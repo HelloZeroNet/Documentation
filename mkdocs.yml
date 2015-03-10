@@ -10,11 +10,11 @@ extra_javascript: [docs.js]
 pages:
 - [index.md, Index]
 
-- [Getting_Started/installing.md, Getting Started, Installing]
-- [Getting_Started/create_new_site.md, Getting Started, Create new site]
+- [getting_started/installing.md, Getting Started, Installing]
+- [getting_started/create_new_site.md, Getting Started, Create new site]
 
-- [Site_Development/debug_mode.md, Site Development, Start ZeroNet in Debug mode]
-- [Site_Development/using_zeroframe_api.md, Site Development, Using ZeroFrame API]
-- [Site_Development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
+- [site_development/debug_mode.md, Site Development, Start ZeroNet in Debug mode]
+- [site_development/using_zeroframe_api.md, Site Development, Using ZeroFrame API]
+- [site_development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
 
 theme: readthedocs
