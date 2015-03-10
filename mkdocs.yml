@@ -17,4 +17,6 @@ pages:
 - [site_development/using_zeroframe_api.md, Site Development, Using ZeroFrame API]
 - [site_development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
 
-theme: readthedocs
+- [zeronet_development/coding_conventions.md, ZeroNet Development, Coding conventions]
+
+theme: readthedocs 
