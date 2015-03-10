@@ -5,10 +5,16 @@ site_description: Decentralized websites using Bitcoin crypto and the BitTorrent
 repo_url: https://github.com/HelloZeroNet/ZeroNet
 
 extra_css: [docs.css]
+extra_javascript: [docs.js]
 
 pages:
 - [index.md, Index]
-- [developing.md, Developing, How to start]
-- [zeroframe_api.md, Developing, ZeroFrame API reference]
+
+- [installing.md, Usage, Installing]
+- [create_new_site.md, Usage, Create new site]
+
+- [debug_mode.md, Site Developing, Start in Debug mode]
+- [using_zeroframe_api.md, Site Developing, Using ZeroFrame API]
+- [zeroframe_api_reference.md, Site Developing, ZeroFrame API reference]
 
 theme: readthedocs
