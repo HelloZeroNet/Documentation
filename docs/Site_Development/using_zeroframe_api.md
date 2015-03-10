@@ -20,6 +20,6 @@ class MySite extends ZeroFrame
 window.my_site = new MySite()
 ```
 
- - Add `<script type="text/javascript" src="js/all.js" asyc></script>` to your index.html
+ - Add `<script type='text/javascript' src='js/all.js' asyc></script>` to your index.html
  - Load your site, the coffee script will be auto compiled to js and merged to all.js
  - Check your javascript console for debug messages
