@@ -12,6 +12,7 @@ pages:
 
 - [getting_started/installing.md, Getting Started, Installing]
 - [getting_started/create_new_site.md, Getting Started, Create new site]
+- [getting_started/sample_sites.md, Getting Started, Sample sites]
 
 - [site_development/debug_mode.md, Site Development, Start ZeroNet in Debug mode]
 - [site_development/using_zeroframe_api.md, Site Development, Using ZeroFrame API]

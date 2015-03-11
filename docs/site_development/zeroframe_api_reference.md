@@ -1,87 +1,7 @@
 # ZeroFrame API Reference
 
-# Standard commands
-
-
-#### siteInfo
-
-**Return**: <dict> All information about the site
-
-**Example:**
-```coffeescript
-@cmd "siteInfo", {}, (site_info) =>
-	@log site_info
-```
-
-**Example return value:**
-```json
-{
-	"tasks": 0, # Number of files currently under download
-	"size_limit": 10, # Current site size limit in MB
-	"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", # Site address
-	"next_size_limit": 10, # Size limit required by sum of site's files
-	"auth_address": "2D6xXUmCVAXGrbVUGRRJdS4j1hif1EMfae", # Current user's bitcoin address
-	"auth_key_sha512": "269a0f4c1e0c697b9d56ccffd9a9748098e51acc5d2807adc15a587779be13cf", # Deprecated, dont use
-	"peers": 14, # Peers of site
-	"auth_key": "pOBdl00EJ29Ad8OmVIc763k4", # Deprecated, dont use
-	"settings":  {
-		"peers": 13, # Saved peers num for sorting
-		"serving": true, # Site enabled
-		"modified": 1425344149.365, # Last modification time of all site's files
-		"own": true, # Own site
-		"permissions": ["ADMIN"], # Site's permission
-		"size": 342165 # Site total size in bytes
-	},
-	"bad_files": 0, # Files that needs to be download
-	"workers": 0, # Current concurent downloads
-	"content": { # Root content.json
-		"files": 12, # Number of file, detailed file info removed to reduce data transfer and parse time
-		"description": "This site",
-		"title": "ZeroHello",
-		"signs_required": 1,
-		"modified": 1425344149.365,
-		"ignore": "(js|css)/(?!all.(js|css))",
-		"signers_sign": null,
-		"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
-		"zeronet_version": "0.2.5",
-		"includes": 0
-	},
-	"started_task_num": 1, # Last number of files downloaded
-	"content_updated": 1426008289.71 # Content.json update time
-}
-```
-
-
----
-
-
-#### serverInfo
-
-**Return:** <dict> All information about the server
-
-**Example:**
-```coffeescript
-@cmd "serverInfo", {}, (server_info) =>
-	@log server_info
-```
-
-**Example return value:**
-```json
-{
-	"debug": true, # Running in debug mode
-	"fileserver_ip": "*", # Fileserver binded to
-	"fileserver_port": 15441, # FileServer port
-	"ip_external": true, # Active of passive mode
-	"platform": "win32", # Operating system
-	"ui_ip": "127.0.0.1", # UiServer binded to
-	"ui_port": 43110, # UiServer port (Web)
-	"version": "0.2.5" # Version
-}
-```
-
-
----
-
+# UiServer commands
+_These commands processed by UiServer_
 
 #### channelJoin _channel_
 
@@ -127,48 +47,75 @@ route: (cmd, data) ->
 
 ---
 
+#### fileGet _inner_path_
+Get file content
 
-#### siteUpdate _address_
+Parameter        | Description
+             --- | ---
+**inner_path**   | The file you want to get
 
-Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
+**Return**: <string> The content of the file
 
-Parameter     | Description
-          --- | ---
-**address**   | Address of site want to update (only current site allowed without site ADMIN permission)
-
-**Return:** None
 
 **Example:**
 ```coffeescript
-# Manual site update for passive connections
-updateSite: =>
-	$("#passive_error a").addClass("loading").removeClassLater("loading", 1000)
-	@log "Updating site..."
-	@cmd "siteUpdate", {"address": @site_info.address}
+# Upvote a topic on ZeroTalk
+submitTopicVote: (e) =>
+	if not Users.my_name # Not registered
+		Page.cmd "wrapperNotification", ["info", "Please, request access before posting."]
+		return false
+
+	elem = $(e.currentTarget)
+	elem.toggleClass("active").addClass("loading")
+	inner_path = "data/users/#{Users.my_address}/data.json"
+
+	Page.cmd "fileGet", [inner_path], (data) =>
+		data = JSON.parse(data)
+		data.topic_votes ?= {} # Create if not exits
+		topic_address = elem.parents(".topic").data("topic_address")
+
+		if elem.hasClass("active") # Add upvote to topic
+			data.topic_votes[topic_address] = 1
+		else # Remove upvote from topic
+			delete data.topic_votes[topic_address]
+
+		# Write file and publish to other peers
+		Page.writePublish inner_path, Page.jsonEncode(data), (res) =>
+			elem.removeClass("loading")
+			if res == true
+				@log "File written"
+			else # Failed
+				elem.toggleClass("active") # Change back
+	
+	return false
 ```
 
 ---
 
 
-#### sitePublish _[privatekey], [inner_path]_ 
-Sign and Publish a content.json of the site
+#### fileQuery _dir_inner_path, query_
+Simple json file query command
 
-Parameter                 | Description
-                      --- | ---
-**privatekey** (optional) | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional) | Inner path of the content json you want to publish (default: content.json)
+Parameter            | Description
+                 --- | ---
+**dir_inner_path**   | Pattern of queried files
+**query**            | Query command
 
-**Return**: "ok" on success else the error message
+**Return**: <list> Matched content
+
+**Query examples:**
+
+ - `["data/users/*/data.json", "topics"]`: Returns all topics node from all user files
+ - `["data/users/*/data.json", "comments.1@2"]`: Returns `user_data["comments"]["1@2"]` value from all user files
+ - `["data/users/*/data.json", ""]`: Returns all data from users files
 
 **Example:**
 ```coffeescript
-# Prompt the private key
-@cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
-	$(".publishbar .button").addClass("loading")
-	# Send sign content.json and publish request to server
-	@cmd "sitePublish", [privatekey], (res) =>
-		$(".publishbar .button").removeClass("loading")
-		@log "Publish result:", res
+@cmd "fileQuery", ["data/users/*/data.json", "topics"], (topics) =>
+	topics.sort (a, b) -> # Sort by date
+		return a.added - b.added
+	for topic in topics
+		@log topic.topic_id, topic.inner_path, topic.title
 ```
 
 
@@ -203,24 +150,141 @@ writeData: (cb=null) ->
 ---
 
 
-#### wrapperNotification _type, message, [timeout]_
-Display a notification
 
-Parameter              | Description
-                  ---  | ---
-**type**               | Possible values: info, error, done
-**message**            | The message you want to display
-**timeout** (optional) | Hide display after this interval (milliseconds)
+#### serverInfo
 
-**Return**: None
+**Return:** <dict> All information about the server
 
 **Example:**
 ```coffeescript
-@cmd "wrapperNotification", ["done", "Your registration has been sent!", 10000] 
+@cmd "serverInfo", {}, (server_info) =>
+	@log "Server info:", server_info
+```
+
+**Example return value:**
+```json
+{
+	"debug": true, # Running in debug mode
+	"fileserver_ip": "*", # Fileserver binded to
+	"fileserver_port": 15441, # FileServer port
+	"ip_external": true, # Active of passive mode
+	"platform": "win32", # Operating system
+	"ui_ip": "127.0.0.1", # UiServer binded to
+	"ui_port": 43110, # UiServer port (Web)
+	"version": "0.2.5" # Version
+}
+```
+
+
+
+
+---
+
+
+#### siteInfo
+
+**Return**: <dict> All information about the site
+
+**Example:**
+```coffeescript
+@cmd "siteInfo", {}, (site_info) =>
+	@log "Site info:", site_info
+```
+
+**Example return value:**
+```json
+{
+	"tasks": 0, # Number of files currently under download
+	"size_limit": 10, # Current site size limit in MB
+	"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", # Site address
+	"next_size_limit": 10, # Size limit required by sum of site's files
+	"auth_address": "2D6xXUmCVAXGrbVUGRRJdS4j1hif1EMfae", # Current user's bitcoin address
+	"auth_key_sha512": "269a0f4c1e0c697b9d56ccffd9a9748098e51acc5d2807adc15a587779be13cf", # Deprecated, dont use
+	"peers": 14, # Peers of site
+	"auth_key": "pOBdl00EJ29Ad8OmVIc763k4", # Deprecated, dont use
+	"settings":  {
+		"peers": 13, # Saved peers num for sorting
+		"serving": true, # Site enabled
+		"modified": 1425344149.365, # Last modification time of all site's files
+		"own": true, # Own site
+		"permissions": ["ADMIN"], # Site's permission
+		"size": 342165 # Site total size in bytes
+	},
+	"bad_files": 0, # Files that needs to be download
+	"workers": 0, # Current concurent downloads
+	"content": { # Root content.json
+		"files": 12, # Number of file, detailed file info removed to reduce data transfer and parse time
+		"description": "This site",
+		"title": "ZeroHello",
+		"signs_required": 1,
+		"modified": 1425344149.365,
+		"ignore": "(js|css)/(?!all.(js|css))",
+		"signers_sign": null,
+		"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
+		"zeronet_version": "0.2.5",
+		"includes": 0
+	},
+	"started_task_num": 1, # Last number of files downloaded
+	"content_updated": 1426008289.71 # Content.json update time
+}
 ```
 
 
 ---
+
+
+#### sitePublish _[privatekey], [inner_path]_ 
+Sign and Publish a content.json of the site
+
+Parameter                 | Description
+                      --- | ---
+**privatekey** (optional) | Private key used for signing (default: current user's privatekey)
+**inner_path** (optional) | Inner path of the content json you want to publish (default: content.json)
+
+**Return**: "ok" on success else the error message
+
+**Example:**
+```coffeescript
+# Prompt the private key
+@cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
+	$(".publishbar .button").addClass("loading")
+	# Send sign content.json and publish request to server
+	@cmd "sitePublish", [privatekey], (res) =>
+		$(".publishbar .button").removeClass("loading")
+		@log "Publish result:", res
+```
+
+
+---
+
+
+#### siteUpdate _address_
+
+Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
+
+Parameter     | Description
+          --- | ---
+**address**   | Address of site want to update (only current site allowed without site ADMIN permission)
+
+**Return:** None
+
+**Example:**
+```coffeescript
+# Manual site update for passive connections
+updateSite: =>
+	$("#passive_error a").addClass("loading").removeClassLater("loading", 1000)
+	@log "Updating site..."
+	@cmd "siteUpdate", {"address": @site_info.address}
+```
+
+
+---
+
+
+# Wrapper commands
+
+_These commands handled by wrapper frame and does not sent to UiServer using websocket_
+
 
 
 #### wrapperConfirm _message, [button_caption]_
@@ -248,18 +312,73 @@ siteDelete: (address) ->
 			@cmd "siteDelete", {"address": address} 
 ```
 
+
+---
+
+
+#### wrapperGetLocalStorage
+**Return**: Browser's local store for the site
+
+**Example:**
+```coffeescript
+@cmd "wrapperGetLocalStorage", [], (res) =>
+	res ?= {}
+	@log "Local storage value:", res
+```
+
+
+---
+
+
+#### wrapperSetLocalStorage _data_
+Set browser's local store data stored for the site
+
+Parameter              | Description
+                  ---  | ---
+**data**               | Any data structure you want to store for the site
+
+**Return**: None
+
+**Example:**
+```coffeescript
+Page.local_storage["topic.#{@topic_id}_#{@topic_user_id}.visited"] = Time.timestamp()
+Page.cmd "wrapperSetLocalStorage", Page.local_storage
+```
+
+
+---
+
+
+#### wrapperNotification _type, message, [timeout]_
+Display a notification
+
+Parameter              | Description
+                  ---  | ---
+**type**               | Possible values: info, error, done
+**message**            | The message you want to display
+**timeout** (optional) | Hide display after this interval (milliseconds)
+
+**Return**: None
+
+**Example:**
+```coffeescript
+@cmd "wrapperNotification", ["done", "Your registration has been sent!", 10000] 
+```
+
+
 ---
 
 
 #### wrapperPrompt _message, [type]_
 
 Prompt text input from user
-**Return**: Text entered to input
 
 Parameter           | Description
                ---  | ---
 **message**         | The message you want to display
 **type** (optional) | Type of the input (default: text)
+
+**Return**: Text entered to input
 
 **Example:**
 ```coffeescript
@@ -272,6 +391,23 @@ Parameter           | Description
 		@log "Publish result:", res
 ```
 
+
+#### wrapperSetViewport _viewport_
+
+Set sites's viewport meta tag content (required for mobile sites)
+
+
+Parameter           | Description
+               ---  | ---
+**viewport**        | The viewport meta tag content
+
+**Return**: None
+
+**Example:**
+```coffeescript
+# Prompt the private key
+@cmd "wrapperSetViewport", "width=device-width, initial-scale=1.0"
+```
 
 ---
 
