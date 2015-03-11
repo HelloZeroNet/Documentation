@@ -17,8 +17,9 @@
 * `pip install pyzmq gevent msgpack-python`
 * Start with `python zeronet.py`
 
-#### Without root access
+#### Other Linux or without root access
 
+* Check your python version using `python --version` if the returned version is not `Python 2.7.X` then try `python2` or `python2.7` command and use it from now
 * `wget https://bootstrap.pypa.io/get-pip.py` 
 * `python get-pip.py --user pyzmq gevent msgpack-python`
 * Start with `python zeronet.py`

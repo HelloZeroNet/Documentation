@@ -1,7 +1,7 @@
 # Example usage of ZeroFrame API
 
  - Start ZeroNet using `zeronet.py --debug` to use automatic js and css merge/compile
- - Copy [ZeroFrame.coffee](https://github.com/HelloZeroNet/ZeroHello/blob/master/js/lib/ZeroFrame.coffee) to your site's `js/` directory
+ - Copy [ZeroFrame.coffee](https://github.com/HelloZeroNet/ZeroHello/blob/master/js/lib/ZeroFrame.coffee) to your site's `js/lib` directory
  - Create a `js/MySite.coffee` :
 ```coffee
 class MySite extends ZeroFrame
@@ -22,4 +22,18 @@ window.my_site = new MySite()
 
  - Add `<script type='text/javascript' src='js/all.js' asyc></script>` to your index.html
  - Load your site, the coffee script will be auto compiled to js and merged to all.js
- - Check your javascript console for debug messages
+ - A Hello World! message should appear and check your javascript console for debug messages
+
+Directory structure:
+```ini
+data/[your site address]
+├─ js/
+│  ├─ lib/
+│  │  └─ ZeroFrame.coffee
+│  ├─ MySite.coffee
+│  └─ all.js
+├── index.html
+└── content.json
+```
+
+[Example at github](https://github.com/HelloZeroNet/Documentation/tree/master/example/ZeroFrame)
