@@ -13,3 +13,10 @@ li.toctree-l2:first-child { display: none }
 
 h4 em { font-style: normal; color: #999 }
 hr { margin: 50px 0 }
+
+#disqus_thread { margin-bottom: 50px }
+
+.loadcomments { 
+	padding: 10px 15px; display: inline-block; border-radius: 2px; border-bottom: 2px solid #CDBD1E; transition: all 0.5s; 
+	background-color: #FFF85F; font-size: 20px; line-height: 31px; background-position: left center 
+}

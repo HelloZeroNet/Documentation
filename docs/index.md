@@ -53,5 +53,5 @@ Bitcoin: 1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX
 
 #### Thank you!
 
-* More info, help, changelog, zeronet sites: http://www.reddit.com/r/zeronet/
+* More info, help, changelog, zeronet sites: [http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
 * Come, chat with us: [#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) or on [gitter](https://gitter.im/HelloZeroNet/ZeroNet)
