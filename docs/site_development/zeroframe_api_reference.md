@@ -130,7 +130,7 @@ route: (cmd, data) ->
 
 #### siteUpdate _address_
 
-Force check and download changed content from other peers (only necessary if user in passive mode and using old version of Zeronet)
+Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
 
 Parameter     | Description
           --- | ---
