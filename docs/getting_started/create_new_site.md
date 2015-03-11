@@ -1,6 +1,6 @@
 # Create new ZeroNet site
 
-Shut down zeronet if you are running it already
+Shut down zeronet if it is already running
 
 ```bash
 $ zeronet.py siteCreate
@@ -16,12 +16,12 @@ $ zeronet.py
 Congratulations, you're finished! Now anyone can access your site using
 `http://localhost:43110/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2`
 
-Next steps: [ZeroNet Developer Documentation](https://github.com/HelloZeroNet/ZeroNet/wiki/ZeroNet-Developer-Documentation)
+Next steps: [ZeroNet Developer Documentation](http://zeronet.readthedocs.org/en/latest/)
 
 
 # Modify ZeroNet site
 
-* Modify files located in data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2 directory.
+* Modify files located in the data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2 directory.
   After you're finished:
 
 ```bash
@@ -30,7 +30,7 @@ $ zeronet.py siteSign 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
 Private key (input hidden):
 ```
 
-* Enter the private key you got when created the site, then:
+* Enter the private key you got when you created the site, then:
 
 ```bash
 $ zeronet.py sitePublish 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
