@@ -23,7 +23,7 @@ Background color of the wrapper
 
 #### description
 
-Description of your site, displayed on ZeroHello, under the title
+Description of your site, displayed under site title on ZeroHello.
 
 **Example**: Decentralized forum demo
 
@@ -88,9 +88,12 @@ Content.json generate time.
 **Example**: 1425857522.076
 
 
+---
+
+
 #### sign (deprecated)
 
-ECDSA sign of the content.json file content. (keys sorted, without whitespace the `sign` and `signers_sign` node). For backward compatibility, will be removed soon.
+ECDSA sign of the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). For backward compatibility, will be removed soon.
 
 **Example**:
 ```json
@@ -108,7 +111,7 @@ ECDSA sign of the content.json file content. (keys sorted, without whitespace th
 
 Possible signers address for the root content.json signed using the site address private key. (Multisig possibility)
 
-**Format**: [signers_required]:[possible signer address],[possible signer address]
+**Format of the signed string**: [signers_required]:[signer address],[signer address]
 
 **Example**: <small>HKNDz9IUHcBc/l2Jm2Bl70XQDL9HYHhJ2hUdg8AMyunACLgxyXBr7EW1/ME4hGkaFZSFmIxlInmxH+BrMVXbnLw=</small>
 
@@ -118,7 +121,7 @@ Possible signers address for the root content.json signed using the site address
 
 #### signs
 
-ECDSA signs for the the content.json file content. (keys sorted, without whitespace the `sign` and `signers_sign` node). 
+ECDSA signs for the the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). 
 
 **Example**:
 ```json
