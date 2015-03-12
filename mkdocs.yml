@@ -7,6 +7,7 @@ repo_url: https://github.com/HelloZeroNet/ZeroNet
 extra_css: [docs.css]
 extra_javascript: [docs.js]
 
+
 pages:
 - [index.md, Index]
 
@@ -15,9 +16,11 @@ pages:
 - [getting_started/sample_sites.md, Getting Started, Sample sites]
 
 - [site_development/debug_mode.md, Site Development, Start ZeroNet in Debug mode]
-- [site_development/using_zeroframe_api.md, Site Development, Using ZeroFrame API]
+- [site_development/using_zeroframe_api.md, Site Development, ZeroFrame API Example]
 - [site_development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
+- [site_development/content_json.md, Site Development, Structure of content.json]
 
 - [zeronet_development/coding_conventions.md, ZeroNet Development, Coding conventions]
+- [zeronet_development/contributing.md, ZeroNet Development, Contributing to ZeroNet]
 
 theme: readthedocs 
