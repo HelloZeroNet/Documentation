@@ -7,7 +7,7 @@ function applyBitcoinbarData(elem, data) {
 
 	// Set anim later to get anim
 	setTimeout(function() {
-		$(".bar", elem).css("width", parseInt(percent)+"%")
+		$(".bar", elem).css("width", Math.round(percent)+"%")
 	}, 10)
 
 	elem.on("click", function() {

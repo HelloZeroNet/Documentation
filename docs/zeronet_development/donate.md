@@ -51,7 +51,7 @@ Benefits:
 
 <a href="bitcoin:1Q3jV3bAZxKBdMtVjnzfpcsmtXDspjGMnG?Label=ZeroNet+Private+sites" class="bitcoinbar" data-address="1Q3jV3bAZxKBdMtVjnzfpcsmtXDspjGMnG" data-goal="2.0"></a> 
 
- * Passworded public key based peer auth to sites
+ * Passworded or public key based peer auth to sites
 
 Benefits:
 

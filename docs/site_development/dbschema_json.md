@@ -5,7 +5,7 @@
 ```json
 
 {
-  "db_name": "ZeroTalk", # Database name (only used for debugging
+  "db_name": "ZeroTalk", # Database name (only used for debugging)
   "db_file": "data/users/zerotalk.db", # Database file relative to site's directory
   "maps": { # Json to database mappings
     ".*/data.json": { # Regex pattern of file relative to db_file
