@@ -9,3 +9,4 @@ To help ZeroNet community you can:
    [github issues](https://github.com/HelloZeroNet/ZeroNet/issues) or develop your own idea. 
    Before you start anything big please, open a [new discussion](https://github.com/HelloZeroNet/ZeroNet/issues/new), 
    so you can make sure nobody is working on it already and we can share our ideas to make the best out of it.
+ - You can [donate](zeronet_development/donate) bitcoin to help this project alive.

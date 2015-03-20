@@ -3,6 +3,37 @@
 # UiServer commands
 _These commands processed by UiServer_
 
+
+#### dbQuery _query_
+Run a query on the sql cache
+
+Parameter            | Description
+                 --- | ---
+**query**            | Sql query command
+
+**Return**: <list> Result of the query
+
+**Example:**
+```coffeescript
+@log "Updating user info...", @my_address
+Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT JOIN json USING(path) WHERE path='#{@my_address}/data.json'"], (res) =>
+	if res.error or res.length == 0 # Db not ready yet or No user found
+		$(".head-user.visitor").css("display", "")
+		$(".user_name-my").text("Visitor")
+		if cb then cb()
+		return 
+	
+	@my_row = res[0]
+	@my_id = @my_row["user_id"]
+	@my_name = @my_row["user_name"]
+	@my_max_size = @my_row["max_size"] 
+```
+
+
+---
+
+
+
 #### channelJoin _channel_
 
 Request notifications about sites's events.

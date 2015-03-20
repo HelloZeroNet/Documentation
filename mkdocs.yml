@@ -19,8 +19,10 @@ pages:
 - [site_development/using_zeroframe_api.md, Site Development, ZeroFrame API Example]
 - [site_development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
 - [site_development/content_json.md, Site Development, Structure of content.json]
+- [site_development/dbschema_json.md, Site Development, Structure of dbschema.json]
 
 - [zeronet_development/coding_conventions.md, ZeroNet Development, Coding conventions]
 - [zeronet_development/contributing.md, ZeroNet Development, Contributing to ZeroNet]
+- [zeronet_development/donate.md, ZeroNet Development, Donation]
 
 theme: readthedocs 
