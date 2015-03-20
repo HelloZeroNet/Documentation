@@ -117,4 +117,4 @@ Benefits:
 
 The task's received donation goes directly to the developer(s) who successfully and properly integrates the feature (please add your plans and ideas to the issue before you start working on anything big).
 
-<script src="../../bitcoinbar/bitcoinbar.js"></script>
+<script src='../../bitcoinbar/bitcoinbar.js'></script>
