@@ -1,5 +1,5 @@
 function applyBitcoinbarData(elem, data) {
-	var balance_btc = data.balance/100000000
+	var balance_btc = data.totalReceivedValue/100000000
 	var percent = balance_btc / parseFloat(elem.data("goal")) * 100
 
 	// Set the text and create html elements
@@ -8,20 +8,21 @@ function applyBitcoinbarData(elem, data) {
 	// Set anim later to get anim
 	setTimeout(function() {
 		$(".bar", elem).css("width", Math.round(percent)+"%")
+		if (percent >= 100) elem.addClass("done")
 	}, 10)
 
 	elem.on("click", function() {
 		$(".bitcoinbar-addressbar").remove() // Remove previous addressbars
 
 		// Create addressbar after bitcoinbar
-		var addressbar = $("<div class='bitcoinbar-addressbar'><input type='text' readonly/><br><a href='"+elem.attr("href")+"'><img src='https://blockchain.info/qr?data="+elem.data("address")+"&size=125' width=125 height=125/></a></div>")
+		var addressbar = $("<div class='bitcoinbar-addressbar'><input type='text' readonly/><br><a href='"+elem.attr("href")+"'><img src='https://blockchain.info/qr?data="+elem.data("address")+"&size=125' width='125' height='125' /></a></div>")
 		elem.after(addressbar)
 
 		// Set address to input
 		$("input", addressbar).val(elem.data("address"))
 
 		// Init QRcode anim
-		$("img", addressbar).css("transform", "rotateX(-90deg)")
+		$("img", addressbar).css("transform", "rotateX(-90deg)").css("opacity", 0)
 
 		// Focus the input
 		setTimeout(function() {

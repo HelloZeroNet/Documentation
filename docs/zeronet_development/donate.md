@@ -26,6 +26,23 @@ Benefits:
 [Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/65)
 
 
+
+---
+
+
+## Namecoin domain support
+
+<a href="bitcoin:1a6job2sSbzPpJVJkkrzKF1QWCs6jc4pq?Label=ZeroNet+Multiuser" class="bitcoinbar" data-address="1a6job2sSbzPpJVJkkrzKF1QWCs6jc4pq" data-goal="2.0"></a> 
+
+ * Use Namecoin domain names to access sites
+
+Benefits:
+
+ * Easier to remember site addresses
+
+[Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/31)
+
+
 ---
 
 
@@ -92,22 +109,6 @@ Benefits:
  * Use local ZeroNet more than one user
 
 [Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/58)
-
-
----
-
-
-## Namecoin domain support
-
-<a href="bitcoin:1a6job2sSbzPpJVJkkrzKF1QWCs6jc4pq?Label=ZeroNet+Multiuser" class="bitcoinbar" data-address="1a6job2sSbzPpJVJkkrzKF1QWCs6jc4pq" data-goal="2.0"></a> 
-
- * Use Namecoin domain names to access sizes
-
-Benefits:
-
- * Easier to remember site addresses
-
-[Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/31)
 
 
 ---
