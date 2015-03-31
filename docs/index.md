@@ -35,6 +35,7 @@ Decentralized websites using Bitcoin crypto and the BitTorrent network
 
 ![Screenshot](http://i.imgur.com/QaZhUCk.png)
 
+### [More screenshots &raquo;](getting_started/sample_sites)
 
 ## Current limitations
 

@@ -13,9 +13,13 @@
 
 #### Debian
 
-* `apt-get install python-dev python-pip` 
-* `pip install pyzmq gevent msgpack-python`
+* `sudo apt-get update`
+* `sudo apt-get install build-essential python-dev python-pip git` 
+* `sudo pip install pyzmq gevent msgpack-python`
+* `git clone https://github.com/HelloZeroNet/ZeroNet.git`
+* `cd ZeroNet`
 * Start with `python zeronet.py`
+* Open http://127.0.0.1:43110/ in your browser and enjoy! :)
 
 #### Other Linux or without root access
 

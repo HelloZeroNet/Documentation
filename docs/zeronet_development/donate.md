@@ -30,9 +30,9 @@ Benefits:
 ---
 
 
-## Namecoin domain support
+## <s>Namecoin domain support</s> (done in version 0.2.8)
 
-<a href="bitcoin:1a6job2sSbzPpJVJkkrzKF1QWCs6jc4pq?Label=ZeroNet+Multiuser" class="bitcoinbar" data-address="1a6job2sSbzPpJVJkkrzKF1QWCs6jc4pq" data-goal="2.0"></a> 
+ ![Namecoin](img/domain.png)
 
  * Use Namecoin domain names to access sites
 

@@ -31,6 +31,16 @@ Description of your site, displayed under site title on ZeroHello.
 ---
 
 
+#### domain
+
+Domain of your site. ZeroHello will link this if the user has Zeroname plugin enabled.
+
+**Example**: Blog.ZeroNetwork.bit
+
+
+---
+
+
 #### files
 
 Size and sha512 hash of signed files. Automatically generated using `zeronet.py siteSign siteaddress privatekey` command.
