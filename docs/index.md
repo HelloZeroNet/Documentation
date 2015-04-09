@@ -31,9 +31,23 @@ Decentralized websites using Bitcoin crypto and the BitTorrent network
   other peers.
 
 
-## Screenshot
+## Features
+ * Easy, zero configuration needed setup.
+ * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) 
+   based authorization: Your account is protected by same cryptography as your bitcoin wallet.
+ * Namecoin .bit domains support.
+ * SQL Database support: Allows easier site development and faster page load times.
+ * Automatic, uPnP port opening using.
+ * Plugin for multiuser(openproxy) support.
+ * [ZeroFrame API](http://zeronet.readthedocs.org/en/latest/site_development/zeroframe_api_reference/) for dynamic sites.
+ * One click ZeroNet client updater.
 
-![Screenshot](http://i.imgur.com/QaZhUCk.png)
+
+## Screenshots
+
+![Screenshot](http://zeronet.readthedocs.org/en/latest/img/zerohello.png)
+
+![ZeroTalk](http://zeronet.readthedocs.org/en/latest/img/zerotalk.png)
 
 ### [More screenshots &raquo;](getting_started/sample_sites)
 
@@ -43,9 +57,8 @@ Decentralized websites using Bitcoin crypto and the BitTorrent network
 * No more anonymous than Bittorrent
 * File transactions are not compressed or encrypted yet
 * No private sites
-* You must have an open port to publish new changes
-* Timeout problems on slow connections
-
+* <s>You must have an open port to publish new changes</s>
+* <s>Timeout problems on slow connections</s>
 
 ## If you want to help keep this project alive
 

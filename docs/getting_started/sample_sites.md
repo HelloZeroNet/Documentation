@@ -76,7 +76,7 @@ Decentralized, p2p forum demo
 
 How does it works?
 
- - To be able to comment you request an own personal from the site owner
+ - To be able to distribute your own content (Topics, Comments, Upvotes, etc.) you request an own file from the site owner
  - After the registration is done you can publish your file's modifications directly to other peers without contacting the site owner again
 
 ![ZeroTalk](img/zerotalk.png)
