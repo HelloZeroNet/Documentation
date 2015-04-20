@@ -1,6 +1,6 @@
 
 
-/* ---- data/1PkBs1yrWupYbugp4NU7K6enMqF4JWwDqJ/js/lib/ZeroFrame.coffee ---- */
+/* ---- data/1QWU6APGTFRynSmNA53qgCaVAxpVA9nYa/js/lib/ZeroFrame.coffee ---- */
 
 
 (function() {
@@ -114,14 +114,14 @@
 }).call(this);
 
 
-/* ---- data/1PkBs1yrWupYbugp4NU7K6enMqF4JWwDqJ/js/MySite.coffee ---- */
+/* ---- data/1QWU6APGTFRynSmNA53qgCaVAxpVA9nYa/js/MySite.coffee ---- */
 
 
 (function() {
   var MySite,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __hasProp = {}.hasOwnProperty;
 
   MySite = (function(_super) {
     __extends(MySite, _super);
@@ -141,12 +141,11 @@
           return _this.log("mysite serverInfo response", serverInfo);
         };
       })(this));
-      this.cmd("siteInfo", {}, (function(_this) {
+      return this.cmd("siteInfo", {}, (function(_this) {
         return function(siteInfo) {
           return _this.log("mysite siteInfo response", siteInfo);
         };
       })(this));
-      return this.cmd("wrapperNotification", ["done", "Hello World!", 10000]);
     };
 
     return MySite;

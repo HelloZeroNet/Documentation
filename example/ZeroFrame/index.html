@@ -2,7 +2,19 @@
 <body>
 <h1>ZeroFrame API example</h1>
 
-Check your javascript console for log messages
+
+<h2>Notification examples</h2>
+<input type='button' onclick='my_site.cmd("wrapperNotification", ["done", "Hello World!", 10000])' value='With 10sec timeout'>
+<input type='button' onclick='my_site.cmd("wrapperNotification", ["error", "Some error"])' value='Error with no timeout'>
+<input type='button' onclick='my_site.cmd("wrapperConfirm", ["Are you sure?"], function (res) { output.value += res+"\n" })' value='Confirmation'>
+<input type='button' onclick='my_site.cmd("wrapperPrompt", ["Whats your name?"], function (res) { output.value += res+"\n" })' value='Prompt'>
+
+<h2>File write example</h2>
+<input type='button' onclick='my_site.cmd("fileWrite", ["data.txt", btoa("hello from ZeroApi")], function (res) { output.value += "fileWrite result:"+res+"\n" })' value='Write file data.txt'>
+<input type='button' onclick='my_site.cmd("fileGet", ["data.txt"], function (res) { output.value += "fileGet result:"+res+"\n" })' value='Read file data.txt'>
+
+<h3>Output</h3>
+<textarea id='output' style='width: 600px; height: 300px'></textarea>
 
 <script type='text/javascript' src='js/all.js' asyc></script>
 </body>
