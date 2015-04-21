@@ -156,6 +156,7 @@ Parameter            | Description
 #### fileWrite _inner_path, content_
 Write file content
 
+
 Parameter        | Description
              --- | ---
 **inner_path**   | Inner path of the file you want to write
@@ -167,7 +168,7 @@ Parameter        | Description
 ```coffeescript
 writeData: (cb=null) ->
 	# Encode to json, encode utf8
-	json_raw = unescape(encodeURIComponent(JSON.stringify(@data, undefined, '\t')))
+	json_raw = unescape(encodeURIComponent(JSON.stringify({"hello": "ZeroNet"}, undefined, '\t')))
 	# Convert to to base64 and send
 	@cmd "fileWrite", ["data.json", btoa(json_raw)], (res) =>
 		if res == "ok"
@@ -176,6 +177,8 @@ writeData: (cb=null) ->
 			@cmd "wrapperNotification", ["error", "File write error: #{res}"]
 			if cb then cb(false) 
 ```
+
+_Note:_ to write files that not in content.json yet, you must have `"own": true` in `data/sites.json` at the site you want to write
 
 
 ---

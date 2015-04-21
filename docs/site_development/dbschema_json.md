@@ -2,6 +2,14 @@
 
 [Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
 
+The following example do the following:
+
+ - If an updated data/users/*/data.json received (eg.: user posted something):
+   - Every row in `data["topics"]` loaded to `topic` table
+   - Every key in `data["comment_votes"]` loaded to `comment_vote` table as `comment_hash` col and the values stored in same line as `vote`
+ - If an updated data/users/content.json received (eg.: new user created):
+   - The `"user_id", "user_name", "max_size", "added"` key in value of `content["include"]` loaded into `user` table and the key is stored as `path`
+
 ```json
 
 {
@@ -92,7 +100,7 @@
 }
 ```
 
-## Example for parsed data.json file
+## Example for data.json file
 ```json
 {
   "next_topic_id": 2,
@@ -150,7 +158,7 @@
 }
 ```
 
-## Example for prased data.json file
+## Example for content.json file
 
 ```json
 {

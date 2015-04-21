@@ -22,6 +22,7 @@ pages:
 - [site_development/dbschema_json.md, Site Development, Structure of dbschema.json]
 
 - [zeronet_development/coding_conventions.md, ZeroNet Development, Coding conventions]
+- [zeronet_development/network_protocol.md, ZeroNet Development, Network protocol]
 - [zeronet_development/contributing.md, ZeroNet Development, Contributing to ZeroNet]
 - [zeronet_development/donate.md, ZeroNet Development, Donation]
 
