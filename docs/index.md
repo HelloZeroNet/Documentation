@@ -1,57 +1,78 @@
-# ZeroNet
+# What is ZeroNet?
 
-Decentralized websites using Bitcoin crypto and the BitTorrent network
+ZeroNet uses Bitcoin cryptography and BitTorrent technology to build a **decentralized censorship-resistant network**.
 
+Users can publish static or dynamic websites into ZeroNet and visitors can choose to also serve the website. Websites will remain on-line even if it is being served by only 1 peer.
 
-## Why?
+When a site is updated by its owner, all nodes serving that site (previous visitors) will receive only the incremental updates done to the site content.
 
-* We believe in open, free, and uncensored network and communication.
-* No single point of failure: Site remains online so long as at least 1 peer
-  serving it.
-* No hosting costs: Sites are served by visitors.
-* Impossible to shut down: It's nowhere because it's everywhere.
-* Fast and works offline: You can access the site even if your internet is
-  unavailable.
+ZeroNet counts with a build-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
 
 
-## How does it work?
+# Why?
 
-* After starting `zeronet.py` you will be able to visit zeronet sites using
-  `http://127.0.0.1:43110/{zeronet_address}` (eg. 
-  `http://127.0.0.1:43110/1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr`).
-* When you visit a new zeronet site, it tries to find peers using the BitTorrent
-  network so it can download the site files (html, css, js...) from them.
-* Each visited site becomes also served by you.
-* Every site contains a `site.json` which holds all other files in a sha512 hash
-  and a signature generated using site's private key.
-* If the site owner (who has the private key for the site address) modifies the
-  site, then he/she signs the new `content.json` and publishes it to the peers.
-  After the peers have verified the `content.json` integrity (using the
-  signature), they download the modified files and publish the new content to
-  other peers.
+* We believe in open, free, and uncensored communication.
+* No censorship: After something is published there is no way to remove it.
+* No single point of failure: Content remains on-line even if only 1 peer is serving it.
+* Impossible to shut down: It's nowhere because it's everywhere. Content is served by any user who wishes to.
+* Fast: ZeroNet uses BitTorrent technology to deliver content faster than centralised servers.
+* Works offline: You can access the site even if your internet is unavailable.
+* Secure: Content ownership is secured using the same cryptography that secures your Bitcoin wallet.
+
+[comment]: <> (I'm unsure about the following bit. Thoughts?)
+[comment]: <> (# What problem is ZeroNet solving?)
+
+[comment]: <> (When Tim Berners-Lee created the internet, he meant for it to be free. Not surveilled nor censored. And [he is still fighting for that](http://edition.cnn.com/2014/03/12/tech/web/tim-berners-lee-web-freedom/).)
+
+[comment]: <> (The internet is centralized mainly in two places: Content and Domain Names (URLs) are hosted and controlled by central servers. If you control the central servers (and if you are powerful enough you do) you control the network.)
+
+[comment]: <> (**Decentralized content storage**)
+
+[comment]: <> (ZeroNet tackles the content storage problem by giving everyone the ability to store content. Site visitors can choose to store a website on their computers, and when they do this they also help to serve the site to other users. The site is online even if only one user is hosting it.)
+
+[comment]: <> (**Shared DNS cache**)
+
+[comment]: <> (Site addresses on ZeroNet are cached by all network members. When you type a ZeroNet site URL on your browser this will query other peers connected to you about the site. If one of these peers happen to have the site they will send it to you, if not, they will forward your query along.)
+
+[comment]: <> (This architecture means that when a site URL is created, as long as one peer is serving it, there is no way to take the URL down.)
 
 
-## Features
- * Easy, zero configuration needed setup.
- * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) 
+# Features
+ * Easy, zero configuration setup.
+ * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
    based authorization: Your account is protected by same cryptography as your bitcoin wallet.
  * Namecoin .bit domains support.
- * SQL Database support: Allows easier site development and faster page load times.
+ * SQL Database support: Allows for easier site development and faster page load times.
  * Automatic, uPnP port opening using.
  * Plugin for multiuser(openproxy) support.
  * [ZeroFrame API](http://zeronet.readthedocs.org/en/latest/site_development/zeroframe_api_reference/) for dynamic sites.
  * One click ZeroNet client updater.
 
 
-## Screenshots
+# How does it work?
+
+* After you install and run ZeroNet, you open a site by visiting:
+  `http://127.0.0.1:43110/{zeronet_site_address}`
+  (eg.  `http://127.0.0.1:43110/1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr`).
+* ZeroNet will then use the BitTorrent network to find peers that are seeding the site and will download the site content (html, css, js...) from these peers.
+* Each visited site becomes also served by you.
+* Every site contains a list of all files used in the site in a sha512 hash and a signature generated using the site owner private key.
+* If the site owner modifies the site, then he/she signs a new list and publishes it to the peers.
+  After the peers have verified the files list integrity (using the
+  signature), they download the modified files and publish the new content to
+  other peers.
+
+
+
+# Screenshots
 
 ![Screenshot](http://zeronet.readthedocs.org/en/latest/img/zerohello.png)
 
 ![ZeroTalk](http://zeronet.readthedocs.org/en/latest/img/zerotalk.png)
 
-### [More screenshots &raquo;](getting_started/sample_sites)
+### [More screenshots &raquo;](getting_started/sample_sites/)
 
-## Current limitations
+# Current limitations
 
 * No torrent-like, file splitting for big file support
 * No more anonymous than Bittorrent
@@ -60,12 +81,12 @@ Decentralized websites using Bitcoin crypto and the BitTorrent network
 * <s>You must have an open port to publish new changes</s>
 * <s>Timeout problems on slow connections</s>
 
-## If you want to help keep this project alive
+# Help to keep this project alive
 
 Bitcoin: 1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX
 
 
-#### Thank you!
+### Thank you!
 
 * More info, help, changelog, zeronet sites: [http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
 * Come, chat with us: [#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) or on [gitter](https://gitter.im/HelloZeroNet/ZeroNet)

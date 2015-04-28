@@ -9,7 +9,7 @@ extra_javascript: [docs.js]
 
 
 pages:
-- [index.md, Index]
+- [index.md, Introduction]
 
 - [getting_started/installing.md, Getting Started, Installing]
 - [getting_started/create_new_site.md, Getting Started, Create new site]
@@ -26,4 +26,4 @@ pages:
 - [zeronet_development/contributing.md, ZeroNet Development, Contributing to ZeroNet]
 - [zeronet_development/donate.md, ZeroNet Development, Donation]
 
-theme: readthedocs 
+theme: readthedocs
