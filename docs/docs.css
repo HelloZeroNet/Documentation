@@ -14,7 +14,11 @@ li.toctree-l2:first-child { display: none }
 h4 em { font-style: normal; color: #999 }
 hr { margin: 50px 0 }
 
+/* List font on the same size page text */
 ul { font-size: 16px }
+
+/* Theme default color is the same color as links; Text using the same color of links is bad usability */
+h3, h4, h5, h6 { color: #333333 }
 
 #disqus_thread { margin-bottom: 50px }
 
