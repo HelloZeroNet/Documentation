@@ -50,4 +50,4 @@ Site:13DNDk..bhC2 Successfuly published to 3 peers
 * Your site will be accessible from: ```http://localhost:43110/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```
 
 
-**Next steps:** [ZeroNet Developer Documentation](http://zeronet.readthedocs.org/en/latest/)
+**Next steps:** [ZeroNet Developer Documentation](/site_development/getting_started/)
