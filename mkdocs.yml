@@ -15,8 +15,7 @@ pages:
 - [getting_started/create_new_site.md, Getting Started, Create new site]
 - [getting_started/sample_sites.md, Getting Started, Sample sites]
 
-- [site_development/debug_mode.md, Site Development, Start ZeroNet in Debug mode]
-- [site_development/using_zeroframe_api.md, Site Development, ZeroFrame API Example]
+- [site_development/getting_started.md, Site Development, Getting Started]
 - [site_development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
 - [site_development/content_json.md, Site Development, Structure of content.json]
 - [site_development/dbschema_json.md, Site Development, Structure of dbschema.json]
