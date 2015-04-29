@@ -1,11 +1,11 @@
 # Structure of content.json
 
-Every ZeroNet site will have the `content.json` file.
+Every ZeroNet site will have a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
-This file will carry a list of all files on your site and a signature created with your private key.
+This file will carry, amont other things, a list of all files on your site and a signature created with your private key. This is done to avoid file tampering (ie: only you, or people you trust, can update the site content).
 
+Here is a list of supported keys:
 
-[Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json)
 
 
 ---
