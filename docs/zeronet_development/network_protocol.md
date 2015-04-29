@@ -1,7 +1,7 @@
 # ZeroNet network protocol
 
- - Every message if encoded using [MessagePack](http://msgpack.org/)
- - Every request has 3 parameter: 
+ - Every message is encoded using [MessagePack](http://msgpack.org/)
+ - Every request has 3 parameter:
     * `cmd`: The request command
     * `req_id`: The request's unique id (simple, incremented nonce), the client has to include this when reply to the command
     * `params`: Parameters for the request
@@ -18,14 +18,14 @@ Parameter            | Description
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **inner_path**       | File path relative to site directory
-**location**         | Request file from this byte (max 512 bytes got sent in a request, so you need multiple for files larger than this)
+**location**         | Request file from this byte (max 512 bytes got sent in a request, so you need multiple requests for larger files)
 
-**Return**: 
+**Return**:
 
 Return key           | Description
                  --- | ---
-**body**             | The requested file's content
-**location**         | The location where the sending ended
+**body**             | The requested file content
+**location**         | The location of the last byte sent
 **size**             | Total size of the file
 
 
@@ -33,9 +33,9 @@ Return key           | Description
 
 
 #### ping
-Checks if the client still alive
+Checks if the client is still alive
 
-**Return**: 
+**Return**:
 
 Return key           | Description
                  --- | ---
@@ -55,17 +55,17 @@ Parameter            | Description
 **peers**            | List of peers that the requester has (packed)
 **need**             | Number of peers the requester want
 
-**Return**: 
+**Return**:
 
 Return key           | Description
                  --- | ---
-**peers**            | List of peer we has for the site (packed)
+**peers**            | List of peer he has for the site (packed)
 
 
 ---
 
 #### update _site_, _inner_path_, _body_
-Update a file of a site.
+Update a site file.
 
 
 Parameter            | Description
@@ -74,7 +74,7 @@ Parameter            | Description
 **inner_path**       | File path relative to site directory
 **body**             | Full content of the updated file
 
-**Return**: 
+**Return**:
 
 Return key           | Description
                  --- | ---
