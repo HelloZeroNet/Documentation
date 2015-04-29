@@ -1,10 +1,146 @@
 # ZeroFrame API Reference
 
-# UiServer commands
-_These commands processed by UiServer_
 
 
-#### dbQuery _query_
+## Wrapper
+
+_These commands handled by wrapper frame and does not sent to UiServer using websocket_
+
+
+### wrapperConfirm _message, [button_caption]_
+Display a notification with confirm button
+
+Parameter              | Description
+                  ---  | ---
+**message**            | The message you want to display
+**timeout** (optional) | Caption of the confirmation button (default: OK)
+
+**Return**: True if clicked on button
+
+**Example:**
+```coffeescript
+# Delete site
+siteDelete: (address) ->
+	site = @sites[address]
+	title = site.content.title
+	if title.length > 40
+		title = title.substring(0, 15)+"..."+title.substring(title.length-10)
+	@cmd "wrapperConfirm", ["Are you sure you sure? <b>#{title}</b>", "Delete"], (confirmed) =>
+		@log "Deleting #{site.address}...", confirmed
+		if confirmed
+			$(".site-#{site.address}").addClass("deleted")
+			@cmd "siteDelete", {"address": address}
+```
+
+
+---
+
+
+### wrapperGetLocalStorage
+**Return**: Browser's local store for the site
+
+**Example:**
+```coffeescript
+@cmd "wrapperGetLocalStorage", [], (res) =>
+	res ?= {}
+	@log "Local storage value:", res
+```
+
+
+---
+
+
+### wrapperSetLocalStorage _data_
+Set browser's local store data stored for the site
+
+Parameter              | Description
+                  ---  | ---
+**data**               | Any data structure you want to store for the site
+
+**Return**: None
+
+**Example:**
+```coffeescript
+Page.local_storage["topic.#{@topic_id}_#{@topic_user_id}.visited"] = Time.timestamp()
+Page.cmd "wrapperSetLocalStorage", Page.local_storage
+```
+
+
+---
+
+
+### wrapperNotification _type, message, [timeout]_
+Display a notification
+
+Parameter              | Description
+                  ---  | ---
+**type**               | Possible values: info, error, done
+**message**            | The message you want to display
+**timeout** (optional) | Hide display after this interval (milliseconds)
+
+**Return**: None
+
+**Example:**
+```coffeescript
+@cmd "wrapperNotification", ["done", "Your registration has been sent!", 10000]
+```
+
+
+---
+
+
+### wrapperPrompt _message, [type]_
+
+Prompt text input from user
+
+Parameter           | Description
+               ---  | ---
+**message**         | The message you want to display
+**type** (optional) | Type of the input (default: text)
+
+**Return**: Text entered to input
+
+**Example:**
+```coffeescript
+# Prompt the private key
+@cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
+	$(".publishbar .button").addClass("loading")
+	# Send sign content.json and publish request to server
+	@cmd "sitePublish", [privatekey], (res) =>
+		$(".publishbar .button").removeClass("loading")
+		@log "Publish result:", res
+```
+
+
+### wrapperSetViewport _viewport_
+
+Set sites's viewport meta tag content (required for mobile sites)
+
+
+Parameter           | Description
+               ---  | ---
+**viewport**        | The viewport meta tag content
+
+**Return**: None
+
+**Example:**
+```coffeescript
+# Prompt the private key
+@cmd "wrapperSetViewport", "width=device-width, initial-scale=1.0"
+```
+
+---
+
+
+## UiServer
+
+The UiServer is for ZeroNet what the LAMP setup is for normal websites.
+
+The UiServer will do all the 'backend' work (eg: querying the DB, accessing files, etc). This are the API calls you will need to make your site dynamic.
+
+---
+
+### dbQuery _query_
 Run a query on the sql cache
 
 Parameter            | Description
@@ -21,12 +157,12 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 		$(".head-user.visitor").css("display", "")
 		$(".user_name-my").text("Visitor")
 		if cb then cb()
-		return 
-	
+		return
+
 	@my_row = res[0]
 	@my_id = @my_row["user_id"]
 	@my_name = @my_row["user_name"]
-	@my_max_size = @my_row["max_size"] 
+	@my_max_size = @my_row["max_size"]
 ```
 
 
@@ -34,7 +170,7 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 
 
 
-#### channelJoin _channel_
+### channelJoin _channel_
 
 Request notifications about sites's events.
 
@@ -78,7 +214,7 @@ route: (cmd, data) ->
 
 ---
 
-#### fileGet _inner_path_
+### fileGet _inner_path_
 Get file content
 
 Parameter        | Description
@@ -117,14 +253,14 @@ submitTopicVote: (e) =>
 				@log "File written"
 			else # Failed
 				elem.toggleClass("active") # Change back
-	
+
 	return false
 ```
 
 ---
 
 
-#### fileQuery _dir_inner_path, query_
+### fileQuery _dir_inner_path, query_
 Simple json file query command
 
 Parameter            | Description
@@ -153,7 +289,7 @@ Parameter            | Description
 ---
 
 
-#### fileWrite _inner_path, content_
+### fileWrite _inner_path, content_
 Write file content
 
 
@@ -175,7 +311,7 @@ writeData: (cb=null) ->
 			if cb then cb(true)
 		else
 			@cmd "wrapperNotification", ["error", "File write error: #{res}"]
-			if cb then cb(false) 
+			if cb then cb(false)
 ```
 
 _Note:_ to write files that not in content.json yet, you must have `"own": true` in `data/sites.json` at the site you want to write
@@ -185,7 +321,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 
 
-#### serverInfo
+### serverInfo
 
 **Return:** <dict> All information about the server
 
@@ -215,7 +351,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
-#### siteInfo
+### siteInfo
 
 **Return**: <dict> All information about the site
 
@@ -267,7 +403,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
-#### sitePublish _[privatekey], [inner_path]_ 
+### sitePublish _[privatekey], [inner_path]_
 Sign and Publish a content.json of the site
 
 Parameter                 | Description
@@ -292,7 +428,7 @@ Parameter                 | Description
 ---
 
 
-#### siteUpdate _address_
+### siteUpdate _address_
 
 Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
 
@@ -314,143 +450,11 @@ updateSite: =>
 
 ---
 
-
-# Wrapper commands
-
-_These commands handled by wrapper frame and does not sent to UiServer using websocket_
-
-
-
-#### wrapperConfirm _message, [button_caption]_
-Display a notification with confirm button
-
-Parameter              | Description
-                  ---  | ---
-**message**            | The message you want to display
-**timeout** (optional) | Caption of the confirmation button (default: OK)
-
-**Return**: True if clicked on button
-
-**Example:**
-```coffeescript
-# Delete site
-siteDelete: (address) ->
-	site = @sites[address]
-	title = site.content.title
-	if title.length > 40
-		title = title.substring(0, 15)+"..."+title.substring(title.length-10)
-	@cmd "wrapperConfirm", ["Are you sure you sure? <b>#{title}</b>", "Delete"], (confirmed) =>
-		@log "Deleting #{site.address}...", confirmed
-		if confirmed
-			$(".site-#{site.address}").addClass("deleted")
-			@cmd "siteDelete", {"address": address} 
-```
-
-
----
-
-
-#### wrapperGetLocalStorage
-**Return**: Browser's local store for the site
-
-**Example:**
-```coffeescript
-@cmd "wrapperGetLocalStorage", [], (res) =>
-	res ?= {}
-	@log "Local storage value:", res
-```
-
-
----
-
-
-#### wrapperSetLocalStorage _data_
-Set browser's local store data stored for the site
-
-Parameter              | Description
-                  ---  | ---
-**data**               | Any data structure you want to store for the site
-
-**Return**: None
-
-**Example:**
-```coffeescript
-Page.local_storage["topic.#{@topic_id}_#{@topic_user_id}.visited"] = Time.timestamp()
-Page.cmd "wrapperSetLocalStorage", Page.local_storage
-```
-
-
----
-
-
-#### wrapperNotification _type, message, [timeout]_
-Display a notification
-
-Parameter              | Description
-                  ---  | ---
-**type**               | Possible values: info, error, done
-**message**            | The message you want to display
-**timeout** (optional) | Hide display after this interval (milliseconds)
-
-**Return**: None
-
-**Example:**
-```coffeescript
-@cmd "wrapperNotification", ["done", "Your registration has been sent!", 10000] 
-```
-
-
----
-
-
-#### wrapperPrompt _message, [type]_
-
-Prompt text input from user
-
-Parameter           | Description
-               ---  | ---
-**message**         | The message you want to display
-**type** (optional) | Type of the input (default: text)
-
-**Return**: Text entered to input
-
-**Example:**
-```coffeescript
-# Prompt the private key
-@cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
-	$(".publishbar .button").addClass("loading")
-	# Send sign content.json and publish request to server
-	@cmd "sitePublish", [privatekey], (res) =>
-		$(".publishbar .button").removeClass("loading")
-		@log "Publish result:", res
-```
-
-
-#### wrapperSetViewport _viewport_
-
-Set sites's viewport meta tag content (required for mobile sites)
-
-
-Parameter           | Description
-               ---  | ---
-**viewport**        | The viewport meta tag content
-
-**Return**: None
-
-**Example:**
-```coffeescript
-# Prompt the private key
-@cmd "wrapperSetViewport", "width=device-width, initial-scale=1.0"
-```
-
----
-
-
 # Admin commands
 _(requires ADMIN permission in data/sites.json)_
 
 
-#### siteList
+### siteList
 
 **Return**: <list> SiteInfo list of all downloaded sites
 
@@ -458,7 +462,7 @@ _(requires ADMIN permission in data/sites.json)_
 ---
 
 
-#### channelJoinAllsite _channel_
+### channelJoinAllsite _channel_
 
 Request notifications about every site's events.
 
@@ -472,7 +476,7 @@ Parameter           | Description
 ---
 
 
-#### sitePause _address_
+### sitePause _address_
 Pause site serving
 
 Parameter           | Description
@@ -485,7 +489,7 @@ Parameter           | Description
 ---
 
 
-#### siteResume _address_
+### siteResume _address_
 Resume site serving
 
 Parameter           | Description
