@@ -20,6 +20,12 @@ ul { font-size: 16px }
 /* Theme default color is the same color as links; Text using the same color of links is bad usability */
 h3, h4, h5, h6 { color: #333333 }
 
+.section a { border-bottom: 1px solid #BBB; color: #000 !important }
+.section a:hover { border-bottom: 1px solid #3091d1 }
+
+.section blockquote { background-color: #e7f2fa; margin: 20px 0px; padding: 10px; border-left: 2px solid #2980B9; }
+.section blockquote p { margin: 0px }
+
 #disqus_thread { margin-bottom: 50px }
 
 .loadcomments {

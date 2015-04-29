@@ -2,12 +2,12 @@
 
 
 
-## Wrapper
+# Wrapper
 
 _These commands handled by wrapper frame and does not sent to UiServer using websocket_
 
 
-### wrapperConfirm _message, [button_caption]_
+##### wrapperConfirm _message, [button_caption]_
 Display a notification with confirm button
 
 Parameter              | Description
@@ -36,7 +36,7 @@ siteDelete: (address) ->
 ---
 
 
-### wrapperGetLocalStorage
+#### wrapperGetLocalStorage
 **Return**: Browser's local store for the site
 
 **Example:**
@@ -50,7 +50,7 @@ siteDelete: (address) ->
 ---
 
 
-### wrapperSetLocalStorage _data_
+#### wrapperSetLocalStorage _data_
 Set browser's local store data stored for the site
 
 Parameter              | Description
@@ -69,7 +69,7 @@ Page.cmd "wrapperSetLocalStorage", Page.local_storage
 ---
 
 
-### wrapperNotification _type, message, [timeout]_
+#### wrapperNotification _type, message, [timeout]_
 Display a notification
 
 Parameter              | Description
@@ -89,7 +89,7 @@ Parameter              | Description
 ---
 
 
-### wrapperPrompt _message, [type]_
+#### wrapperPrompt _message, [type]_
 
 Prompt text input from user
 
@@ -112,7 +112,7 @@ Parameter           | Description
 ```
 
 
-### wrapperSetViewport _viewport_
+#### wrapperSetViewport _viewport_
 
 Set sites's viewport meta tag content (required for mobile sites)
 
@@ -132,7 +132,7 @@ Parameter           | Description
 ---
 
 
-## UiServer
+# UiServer
 
 The UiServer is for ZeroNet what the LAMP setup is for normal websites.
 
@@ -140,7 +140,7 @@ The UiServer will do all the 'backend' work (eg: querying the DB, accessing file
 
 ---
 
-### dbQuery _query_
+#### dbQuery _query_
 Run a query on the sql cache
 
 Parameter            | Description
@@ -170,7 +170,7 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 
 
 
-### channelJoin _channel_
+#### channelJoin _channel_
 
 Request notifications about sites's events.
 
@@ -214,7 +214,7 @@ route: (cmd, data) ->
 
 ---
 
-### fileGet _inner_path_
+#### fileGet _inner_path_
 Get file content
 
 Parameter        | Description
@@ -260,7 +260,7 @@ submitTopicVote: (e) =>
 ---
 
 
-### fileQuery _dir_inner_path, query_
+#### fileQuery _dir_inner_path, query_
 Simple json file query command
 
 Parameter            | Description
@@ -289,7 +289,7 @@ Parameter            | Description
 ---
 
 
-### fileWrite _inner_path, content_
+#### fileWrite _inner_path, content_
 Write file content
 
 
@@ -321,7 +321,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 
 
-### serverInfo
+#### serverInfo
 
 **Return:** <dict> All information about the server
 
@@ -351,7 +351,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
-### siteInfo
+#### siteInfo
 
 **Return**: <dict> All information about the site
 
@@ -403,7 +403,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
-### sitePublish _[privatekey], [inner_path]_
+#### sitePublish _[privatekey], [inner_path]_
 Sign and Publish a content.json of the site
 
 Parameter                 | Description
@@ -428,7 +428,7 @@ Parameter                 | Description
 ---
 
 
-### siteUpdate _address_
+#### siteUpdate _address_
 
 Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
 
@@ -454,7 +454,7 @@ updateSite: =>
 _(requires ADMIN permission in data/sites.json)_
 
 
-### siteList
+#### siteList
 
 **Return**: <list> SiteInfo list of all downloaded sites
 
@@ -462,7 +462,7 @@ _(requires ADMIN permission in data/sites.json)_
 ---
 
 
-### channelJoinAllsite _channel_
+#### channelJoinAllsite _channel_
 
 Request notifications about every site's events.
 
@@ -476,7 +476,7 @@ Parameter           | Description
 ---
 
 
-### sitePause _address_
+#### sitePause _address_
 Pause site serving
 
 Parameter           | Description
@@ -489,7 +489,7 @@ Parameter           | Description
 ---
 
 
-### siteResume _address_
+#### siteResume _address_
 Resume site serving
 
 Parameter           | Description

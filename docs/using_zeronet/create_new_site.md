@@ -19,7 +19,8 @@ $ zeronet.py
 
 - This will create the initial files for your site inside ```data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```.
 
-Note: Windows users using the bundle version must browse into the ZeroBundle/ZeroNet folder and run ```"../Python/python.exe" zeronet.py siteCreate```
+> __Note:__
+> Windows users using the bundle version must browse into the ZeroBundle/ZeroNet folder and run `"../Python/python.exe" zeronet.py siteCreate`
 
 ### 2. Build/Modify site
 

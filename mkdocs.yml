@@ -11,9 +11,10 @@ extra_javascript: [docs.js]
 pages:
 - [index.md, Introduction]
 
-- [getting_started/installing.md, Getting Started, Installing]
-- [getting_started/create_new_site.md, Getting Started, Create new site]
-- [getting_started/sample_sites.md, Getting Started, Sample sites]
+- [index.md, Using ZeroNet, Introduction]
+- [using_zeronet/installing.md, Using ZeroNet, Installing]
+- [using_zeronet/sample_sites.md, Using ZeroNet, Sample sites]
+- [using_zeronet/create_new_site.md, Using ZeroNet, Create new site]
 
 - [site_development/getting_started.md, Site Development, Getting Started]
 - [site_development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
