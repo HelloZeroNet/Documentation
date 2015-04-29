@@ -14,9 +14,15 @@ li.toctree-l2:first-child { display: none }
 h4 em { font-style: normal; color: #999 }
 hr { margin: 50px 0 }
 
+/* List font on the same size page text */
+ul { font-size: 16px }
+
+/* Theme default color is the same color as links; Text using the same color of links is bad usability */
+h3, h4, h5, h6 { color: #333333 }
+
 #disqus_thread { margin-bottom: 50px }
 
-.loadcomments { 
-	padding: 10px 15px; display: inline-block; border-radius: 2px; border-bottom: 2px solid #CDBD1E; transition: all 0.5s; 
-	background-color: #FFF85F; font-size: 20px; line-height: 31px; background-position: left center 
+.loadcomments {
+	padding: 10px 15px; display: inline-block; border-radius: 2px; border-bottom: 2px solid #CDBD1E; transition: all 0.5s;
+	background-color: #FFF85F; font-size: 20px; line-height: 31px; background-position: left center
 }

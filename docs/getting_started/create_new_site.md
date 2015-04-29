@@ -1,6 +1,10 @@
 # Create new ZeroNet site
 
-Shut down zeronet if it is already running
+
+### 1. Create site structure
+
+* Shut down ZeroNet if it is running
+* Browse to the folder where ZeroNet is installed and run:
 
 ```bash
 $ zeronet.py siteCreate
@@ -13,16 +17,14 @@ $ zeronet.py
 ...
 ```
 
-Congratulations, you're finished! Now anyone can access your site using
-`http://localhost:43110/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2`
+- This will create the initial files for your site inside ```data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```.
 
-Next steps: [ZeroNet Developer Documentation](http://zeronet.readthedocs.org/en/latest/)
+Note: Windows users using the bundle version must browse into the ZeroBundle/ZeroNet folder and run ```"../Python/python.exe" zeronet.py siteCreate```
 
+### 2. Build/Modify site
 
-# Modify ZeroNet site
-
-* Modify files located in the data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2 directory.
-  After you're finished:
+* Update the site files located in ```data/[your site address key]``` (eg: 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2).
+* When your site is ready run:
 
 ```bash
 $ zeronet.py siteSign 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
@@ -30,7 +32,11 @@ $ zeronet.py siteSign 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
 Private key (input hidden):
 ```
 
-* Enter the private key you got when you created the site, then:
+* Enter the private key you got when you created the site. This will sign all files so peers can verify that the site owner is who made the changes.
+
+### 3. Publish site changes
+
+* In order to inform peers about the changes you made you need to run:
 
 ```bash
 $ zeronet.py sitePublish 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
@@ -41,3 +47,7 @@ Site:13DNDk..bhC2 Successfuly published to 3 peers
 ```
 
 * That's it! You've successfully signed and published your modifications.
+* Your site will be accessible from: ```http://localhost:43110/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```
+
+
+**Next steps:** [ZeroNet Developer Documentation](/site_development/getting_started/)

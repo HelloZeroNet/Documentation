@@ -1,6 +1,6 @@
-# Coding standards if you want to modify the source code
+# Coding standards if you want to collaborate to ZeroNet
  - Use tabs instead of spaces (tab size: 4)
- - Comments starts with # Capitalized word 
+ - Comments starts with # Capitalized word
  - Simple is better than complex
  - Premature optimization is the root of all evil
 
@@ -18,4 +18,4 @@
 
 ### Source files directories and naming
  - One class per file is preferred
- - Source file name and directory comes from ClassName: WorkerManager class = Worker/WorkerManager.py 
+ - Source file name and directory comes from ClassName: WorkerManager class = Worker/WorkerManager.py

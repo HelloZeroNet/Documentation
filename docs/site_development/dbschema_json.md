@@ -1,14 +1,14 @@
-# The structure of dbschema.json files
+# Structure of dbschema.json
 
 [Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
 
-The following example do the following:
+The code below will do the following:
 
- - If an updated data/users/*/data.json received (eg.: user posted something):
-   - Every row in `data["topics"]` loaded to `topic` table
-   - Every key in `data["comment_votes"]` loaded to `comment_vote` table as `comment_hash` col and the values stored in same line as `vote`
- - If an updated data/users/content.json received (eg.: new user created):
-   - The `"user_id", "user_name", "max_size", "added"` key in value of `content["include"]` loaded into `user` table and the key is stored as `path`
+ - If an updated data/users/*/data.json file is received (eg.: a user posted something):
+   - Every row in `data["topics"]` is loaded to the `topic` table
+   - Every key in `data["comment_votes"]` is loaded to the `comment_vote` table as `comment_hash` col and the values stored in same line as `vote`
+ - If an updated data/users/content.json file is received (eg.: new user created):
+   - The `"user_id", "user_name", "max_size", "added"` key in value of `content["include"]` is loaded into the `user` table and the key is stored as `path`
 
 ```json
 
@@ -25,30 +25,30 @@ The following example do the following:
         {
           "node": "comment_votes", # Reading data.json[comment_votes] key value
           "table": "comment_vote", # Feeding data to comment_vote table
-          "key_col": "comment_hash", 
-            # data.json[comment_votes] is a simple dict, the keys of the 
+          "key_col": "comment_hash",
+            # data.json[comment_votes] is a simple dict, the keys of the
             # dict are loaded to comment_vote table comment_hash column
 
-          "val_col": "vote" 
+          "val_col": "vote"
             # The data.json[comment_votes] dict values loaded to comment_vote table vote column
-            
+
         }
       ],
-      "to_keyvalue": ["next_message_id", "next_topic_id"] 
-        # Load data.json[next_topic_id] to keyvalues table 
+      "to_keyvalue": ["next_message_id", "next_topic_id"]
+        # Load data.json[next_topic_id] to keyvalues table
         # (key: next_message_id, value: data.json[next_message_id] value)
 
     },
     "content.json": {
       "to_table": [
         {
-          "node": "includes", 
-          "table": "user", 
-          "key_col": "path", 
-          "import_cols": ["user_id", "user_name", "max_size", "added"], 
+          "node": "includes",
+          "table": "user",
+          "key_col": "path",
+          "import_cols": ["user_id", "user_name", "max_size", "added"],
             # Only import these columns to user table
-          "replaces": { 
-            "path": {"content.json": "data.json"} 
+          "replaces": {
+            "path": {"content.json": "data.json"}
               # Replace content.json to data.json in the
               # value of path column (required for joining)
           }
@@ -59,7 +59,7 @@ The following example do the following:
   "tables": { # Table definitions
     "topic": { # Define topic table
       "cols": [ # Cols of the table
-        ["topic_id", "INTEGER"], 
+        ["topic_id", "INTEGER"],
         ["title", "TEXT"],
         ["body", "TEXT"],
         ["type", "TEXT"],
@@ -67,11 +67,11 @@ The following example do the following:
         ["added", "DATETIME"],
         ["json_id", "INTEGER REFERENCES json (json_id)"]
       ],
-      "indexes": ["CREATE UNIQUE INDEX topic_key ON topic(topic_id, json_id)"], 
+      "indexes": ["CREATE UNIQUE INDEX topic_key ON topic(topic_id, json_id)"],
         # Indexes automatically created
 
-      "schema_changed": 1426195822 
-        # Last time of the schema changed, if the client's version is different then 
+      "schema_changed": 1426195822
+        # Last time of the schema changed, if the client's version is different then
         # automatically destroy the old, create the new table then reload the data into it
 
     },
@@ -162,31 +162,31 @@ The following example do the following:
 
 ```json
 {
-  "files": {}, 
-  "ignore": ".*/.*", 
+  "files": {},
+  "ignore": ".*/.*",
   "includes": {
     "13v1FwKcq7dx2UPruFcRcqd8s7VBjvoWJW/content.json": {
-      "added": 1426683897, 
-      "files_allowed": "data.json", 
-      "includes_allowed": false, 
-      "max_size": 10000, 
+      "added": 1426683897,
+      "files_allowed": "data.json",
+      "includes_allowed": false,
+      "max_size": 10000,
       "signers": [
         "13v1FwKcq7dx2UPruFcRcqd8s7VBjvoWJW"
-      ], 
-      "signers_required": 1, 
-      "user_id": 15, 
+      ],
+      "signers_required": 1,
+      "user_id": 15,
       "user_name": "meginthelloka"
-    }, 
+    },
     "15WGMVViswrF13sAKb7je6oX3UhXavBxxQ/content.json": {
-      "added": 1426687209, 
-      "files_allowed": "data.json", 
-      "includes_allowed": false, 
-      "max_size": 10000, 
+      "added": 1426687209,
+      "files_allowed": "data.json",
+      "includes_allowed": false,
+      "max_size": 10000,
       "signers": [
         "15WGMVViswrF13sAKb7je6oX3UhXavBxxQ"
-      ], 
-      "signers_required": 1, 
-      "user_id": 18, 
+      ],
+      "signers_required": 1,
+      "user_id": 18,
       "user_name": "habla"
     }
   }

@@ -1,9 +1,18 @@
-# The structure of content.json files
+# Structure of content.json
 
-[Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json)
+Every ZeroNet site will have a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
-#### address
-Your site's address
+This file will carry, amont other things, a list of all files on your site and a signature created with your private key. This is done to avoid file tampering (ie: only you, or people you trust, can update the site content).
+
+Here is a list of supported keys:
+
+
+
+---
+
+### address
+
+Your site address
 
 **Example**: 1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ
 
@@ -11,7 +20,7 @@ Your site's address
 ---
 
 
-#### background-color
+### background-color
 
 Background color of the wrapper
 
@@ -21,7 +30,7 @@ Background color of the wrapper
 ---
 
 
-#### description
+### description
 
 Description of your site, displayed under site title on ZeroHello.
 
@@ -31,9 +40,9 @@ Description of your site, displayed under site title on ZeroHello.
 ---
 
 
-#### domain
+### domain
 
-Domain of your site. ZeroHello will link this if the user has Zeroname plugin enabled.
+Namecoin domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
 
 **Example**: Blog.ZeroNetwork.bit
 
@@ -41,15 +50,15 @@ Domain of your site. ZeroHello will link this if the user has Zeroname plugin en
 ---
 
 
-#### files
+### files
 
-Size and sha512 hash of signed files. Automatically generated using `zeronet.py siteSign siteaddress privatekey` command.
+Size and sha512 hash of all files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```json
     "css/all.css": {
       "sha1": "f2b14758210163f0cb38a865aa67797a4ed92837", # Only for backward compatibility, will be removed soon
-      "sha512": "869b09328f07bac538c313c4702baa5276544346418378199fa5cef644c139e8", 
+      "sha512": "869b09328f07bac538c313c4702baa5276544346418378199fa5cef644c139e8",
       "size": 148208
 ```
 
@@ -57,7 +66,7 @@ Size and sha512 hash of signed files. Automatically generated using `zeronet.py 
 ---
 
 
-#### ignore
+### ignore
 
 Ignore files from signing matching this preg pattern
 
@@ -67,7 +76,7 @@ Ignore files from signing matching this preg pattern
 ---
 
 
-#### includes
+### includes
 
 Include an another content.json
 
@@ -78,7 +87,7 @@ Include an another content.json
   "data/users/content.json": {
     "signers": [ # Possible signers address for the file
       "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
-    ], 
+    ],
     "signers_required": 1 # Valid signs required to accept the file (Multisig possibility),
     "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
     "includes_allowed": false, # Nested includes allowed or not
@@ -91,9 +100,9 @@ Include an another content.json
 ---
 
 
-#### modified
+### modified
 
-Content.json generate time.
+Time when the content.json was generated.
 
 **Example**: 1425857522.076
 
@@ -101,23 +110,23 @@ Content.json generate time.
 ---
 
 
-#### sign (deprecated)
+### sign (deprecated)
 
 ECDSA sign of the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). For backward compatibility, will be removed soon.
 
 **Example**:
 ```json
   "sign": [
-    43117356513690007125104018825100786623580298637039067305407092800990252156956, 
+    43117356513690007125104018825100786623580298637039067305407092800990252156956,
     94139380599940414070721501960181245022427741524702752954181461080408625270000
-  ], 
+  ],
 ```
 
 
 ---
 
 
-#### signers_sign
+### signers_sign
 
 Possible signers address for the root content.json signed using the site address private key. (Multisig possibility)
 
@@ -129,22 +138,22 @@ Possible signers address for the root content.json signed using the site address
 ---
 
 
-#### signs
+### signs
 
-ECDSA signs for the the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). 
+ECDSA signs for the the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes).
 
 **Example**:
 ```json
   "signs": {
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
-  }, 
+  },
 ```
 
 
 ---
 
 
-#### signs_required
+### signs_required
 
 Valid signs required to accept the file (Multisig possibility)
 
@@ -155,9 +164,9 @@ Valid signs required to accept the file (Multisig possibility)
 ---
 
 
-#### title
+### title
 
-Site's title, displayed in browser title and on ZeroHello.
+Site's title, visible in browser title and on ZeroHello.
 
 **Example**: ZeroTalk
 
@@ -165,7 +174,7 @@ Site's title, displayed in browser title and on ZeroHello.
 ----
 
 
-#### viewport
+### viewport
 
 Content for the viewport meta tag. (Used for mobile-friendly pages)
 
@@ -175,10 +184,8 @@ Content for the viewport meta tag. (Used for mobile-friendly pages)
 ----
 
 
-#### zeronet_version
+### zeronet_version
 
 ZeroNet version used to generate content.json file.
 
 **Example**: 0.2.5
-
-
