@@ -40,6 +40,7 @@ To run ZeroNet in debug mode use: `python zeronet.py --debug`
 
  - Merged CSS files: All CSS files inside the site folder will be merged into one file called `all.css`. You can chose to include only this file to your site. If you want to keep the other CSS files the make the development easier you can add them to the ignore key of your `content.json`, this way they won't be published with your site. (eg: add to your `content.json` `"ignore": "(js|css)/(?!all.(js|css))"` this will ignore all css and js files except `all.js` and `all.css`)
  - Merged JS files: All JS files inside the site folder will be merged into one file called `all.js`. If a CoffeeScript compiler is present (bundled for Windows) it will convert `.coffee` to `.js`.
+ - Order in which files are merged into all.css/all.js: Files inside subdirectories of the css/js folder comes first; Files in the css/js folder will be merged according to file name ordering (01_a.css, 02_a.css, etc) 
 
 
 
