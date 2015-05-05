@@ -1,4 +1,7 @@
 <html>
+<style>
+* { font-family: Arial; font-weight: normal; }
+</style>
 <body>
 <h1>ZeroFrame API example</h1>
 
@@ -6,15 +9,47 @@
 <h2>Notification examples</h2>
 <input type='button' onclick='my_site.cmd("wrapperNotification", ["done", "Hello World!", 10000])' value='With 10sec timeout'>
 <input type='button' onclick='my_site.cmd("wrapperNotification", ["error", "Some error"])' value='Error with no timeout'>
-<input type='button' onclick='my_site.cmd("wrapperConfirm", ["Are you sure?"], function (res) { output.value += res+"\n" })' value='Confirmation'>
-<input type='button' onclick='my_site.cmd("wrapperPrompt", ["Whats your name?"], function (res) { output.value += res+"\n" })' value='Prompt'>
+<input type='button' onclick='my_site.cmd("wrapperConfirm", ["Are you sure?"], function (res) { output.value = res+"\n"+output.value })' value='Confirmation'>
+<input type='button' onclick='my_site.cmd("wrapperPrompt", ["Whats your name?"], function (res) { output.value = res+"\n"+output.value })' value='Prompt'>
 
-<h2>File write example</h2>
-<input type='button' onclick='my_site.cmd("fileWrite", ["data.txt", btoa("hello from ZeroApi")], function (res) { output.value += "fileWrite result:"+res+"\n" })' value='Write file data.txt'>
-<input type='button' onclick='my_site.cmd("fileGet", ["data.txt"], function (res) { output.value += "fileGet result:"+res+"\n" })' value='Read file data.txt'>
+<h2>File write example <small>(You must have "own": true in data/sites.json at your site)</small></h2>
+<input type='button' onclick='my_site.cmd("fileWrite", ["data.txt", btoa("hello from ZeroApi")], function (res) { output.value = "fileWrite data.txt result:"+res+"\n"+output.value })' value='Write file data.txt'>
+<input type='button' onclick='my_site.cmd("fileGet", ["data.txt"], function (res) { output.value = "fileGet result:"+res+"\n"+output.value })' value='Read file data.txt'>
+
+<h2>Database example <small>(You have to restart ZeroNet to detect the database)</h2>
+<script>
+function createMessage() {
+	// Load current messages.json
+	my_site.cmd("fileGet", "data/messages.json", function (data) {
+		var data = JSON.parse(data)
+		// Generate new message data
+		var message_id = data["next_message_id"]
+		var message = {
+			"message_id": message_id,
+			"topic_id": 1+parseInt(Math.random()*10),
+			"body": "Hello ZeroNet database! This is message #"+message_id,
+			"added": +(new Date)
+		}
+		data["next_message_id"] += 1
+		// Add to data file array
+		data["messages"].push(message)
+		output.value = "Inserting message: "+JSON.stringify(message)+"\n"+output.value
+		// Write file to disk (automatically inserted to db)
+		my_site.cmd("fileWrite", ["data/messages.json", btoa(JSON.stringify(data, undefined, '\t'))], function (res) { output.value = "fileWrite data/messages.json result:"+res+"\n"+output.value })
+	})
+}
+
+function queryMessages() {
+	my_site.cmd("dbQuery", ["SELECT * FROM message ORDER BY added DESC LIMIT 5"], function (res) {
+		output.value = JSON.stringify(res, undefined, '\t')+"\n"+output.value
+	})
+}
+</script>
+<input type='button' onclick='createMessage()' value='Create message'>
+<input type='button' onclick='queryMessages()' value='SELECT * FROM message ORDER BY added DESC LIMIT 5'>
 
 <h3>Output</h3>
-<textarea id='output' style='width: 600px; height: 300px'></textarea>
+<textarea id='output' style='width: 960px; height: 600px'></textarea>
 
 <script type='text/javascript' src='js/all.js' asyc></script>
 </body>

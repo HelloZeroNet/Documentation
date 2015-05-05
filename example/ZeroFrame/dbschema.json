@@ -1,0 +1,24 @@
+{
+	"db_name": "ZeroFrame test",
+	"db_file": "data/zeronet_test.db",
+	"maps": {
+		"messages.json": {
+			"to_table": [
+				{"node": "messages", "table": "message"}
+			]
+		}
+	},
+	"tables": {
+		"message": {
+			"cols": [
+				["message_id", "INTEGER"], 
+				["topic_id", "INTEGER"],
+				["body", "TEXT"],
+				["added", "INTEGER"],
+				["json_id", "INTEGER REFERENCES json (json_id)"]
+			],
+			"indexes": ["CREATE UNIQUE INDEX message_key ON message(message_id, json_id)"],
+			"schema_changed": 1426195822
+		}
+	}
+}

@@ -1,0 +1,59 @@
+{
+	"messages": [
+		{
+			"message_id": 1,
+			"topic_id": 2,
+			"body": "Hello ZeroNet database! This is message #1",
+			"added": 1430864641659
+		},
+		{
+			"message_id": 2,
+			"topic_id": 5,
+			"body": "Hello ZeroNet database! This is message #2",
+			"added": 1430864660312
+		},
+		{
+			"message_id": 3,
+			"topic_id": 4,
+			"body": "Hello ZeroNet database! This is message #3",
+			"added": 1430864687850
+		},
+		{
+			"message_id": 4,
+			"topic_id": 8,
+			"body": "Hello ZeroNet database! This is message #4",
+			"added": 1430864733777
+		},
+		{
+			"message_id": 5,
+			"topic_id": 3,
+			"body": "Hello ZeroNet database! This is message #5",
+			"added": 1430864951466
+		},
+		{
+			"message_id": 6,
+			"topic_id": 4,
+			"body": "Hello ZeroNet database! This is message #6",
+			"added": 1430865030673
+		},
+		{
+			"message_id": 7,
+			"topic_id": 6,
+			"body": "Hello ZeroNet database! This is message #7",
+			"added": 1430865049237
+		},
+		{
+			"message_id": 8,
+			"topic_id": 4,
+			"body": "Hello ZeroNet database! This is message #8",
+			"added": 1430865073633
+		},
+		{
+			"message_id": 9,
+			"topic_id": 9,
+			"body": "Hello ZeroNet database! This is message #9",
+			"added": 1430865077577
+		}
+	],
+	"next_message_id": 10
+}
