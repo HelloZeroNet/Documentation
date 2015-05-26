@@ -40,11 +40,18 @@ It will download the latest version of ZeroNet and start it automatically.
 * `tar xvpfz master`
 * Start with `python zeronet.py`
 
-
 ## Mac
 
  * Install [brew](http://brew.sh/)
  * `brew install python`
  * `pip install gevent msgpack-python`
  * [Download](https://github.com/HelloZeroNet/ZeroNet/archive/master.zip), Unpack, run `python zeronet.py`
+ 
+## Vagrant
+
+* `vagrant up`
+* Access VM with `vagrant ssh`
+* `cd /vagrant`
+* Run `python zeronet.py --ui_ip 0.0.0.0`
+* Open http://127.0.0.1:43110/ in your browser
  
