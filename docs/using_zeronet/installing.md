@@ -54,4 +54,9 @@ It will download the latest version of ZeroNet and start it automatically.
 * `cd /vagrant`
 * Run `python zeronet.py --ui_ip 0.0.0.0`
 * Open http://127.0.0.1:43110/ in your browser
+
+## Docker
+* `docker run -p 15441:15441 -p 43110:43110 nofish/zeronet​`
+* Open http://127.0.0.1:43110/ in your browser
+
  
