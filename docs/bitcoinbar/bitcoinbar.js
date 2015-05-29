@@ -1,5 +1,6 @@
 function applyBitcoinbarData(elem, data) {
-	var balance_btc = data.totalReceivedValue/100000000
+	// var balance_btc = data.totalReceivedValue/100000000
+	var balance_btc = parseFloat(data.available_balance)+parseFloat(data.pending_received_balance)
 	var percent = balance_btc / parseFloat(elem.data("goal")) * 100
 
 	// Set the text and create html elements
@@ -47,14 +48,30 @@ function applyBitcoinbarData(elem, data) {
 }
 
 function updateBitcoinbars() {
+	// Query all address balance in one query
+	/*
+	helloblock.io down
 	var addresses = []
 	$(".bitcoinbar").each(function() {
 		addresses.push("addresses="+$(this).data("address"))
 	})
-	// Query all address balance in one query
 	$.get("https://mainnet.helloblock.io/v1/addresses?"+addresses.join("&"), function(res) { 
 		for (var i=0;i<res.data.addresses.length;i++) {
 			var address_data = res.data.addresses[i]
+			elem = $(".bitcoinbar[data-address="+address_data.address+"]")
+
+			// Apply the data to element
+			applyBitcoinbarData(elem, address_data)
+		}
+	})
+	*/
+	var addresses = []
+	$(".bitcoinbar").each(function() {
+		addresses.push($(this).data("address"))
+	})
+	$.get("https://block.io/api/v2/get_address_balance/?api_key=969b-3ffd-0b6a-45ad&addresses="+addresses.join(","), function(res) { 
+		for (var i=0;i<res.data.balances.length;i++) {
+			var address_data = res.data.balances[i]
 			elem = $(".bitcoinbar[data-address="+address_data.address+"]")
 
 			// Apply the data to element
