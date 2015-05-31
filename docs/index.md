@@ -42,6 +42,7 @@ ZeroNet counts with a build-in SQL database. This makes content-heavy site devel
  * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
    based authorization: Your account is protected by same cryptography as your bitcoin wallet.
  * Namecoin .bit domains support.
+ * DNS support
  * SQL Database support: Allows for easier site development and faster page load times.
  * Automatic, uPnP port opening using.
  * Plugin for multiuser(openproxy) support.

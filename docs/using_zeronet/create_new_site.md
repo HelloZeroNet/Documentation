@@ -50,5 +50,64 @@ Site:13DNDk..bhC2 Successfuly published to 3 peers
 * That's it! You've successfully signed and published your modifications.
 * Your site will be accessible from: ```http://localhost:43110/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```
 
+### 4. Add domain name resolving
+
+This step is optional. It's hard to use alway a full site ID `13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2`. For this reason it's possible to use a name resolving service. It's possible to use the normal Domain Name System (DNS) or to use the Namecoin system.
+
+To make the homepage (ZeroHello) link to your site domain you have to add a "domain" key to your site's content.json file, for example:
+
+```
+ {
+  "address": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ", 
+  "background-color": "#F5F5F5", 
+  "description": "Decentralized forum demo", 
+  "domain": "Talk.ZeroNetwork.bit", 
+  "files": {
+  ...
+```
+
+#### Domain Name System (DNS)
+
+Simply add a new TXT record to your DNS zonefile on your nameservers.
+
+##### Example TXT record: Subdomain
+
+```
+subdomain        IN      TXT    "zero=1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
+```
+
+##### Example TXT record: Top level domain (TLD) 
+
+```
+@        IN      TXT    "zero=1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
+```
+
+#### Namecoin
+
+To register the site ID just add 'zeronet' key to your namecoin domain.
+The "" key means the primary domain, any other than that is a subdomain. 
+
+Example:
+
+```
+ {
+    "name": {
+        "formatted": "ZeroNet project"
+    },
+    "bitcoin": {
+        "address": "1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX"
+    },
+    "zeronet": {
+        "": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", 
+        "blog": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8", 
+        "talk": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
+    },
+    "ns": [
+       "ns1.domaincoin.net"
+       "ns2.domaincoin.net"
+    ]
+ }
+ ```
+
 
 **Next steps:** [ZeroNet Developer Documentation](/site_development/getting_started/)

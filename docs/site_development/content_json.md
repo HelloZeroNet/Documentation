@@ -42,7 +42,7 @@ Description of your site, displayed under site title on ZeroHello.
 
 ### domain
 
-Namecoin domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
+Domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
 
 **Example**: Blog.ZeroNetwork.bit
 
