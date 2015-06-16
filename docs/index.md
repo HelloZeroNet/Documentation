@@ -41,12 +41,14 @@ ZeroNet counts with a build-in SQL database. This makes content-heavy site devel
  * Easy, zero configuration setup.
  * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
    based authorization: Your account is protected by same cryptography as your bitcoin wallet.
+ * Real-time updated sites.
  * Namecoin .bit domains support.
  * SQL Database support: Allows for easier site development and faster page load times.
- * Automatic, uPnP port opening using.
- * Plugin for multiuser(openproxy) support.
- * [ZeroFrame API](http://zeronet.readthedocs.org/en/latest/site_development/zeroframe_api_reference/) for dynamic sites.
- * One click ZeroNet client updater.
+ * Tor network support.
+ * TLS encrypted connections.
+ * Automatic, uPnP port opening.
+ * Plugin for multiuser (openproxy) support.
+ * Works with any browser/OS.
 
 
 # How does it work?
@@ -77,7 +79,7 @@ ZeroNet counts with a build-in SQL database. This makes content-heavy site devel
 
 * No torrent-like, file splitting for big file support
 * No more anonymous than Bittorrent
-* File transactions are not compressed or encrypted yet
+* File transactions are not compressed ~~or encrypted yet~~
 * No private sites
 * <s>You must have an open port to publish new changes</s>
 * <s>Timeout problems on slow connections</s>

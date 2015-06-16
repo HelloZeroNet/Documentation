@@ -42,7 +42,7 @@ It will download the latest version of ZeroNet and start it automatically.
 
 ## Mac
 
- * Install [brew](http://brew.sh/)
+ * Install [homebrew](http://brew.sh/)
  * `brew install python`
  * `pip install gevent msgpack-python`
  * [Download](https://github.com/HelloZeroNet/ZeroNet/archive/master.zip), Unpack, run `python zeronet.py`

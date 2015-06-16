@@ -138,36 +138,48 @@ The UiServer is for ZeroNet what the LAMP setup is for normal websites.
 
 The UiServer will do all the 'backend' work (eg: querying the DB, accessing files, etc). This are the API calls you will need to make your site dynamic.
 
----
 
-#### dbQuery _query_
-Run a query on the sql cache
+
+#### certAdd _domain, auth_type, auth_user_name, cert_
+Add a new certificate to current user.
 
 Parameter            | Description
                  --- | ---
-**query**            | Sql query command
+**domain**           | Certificate issuer domain
+**auth_type**        | Auth type used on registration
+**auth_user_name**   | User name used on registration
+**cert**             | The cert itself: `auth_address#auth_type/auth_user_name` string signed by the cert site owner
 
-**Return**: <list> Result of the query
+**Return**: "ok", "Not changed" or {"error": error_message}
 
 **Example:**
 ```coffeescript
-@log "Updating user info...", @my_address
-Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT JOIN json USING(path) WHERE path='#{@my_address}/data.json'"], (res) =>
-	if res.error or res.length == 0 # Db not ready yet or No user found
-		$(".head-user.visitor").css("display", "")
-		$(".user_name-my").text("Visitor")
-		if cb then cb()
-		return
-
-	@my_row = res[0]
-	@my_id = @my_row["user_id"]
-	@my_name = @my_row["user_name"]
-	@my_max_size = @my_row["max_size"]
+@cmd "certAdd", ["zeroid.bit", auth_type, user_name, cert_sign], (res) =>
+	$(".ui").removeClass("flipped")
+	if res.error
+		@cmd "wrapperNotification", ["error", "#{res.error}"]
 ```
 
 
 ---
 
+
+#### certSelect _accepted_domains_
+Display certificate selector.
+
+Parameter            | Description
+                 --- | ---
+**accepted_domains** | List of domains that accepted by site as authorization provider
+
+**Return**: None
+
+**Example:**
+```coffeescript
+@cmd "certSelect", {"accepted_domains": ["zeroid.bit"]}
+```
+
+
+---
 
 
 #### channelJoin _channel_
@@ -209,6 +221,35 @@ route: (cmd, data) ->
 	[...] # Same as siteInfo return dict
 }
 
+```
+
+
+---
+
+
+#### dbQuery _query_
+Run a query on the sql cache
+
+Parameter            | Description
+                 --- | ---
+**query**            | Sql query command
+
+**Return**: <list> Result of the query
+
+**Example:**
+```coffeescript
+@log "Updating user info...", @my_address
+Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT JOIN json USING(path) WHERE path='#{@my_address}/data.json'"], (res) =>
+	if res.error or res.length == 0 # Db not ready yet or No user found
+		$(".head-user.visitor").css("display", "")
+		$(".user_name-my").text("Visitor")
+		if cb then cb()
+		return
+
+	@my_row = res[0]
+	@my_id = @my_row["user_id"]
+	@my_name = @my_row["user_name"]
+	@my_max_size = @my_row["max_size"]
 ```
 
 
@@ -283,6 +324,38 @@ Parameter            | Description
 		return a.added - b.added
 	for topic in topics
 		@log topic.topic_id, topic.inner_path, topic.title
+```
+
+
+---
+
+
+#### fileRules _inner_path_
+Return the rules for the file.
+
+Parameter            | Description
+                 --- | ---
+**inner_path**       | File inner path
+
+**Return**: <list> Matched content
+
+**Example result:**
+
+```json
+{
+	"current_size": 2485, 
+	"cert_signers": {"zeroid.bit": ["1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz"]}, 
+	"files_allowed": "data.json", 
+	"signers": ["1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj"], 
+	"user_address": "1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj", 
+	"max_size": 100000
+}
+```
+
+**Example:**
+```coffeescript
+@cmd "fileRules", "data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json", (rules) =>
+	@log rules
 ```
 
 
@@ -403,13 +476,14 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
-#### sitePublish _[privatekey], [inner_path]_
-Sign and Publish a content.json of the site
+#### sitePublish _[privatekey], [inner_path], [sign]_
+Publish a content.json of the site
 
 Parameter                 | Description
                       --- | ---
 **privatekey** (optional) | Private key used for signing (default: current user's privatekey)
 **inner_path** (optional) | Inner path of the content json you want to publish (default: content.json)
+**sign** (optional)       | If True then sign the content.json before publish (default: True)
 
 **Return**: "ok" on success else the error message
 
@@ -426,6 +500,31 @@ Parameter                 | Description
 
 
 ---
+
+
+#### siteSign _[privatekey], [inner_path]_
+Sign a content.json of the site
+
+Parameter                 | Description
+                      --- | ---
+**privatekey** (optional) | Private key used for signing (default: current user's privatekey)
+**inner_path** (optional) | Inner path of the content json you want to sign (default: content.json)
+
+**Return**: "ok" on success else the error message
+
+> __Note:__
+> Use "stored" as privatekey if its definied in users.json (eg. cloned sites)
+
+**Example:**
+```coffeescript
+if @site_info["privatekey"] # Private key stored in users.json
+	@cmd "siteSign", ["stored", "content.json"], (res) =>
+		@log "Sign result", res 
+```
+
+
+---
+
 
 
 #### siteUpdate _address_
@@ -454,9 +553,16 @@ updateSite: =>
 _(requires ADMIN permission in data/sites.json)_
 
 
-#### siteList
 
-**Return**: <list> SiteInfo list of all downloaded sites
+
+#### certSet _domain_
+Set the used certificate for current site.
+
+Parameter            | Description
+                 --- | ---
+**domain**           | Domain of the certificate issuer
+
+**Return**: None
 
 
 ---
@@ -471,6 +577,32 @@ Parameter           | Description
 **channel**         | Channel to join (see channelJoin)
 
 **Return**: None
+
+
+---
+
+
+#### siteClone _address_
+Copy site files into a new one. 
+
+Every file and directory will be skipped if it has a `-default` subfixed version and the subfixed version will be copied instead of it.
+
+
+Eg. If you have a `data` and a `data-default` directory: The `data` directory will not be copied and the `data-default` directory will be renamed to data.
+
+Parameter           | Description
+               ---  | ---
+**address**         | Address of site want to clone
+
+**Return**: None, automatically redirects to new site on completion
+
+
+---
+
+
+#### siteList
+
+**Return**: <list> SiteInfo list of all downloaded sites
 
 
 ---
@@ -497,3 +629,5 @@ Parameter           | Description
 **address**         | Address of site want to resume
 
 **Return**: None
+
+
