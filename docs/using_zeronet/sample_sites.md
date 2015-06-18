@@ -8,7 +8,7 @@ The homepage of ZeroNet
  - Site actions: Update, Pause, Resume, Delete
  - If new version available update ZeroNet with one click
 
-![ZeroHello](img/zerohello.png)
+![ZeroHello](/img/zerohello.png)
 
 Address: [1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr](http://127.0.0.1:43110/1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 
@@ -29,7 +29,7 @@ How does it works?
  - The bot modify the `message.json` file, signs it using the private key and publish to other peers
  - If the site modification reaches your client the message will appear to your browser
 
-![ZeroBoard](img/zeroboard.png)
+![ZeroBoard](/img/zeroboard.png)
 
 Address: [1Gfey7wVXXg1rxk751TBTxLJwhddDNfcdp](http://127.0.0.1:43110/1Gfey7wVXXg1rxk751TBTxLJwhddDNfcdp)
 
@@ -54,7 +54,7 @@ How does it works?
  - Your ZeroNet client signs the new, modified files and publish directly to other peers
  - You site will be accessible until at least 1 peer (visitor) computer is active
 
-![ZeroBlog](img/zeroblog.png)
+![ZeroBlog](/img/zeroblog.png)
 
 Address: [1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8](http://127.0.0.1:43110/1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8)
 
@@ -79,7 +79,7 @@ How does it works?
  - To be able to distribute your own content (Topics, Comments, Upvotes, etc.) you request an own file from the site owner
  - After the registration is done you can publish your file's modifications directly to other peers without contacting the site owner again
 
-![ZeroTalk](img/zerotalk.png)
+![ZeroTalk](/img/zerotalk.png)
 
 Address: [1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ](http://127.0.0.1:43110/1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ)
 

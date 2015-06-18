@@ -3,7 +3,7 @@
 # Help to keep ZeroNet development alive
 
 
-## ZeroNet: 2015 second quarter development 
+## ZeroNet: 2015 third quarter development 
 <a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="3.0"></a>
 
 * General donation towards ZeroNet development
@@ -31,8 +31,6 @@ Benefits:
 
 
 ## <s>Namecoin domain support</s> (done in version 0.2.8)
-
- ![Namecoin](img/domain.png)
 
  * Use Namecoin domain names to access sites
 

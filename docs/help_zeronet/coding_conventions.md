@@ -1,6 +1,5 @@
 # Coding standards if you want to collaborate to ZeroNet
- - Use tabs instead of spaces (tab size: 4)
- - Comments starts with # Capitalized word
+ - Follow [PEP8](https://www.python.org/dev/peps/pep-0008/)
  - Simple is better than complex
  - Premature optimization is the root of all evil
 

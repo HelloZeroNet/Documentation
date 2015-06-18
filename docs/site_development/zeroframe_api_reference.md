@@ -7,7 +7,7 @@
 _These commands handled by wrapper frame and does not sent to UiServer using websocket_
 
 
-##### wrapperConfirm _message, [button_caption]_
+#### wrapperConfirm _message, [button_caption]_
 Display a notification with confirm button
 
 Parameter              | Description

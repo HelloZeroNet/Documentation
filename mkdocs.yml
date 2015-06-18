@@ -9,21 +9,19 @@ extra_javascript: [docs.js]
 
 
 pages:
-- [index.md, Introduction]
-
-- [index.md, Using ZeroNet, Introduction]
-- [using_zeronet/installing.md, Using ZeroNet, Installing]
-- [using_zeronet/sample_sites.md, Using ZeroNet, Sample sites]
-- [using_zeronet/create_new_site.md, Using ZeroNet, Create new site]
-
-- [site_development/getting_started.md, Site Development, Getting Started]
-- [site_development/zeroframe_api_reference.md, Site Development, ZeroFrame API reference]
-- [site_development/content_json.md, Site Development, Structure of content.json]
-- [site_development/dbschema_json.md, Site Development, Structure of dbschema.json]
-
-- [zeronet_development/coding_conventions.md, ZeroNet Development, Coding conventions]
-- [zeronet_development/network_protocol.md, ZeroNet Development, Network protocol]
-- [zeronet_development/contributing.md, ZeroNet Development, Contributing to ZeroNet]
-- [zeronet_development/donate.md, ZeroNet Development, Donation]
+- Introduction: "index.md"
+- Start using ZeroNet:
+  - "Installing": using_zeronet/installing.md
+  - "Sample sites": using_zeronet/sample_sites.md
+  - "Create new site": using_zeronet/create_new_site.md
+- "Site Development":
+  - "Getting Started": "site_development/getting_started.md"
+  - "ZeroFrame API reference": "site_development/zeroframe_api_reference.md"
+  - "Structure of content.json": "site_development/content_json.md"
+  - "Structure of dbschema.json": "site_development/dbschema_json.md"
+- "Help ZeroNet deleopment":
+  - "Contributing to ZeroNet": "help_zeronet/contributing.md"
+  - "Network protocol": "help_zeronet/network_protocol.md"
+  - "Donation": "help_zeronet/donate.md"
 
 theme: readthedocs
