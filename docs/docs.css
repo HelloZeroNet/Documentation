@@ -1,5 +1,5 @@
 .toctree-l3 { margin-left: -12px; }
-.wy-menu-vertical span { padding-top: 20px }
+.wy-menu-vertical span { padding-top: 20px; text-transform: uppercase; }
 .wy-menu-vertical .subnav a { padding: 0.4045em 1.627em }
 li.toctree-l3:first-child { display: none }
 code { padding: 3px 6px; font-size: 80% !important; border-bottom: 2px solid #e1e4e5; color: black }
@@ -27,7 +27,7 @@ h3, h4, h5, h6 { color: #2980b9 }
 .section a:hover { border-bottom: 1px solid #3091d1 }
 
 .section blockquote { background-color: #e7f2fa; margin: 20px 0px; padding: 10px; border-left: 2px solid #2980B9; }
-.section blockquote p { margin: 0px }
+.section blockquote p { margin: 4px 0px; }
 
 #disqus_thread { margin-bottom: 50px }
 

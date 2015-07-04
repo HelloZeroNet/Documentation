@@ -10,6 +10,7 @@ extra_javascript: [docs.js]
 
 pages:
 - Introduction: "index.md"
+- Frequently asked questions: "faq.md"
 - Start using ZeroNet:
   - "Installing": using_zeronet/installing.md
   - "Sample sites": using_zeronet/sample_sites.md
