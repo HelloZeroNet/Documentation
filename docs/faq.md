@@ -27,6 +27,7 @@ You have to install [Tor](https://www.torproject.org/) then start ZeroNet using 
 > __Tip:__ If you get connection errors make sure you have the latest version of Tor installed.
 
 
+
 ---
 
 
@@ -34,10 +35,31 @@ You have to install [Tor](https://www.torproject.org/) then start ZeroNet using 
 You can register .bit domains using [Namecoin](https://namecoin.info/). 
 You can manage your domains using the client's GUI or by the [command line interface](http://christopherpoole.github.io/registering-a-.bit-domain-with-namecoin/).
 
+After the registration done you have to edit your domain's record by adding a zeronet section to it, eg.:
+
+```
+{
+...
+    "zeronet": {
+        "": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", 
+        "blog": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8", 
+        "talk": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
+    },
+...
+}
+```
+"" means the top domain, any other that that is a sub-domain.
+
+
 > __Tip:__ You can buy namecoins using bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
 
 > __Tip:__ Other possibilities to register .bit domains: [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
 
+> __Tip:__ You can verify you domain using [namecha.in](http://namecha.in/), for example: [zeroid.bit](http://namecha.in/name/d/zeroid)
+
+> __Tip:__ You should use only [lower-cased letters, numbers and - in your domains](http://wiki.namecoin.info/?title=Domain_Name_Specification_2.0#Valid_Domains).
+
+> __Tip:__ To make ZeroHello to your domain instead of your site's address add a domain key to your content.json. ([example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
 
 ---
 
