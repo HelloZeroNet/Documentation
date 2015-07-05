@@ -51,23 +51,23 @@ After the registration done you have to edit your domain's record by adding a ze
 "" means the top domain, any other that that is a sub-domain.
 
 
-> __Tip:__ You can buy namecoins using bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
+> __Tip:__ You can buy namecoin for bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
 
 > __Tip:__ Other possibilities to register .bit domains: [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
 
-> __Tip:__ You can verify you domain using [namecha.in](http://namecha.in/), for example: [zeroid.bit](http://namecha.in/name/d/zeroid)
+> __Tip:__ You can verify you domain on [namecha.in](http://namecha.in/), for example: [zeroid.bit](http://namecha.in/name/d/zeroid)
 
 > __Tip:__ You should use only [lower-cased letters, numbers and - in your domains](http://wiki.namecoin.info/?title=Domain_Name_Specification_2.0#Valid_Domains).
 
-> __Tip:__ To make ZeroHello to your domain instead of your site's address add a domain key to your content.json. ([example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
+> __Tip:__ To make ZeroHello to link your domain instead of your site's address add a domain key to your content.json. ([example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
+
 
 ---
 
 
 #### Can I use the generated site address/private key to accept Bitcoin payments?
 
-Yes, it's a standard Bitcoin addresses, you can import the private key to your client, 
-its using the standard WIF format.
+Yes, it's a standard Bitcoin addresses. The private key is WIF formatted, so you can import it to most of the clients.
 
 > __Tip:__ It's not recommended to keep high amount of money on your site's address, because you have to enter your private key every time you modify your site.
 
@@ -76,6 +76,8 @@ its using the standard WIF format.
 
 
 #### What happens when someone hosting malicious content?
+
+The ZeroNet sites sandboxed, they have the same privileges as any other website you visit over the Internet.
 You are in full control what are you hosting, if you find a suspicious content you can stop hosting the site any time.
 
 
@@ -94,7 +96,7 @@ accepts connections only from ip 127.0.0.1 and 123.123.123.123.
 
 
 #### Is there anyway to track the bandwidth ZeroNet using?
-The sent/received bytes displayed at ZeroNet's statistic page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
+The sent/received bytes displayed at ZeroNet's statistics page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
 
 
 ---
@@ -108,9 +110,22 @@ Every content.json file is timestamped, the clients always accepts the newest on
 
 
 #### Does ZeroNet only support HTML, CSS websites? 
-ZeroNet is built for dynamic, real-time updated websites, but you can server any kind of files using it. 
+ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it. 
 (GIT repository, your own thin-client, database, etc.)
 
+
+---
+
+
+#### How can I create a new ZeroNet site?
+
+- Shut down zeronet if you are running it already
+- Execute `zeronet.py siteCreate`, your site address and private key will be displayed.
+- Start ZeroNet again, your site is ready to access!
+
+- If you make any modification in your site's content you have to sign it and publish to existing visitors using `zeronet.py siteSign yoursiteaddress --publish`
+
+More info: [Create new ZeroNet site](/using_zeronet/create_new_site/)
 
 ---
 
