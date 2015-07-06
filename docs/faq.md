@@ -2,6 +2,7 @@
 
 
 #### Do I need to have open port?
+
 This is __optional__, you can browse and use ZeroNet sites without an open port.
 If you want to create new site it's highly recommended to have an open port.
 
@@ -19,7 +20,19 @@ If it's still not works then try to find forward section. This is different in e
 ---
 
 
+#### Is ZeroNet anonymous?
+
+It's no more anonymous than BitTorrent, but privacy (the possibility to find out who is the owner of the comment/site) will increase as the network and the sites gaining more peers. 
+
+ZeroNet is made to work with anonymity networks: you can easily hide your IP using the Tor network.
+
+
+---
+
+
+
 #### How to use ZeroNet with Tor?
+
 You have to install [Tor](https://www.torproject.org/) then start ZeroNet using `zeronet.py --proxy 127.0.0.1:9050 --disable_udp` command.
 
 > __Tip:__ You can verify your IP address using ZeroNet's [Stats](http://127.0.0.1:43110/Stats) page.
@@ -32,8 +45,9 @@ You have to install [Tor](https://www.torproject.org/) then start ZeroNet using 
 
 
 #### How can I register a .bit domain?
+
 You can register .bit domains using [Namecoin](https://namecoin.info/). 
-You can manage your domains using the client's GUI or by the [command line interface](http://christopherpoole.github.io/registering-a-.bit-domain-with-namecoin/).
+Manage your domains using the client's GUI or by the [command line interface](http://christopherpoole.github.io/registering-a-.bit-domain-with-namecoin/).
 
 After the registration done you have to edit your domain's record by adding a zeronet section to it, eg.:
 
@@ -96,13 +110,15 @@ accepts connections only from ip 127.0.0.1 and 123.123.123.123.
 
 
 #### Is there anyway to track the bandwidth ZeroNet using?
+
 The sent/received bytes displayed at ZeroNet's statistics page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
 
 
 ---
 
 
-#### What happens if two people use the same keys?
+#### What happens if two people use the same keys to modify a site?
+
 Every content.json file is timestamped, the clients always accepts the newest one.
 
 
@@ -110,6 +126,7 @@ Every content.json file is timestamped, the clients always accepts the newest on
 
 
 #### Does ZeroNet only support HTML, CSS websites? 
+
 ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it. 
 (GIT repository, your own thin-client, database, etc.)
 
