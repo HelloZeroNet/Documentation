@@ -173,6 +173,39 @@ Site's title, visible in browser title and on ZeroHello.
 
 ----
 
+### user_contents
+
+Rules of allowed user content of current directory.
+
+Node                   | Description
+                  ---  | ---
+**cert_signers**       | Accepted domains and it's valid signer's addresses
+**permission_rules**   | Allowed file names and total directory size based on cert domain or authorization method
+**permissions**        | Per-user permissions. (false = banned user)
+
+**Example**:
+```json
+  "user_contents": {
+    "cert_signers": {
+      "zeroid.bit": [ "1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz" ]
+    },
+    "permission_rules": {
+      ".*": {
+        "files_allowed": "data.json",
+        "max_size": 10000
+      },
+      "bitid/.*@zeroid.bit": { "max_size": 40000 },
+      "bitmsg/.*@zeroid.bit": { "max_size": 15000 }
+    },
+    "permissions": {
+      "bad@zeroid.bit": false,
+      "nofish@zeroid.bit": { "max_size": 100000 }
+    }
+  }
+```
+
+----
+
 
 ### viewport
 

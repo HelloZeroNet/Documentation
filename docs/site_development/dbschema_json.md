@@ -15,6 +15,8 @@ The code below will do the following:
 {
   "db_name": "ZeroTalk", # Database name (only used for debugging)
   "db_file": "data/users/zerotalk.db", # Database file relative to site's directory
+  "version": 2, # 1 = Json table has path column that includes directory and filename
+                # 2 = Json table has seperate directory and file_name column
   "maps": { # Json to database mappings
     ".*/data.json": { # Regex pattern of file relative to db_file
       "to_table": [ # Load values to table
