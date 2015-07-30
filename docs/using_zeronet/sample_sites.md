@@ -81,6 +81,6 @@ How does it works?
 
 ![ZeroTalk](/img/zerotalk.png)
 
-Address: [1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ](http://127.0.0.1:43110/1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ)
+Address: [1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ](http://127.0.0.1:43110/1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT)
 
 [Source code](https://github.com/HelloZeroNet/ZeroTalk)
