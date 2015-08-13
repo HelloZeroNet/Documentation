@@ -343,11 +343,11 @@ Parameter            | Description
 
 ```json
 {
-	"current_size": 2485, 
-	"cert_signers": {"zeroid.bit": ["1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz"]}, 
-	"files_allowed": "data.json", 
-	"signers": ["1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj"], 
-	"user_address": "1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj", 
+	"current_size": 2485,
+	"cert_signers": {"zeroid.bit": ["1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz"]},
+	"files_allowed": "data.json",
+	"signers": ["1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj"],
+	"user_address": "1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj",
 	"max_size": 100000
 }
 ```
@@ -467,6 +467,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 		"zeronet_version": "0.2.5",
 		"includes": 0
 	},
+	"cert_user_id": "zeronetuser@zeroid.bit", # Currently selected certificate for the site
 	"started_task_num": 1, # Last number of files downloaded
 	"content_updated": 1426008289.71 # Content.json update time
 }
@@ -519,7 +520,7 @@ Parameter                 | Description
 ```coffeescript
 if @site_info["privatekey"] # Private key stored in users.json
 	@cmd "siteSign", ["stored", "content.json"], (res) =>
-		@log "Sign result", res 
+		@log "Sign result", res
 ```
 
 
@@ -583,7 +584,7 @@ Parameter           | Description
 
 
 #### siteClone _address_
-Copy site files into a new one. 
+Copy site files into a new one.
 
 Every file and directory will be skipped if it has a `-default` subfixed version and the subfixed version will be copied instead of it.
 
