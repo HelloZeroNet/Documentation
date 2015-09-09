@@ -6,14 +6,14 @@
 This is __optional__, you can browse and use ZeroNet sites without an open port.
 If you want to create new site it's highly recommended to have an open port.
 
-At startup ZeroNet tries to open a port for you on your router using 
+At startup ZeroNet tries to open a port for you on your router using
 [UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play), if this fail you have to do it manually:
 
-- Try access your router's webui using [http://192.168.1.1](http://192.168.1.1) 
+- Try access your router's webui using [http://192.168.1.1](http://192.168.1.1)
 or [http://192.168.0.1](http://192.168.0.1)
 - Look for "enable UPnP support" option then restart ZeroNet.
 
-If it's still not works then try to find forward section. This is different in every router, here is a tutorial on youtube: 
+If it's still not works then try to find forward section. This is different in every router, here is a tutorial on youtube:
 [https://www.youtube.com/watch?v=aQXJ7sLSz14](https://www.youtube.com/watch?v=aQXJ7sLSz14) (you have to forward port 15441)
 
 
@@ -22,7 +22,7 @@ If it's still not works then try to find forward section. This is different in e
 
 #### Is ZeroNet anonymous?
 
-It's no more anonymous than BitTorrent, but privacy (the possibility to find out who is the owner of the comment/site) will increase as the network and the sites gaining more peers. 
+It's no more anonymous than BitTorrent, but privacy (the possibility to find out who is the owner of the comment/site) will increase as the network and the sites gaining more peers.
 
 ZeroNet is made to work with anonymity networks: you can easily hide your IP using the Tor network.
 
@@ -46,7 +46,7 @@ You have to install [Tor](https://www.torproject.org/) then start ZeroNet using 
 
 #### How can I register a .bit domain?
 
-You can register .bit domains using [Namecoin](https://namecoin.info/). 
+You can register .bit domains using [Namecoin](https://namecoin.info/).
 Manage your domains using the client's GUI or by the [command line interface](http://christopherpoole.github.io/registering-a-.bit-domain-with-namecoin/).
 
 After the registration done you have to edit your domain's record by adding a zeronet section to it, eg.:
@@ -55,8 +55,8 @@ After the registration done you have to edit your domain's record by adding a ze
 {
 ...
     "zeronet": {
-        "": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", 
-        "blog": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8", 
+        "": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
+        "blog": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8",
         "talk": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
     },
 ...
@@ -99,11 +99,11 @@ You are in full control what are you hosting, if you find a suspicious content y
 
 
 #### Is it possible to install ZeroNet to remote machine?
-Yes, you have to start ZeroNet using `zeronet.py --ui_restrict 127.0.0.1 123.123.123.123 --ui_ip "*"` 
-This will bind the ZeroNet ui webserver to all interfaces, but to keep it secure 
-accepts connections only from ip 127.0.0.1 and 123.123.123.123. 
+Yes, you have to enable the UiPassword plugin by renaming the __plugins/disabled-UiPassword__ directory to __plugins/UiPassword__,
+then start ZeroNet on the remote machine using <br>`zeronet.py --ui_ip "*" --ui_password anypassword` command.
+This will bind the ZeroNet ui webserver to all interfaces, but to keep it secure you can only access it by entering the given password
 
-> __Info:__ Password based authentication is planned later
+> __Tip:__ You can also restrict the interface based on ip address by using `--ui_restrict ip1 ip2` startup parameter.
 
 
 ---
@@ -127,7 +127,7 @@ Every content.json file is timestamped, the clients always accepts the newest on
 
 #### Does ZeroNet uses Bitcoin's blockchain?
 
-No, ZeroNet only using the cryptography of Bitcoin for site addresses and content signing/verification. 
+No, ZeroNet only using the cryptography of Bitcoin for site addresses and content signing/verification.
 The users identification also based on Bitcoin's [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) format.
 
 Namecoin's blockchain is being used to domain registrations.
@@ -136,9 +136,9 @@ Namecoin's blockchain is being used to domain registrations.
 ---
 
 
-#### Does ZeroNet only support HTML, CSS websites? 
+#### Does ZeroNet only support HTML, CSS websites?
 
-ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it. 
+ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it.
 (GIT repository, your own thin-client, database, etc.)
 
 
@@ -161,16 +161,16 @@ More info: [Create new ZeroNet site](/using_zeronet/create_new_site/)
 #### How does it work?
 
 - When you want to open a new site it asks visitors IP addresses from BitTorrent network
-- First downloads a file named __content.json__, which holds all other filenames, 
+- First downloads a file named __content.json__, which holds all other filenames,
   __hashes__ and the site owner's cryptographic signature
 - __Verifies__ the downloaded content.json file using the site's __address__ and the site owner's __signature__ from the file
 - __Downloads other file__ (html, css, js...) and verifies them using the SHA512 hash fro content.json file
 - Each visited site becomes __also served by you__.
-- If the site owner (who has the private key for the site address) __modifies__ the site, then he/she signs 
-  the new content.json and __publishes it to the peers__. After the peers have verified the content.json 
+- If the site owner (who has the private key for the site address) __modifies__ the site, then he/she signs
+  the new content.json and __publishes it to the peers__. After the peers have verified the content.json
   integrity (using the signature), they __download the modified files__ and publish the new content to other peers.
 
-More info: 
- [Description of ZeroNet sample sites](/using_zeronet/sample_sites/), 
+More info:
+ [Description of ZeroNet sample sites](/using_zeronet/sample_sites/),
  [Slides about how does ZeroNet work](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
 
