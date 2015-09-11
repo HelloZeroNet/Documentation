@@ -6,6 +6,7 @@ The homepage of ZeroNet
 
  - Lists all added sites: Title, Peer number, Modification date
  - Site actions: Update, Pause, Resume, Delete
+ - Clone sites to have your own blog / forum
  - If new version available update ZeroNet with one click
 
 ![ZeroHello](/img/zerohello.png)
@@ -56,7 +57,7 @@ How does it works?
 
 ![ZeroBlog](/img/zeroblog.png)
 
-Address: [1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8](http://127.0.0.1:43110/1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8)
+Address: [1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8](http://127.0.0.1:43110/1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8) or [blog.zeronetwork.bit](http://127.0.0.1:43110/blog.zeronetwork.bit)
 
 [Source code](https://github.com/HelloZeroNet/ZeroBlog)
 
@@ -76,11 +77,31 @@ Decentralized, p2p forum demo
 
 How does it works?
 
- - To be able to distribute your own content (Topics, Comments, Upvotes, etc.) you request an own file from the site owner
- - After the registration is done you can publish your file's modifications directly to other peers without contacting the site owner again
+ - To interact the site you have to request a certifate of registration (a cryptographic sign) from a ZeroID provider
+ - After you got the certificate you can publish your content (messages, topics, upvotes) directly to other peers
 
 ![ZeroTalk](/img/zerotalk.png)
 
-Address: [1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ](http://127.0.0.1:43110/1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT)
+Address: [1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT](http://127.0.0.1:43110/1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT) or [talk.zeronetwork.bit](http://127.0.0.1:43110/talk.zeronetwork.bit)
 
 [Source code](https://github.com/HelloZeroNet/ZeroTalk)
+
+
+---
+
+## ZeroChat
+
+The finished site for the tutorial of creating server-less, SQL backed, real-time updated P2P chat application using ZeroNet in less than 100 lines of code
+
+ - Selecting ZeroID certificate
+ - Storing messages in a SQL database
+ - Creating own messages and distribute directly to other users in realtime
+ - Real-time update the messages as they arrives
+
+![ZeroChat](/img/zerochat.png)
+
+Address of finished site: [1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg](http://127.0.0.1:43110/1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg)
+
+Tutorial on ZeroBlog:
+ [Part1](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:43:ZeroNet+site+development+tutorial+1),
+ [Part2](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:46:ZeroNet+site+development+tutorial+2)
