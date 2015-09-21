@@ -1,18 +1,11 @@
 <link rel=stylesheet href="../../bitcoinbar/bitcoinbar.css">
 
-# Sponsors
-
-* Better OSX/Safari compatibility made possible by [BrowserStack.com](https://www.browserstack.com/)
-
-
----
-
 
 # Help to keep ZeroNet development alive
 
 
 ## ZeroNet: 2015 fourth quarter development
-<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="6.0"></a>
+<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="5.0"></a>
 
 * General donation towards ZeroNet development
 
@@ -103,7 +96,7 @@ Benefits:
 ---
 
 
-## Multiuser proxy support
+## <s>Multiuser proxy support</s> (done in version 0.2.7)
 
 <a href="bitcoin:15qp7SLFiSoUuV59yV2GbG3siSG1UGPnrH?Label=ZeroNet+Multiuser" class="bitcoinbar" data-address="15qp7SLFiSoUuV59yV2GbG3siSG1UGPnrH" data-goal="2.0"></a>
 
@@ -123,5 +116,12 @@ Benefits:
 ## Where does the donation go?
 
 The task's received donation goes directly to the developer(s) who successfully and properly integrates the feature (please add your plans and ideas to the issue before you start working on anything big).
+
+
+
+# Sponsors
+
+* Better OSX/Safari compatibility made possible by [BrowserStack.com](https://www.browserstack.com/)
+
 
 <script src='../../bitcoinbar/bitcoinbar.js'></script>
