@@ -2,18 +2,18 @@
 
 ZeroNet uses Bitcoin cryptography and BitTorrent technology to build a **decentralized censorship-resistant network**.
 
-Users can publish static or dynamic websites into ZeroNet and visitors can choose to also serve the website. Websites will remain on-line even if it is being served by only 1 peer.
+Users can publish static or dynamic websites into ZeroNet and visitors can choose to also serve the website. Websites will remain online even if it is being served by only one peer.
 
 When a site is updated by its owner, all nodes serving that site (previous visitors) will receive only the incremental updates done to the site content.
 
-ZeroNet counts with a build-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
+ZeroNet counts with a built-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
 
 
 # Why?
 
 * We believe in open, free, and uncensored communication.
 * No censorship: After something is published there is no way to remove it.
-* No single point of failure: Content remains on-line even if only 1 peer is serving it.
+* No single point of failure: Content remains online even if only one peer is serving it.
 * Impossible to shut down: It's nowhere because it's everywhere. Content is served by any user who wishes to.
 * Fast: ZeroNet uses BitTorrent technology to deliver content faster than centralised servers.
 * Works offline: You can access the site even if your internet is unavailable.
@@ -40,7 +40,7 @@ ZeroNet counts with a build-in SQL database. This makes content-heavy site devel
 # Features
  * Easy, zero configuration setup.
  * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
-   based authorization: Your account is protected by same cryptography as your bitcoin wallet.
+   based authorization: Your account is protected by the same cryptography as your Bitcoin wallet.
  * Real-time updated sites.
  * Namecoin .bit domains support.
  * SQL Database support: Allows for easier site development and faster page load times.
@@ -56,9 +56,9 @@ ZeroNet counts with a build-in SQL database. This makes content-heavy site devel
 * After you install and run ZeroNet, you open a site by visiting:
   `http://127.0.0.1:43110/{zeronet_site_address}`
   (eg.  `http://127.0.0.1:43110/1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr`).
-* ZeroNet will then use the BitTorrent network to find peers that are seeding the site and will download the site content (html, css, js...) from these peers.
+* ZeroNet will then use the BitTorrent network to find peers that are seeding the site and will download the site content (HTML, CSS, JS...) from these peers.
 * Each visited site becomes also served by you.
-* Every site contains a list of all files used in the site in a sha512 hash and a signature generated using the site owner private key.
+* Every site contains a list of all files used in the site in a Sha512 hash and a signature generated using the site owner private key.
 * If the site owner modifies the site, then he/she signs a new list and publishes it to the peers.
   After the peers have verified the files list integrity (using the
   signature), they download the modified files and publish the new content to
@@ -78,7 +78,7 @@ ZeroNet counts with a build-in SQL database. This makes content-heavy site devel
 # Current limitations
 
 * No torrent-like, file splitting for big file support
-* No more anonymous than Bittorrent
+* No more anonymous than BitTorrent
 * File transactions are not compressed ~~or encrypted yet~~
 * No private sites
 * <s>You must have an open port to publish new changes</s>
