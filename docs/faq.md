@@ -1,20 +1,19 @@
 # Frequently asked questions
 
 
-#### Do I need to have open port?
+#### Do I need to have a port opened?
 
 This is __optional__, you can browse and use ZeroNet sites without an open port.
-If you want to create new site it's highly recommended to have an open port.
+If you want to create a new site it's highly recommended to have an open port.
 
 At startup ZeroNet tries to open a port for you on your router using
-[UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play), if this fail you have to do it manually:
+[UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play), if this fails you have to do it manually:
 
-- Try access your router's webui using [http://192.168.1.1](http://192.168.1.1)
+- Try access your router's web interface using [http://192.168.1.1](http://192.168.1.1)
 or [http://192.168.0.1](http://192.168.0.1)
-- Look for "enable UPnP support" option then restart ZeroNet.
+- Look for an "Enable UPnP support" or similar option then restart ZeroNet.
 
-If it's still not works then try to find forward section. This is different in every router, here is a tutorial on youtube:
-[https://www.youtube.com/watch?v=aQXJ7sLSz14](https://www.youtube.com/watch?v=aQXJ7sLSz14) (you have to forward port 15441)
+If it still doesn't work then try to find a 'port forwarding' section. This is different in every router. [Here is a tutorial on YouTube.](https://www.youtube.com/watch?v=aQXJ7sLSz14) The port to forward is 15441.
 
 
 ---
@@ -22,7 +21,7 @@ If it's still not works then try to find forward section. This is different in e
 
 #### Is ZeroNet anonymous?
 
-It's no more anonymous than BitTorrent, but privacy (the possibility to find out who is the owner of the comment/site) will increase as the network and the sites gaining more peers.
+It's no more anonymous than BitTorrent, but privacy (the possibility to find out who is the owner of the comment/site) will increase as the network and the sites gains more peers.
 
 ZeroNet is made to work with anonymity networks: you can easily hide your IP using the Tor network.
 
@@ -49,7 +48,7 @@ You have to install [Tor](https://www.torproject.org/) then start ZeroNet using 
 You can register .bit domains using [Namecoin](https://namecoin.info/).
 Manage your domains using the client's GUI or by the [command line interface](http://christopherpoole.github.io/registering-a-.bit-domain-with-namecoin/).
 
-After the registration done you have to edit your domain's record by adding a zeronet section to it, eg.:
+After the registration is done you have to edit your domain's record by adding a zeronet section to it, eg.:
 
 ```
 {
@@ -65,15 +64,15 @@ After the registration done you have to edit your domain's record by adding a ze
 "" means the top domain, any other that that is a sub-domain.
 
 
-> __Tip:__ You can buy namecoin for bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
+> __Tip:__ You can buy Namecoin for Bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
 
 > __Tip:__ Other possibilities to register .bit domains: [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
 
-> __Tip:__ You can verify you domain on [namecha.in](http://namecha.in/), for example: [zeroid.bit](http://namecha.in/name/d/zeroid)
+> __Tip:__ You can verify your domain on [namecha.in](http://namecha.in/), for example: [zeroid.bit](http://namecha.in/name/d/zeroid)
 
 > __Tip:__ You should use only [lower-cased letters, numbers and - in your domains](http://wiki.namecoin.info/?title=Domain_Name_Specification_2.0#Valid_Domains).
 
-> __Tip:__ To make ZeroHello to link your domain instead of your site's address add a domain key to your content.json. ([example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
+> __Tip:__ To make ZeroHello to link your domain instead of your site's address, add a domain key to your content.json. ([Example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
 
 
 ---
@@ -81,37 +80,37 @@ After the registration done you have to edit your domain's record by adding a ze
 
 #### Can I use the generated site address/private key to accept Bitcoin payments?
 
-Yes, it's a standard Bitcoin addresses. The private key is WIF formatted, so you can import it to most of the clients.
+Yes, it's a standard Bitcoin address. The private key is WIF formatted, so you can import it in most clients.
 
-> __Tip:__ It's not recommended to keep high amount of money on your site's address, because you have to enter your private key every time you modify your site.
-
-
----
-
-
-#### What happens when someone hosting malicious content?
-
-The ZeroNet sites sandboxed, they have the same privileges as any other website you visit over the Internet.
-You are in full control what are you hosting, if you find a suspicious content you can stop hosting the site any time.
+> __Tip:__ It's not recommended to keep a high amount of money on your site's address, because you have to enter your private key every time you modify your site.
 
 
 ---
 
 
-#### Is it possible to install ZeroNet to remote machine?
+#### What happens when someone hosts malicious content?
+
+The ZeroNet sites are sandboxed, they have the same privileges as any other website you visit over the Internet.
+You are in full control of what you are hosting. If you find suspicious content you can stop hosting the site at any time.
+
+
+---
+
+
+#### Is it possible to install ZeroNet to a remote machine?
 Yes, you have to enable the UiPassword plugin by renaming the __plugins/disabled-UiPassword__ directory to __plugins/UiPassword__,
-then start ZeroNet on the remote machine using <br>`zeronet.py --ui_ip "*" --ui_password anypassword` command.
-This will bind the ZeroNet ui webserver to all interfaces, but to keep it secure you can only access it by entering the given password
+then start ZeroNet on the remote machine using <br>`zeronet.py --ui_ip "*" --ui_password anypassword`.
+This will bind the ZeroNet UI webserver to all interfaces, but to keep it secure you can only access it by entering the given password.
 
-> __Tip:__ You can also restrict the interface based on ip address by using `--ui_restrict ip1 ip2` startup parameter.
+> __Tip:__ You can also restrict the interface based on ip address by using `--ui_restrict ip1 ip2`.
 
 
 ---
 
 
-#### Is there anyway to track the bandwidth ZeroNet using?
+#### Is there anyway to track the bandwidth ZeroNet is using?
 
-The sent/received bytes displayed at ZeroNet's statistics page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
+The sent/received bytes are displayed at ZeroNet's statistics page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
 
 
 ---
@@ -128,9 +127,9 @@ Every content.json file is timestamped, the clients always accepts the newest on
 #### Does ZeroNet uses Bitcoin's blockchain?
 
 No, ZeroNet only using the cryptography of Bitcoin for site addresses and content signing/verification.
-The users identification also based on Bitcoin's [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) format.
+The users identification is also based on Bitcoin's [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) format.
 
-Namecoin's blockchain is being used to domain registrations.
+Namecoin's blockchain is being used for domain registrations.
 
 
 ---
@@ -139,7 +138,7 @@ Namecoin's blockchain is being used to domain registrations.
 #### Does ZeroNet only support HTML, CSS websites?
 
 ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it.
-(GIT repository, your own thin-client, database, etc.)
+(VCS repositories, your own thin-client, database, etc.)
 
 
 ---
@@ -147,13 +146,7 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
 
 #### How can I create a new ZeroNet site?
 
-- Shut down zeronet if you are running it already
-- Execute `zeronet.py siteCreate`, your site address and private key will be displayed.
-- Start ZeroNet again, your site is ready to access!
-
-- If you make any modification in your site's content you have to sign it and publish to existing visitors using `zeronet.py siteSign yoursiteaddress --publish`
-
-More info: [Create new ZeroNet site](/using_zeronet/create_new_site/)
+[Follow those instructions.](/using_zeronet/create_new_site/)
 
 ---
 
