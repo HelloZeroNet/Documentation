@@ -43,6 +43,7 @@ ZeroNet counts with a built-in SQL database. This makes content-heavy site devel
    based authorization: Your account is protected by the same cryptography as your Bitcoin wallet.
  * Real-time updated sites.
  * Namecoin .bit domains support.
+ * DNS support
  * SQL Database support: Allows for easier site development and faster page load times.
  * Tor network support.
  * TLS encrypted connections.

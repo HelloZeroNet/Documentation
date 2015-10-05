@@ -24,7 +24,7 @@ It will download the latest version of ZeroNet and start it automatically.
 ### Debian
 
 * `sudo apt-get update`
-* `sudo apt-get install msgpack-python python-gevent` 
+* `sudo apt-get install msgpack-python python-gevent python-dnspython` 
 * `wget https://github.com/HelloZeroNet/ZeroNet/archive/master.tar.gz`
 * `tar xvpfz master.tar.gz`
 * `cd ZeroNet-master`
@@ -35,7 +35,7 @@ It will download the latest version of ZeroNet and start it automatically.
 
 * Check your python version using `python --version` if the returned version is not `Python 2.7.X` then try `python2` or `python2.7` command and use it from now
 * `wget https://bootstrap.pypa.io/get-pip.py`
-* `python get-pip.py --user gevent msgpack-python`
+* `python get-pip.py --user gevent msgpack-python dnspython`
 * `wget https://codeload.github.com/HelloZeroNet/ZeroNet/tar.gz/master`
 * `tar xvpfz master`
 * Start with `python zeronet.py`
@@ -44,7 +44,7 @@ It will download the latest version of ZeroNet and start it automatically.
 
  * Install [homebrew](http://brew.sh/)
  * `brew install python`
- * `pip install gevent msgpack-python`
+ * `pip install gevent msgpack-python dnspython`
  * [Download](https://github.com/HelloZeroNet/ZeroNet/archive/master.zip), Unpack, run `python zeronet.py`
  
 ## Vagrant
