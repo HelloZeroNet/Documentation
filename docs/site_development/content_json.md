@@ -7,6 +7,8 @@ This file will carry, amont other things, a list of all files on your site and a
 Here is a list of supported keys:
 
 
+# Generated automatically
+
 
 ---
 
@@ -20,44 +22,13 @@ Your site address
 ---
 
 
-### background-color
-
-Background color of the wrapper
-
-**Example**: #F5F5F5
-
-
----
-
-
-### description
-
-Description of your site, displayed under site title on ZeroHello.
-
-**Example**: Decentralized forum demo
-
-
----
-
-
-### domain
-
-Namecoin domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
-
-**Example**: Blog.ZeroNetwork.bit
-
-
----
-
-
 ### files
 
-Size and sha512 hash of all files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
+Size and sha512 hash of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```json
     "css/all.css": {
-      "sha1": "f2b14758210163f0cb38a865aa67797a4ed92837", # Only for backward compatibility, will be removed soon
       "sha512": "869b09328f07bac538c313c4702baa5276544346418378199fa5cef644c139e8",
       "size": 148208
 ```
@@ -66,35 +37,17 @@ Size and sha512 hash of all files contained in your site. Automatically added by
 ---
 
 
-### ignore
+### files_optional
 
-Ignore files from signing matching this preg pattern
-
-**Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from data/users/ directory)
-
-
----
-
-
-### includes
-
-Include an another content.json
+Size and sha512 hash of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
-
 ```json
-{
-  "data/users/content.json": {
-    "signers": [ # Possible signers address for the file
-      "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
-    ],
-    "signers_required": 1 # Valid signs required to accept the file (Multisig possibility),
-    "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
-    "includes_allowed": false, # Nested includes allowed or not
-    "max_size": 10000, # Max sum filesize allowed in the include (in bytes)
-  }
-}
+    "data/myvideo.mp4": {
+      "sha512": "538c09328aa52765443464135cef644c144346418378199fa5cef61837819538",
+      "size": 832103
 ```
+
 
 
 ---
@@ -148,6 +101,95 @@ ECDSA signs for the the content.json file content. (keys sorted, without whitesp
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
   },
 ```
+
+
+----
+
+
+### zeronet_version
+
+ZeroNet version used to generate content.json file.
+
+**Example**: 0.2.5
+
+
+---
+
+
+# Settings
+
+
+### background-color
+
+Background color of the wrapper
+
+**Example**: #F5F5F5
+
+
+---
+
+
+### description
+
+Description of your site, displayed under site title on ZeroHello.
+
+**Example**: Decentralized forum demo
+
+
+---
+
+
+### domain
+
+Namecoin domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
+
+**Example**: Blog.ZeroNetwork.bit
+
+
+
+
+---
+
+
+### ignore
+
+Ignore files from signing matching this preg pattern
+
+**Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from data/users/ directory)
+
+
+---
+
+
+### includes
+
+Include an another content.json
+
+**Example**:
+
+```json
+{
+  "data/users/content.json": {
+    "signers": [ # Possible signers address for the file
+      "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
+    ],
+    "signers_required": 1 # Valid signs required to accept the file (Multisig possibility),
+    "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
+    "includes_allowed": false, # Nested includes allowed or not
+    "max_size": 10000, # Max sum filesize allowed in the include (in bytes)
+  }
+}
+```
+
+
+---
+
+
+### optional
+
+Preg pattern of optional files
+
+**Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and publisher directory is optional)
 
 
 ---
@@ -212,13 +254,3 @@ Node                   | Description
 Content for the viewport meta tag. (Used for mobile-friendly pages)
 
 **Example**: width=device-width, initial-scale=1.0
-
-
-----
-
-
-### zeronet_version
-
-ZeroNet version used to generate content.json file.
-
-**Example**: 0.2.5

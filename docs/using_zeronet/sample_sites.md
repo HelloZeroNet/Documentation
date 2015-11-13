@@ -105,3 +105,15 @@ Address of finished site: [1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg](http://127.0.0.1:
 Tutorial on ZeroBlog:
  [Part1](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:43:ZeroNet+site+development+tutorial+1),
  [Part2](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:46:ZeroNet+site+development+tutorial+2)
+
+---
+
+## ReactionGIFs
+
+Demo for optional files, the video files only downloaded if your browser requests it.
+
+![ReactionGIFs](/img/reactiongifs.jpg)
+
+Address: [1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h](http://127.0.0.1:43110/1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h)
+
+[Source code](https://github.com/HelloZeroNet/ReactionGIFs)
