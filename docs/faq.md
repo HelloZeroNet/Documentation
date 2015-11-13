@@ -39,6 +39,12 @@ You have to install [Tor](https://www.torproject.org/) then start ZeroNet using 
 > __Tip:__ If you get connection errors make sure you have the latest version of Tor installed.
 
 
+---
+
+#### Can I use the same username on multiple machine?
+
+Yes, you have to copy the `data/users.json` file.
+
 
 ---
 
