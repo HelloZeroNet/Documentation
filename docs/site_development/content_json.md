@@ -22,6 +22,25 @@ Your site address
 ---
 
 
+### address_index
+
+Generated when you clone a site, the site's address BIP32 sub-key index. It allows to recover the site privatekey from your BIP32 seed.
+
+**Example**: 30926910
+
+---
+
+
+### cloned_from
+
+The site address where the site is cloned from.
+
+**Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
+
+
+---
+
+
 ### files
 
 Size and sha512 hash of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
@@ -124,6 +143,19 @@ ZeroNet version used to generate content.json file.
 Background color of the wrapper
 
 **Example**: #F5F5F5
+
+
+---
+
+
+### cloneable
+
+Allow to clone the site if True.
+
+To make your site properly cloneable you have to add data files for clean start (eg. without any blog posts).
+To do this you have to add **-default** prefix to your data files and directories.
+On the cloning process every file and directory is skipped if it has **-default** prefixed alternative and then the **-default** prefix will be removed from the affected files and directories.
+
 
 
 ---
