@@ -24,7 +24,7 @@ Your site address
 
 ### address_index
 
-Generated when you clone a site, the site's address BIP32 sub-key index. It allows to recover the site privatekey from your BIP32 seed.
+The site's address BIP32 sub-key index of your BIP32 seed. Auto-added when you clone a site. It allows to recover the site privatekey from your BIP32 seed.
 
 **Example**: 30926910
 
@@ -150,11 +150,11 @@ Background color of the wrapper
 
 ### cloneable
 
-Allow to clone the site if True.
+Allow to clone the site if **true**.
 
 To make your site properly cloneable you have to add data files for clean start (eg. without any blog posts).
-To do this you have to add **-default** prefix to your data files and directories.
-On the cloning process every file and directory is skipped if it has **-default** prefixed alternative and then the **-default** prefix will be removed from the affected files and directories.
+To do this you have to add **-default** postfix to your data files and directories.
+On the cloning process every file and directory is skipped if it has **-default** postfixed alternative and then the **-default** postfix will be removed from the affected files and directories.
 
 
 
