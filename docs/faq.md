@@ -29,14 +29,39 @@ ZeroNet is made to work with anonymity networks: you can easily hide your IP usi
 ---
 
 
-
 #### How to use ZeroNet with Tor?
 
-You have to install [Tor](https://www.torproject.org/) then start ZeroNet using `zeronet.py --proxy 127.0.0.1:9050 --disable_udp` command.
+If you want to hide your IP install the latest version of ZeroNet then start it using the `zeronet.py --tor always` parameter.
+
+On Windows Tor is bundled with ZeroNet for other OS [follow Tor install instructions](https://www.torproject.org/docs/installguide.html),
+edit your torrc configuration file by removing `#` from line `# ControlPort 9051` then restart your Tor service and ZeroNet.
 
 > __Tip:__ You can verify your IP address using ZeroNet's [Stats](http://127.0.0.1:43110/Stats) page.
 
-> __Tip:__ If you get connection errors make sure you have the latest version of Tor installed.
+> __Tip:__ If you get connection errors make sure you have the latest version of Tor installed. (0.2.7.5 required)
+
+
+---
+
+
+#### How to make ZeroNet work with Tor under Linux?
+
+Upgrade to latest version of Tor (we need 0.2.7.5+), follow [these](https://www.torproject.org/docs/debian.html.en) instructions eg. for Debian:
+
+ - `echo 'deb http://deb.torproject.org/torproject.org jessie main'>> /etc/apt/sources.list.d/tor.list`
+ - `gpg --keyserver keys.gnupg.net --recv 886DDD89`
+ - `gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -`
+ - `apt-get update`
+ - `apt-get install tor`
+
+Edit config to enable controll protocol:
+
+ - `mcedit /etc/tor/torrc`
+ - Remove the `#` character from lines `ControlPort 9051` and `CookieAuthentication 1` (line ~57)
+ - `/etc/init.d/tor restart`
+ - Add permission yourself to read the auth cookie by `usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
+ - Logout/Login with your user to apply group changes
+
 
 
 ---
@@ -110,13 +135,17 @@ This will bind the ZeroNet UI webserver to all interfaces, but to keep it secure
 
 > __Tip:__ You can also restrict the interface based on ip address by using `--ui_restrict ip1 ip2`.
 
+> __Tip:__ You can specify the password in config file by creating a `zeronet.conf` file and add `[global]`, `ui_password = anypassword` lines to it.
+
 
 ---
 
 
 #### Is there anyway to track the bandwidth ZeroNet is using?
 
-The sent/received bytes are displayed at ZeroNet's statistics page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
+The sent/received bytes are displayed at ZeroNet's sidebar.<br>(open it by dragging the topright `0` button to left)
+
+> __Tip:__ Per connection statistics page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
 
 
 ---
