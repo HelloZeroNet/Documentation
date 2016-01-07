@@ -77,7 +77,7 @@ Decentralized, p2p forum demo
 
 How does it works?
 
- - To interact the site you have to request a certifate of registration (a cryptographic sign) from a ZeroID provider
+ - To interact the site you have to request a certificate of registration (a cryptographic sign) from a ZeroID provider
  - After you got the certificate you can publish your content (messages, topics, upvotes) directly to other peers
 
 ![ZeroTalk](/img/zerotalk.png)
@@ -86,6 +86,23 @@ Address: [1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT](http://127.0.0.1:43110/1TaLkFrMwvbN
 
 [Source code](https://github.com/HelloZeroNet/ZeroTalk)
 
+---
+
+## ZeroMail
+
+End-to-end encrypted, distributed, P2P messaging site. To improve privacy it uses a BitMessage-like solution and will not expose the message recipient.
+
+ - Using ECIES for secret exchange, AES256 for message encoding
+ - When you first visit the site it adds your public key to your data file and after that anyone able to send message to you
+ - Everyone try to decrypt every message, this improves privacy by making it impossible to find the message recipient
+ - To reduce per message overhead and increase decryption speed we re-use the AES key, but new IV is generated every time
+
+
+![ZeroTalk](/img/zeromail.png)
+
+Address: [1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27](http://127.0.0.1:43110/1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27) or [mail.zeronetwork.bit](http://127.0.0.1:43110/mail.zeronetwork.bit)
+
+[Source code](https://github.com/HelloZeroNet/ZeroMail)
 
 ---
 
@@ -95,7 +112,7 @@ The finished site for the tutorial of creating server-less, SQL backed, real-tim
 
  - Selecting ZeroID certificate
  - Storing messages in a SQL database
- - Creating own messages and distribute directly to other users in realtime
+ - Creating own messages and distribute directly to other users in real-time
  - Real-time update the messages as they arrives
 
 ![ZeroChat](/img/zerochat.png)

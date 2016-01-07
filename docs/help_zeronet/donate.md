@@ -4,8 +4,8 @@
 # Help to keep ZeroNet development alive
 
 
-## ZeroNet: 2015 fourth quarter development
-<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="5.0"></a>
+## ZeroNet: 2016 first quarter development
+<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="7.0"></a>
 
 * General donation towards ZeroNet development
 
@@ -87,9 +87,7 @@ Benefits:
 ---
 
 
-## Full Tor support
-
-<a href="bitcoin:15kqzH6wuZRsmrM9Y8qD7z7hx6ikQkouJ5?Label=ZeroNet+Tor+support" class="bitcoinbar" data-address="15kqzH6wuZRsmrM9Y8qD7z7hx6ikQkouJ5" data-goal="2.0"></a>
+## <s>Full Tor support</s> (done in version 0.3.5)
 
  * Allow to seed sites and connect other peers using Tor network (Probably depends on DHT support)
 

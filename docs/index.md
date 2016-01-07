@@ -79,7 +79,7 @@ ZeroNet counts with a built-in SQL database. This makes content-heavy site devel
 
 * No torrent-like, file splitting for big file support
 * No more anonymous than BitTorrent
-* File transactions are not compressed ~~or encrypted yet~~
+* File transactions are not compressed <s>or encrypted yet</s>
 * No private sites
 * <s>You must have an open port to publish new changes</s>
 * <s>Timeout problems on slow connections</s>
