@@ -44,7 +44,7 @@ ZeroNet counts with a built-in SQL database. This makes content-heavy site devel
  * Real-time updated sites.
  * Namecoin .bit domains support.
  * SQL Database support: Allows for easier site development and faster page load times.
- * Tor network support.
+ * Anonymity: Full Tor network support with .onion hidden services instead of ipv4 addresses
  * TLS encrypted connections.
  * Automatic, uPnP port opening.
  * Plugin for multiuser (openproxy) support.
@@ -78,11 +78,8 @@ ZeroNet counts with a built-in SQL database. This makes content-heavy site devel
 # Current limitations
 
 * No torrent-like, file splitting for big file support
-* No more anonymous than BitTorrent
-* File transactions are not compressed <s>or encrypted yet</s>
+* File transactions are not compressed
 * No private sites
-* <s>You must have an open port to publish new changes</s>
-* <s>Timeout problems on slow connections</s>
 
 # Help to keep this project alive
 
