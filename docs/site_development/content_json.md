@@ -221,7 +221,7 @@ Include an another content.json
 
 Preg pattern of optional files
 
-**Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and publisher directory is optional)
+**Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
 
 
 ---
