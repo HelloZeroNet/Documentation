@@ -1,6 +1,6 @@
 # Structure of dbschema.json
 
-[Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
+[Example dbschema.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
 
 The code below will do the following:
 
