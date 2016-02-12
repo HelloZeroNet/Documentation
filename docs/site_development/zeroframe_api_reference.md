@@ -255,12 +255,13 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 
 ---
 
-#### fileGet _inner_path_
+#### fileGet _inner_path, [required]_
 Get file content
 
 Parameter        | Description
              --- | ---
 **inner_path**   | The file you want to get
+**required** (optional) | Try and wait for the file if it's not exists. (default: True)
 
 **Return**: <string> The content of the file
 
@@ -297,6 +298,20 @@ submitTopicVote: (e) =>
 
 	return false
 ```
+
+
+---
+
+
+#### fileDelete _inner_path_
+Get file content
+
+Parameter        | Description
+             --- | ---
+**inner_path**   | The file you want to delete
+
+**Return**: "ok" on success else the error message
+
 
 ---
 
@@ -550,13 +565,162 @@ updateSite: =>
 
 ---
 
+
+# Plugin: CryptMessage
+
+
+#### userPublickey _[index]_
+
+Get user's site specific publickey
+
+Parameter            | Description
+                 --- | ---
+**index** (optional) | Sub-publickey within site (default: 0)
+
+
+**Return**: base64 encoded publickey
+
+---
+
+#### eciesEncrypt _text, [publickey], [return_aes_key]_
+
+Encrypt a text using a publickey
+
+Parameter                      | Description
+                           --- | ---
+**text**                       | Text to encrypt
+**publickey** (optional)       | User's publickey index (int) or base64 encoded publickey (default: 0)
+**return_aes_key** (optional)  | Get the AES key used in encryption (default: False)
+
+
+**Return**: Encrypted text in base64 format or [Encrypted text in base64 format, AES key in base64 format]
+
+---
+
+#### eciesDecrypt _params, [privatekey]_
+
+Try to decrypt list of texts
+
+Parameter                      | Description
+                           --- | ---
+**params**                     | A text or list of encrypted texts
+**privatekey** (optional)      | User's privatekey index (int) or base64 encoded privatekey (default: 0)
+
+
+**Return**: Decrypted text or list of decrypted texts (null for failed decodings)
+
+---
+
+#### aesEncrypt _text, [key], [iv]_
+
+Encrypt a text using the key and the iv
+
+Parameter                      | Description
+                           --- | ---
+**text**                       | A text encrypt using AES
+**key** (optional)             | Base64 encoded password (default: generate new)
+**iv** (optional)              | Base64 encoded iv (default: generate new)
+
+
+**Return**: Encoded text in base64 format
+
+
+---
+
+#### aesDecrypt iv, encrypted_text, key_
+#### aesDecrypt encrypted_texts, keys_
+
+Decrypt text using the IV and AES key
+
+Parameter                      | Description
+                           --- | ---
+**iv**                         | IV in Base64 format
+**encrypted_text**             | Encrypted text in Base64 format
+**encrypted_texts**            | List of [iv, encrypted_text] pairs
+**key**                        | Base64 encoded password for the text
+**keys**                       | Keys for decoding (tries every one for every pairs)
+
+
+**Return**: Decoded text or list of decoded texts
+
+
+---
+
+
+# Plugin: Newsfeed
+
+
+#### feedFollow _feeds_
+
+Set followed sql queries.
+
+The SQL query should result in rows with cols:
+
+Field          | Description
+           --- | ---
+**type**       | Type: post, article, comment, mention
+**date_added** | Event time
+**title**      | Event's first line to be displayed
+**body**       | Event's second and third line
+**url**        | Link to event's page
+
+Parameter      | Description
+           --- | ---
+**feeds**      | Format: [SQL query, [param1, param2, ...]], parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
+
+
+**Return**: ok
+
+---
+
+#### feedListFollow
+
+Return of current followed feeds
+
+
+**Return**: The currently followed feeds in the same format as in the feedFollow commands
+
+
+---
+
+#### feedQuery
+
+Execute all followed sql query
+
+
+**Return**: The result of the followed Sql queries
+
+
+---
+
 # Admin commands
 _(requires ADMIN permission in data/sites.json)_
 
 
 
+---
+
+
+#### configSet _key, value_
+
+Create or update an entry in ZeroNet config file. (zeronet.conf by default)
+
+
+Parameter            | Description
+                 --- | ---
+**key**              | Configuration entry name
+**value**            | Configuration entry new value
+
+
+**Return**: ok
+
+
+---
+
+
 
 #### certSet _domain_
+
 Set the used certificate for current site.
 
 Parameter            | Description
@@ -576,6 +740,39 @@ Request notifications about every site's events.
 Parameter           | Description
                ---  | ---
 **channel**         | Channel to join (see channelJoin)
+
+**Return**: None
+
+
+
+
+---
+
+
+#### serverPortcheck
+
+Start checking if port is opened
+
+**Return**: True (port opened) or False (port closed)
+
+
+---
+
+
+#### serverShutdown
+
+Stop running ZeroNet client.
+
+**Return**: None
+
+
+
+---
+
+
+#### serverUpdate
+
+Re-download ZeroNet from github.
 
 **Return**: None
 
