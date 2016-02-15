@@ -51,7 +51,7 @@ Self publishing blog demo
 How does it works?
 
  - You can edit the `data.json` file using the web interface
- - By pressing `Sign & Publish new content` button it asks for the site private key (its displayed when you [creating a new site using zeronet.py siteCreate command](create_new_site))
+ - By pressing `Sign & Publish new content` button it asks for the site private key (its displayed when you [creating a new site using zeronet.py siteCreate command](create_new_site/))
  - Your ZeroNet client signs the new, modified files and publish directly to other peers
  - You site will be accessible until at least 1 peer (visitor) computer is active
 
