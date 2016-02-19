@@ -622,13 +622,13 @@ Parameter                      | Description
 **iv** (optional)              | Base64 encoded iv (default: generate new)
 
 
-**Return**: Encoded text in base64 format
+**Return**: [base64 encoded key, base64 encoded iv, base64 encoded encrypted text]
 
 
 ---
 
-#### aesDecrypt iv, encrypted_text, key_
-#### aesDecrypt encrypted_texts, keys_
+#### aesDecrypt _iv, encrypted_text, key_
+#### aesDecrypt _encrypted_texts, keys_
 
 Decrypt text using the IV and AES key
 
@@ -636,7 +636,7 @@ Parameter                      | Description
                            --- | ---
 **iv**                         | IV in Base64 format
 **encrypted_text**             | Encrypted text in Base64 format
-**encrypted_texts**            | List of [iv, encrypted_text] pairs
+**encrypted_texts**            | List of [base64 encoded iv, base64 encoded encrypted text] pairs
 **key**                        | Base64 encoded password for the text
 **keys**                       | Keys for decoding (tries every one for every pairs)
 
