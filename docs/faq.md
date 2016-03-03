@@ -81,7 +81,7 @@ Yes, you have to copy the `data/users.json` file.
 #### How can I register a .bit domain?
 
 You can register .bit domains using [Namecoin](https://namecoin.info/).
-Manage your domains using the client's GUI or by the [command line interface](http://christopherpoole.github.io/registering-a-.bit-domain-with-namecoin/).
+Manage your domains using the client's GUI or by the [command line interface](http://www.christopherpoole.net/registering-a-bit-domain-with-namecoin.html).
 
 After the registration is done you have to edit your domain's record by adding a zeronet section to it, eg.:
 
@@ -96,7 +96,7 @@ After the registration is done you have to edit your domain's record by adding a
 ...
 }
 ```
-"" means the top domain, any other that that is a sub-domain.
+"" means the top domain, any other that is a sub-domain.
 
 
 > __Tip:__ You can buy Namecoin for Bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
