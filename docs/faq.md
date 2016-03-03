@@ -54,7 +54,7 @@ Upgrade to latest version of Tor (we need 0.2.7.5+), follow [these](https://www.
  - `apt-get update`
  - `apt-get install tor`
 
-Edit config to enable controll protocol:
+Edit config to enable control protocol:
 
  - `mcedit /etc/tor/torrc`
  - Remove the `#` character from lines `ControlPort 9051` and `CookieAuthentication 1` (line ~57)
