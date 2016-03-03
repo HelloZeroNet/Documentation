@@ -196,7 +196,7 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
 - First downloads a file named __content.json__, which holds all other filenames,
   __hashes__ and the site owner's cryptographic signature
 - __Verifies__ the downloaded content.json file using the site's __address__ and the site owner's __signature__ from the file
-- __Downloads other file__ (html, css, js...) and verifies them using the SHA512 hash fro content.json file
+- __Downloads other file__ (html, css, js...) and verifies them using the SHA512 hash for content.json file
 - Each visited site becomes __also served by you__.
 - If the site owner (who has the private key for the site address) __modifies__ the site, then he/she signs
   the new content.json and __publishes it to the peers__. After the peers have verified the content.json
