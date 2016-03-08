@@ -29,16 +29,29 @@ ZeroNet is made to work with anonymity networks: you can easily hide your IP usi
 ---
 
 
+#### How to use ZeroNet in Tor browser?
+
+In Tor mode it's recommended to use ZeroNet in Tor Browser:
+
+- Start the Tor Browser
+- Go to address `about:preferences#advanced`
+- Click `Settings...`
+- Enter `127.0.0.1` to field **No proxy for**
+
+
+---
+
+
 #### How to use ZeroNet with Tor?
 
-If you want to hide your IP install the latest version of ZeroNet then start it using the `zeronet.py --tor always` parameter.
+If you want to hide your IP install the latest version of ZeroNet then click Tor > Enable Tor for every connection on ZeroHello.
 
 On Windows Tor is bundled with ZeroNet for other OS [follow Tor install instructions](https://www.torproject.org/docs/installguide.html),
 edit your torrc configuration file by removing `#` from line `# ControlPort 9051` then restart your Tor service and ZeroNet.
 
 > __Tip:__ You can verify your IP address using ZeroNet's [Stats](http://127.0.0.1:43110/Stats) page.
 
-> __Tip:__ If you get connection errors make sure you have the latest version of Tor installed. (0.2.7.5 required)
+> __Tip:__ If you get connection errors make sure you have the latest version of Tor installed. (0.2.7.5+ required)
 
 
 ---
