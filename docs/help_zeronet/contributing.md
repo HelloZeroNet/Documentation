@@ -20,7 +20,7 @@
  - variable_names: lowercased, under_scored
 
 ### Variables
- - file_path: File path realtive to working dir (data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)
+ - file_path: File path relative to working dir (data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)
  - inner_path: File relative to site dir (css/all.css)
  - file_name: all.css
  - file: Python file object
