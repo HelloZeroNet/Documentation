@@ -93,8 +93,8 @@ Address: [1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT](http://127.0.0.1:43110/1TaLkFrMwvbN
 End-to-end encrypted, distributed, P2P messaging site. To improve privacy it uses a BitMessage-like solution and will not expose the message recipient.
 
  - Using ECIES for secret exchange, AES256 for message encoding
- - When you first visit the site it adds your public key to your data file and after that anyone able to send message to you
- - Everyone try to decrypt every message, this improves privacy by making it impossible to find the message recipient
+ - When you first visit the site it adds your public key to your data file and after that anyone is able to send a message to you
+ - Everyone tries to decrypt every message, this improves privacy by making it impossible to find the message recipient
  - To reduce per message overhead and increase decryption speed we re-use the AES key, but new IV is generated every time
 
 
