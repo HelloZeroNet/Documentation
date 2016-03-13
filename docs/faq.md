@@ -79,7 +79,7 @@ Edit config to enable control protocol:
 
 > __Tip:__ It's also possible to use without modifying torrc (or using older version of Tor clients) by running it `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will loose ability to talk with other .onion addresses.
 
-
+If you are using non standard ports (control port or proxy port), you need to edit config.py and change the port numbers to match your torrc file.
 
 ---
 
