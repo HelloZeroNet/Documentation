@@ -1,2 +1,2 @@
 Available at
-http://zeronet.readthedocs.org/
+https://zeronet.readthedocs.org/
