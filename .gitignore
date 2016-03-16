@@ -22,3 +22,6 @@ docs/_build/
 
 # Hidden files
 .*
+
+# Built site
+site/
