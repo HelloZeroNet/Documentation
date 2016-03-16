@@ -69,9 +69,9 @@ ZeroNet counts with a built-in SQL database. This makes content-heavy site devel
 
 # Screenshots
 
-![Screenshot](http://zeronet.readthedocs.org/en/latest/img/zerohello.png)
+![Screenshot](./img/zerohello.png)
 
-![ZeroTalk](http://zeronet.readthedocs.org/en/latest/img/zerotalk.png)
+![ZeroTalk](./img/zerotalk.png)
 
 ##### [More screenshots &raquo;](/using_zeronet/sample_sites/)
 
