@@ -666,10 +666,26 @@ Field          | Description
 
 Parameter      | Description
            --- | ---
-**feeds**      | Format: [SQL query, [param1, param2, ...]], parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
-
+**feeds**      | Format: {"query name": [SQL query, [param1, param2, ...], ...}, parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
 
 **Return**: ok
+
+**Example:**
+```coffeescript
+# Follow ZeroBlog posts
+query = "
+	SELECT
+	 post_id AS event_uri,
+	 'post' AS type,
+	 date_published AS date_added,
+	 title AS title,
+	 body AS body,
+	 '?Post:' || post_id AS url
+	FROM post
+"
+params = [""]
+Page.cmd feedFollow [{"Posts": [query, params]}]
+```
 
 ---
 
