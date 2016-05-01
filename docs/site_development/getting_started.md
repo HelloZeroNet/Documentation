@@ -15,8 +15,8 @@ To run ZeroNet in debug mode use: `python zeronet.py --debug`
 - Automatic CoffeeScript -> JavaScript conversion (All examples used in this documentation and sample sites are written in [CoffeeScript](http://coffeescript.org/))
 - Debug messages will appear in the console
 - Auto reload of some source files (UiRequest, UiWebsocket, FileRequest) on modification to prevent restarting (Requires [PyFilesystem](http://pyfilesystem.org/) on GNU/Linux)
-- `http://127.0.01:43110/Debug` Traceback and interactive Python console at the last error position (using the wonderful Werkzeug debugger - Requires [Werkzeug](http://werkzeug.pocoo.org/))
-- `http://127.0.01:43110/Console` Spawns an interactive Python console (Requires [Werkzeug](http://werkzeug.pocoo.org/))
+- `http://127.0.0.1:43110/Debug` Traceback and interactive Python console at the last error position (using the wonderful Werkzeug debugger - Requires [Werkzeug](http://werkzeug.pocoo.org/))
+- `http://127.0.0.1:43110/Console` Spawns an interactive Python console (Requires [Werkzeug](http://werkzeug.pocoo.org/))
 
 ### Extra features (works only for sites that you own)
 
