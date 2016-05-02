@@ -13,7 +13,7 @@ Display a notification with confirm button
 Parameter              | Description
                   ---  | ---
 **message**            | The message you want to display
-**timeout** (optional) | Caption of the confirmation button (default: OK)
+**button_caption** (optional) | Caption of the confirmation button (default: OK)
 
 **Return**: True if clicked on button
 
