@@ -78,7 +78,7 @@ Edit config to enable control protocol:
 Start Tor, and then start ZeroNet like this: `zeronet.py --tor always`. For concurrent dual (clearnet and Tor) use, use `--tor enable`.
 
 
-> __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`. If ZeroNet cannot access Tor, consider adding `CookieAuthFileGroupReadable 1` and `CookieAuthFile <path-to-cookie-file-in-your-home-dir>` to your Tor configuration file. 
+> __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`. If ZeroNet user cannot access the Tor authentication cookie file, ensure you have `CookieAuthFileGroupReadable 1` and `CookieAuthFile /full/path/to/cookie/file>` that is accessible to user(s) who runs ZeroNet and Tor. 
 
 > __Tip:__ It's also possible to use without modifying torrc (or using older version of Tor clients) by running it `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will loose ability to talk with other .onion addresses.
 
