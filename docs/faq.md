@@ -75,7 +75,7 @@ Edit config to enable control protocol:
  - Add permission yourself to read the auth cookie by `usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
  - Logout/Login with your user to apply group changes
 
-Start Tor, and then start ZeroNet like this: `zeronet.py --tor always`. 
+Start Tor, and then start ZeroNet like this: `zeronet.py --tor always`. For concurrent dual (clearnet and Tor) use, use `--tor enable`.
 
 
 > __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`. If ZeroNet cannot access Tor, consider adding `CookieAuthFileGroupReadable 1` and `CookieAuthFile <path-to-cookie-file-in-your-home-dir>` to your Tor configuration file. 
