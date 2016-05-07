@@ -20,7 +20,7 @@ pages:
   - "ZeroFrame API reference": "site_development/zeroframe_api_reference.md"
   - "Structure of content.json": "site_development/content_json.md"
   - "Structure of dbschema.json": "site_development/dbschema_json.md"
-- "Help ZeroNet deleopment":
+- "Help ZeroNet development":
   - "Contributing to ZeroNet": "help_zeronet/contributing.md"
   - "Network protocol": "help_zeronet/network_protocol.md"
   - "Donation": "help_zeronet/donate.md"
