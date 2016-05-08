@@ -176,9 +176,9 @@ Every content.json file is timestamped, the clients always accepts the newest on
 ---
 
 
-#### Does ZeroNet uses Bitcoin's blockchain?
+#### Does ZeroNet use Bitcoin's blockchain?
 
-No, ZeroNet only using the cryptography of Bitcoin for site addresses and content signing/verification.
+No, ZeroNet only uses the cryptography of Bitcoin for site addresses and content signing/verification.
 The users identification is also based on Bitcoin's [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) format.
 
 Namecoin's blockchain is being used for domain registrations.
@@ -218,4 +218,3 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
 More info:
  [Description of ZeroNet sample sites](/using_zeronet/sample_sites/),
  [Slides about how does ZeroNet work](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
-
