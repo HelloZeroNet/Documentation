@@ -31,7 +31,7 @@ To run ZeroNet in debug mode use: `python zeronet.py --debug`
  - Site creation,
  - First ZeroFrame API calls)
 
-#### [Part #2](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:43:ZeroNet+site+development+tutorial+2):
+#### [Part #2](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:46:ZeroNet+site+development+tutorial+2):
 
  - User login
  - Publish new content to network
