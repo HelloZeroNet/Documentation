@@ -6,7 +6,7 @@ Users can publish static or dynamic websites into ZeroNet and visitors can choos
 
 When a site is updated by its owner, all nodes serving that site (previous visitors) will receive only the incremental updates done to the site content.
 
-ZeroNet counts with a built-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
+ZeroNet comes with a built-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
 
 
 # Why?
@@ -55,10 +55,10 @@ ZeroNet counts with a built-in SQL database. This makes content-heavy site devel
 
 * After you install and run ZeroNet, you open a site by visiting:
   `http://127.0.0.1:43110/{zeronet_site_address}`
-  (eg.  `http://127.0.0.1:43110/1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr`).
+  (eg.  `http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D`).
 * ZeroNet will then use the BitTorrent network to find peers that are seeding the site and will download the site content (HTML, CSS, JS...) from these peers.
 * Each visited site becomes also served by you.
-* Every site contains a list of all files used in the site in a Sha512 hash and a signature generated using the site owner private key.
+* Every site contains a list of all files used in the site in a SHA512 hash and a signature generated using the site owner private key.
 * If the site owner modifies the site, then he/she signs a new list and publishes it to the peers.
   After the peers have verified the files list integrity (using the
   signature), they download the modified files and publish the new content to
@@ -78,7 +78,7 @@ ZeroNet counts with a built-in SQL database. This makes content-heavy site devel
 # Current limitations
 
 * No torrent-like, file splitting for big file support
-* File transactions are not compressed
+* File transactions are not compressed ~~or encrypted yet~~ (TLS encryption added)
 * No private sites
 
 # Help to keep this project alive
