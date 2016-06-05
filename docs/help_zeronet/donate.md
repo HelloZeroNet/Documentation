@@ -4,8 +4,8 @@
 # Help to keep ZeroNet development alive
 
 
-## ZeroNet: 2016 first quarter development
-<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="7.0"></a>
+## ZeroNet: 2016 third quarter development
+<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="9.0"></a>
 
 * General donation towards ZeroNet development
 
