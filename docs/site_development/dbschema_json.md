@@ -17,6 +17,7 @@ The code below will do the following:
   "db_file": "data/users/zerotalk.db", # Database file relative to site's directory
   "version": 2, # 1 = Json table has path column that includes directory and filename
                 # 2 = Json table has seperate directory and file_name column
+                # 3 = Same as version 2, but also has site column (for merger sites)
   "maps": { # Json to database mappings
     ".*/data.json": { # Regex pattern of file relative to db_file
       "to_table": [ # Load values to table
@@ -55,7 +56,8 @@ The code below will do the following:
               # value of path column (required for joining)
           }
         }
-      ]
+      ],
+      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  # Save cert_auth_type and cert_user_id directly to json table (easier and faster data queries)
     }
   },
   "tables": { # Table definitions
@@ -97,6 +99,17 @@ The code below will do the following:
       ],
       "indexes": ["CREATE UNIQUE INDEX user_id ON user(user_id)", "CREATE UNIQUE INDEX user_path ON user(path)"],
       "schema_changed": 1426195825
+    },
+    "json": {  # Json table format only required if you have specified to_json_table pattern anywhere
+        "cols": [
+            ["json_id", "INTEGER PRIMARY KEY AUTOINCREMENT"],
+            ["directory", "TEXT"],
+            ["file_name", "TEXT"],
+            ["cert_auth_type", "TEXT"],
+            ["cert_user_id", "TEXT"]
+        ],
+        "indexes": ["CREATE UNIQUE INDEX path ON json(directory, site, file_name)"],
+        "schema_changed": 4
     }
   }
 }
