@@ -217,6 +217,16 @@ Include an another content.json
 ---
 
 
+### merged_type
+
+Data source for specified merger site type
+
+**Example**: `ZeroMe`
+
+
+---
+
+
 ### optional
 
 Preg pattern of optional files

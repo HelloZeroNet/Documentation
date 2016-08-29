@@ -49,6 +49,17 @@ siteDelete: (address) ->
 
 ---
 
+#### wrapperPermissionAdd _permission_
+
+Request new permission for site
+
+
+Parameter        | Description
+             --- | ---
+**permission**   | Name of permission (eg. Merger:ZeroMe)
+
+---
+
 
 #### wrapperSetLocalStorage _data_
 Set browser's local store data stored for the site
@@ -378,6 +389,7 @@ Parameter            | Description
 
 
 #### fileWrite _inner_path, content_
+
 Write file content
 
 
@@ -708,6 +720,42 @@ Execute all followed sql query
 
 
 ---
+
+# Plugin: MergerSite
+
+
+#### mergerSiteAdd _addresses_
+
+Start downloading new merger site(s)
+
+Parameter            | Description
+                 --- | ---
+**addresses**         | Site address or list of site addresses
+
+
+---
+
+#### mergerSiteDelete _address_
+
+Stop seeding and delete a merged site
+
+Parameter            | Description
+                 --- | ---
+**address**           | Site address
+
+
+---
+
+#### mergerSiteList _[query_site_info]_
+
+Return merged sites.
+
+Parameter            | Description
+                 --- | ---
+**query_site_info**  | If True, then gives back detailed site info for merged sites
+
+---
+
 
 # Admin commands
 _(requires ADMIN permission in data/sites.json)_
