@@ -315,7 +315,7 @@ submitTopicVote: (e) =>
 
 
 #### fileDelete _inner_path_
-Get file content
+Delete a file
 
 Parameter        | Description
              --- | ---
@@ -730,7 +730,7 @@ Start downloading new merger site(s)
 
 Parameter            | Description
                  --- | ---
-**addresses**        | Site address or list of site addresses
+**addresses**         | Site address or list of site addresses
 
 
 ---
@@ -756,132 +756,6 @@ Parameter            | Description
 
 ---
 
-# Plugin: OptionalManager
-
-#### optionalFileList _[address]_, _[orderby]_, _[limit]_
-
-Return list of optional files
-
-Parameter            | Description
-                 --- | ---
-**address**          | The site address you want to list optional files (default: current site)
-**orderby**          | Order of returned optional files (default: time_downloaded DESC)
-**limit**            | Max number of returned optional files (default: 10)
-
-**Return**: Database row of optional files: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
-
----
-
-#### optionalFileInfo _inner_path_
-
-Query optional file info from database
-
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
-
-**Return**: Database row of optional file: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
-
----
-
-#### optionalFilePin _inner_path_, _[address]_
-
-Pin (exclude from automatized optional file cleanup) downloaded optional file
-
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
-
----
-
-#### optionalFileUnpin _inner_path_, _[address]_
-
-Remove pinning (include from automatized optional file cleanup) of downloaded optional file
-
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
-
----
-
-#### optionalFileDelete _inner_path_, _[address]_
-
-Query a downloaded optional file
-
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
-
----
-
-#### optionalLimitStats
-
-Return currently used disk space by optional files
-
-**Return**: limit, used and free space statistics
-
----
-
-
-#### actionOptionalLimitSet _limit_
-
-Set the optional file limit
-
-Parameter            | Description
-                 --- | ---
-**limit**            | Max space used by the optional files in gb or percent of used space
-
----
-
-#### actionOptionalHelpList _[address]_
-
-List the auto-downloaded directories of optional files
-
-Parameter            | Description
-                 --- | ---
-**address**          | Address of site you want to list helped directories (default: current site)
-
-**Return**: Dict of auto-downloaded directories and descriptions
-
----
-
-
-#### actionOptionalHelp directory, title, _[address]_
-
-Add directory to auto-download list
-
-Parameter            | Description
-                 --- | ---
-**directory**        | Directory you want to add to auto-download list
-**title**            | Title for the entry (displayed on ZeroHello)
-**address**          | Address of site you want to add the auto-download directory (default: current site)
-
----
-
-#### actionOptionalHelpRemove directory, _[address]_
-
-Remove an auto-download entry
-
-Parameter            | Description
-                 --- | ---
-**directory**        | Directory you want to remove from auto-download list
-**address**          | Address of affected site (default: current site)
-
----
-
-#### actionOptionalHelpAll value, _[address]_
-
-Help download every new uploaded optional file to the site
-
-Parameter            | Description
-                 --- | ---
-**value**            | Enable or Disable the auto-download
-**address**          | Address of affected site (default: current site)
-
----
 
 # Admin commands
 _(requires ADMIN permission in data/sites.json)_
