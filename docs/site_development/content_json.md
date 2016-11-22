@@ -262,7 +262,7 @@ Site's title, visible in browser title and on ZeroHello.
 
 Site's favicon. Replace default ZeroNet favicon with a site-specific favicon.
 
-**Example**: <SITE ADDRESS>/favicon.png
+**Example**: favicon.ico
 
 
 ----
