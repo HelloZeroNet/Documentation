@@ -47,38 +47,13 @@ siteDelete: (address) ->
 ```
 
 
----
-
-#### wrapperPermissionAdd _permission_
-
-Request new permission for site
-
-
-Parameter        | Description
-             --- | ---
-**permission**   | Name of permission (eg. Merger:ZeroMe)
 
 ---
 
-
-#### wrapperSetLocalStorage _data_
-Set browser's local store data stored for the site
-
-Parameter              | Description
-                  ---  | ---
-**data**               | Any data structure you want to store for the site
-
-**Return**: None
-
-**Example:**
-```coffeescript
-Page.local_storage["topic.#{@topic_id}_#{@topic_user_id}.visited"] = Time.timestamp()
-Page.cmd "wrapperSetLocalStorage", Page.local_storage
-```
-
+#### wrapperGetState
+**Return**: Browser's current history state object
 
 ---
-
 
 #### wrapperNotification _type, message, [timeout]_
 Display a notification
@@ -99,6 +74,35 @@ Parameter              | Description
 
 ---
 
+#### wrapperOpenWindow _url, [target], [specs]
+
+Navigates or opens a new popup window.
+
+Parameter              | Description
+                  ---  | ---
+**url**                | Url of the opened page
+**target** (optional)  | Target window name
+**specs** (optional)   | Special properties of the window (see: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
+
+**Example:**
+```coffeescript
+@cmd "wrapperOpenWindow", ["https://zeronet.io", "_blank", "width=550,height=600,location=no,menubar=no"]
+```
+
+---
+
+
+#### wrapperPermissionAdd _permission_
+
+Request new permission for site
+
+
+Parameter        | Description
+             --- | ---
+**permission**   | Name of permission (eg. Merger:ZeroMe)
+
+
+---
 
 #### wrapperPrompt _message, [type]_
 
@@ -115,12 +119,85 @@ Parameter           | Description
 ```coffeescript
 # Prompt the private key
 @cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
-	$(".publishbar .button").addClass("loading")
-	# Send sign content.json and publish request to server
-	@cmd "sitePublish", [privatekey], (res) =>
-		$(".publishbar .button").removeClass("loading")
-		@log "Publish result:", res
+    $(".publishbar .button").addClass("loading")
+    # Send sign content.json and publish request to server
+    @cmd "sitePublish", [privatekey], (res) =>
+        $(".publishbar .button").removeClass("loading")
+        @log "Publish result:", res
 ```
+
+
+---
+
+#### wrapperPushState _state, title, url_
+Change the url and adds new entry to browser's history. See: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
+
+Parameter           | Description
+               ---  | ---
+**state**           | State javascript object
+**title**           | Title of the page
+**url**             | Url of the page
+
+**Return**: None
+
+```coffeescript
+@cmd "wrapperPushState", [{"scrollY": 100}, "Profile page", "Profile"]
+```
+
+
+---
+
+#### wrapperReplaceState _state, title, url_
+Change the url without adding new entry to browser's history. See: [replaceState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)
+
+Parameter           | Description
+               ---  | ---
+**state**           | State javascript object
+**title**           | Title of the page
+**url**             | Url of the page
+
+**Return**: None
+
+```coffeescript
+@cmd "wrapperReplaceState", [{"scrollY": 100}, "Profile page", "Profile"]
+```
+
+
+---
+
+#### wrapperSetLocalStorage _data_
+Set browser's local store data stored for the site
+
+Parameter              | Description
+                  ---  | ---
+**data**               | Any data structure you want to store for the site
+
+**Return**: None
+
+**Example:**
+```coffeescript
+Page.local_storage["topic.#{@topic_id}_#{@topic_user_id}.visited"] = Time.timestamp()
+Page.cmd "wrapperSetLocalStorage", Page.local_storage
+```
+
+
+---
+
+#### wrapperSetTitle _title_
+Set browser's title
+
+Parameter              | Description
+                  ---  | ---
+**title**              | New browser tab title
+
+**Return**: None
+
+**Example:**
+```coffeescript
+Page.cmd "wrapperSetTitle", "newtitle"
+```
+
+---
 
 
 #### wrapperSetViewport _viewport_
@@ -140,7 +217,9 @@ Parameter           | Description
 @cmd "wrapperSetViewport", "width=device-width, initial-scale=1.0"
 ```
 
+
 ---
+
 
 
 # UiServer
