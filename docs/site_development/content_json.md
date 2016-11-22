@@ -257,6 +257,17 @@ Site's title, visible in browser title and on ZeroHello.
 
 ----
 
+
+### favicon
+
+Site's favicon. Replace default ZeroNet favicon with a site-specific favicon.
+
+**Example**: <SITE ADDRESS>/favicon.png
+
+
+----
+
+
 ### user_contents
 
 Rules of allowed user content of current directory.
