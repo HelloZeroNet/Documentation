@@ -394,7 +394,7 @@ submitTopicVote: (e) =>
 
 
 #### fileDelete _inner_path_
-Get file content
+Delete a file
 
 Parameter        | Description
              --- | ---
