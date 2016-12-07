@@ -125,6 +125,23 @@ Tutorial on ZeroBlog:
 
 ---
 
+## ZeroMe
+
+Decentralized, Twitter-like P2P social network.
+
+ - Stroe user information in ZeroMe user registry
+ - Store post and comment in MergeSite called Hub
+ - Upload images as optional files
+ - Real time of display activity feed
+ 
+![ZeroMe](/img/zerome.png)
+
+Address: [1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH](http://127.0.0.1:43110/1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH)
+
+[Source code](https://github.com/HelloZeroNet/ZeroMe)
+
+---
+
 ## ReactionGIFs
 
 Demo for optional files, the video files only download if your browser requests them.
