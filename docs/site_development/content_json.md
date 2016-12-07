@@ -258,6 +258,16 @@ Site's title, visible in browser title and on ZeroHello.
 ----
 
 
+### translate
+
+Files need be translated. (use language json files in `translates` dictionary)
+
+**Example**: ["index.html", "js/all.js"]
+
+
+----
+
+
 ### favicon
 
 Site's favicon. Replace default ZeroNet favicon with a site-specific favicon.
