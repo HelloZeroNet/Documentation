@@ -472,10 +472,10 @@ Parameter            | Description
 Write file content
 
 
-Parameter        | Description
-             --- | ---
-**inner_path**   | Inner path of the file you want to write
-**content**      | Content you want to write to file (base64 encoded)
+Parameter          | Description
+               --- | ---
+**inner_path**     | Inner path of the file you want to write
+**content_base64** | Content you want to write to file (base64 encoded)
 
 **Return**: "ok" on success else the error message
 
