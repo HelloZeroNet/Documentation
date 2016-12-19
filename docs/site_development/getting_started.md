@@ -4,6 +4,13 @@ ZeroNet allows you to publish static and dynamic sites.
 
 Although ZeroNet can't run scripting languages like PHP or Ruby, you can create dynamic sites using ZeroNet's API (called ZeroFrame), JavaScript (or CoffeeScript) and the built-in SQL database.
 
+## ZeroChat tutorial
+
+In this tutorial we going to build a P2P, decentralized, server and backend-less chat site in less then 100 lines of code.
+
+* [Read on ZeroBlog](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:99:ZeroChat+tutorial)
+* [Read on Medium.com](https://decentralize.today/decentralized-p2p-chat-in-100-lines-of-code-d6e496034cd4)
+
 ## ZeroNet Debug mode
 
 ZeroNet comes with a `--debug` flag that will make site development easier.
@@ -24,16 +31,3 @@ To run ZeroNet in debug mode use: `python zeronet.py --debug`
  - Merged JS files: All JS files inside the site folder will be merged into one file called `all.js`. If a CoffeeScript compiler is present (bundled for Windows) it will convert `.coffee` to `.js`.
  - Order in which files are merged into all.css/all.js: Files inside subdirectories of the css/js folder comes first; Files in the css/js folder will be merged according to file name ordering (01_a.css, 02_a.css, etc)
 
-### ZeroNet site development tutorial
-
-#### [Part #1](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:43:ZeroNet+site+development+tutorial+1):
-
- - Site creation,
- - First ZeroFrame API calls)
-
-#### [Part #2](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:46:ZeroNet+site+development+tutorial+2):
-
- - User login
- - Publish new content to network
- - SQL Database insert and query
- - Real-time update your site
