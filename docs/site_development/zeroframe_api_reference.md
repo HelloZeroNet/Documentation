@@ -1049,7 +1049,7 @@ Re-download ZeroNet from github.
 ---
 
 
-#### siteClone _address_
+#### siteClone _address_, _[root_inner_path]_
 Copy site files into a new one.
 
 Every file and directory will be skipped if it has a `-default` subfixed version and the subfixed version will be copied instead of it.
@@ -1060,6 +1060,7 @@ Eg. If you have a `data` and a `data-default` directory: The `data` directory wi
 Parameter           | Description
                ---  | ---
 **address**         | Address of site want to clone
+**root_inner_path** | The source directory of the new site
 
 **Return**: None, automatically redirects to new site on completion
 

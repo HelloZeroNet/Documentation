@@ -37,6 +37,15 @@ The site address where the site is cloned from.
 
 **Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
 
+---
+
+
+### clone_root
+
+The sub-directory on source site where this site was cloned from.
+
+**Example**: template-new
+
 
 ---
 
