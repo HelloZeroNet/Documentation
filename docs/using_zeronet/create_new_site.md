@@ -1,5 +1,13 @@
 # Create new ZeroNet site
 
+## Easy way: Using the web interface
+
+ * Click on **⋮** > **"Create new, empty site"** menu item on the site ZeroHello.
+ * You will be **redirected** to a completely new site that is only modifiable by you!
+ * You can find and modify your site's content in **data/[yoursiteaddress]** directory
+ * After the modifications open your site, drag the topright "0" button to left, then press **sign** and **publish** buttons on the bottom
+
+## Manual way: Using the command line
 
 ### 1. Create site structure
 
