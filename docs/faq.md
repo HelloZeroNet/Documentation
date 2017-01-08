@@ -90,6 +90,13 @@ Yes, you have to copy the `data/users.json` file.
 
 ---
 
+#### How to create a "fancy" site address?
+
+Use [vanitygen](https://bitcointalk.org/index.php?topic=25804.0) to generate one. Once you get your keys, create `data/1YourPublicKey...tCkBzAXTKvJk4uj8` directory. Put some files there.
+
+Then navigate to [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/). Drag the `0` button to the left and use the sidebar to sign your site.
+
+---
 
 #### How can I register a .bit domain?
 
