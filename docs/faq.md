@@ -77,7 +77,7 @@ Edit config to enable control protocol:
 
 > __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
 
-> __Tip:__ It's also possible to use without modifying torrc (or using older version of Tor clients) by running it `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will loose ability to talk with other .onion addresses.
+> __Tip:__ It's also possible to use without modifying torrc (or using older version of Tor clients) by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
 
 
 
@@ -85,7 +85,7 @@ Edit config to enable control protocol:
 
 #### Can I use the same username on multiple machine?
 
-Yes, you have to copy the `data/users.json` file.
+Yes, you have to copy the `data/users.json` file to your new machine.
 
 
 ---
@@ -119,7 +119,7 @@ After the registration is done you have to edit your domain's record by adding a
 
 > __Tip:__ You should use only [lower-cased letters, numbers and - in your domains](http://wiki.namecoin.info/?title=Domain_Name_Specification_2.0#Valid_Domains).
 
-> __Tip:__ To make ZeroHello to link your domain instead of your site's address, add a domain key to your content.json. ([Example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
+> __Tip:__ To make ZeroHello display your domain name instead of your site's Bitcoin address, add a domain key to your content.json. ([Example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
 
 
 ---
