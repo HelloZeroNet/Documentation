@@ -129,7 +129,7 @@ Tutorial on ZeroBlog:
 
 Decentralized, Twitter-like P2P social network.
 
- - Stroe user information in ZeroMe user registry
+ - Store user information in ZeroMe user registry
  - Store post and comment in MergeSite called Hub
  - Upload images as optional files
  - Real time of display activity feed

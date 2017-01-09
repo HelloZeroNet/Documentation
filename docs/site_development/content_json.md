@@ -269,7 +269,7 @@ Site's title, visible in browser title and on ZeroHello.
 
 ### translate
 
-Files need be translated. (use language json files in `translates` dictionary)
+Files need be translated. (use language json files in `languages` dictionary)
 
 **Example**: ["index.html", "js/all.js"]
 
