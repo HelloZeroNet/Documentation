@@ -2,7 +2,7 @@
 
 Every ZeroNet site will have a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
-This file will carry, amont other things, a list of all files on your site and a signature created with your private key. This is done to avoid file tampering (ie: only you, or people you trust, can update the site content).
+This file will carry, among other things, a list of all files on your site and a signature created with your private key. This is done to avoid file tampering (ie: only you, or people you trust, can update the site content).
 
 Here is a list of supported keys:
 
@@ -36,6 +36,15 @@ The site's address BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 The site address where the site is cloned from.
 
 **Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
+
+---
+
+
+### clone_root
+
+The sub-directory on source site where this site was cloned from.
+
+**Example**: template-new
 
 
 ---
