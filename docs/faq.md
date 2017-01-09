@@ -80,8 +80,22 @@ Edit config to enable control protocol:
 > __Tip:__ It's also possible to use without modifying torrc (or using older version of Tor clients) by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
 
 
+---
+
+
+#### How to make Tor work if my ISP or goverment blocks it?
+
+ZeroNet does not include Tor pluggable transports yet. The easiest way to use that is starting the Tor browser, configuring the pluggable transports, then modifing ZeroNet's config to use the browser's tor client by starting it with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or adding it to zeronet.conf
+
+```
+[global]
+tor_controller = 127.0.0.1:9151
+tor_proxy = 127.0.0.1:9150
+```
+
 
 ---
+
 
 #### Can I use the same username on multiple machine?
 
@@ -90,13 +104,16 @@ Yes, you have to copy the `data/users.json` file to your new machine.
 
 ---
 
+
 #### How to create a "fancy" site address?
 
 Use [vanitygen](https://bitcointalk.org/index.php?topic=25804.0) to generate one. Once you get your keys, create `data/1YourPublicKey...tCkBzAXTKvJk4uj8` directory. Put some files there.
 
 Then navigate to [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/). Drag the `0` button to the left and use the sidebar to sign your site.
 
+
 ---
+
 
 #### How can I register a .bit domain?
 
