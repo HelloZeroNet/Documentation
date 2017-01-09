@@ -85,7 +85,7 @@ Edit config to enable control protocol:
 
 #### How to make Tor work if my ISP or goverment blocks it?
 
-ZeroNet does not include Tor pluggable transports yet. The easiest way to use that is starting the Tor browser, configuring the pluggable transports, then modifing ZeroNet's config to use the browser's tor client by starting it with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or adding it to zeronet.conf
+ZeroNet does not include [Tor pluggable transports](https://www.torproject.org/docs/pluggable-transports.html.en) yet. The easiest way to use that is starting the Tor browser, configuring the pluggable transports, then modifing ZeroNet's config to use the browser's tor client by starting it with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or adding it to zeronet.conf
 
 ```
 [global]
