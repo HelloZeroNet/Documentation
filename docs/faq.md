@@ -77,7 +77,7 @@ Edit config to enable control protocol:
 
 > __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
 
-> __Tip:__ It's also possible to use without modifying torrc (or using older version of Tor clients) by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
+> __Tip:__ It's also possible to use Tor without modifying torrc (or to use older versions of Tor clients), by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
 
 
 ---
@@ -85,7 +85,7 @@ Edit config to enable control protocol:
 
 #### How to make Tor work if my ISP or goverment blocks it?
 
-ZeroNet does not include [Tor pluggable transports](https://www.torproject.org/docs/pluggable-transports.html.en) yet. The easiest way to use that is starting the Tor browser, configuring the pluggable transports, then modifing ZeroNet's config to use the browser's tor client by starting it with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or adding it to zeronet.conf
+ZeroNet does not include [Tor pluggable transports](https://www.torproject.org/docs/pluggable-transports.html.en) yet. The easiest way to make Tor work in a censored network is to start the Tor browser, configure it to connect to the Tor network with working pluggable transports, and modify ZeroNet's config to use Tor browser's proxy and control port by starting ZeroNet with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or by adding these parameters to zeronet.conf
 
 ```
 [global]
