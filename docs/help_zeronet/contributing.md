@@ -7,7 +7,7 @@
    [github issues](https://github.com/HelloZeroNet/ZeroNet/issues) or develop your own idea.
    Before you start anything big please, open a [new discussion](https://github.com/HelloZeroNet/ZeroNet/issues/new),
    so you can make sure nobody is working on it already and we can share our ideas to make the best out of it.
- - You can [donate](zeronet_development/donate) bitcoins to support ZeroNet.
+ - You can [donate](donate) bitcoins to support ZeroNet.
 
 # Coding standards if you want to collaborate to ZeroNet
  - Follow [PEP8](https://www.python.org/dev/peps/pep-0008/)
