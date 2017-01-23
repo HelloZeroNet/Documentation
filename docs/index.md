@@ -1,23 +1,23 @@
-# What is ZeroNet?
+# 什么是 ZeroNet ？
 
-ZeroNet uses Bitcoin cryptography and BitTorrent technology to build a **decentralized censorship-resistant network**.
+ZeroNet 使用比特币加密技术和 BitTorrent 技术来创建一个**分布式的抗审查网络**.
 
-Users can publish static or dynamic websites into ZeroNet and visitors can choose to also serve the website. Websites will remain online even if it is being served by only one peer.
+用户能在 ZeroNet 上发布一个静态的或动态的网站 and visitors can choose to also serve the website. Websites will remain online even if it is being served by only one peer.
 
-When a site is updated by its owner, all nodes serving that site (previous visitors) will receive only the incremental updates done to the site content.
+当一个网站被所有者更新时，all nodes serving that site (previous visitors) will receive only the incremental updates done to the site content.
 
-ZeroNet comes with a built-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
+ZeroNet 内置一个 SQL 数据库。这使得以内容为重的网站的开发变得容易。该数据库也与托管的节点以增量更新的形式同步。
 
 
-# Why?
+# 为什么？
 
-* We believe in open, free, and uncensored communication.
-* No censorship: After something is published there is no way to remove it.
-* No single point of failure: Content remains online even if only one peer is serving it.
-* Impossible to shut down: It's nowhere because it's everywhere. Content is served by any user who wishes to.
-* Fast: ZeroNet uses BitTorrent technology to deliver content faster than centralised servers.
-* Works offline: You can access the site even if your internet is unavailable.
-* Secure: Content ownership is secured using the same cryptography that secures your Bitcoin wallet.
+* 我们相信开放、自由、未经审查的沟通。
+* 没有审查：一旦被出版就没有办法被移除
+* 没有单点故障：即使只有一个节点正在服务内容，仍然在线。
+* 不可能被关闭：它不在是因为它无处不在，内容由任何想要它的用户提供服务。
+* 快速：ZeroNet 使用 BitTorrent 技术比中心化服务器更快地提供内容。
+* 离线使用：在你的网络不可用时，你依然可以访问你的网站。
+* 安全： Content ownership is secured using the same cryptography that secures your Bitcoin wallet.
 
 [comment]: <> (I'm unsure about the following bit. Thoughts?)
 [comment]: <> (# What problem is ZeroNet solving?)
@@ -37,21 +37,21 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 [comment]: <> (This architecture means that when a site URL is created, as long as one peer is serving it, there is no way to take the URL down.)
 
 
-# Features
- * Easy, zero configuration setup.
- * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
-   based authorization: Your account is protected by the same cryptography as your Bitcoin wallet.
- * Real-time updated sites.
- * Namecoin .bit domains support.
- * SQL Database support: Allows for easier site development and faster page load times.
- * Anonymity: Full Tor network support with .onion hidden services instead of ipv4 addresses
- * TLS encrypted connections.
- * Automatic, uPnP port opening.
- * Plugin for multiuser (openproxy) support.
- * Works with any browser/OS.
+# 特性
+ * 简单，零配置安装。
+ * 无密码 [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
+   基于授权：你的帐户由你的比特币钱包相同的密码来保护。
+ * 实时站点更新。
+ * 域名币 .bit 域名支持。
+ * SQL 数据库支持：允许更简单地开放网站和更快地载入页面。
+ * 自动：完全支持使用 .onion 隐藏服务的 Tor 网络而不是 IPv4 地址。
+ * TLS 加密连接。
+ * 自动，uPnP 端口开启。
+ * 用于多用户（开放代理）支持的插件。
+ * 工作在任何浏览器/操作系统
 
 
-# How does it work?
+# 它是如何工作的？
 
 * After you install and run ZeroNet, you open a site by visiting:
   `http://127.0.0.1:43110/{zeronet_site_address}`
@@ -67,26 +67,26 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 ##### [Slideshow about ZeroNet cryptography, content updates, multi-user sites &raquo;](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub?start=false&loop=false&delayms=3000)
 
 
-# Screenshots
+# 截图
 
-![Screenshot](./img/zerohello.png)
+![截图](./img/zerohello.png)
 
 ![ZeroTalk](./img/zerotalk.png)
 
-##### [More screenshots &raquo;](/using_zeronet/sample_sites/)
+##### [更多截图 &raquo;](/using_zeronet/sample_sites/)
 
-# Current limitations
+# 目前的限制
 
-* No torrent-like, file splitting for big file support
-* File transactions are not compressed ~~or encrypted yet~~ (TLS encryption added)
-* No private sites
+* 没有类似于 torrent 的大型文件的文件分割支持。
+* 传输的文件没有被压缩 ~~或者被加密~~ (TLS 加密已加入)
+* 没有私人网站
 
-# Help to keep this project alive
+# 帮助这个项目存活
 
 Bitcoin: 1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX
 
 
-### Thank you!
+### 谢谢你！
 
-* More info, help, changelog, zeronet sites: [http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
-* Come, chat with us: [#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) or on [gitter](https://gitter.im/HelloZeroNet/ZeroNet)
+* 更多信息、帮助、更改日志、Zeronet 网站：[http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
+* 来和我们聊天：[#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) or on [gitter](https://gitter.im/HelloZeroNet/ZeroNet)
