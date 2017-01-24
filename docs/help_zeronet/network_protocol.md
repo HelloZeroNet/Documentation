@@ -6,7 +6,7 @@
     * `req_id`: The request's unique id (simple, incremented nonce), the client has to include this when reply to the command
     * `params`: Parameters for the request
  - Example request: `{"cmd": "getFile", "req_id": 1, "params:" {"site": "1EU...", "inner_path": "content.json", "location": 0}}`
- - Example response: `{"cmd": "response", "to": 1, "body": "content.json content", "location": 1132, "site": 1132}`
+ - Example response: `{"cmd": "response", "to": 1, "body": "content.json content", "location": 1132, "size": 1132}`
  - Example error response: `{"cmd": "response", "to": 1, "error": "Unknown site"}`
 
 # Peer requests
@@ -78,4 +78,4 @@ Parameter            | Description
 
 Return key           | Description
                  --- | ---
-**ok**               | Thanks message on successful update
+**ok**               | Thanks message on successful update :)
