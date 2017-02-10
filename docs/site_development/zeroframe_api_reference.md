@@ -343,15 +343,32 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 ```
 
 
+
 ---
 
-#### fileGet _inner_path, [required]_
-Get file content
+
+#### fileDelete _inner_path_
+Delete a file
 
 Parameter        | Description
              --- | ---
-**inner_path**   | The file you want to get
+**inner_path**   | The file you want to delete
+
+**Return**: "ok" on success else the error message
+
+
+---
+
+
+#### fileGet _inner_path, [required], [format], [timeout]_
+Get file content
+
+Parameter               | Description
+                    --- | ---
+**inner_path**          | The file you want to get
 **required** (optional) | Try and wait for the file if it's not exists. (default: True)
+**format** (optional)   | Encoding of returned data. (text or base64) (default: text)
+**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
 
 **Return**: <string> The content of the file
 
@@ -393,14 +410,14 @@ submitTopicVote: (e) =>
 ---
 
 
-#### fileDelete _inner_path_
-Delete a file
+#### fileList _inner_path_
+List of files in a directory
 
 Parameter        | Description
              --- | ---
-**inner_path**   | The file you want to delete
+**inner_path**   | Directory you want to list
 
-**Return**: "ok" on success else the error message
+**Return**: List of files in the directory (recursive)
 
 
 ---
@@ -790,13 +807,17 @@ Return of current followed feeds
 
 ---
 
-#### feedQuery
+#### feedQuery _[limit], [day_limit]_
 
 Execute all followed sql query
 
 
 **Return**: The result of the followed Sql queries
 
+Parameter            | Description
+                 --- | ---
+**limit**            | Limit of results per followed site (default: 10)
+**day_limit**        | Return no older than number of this days (default: 3)
 
 ---
 
@@ -833,7 +854,58 @@ Parameter            | Description
                  --- | ---
 **query_site_info**  | If True, then gives back detailed site info for merged sites
 
+
+
 ---
+
+
+# Plugin: Mute
+
+#### muteAdd _auth_address_, _cert_user_id_, _reason_
+
+Add new user to mute list. (Requires confirmation for non-ADMIN sites)
+
+Parameter            | Description
+                 --- | ---
+**auth_address**     | Directory name of the user's data.
+**cert_user_id**     | Cert user name of the user
+**reason**           | Reason of the muting
+
+**Return**: ok if confirmed
+
+**Example:**
+```coffeescript
+Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit','Spammer'])
+```
+
+---
+
+#### muteRemove _auth_address_
+
+Remove a user from mute list. (Requires confirmation for non-ADMIN sites)
+
+Parameter            | Description
+                 --- | ---
+**auth_address**     | Directory name of the user's data.
+
+**Return**: ok if confirmed
+
+**Example:**
+```coffeescript
+Page.cmd("muteRemove", '1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz')
+```
+
+---
+
+#### muteList
+
+List muted users. (Requires ADMIN permission on site)
+
+**Return**: List of muted users
+
+
+---
+
 
 # Plugin: OptionalManager
 
