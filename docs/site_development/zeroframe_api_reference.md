@@ -36,6 +36,14 @@ siteDelete: (address) ->
 ---
 
 
+#### wrapperInnerLoaded
+
+Applies the windows.location.hash to page url. Call when you page is fully loaded to jump to the desired anchor point.
+
+
+---
+
+
 #### wrapperGetLocalStorage
 **Return**: Browser's local store for the site
 
