@@ -111,10 +111,16 @@ ECDSA sign of the content.json file content. (keys sorted, without whitespace an
 
 Possible signers address for the root content.json signed using the site address private key. (Multisig possibility)
 
-**Format of the signed string**: [signers_required]:[signer address],[signer address]
+**Format of the signed string**: [number_of_signers_required]:[signer address],[signer address]
 
 **Example**: <small>HKNDz9IUHcBc/l2Jm2Bl70XQDL9HYHhJ2hUdg8AMyunACLgxyXBr7EW1/ME4hGkaFZSFmIxlInmxH+BrMVXbnLw=</small>
 
+*Another Example*:
+```
+signs_required: 1:1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G,1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE
+signed message: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
+```
+the above signed message is signed using the address, "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G"
 
 ---
 
