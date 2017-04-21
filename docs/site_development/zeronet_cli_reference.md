@@ -1,4 +1,5 @@
-# ZeroFrame API Reference
+
+# ZeroNet Command Line Reference
 
 
 
@@ -437,7 +438,7 @@ Simple json file query command
 Parameter            | Description
                  --- | ---
 **dir_inner_path**   | Pattern of queried files
-**query**            | Query command (optional)
+**query**            | Query command
 
 **Return**: <list> Matched content
 
@@ -446,7 +447,6 @@ Parameter            | Description
  - `["data/users/*/data.json", "topics"]`: Returns all topics node from all user files
  - `["data/users/*/data.json", "comments.1@2"]`: Returns `user_data["comments"]["1@2"]` value from all user files
  - `["data/users/*/data.json", ""]`: Returns all data from users files
- - `["data/users/*/data.json"]`: Returns all data from users files (same as above)
 
 **Example:**
 ```coffeescript
