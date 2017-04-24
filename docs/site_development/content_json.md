@@ -120,7 +120,7 @@ Possible signers address for the root content.json signed using the site address
 signs_required: 1:1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G,1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE
 signed message: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
 ```
-the above signed message is signed using the address, "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G"
+The above signed message is signed using the address, "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G"
 
 ---
 
@@ -220,7 +220,7 @@ Include an another content.json
     "signers": [ # Possible signers address for the file
       "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
     ],
-    "signers_required": 1 # Valid signs required to accept the file (Multisig possibility),
+    "signers_required": 1 # The *number* of Valid signs required to accept the file (Multisig possibility),
     "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
     "includes_allowed": false, # Nested includes allowed or not
     "max_size": 10000, # Max sum filesize allowed in the include (in bytes)
@@ -254,7 +254,7 @@ Preg pattern of optional files
 
 ### signs_required
 
-Valid signs required to accept the file (Multisig possibility)
+The **number** of valid signs required to accept the file (Multisig possibility)
 
 
 **Example**: 1
