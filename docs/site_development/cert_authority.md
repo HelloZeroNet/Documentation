@@ -139,7 +139,7 @@ Certificate information:
 
 - A certificate authority does not have to be approved by any ZeroNet developers. A site owner can choose which certificate authorities to trust for the sake of user content quality.
 
-- A certificate authority is responsible for maintaining the uniqueness of its user name pool.
+- A certificate authority is responsible for maintaining its user name pool.
 
 - ZeroID does not revoke or renew certificates.
 
