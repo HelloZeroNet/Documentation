@@ -37,7 +37,12 @@ In Tor mode it's recommended to use ZeroNet in Tor Browser:
 - Go to address `about:preferences#advanced`
 - Click `Settings...`
 - Enter `127.0.0.1` to field **No proxy for**
+- Open http://127.0.0.1:43110 in the browser
 
+If you still see blank page: 
+ - Click on NoScript's button (first on the toolbar) 
+ - Choose "Temporary allow all this page"
+ - Reload the page
 
 ---
 
