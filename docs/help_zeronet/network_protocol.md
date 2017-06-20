@@ -13,6 +13,34 @@
 # Handshake
 Every connection begins with a handshake by sending a request to the target network address:
 
+Parameter            | Description
+                 --- | ---
+**crypt**            | Null/None, only used in respones
+**crypt_supported**  | An array of connection encryption methods supported by the client
+**fileserver_port**  | The client's fileserver port
+**onion**            | (Only used on tor) The client's onion address
+**protocol**         | The protocol version the client uses (v1 or v2)
+**port_opened**      | The client's client port open status
+**peer_id**          | (Not used on tor) The client's peer_id
+**rev**              | The client's revision number
+**version**          | The client's version
+**target_ip**        | The server's network address
+
+**Return**:
+
+Return key           | Description
+                 --- | ---
+**crypt**            | The encryption to use
+**crypt_supported**  | An array of connection encryption methods supported by the server
+**fileserver_port**  | The server's fileserver port
+**onion**            | (Only used on tor) The server's onion address
+**protocol**         | The protocol version the server uses (v1 or v2)
+**port_opened**      | The server's client port open status
+**peer_id**          | (Not used on tor) The server's peer_id
+**rev**              | The server's revision number
+**version**          | The server's version
+**target_ip**        | The client's network address
+
 ```json
 {
   "cmd": "handshake",
