@@ -26,7 +26,7 @@ Parameter            | Description
 **version**          | The client's version
 **target_ip**        | The server's network address
 
-**Return**:
+The target initialize the encryption on the socket based on `crypt_supported`, then return:
 
 Return key           | Description
                  --- | ---
@@ -40,6 +40,13 @@ Return key           | Description
 **rev**              | The server's revision number
 **version**          | The server's version
 **target_ip**        | The client's network address
+
+> **Note:** No encryption used on .onion connections, as the Tor network provides the transport security by default.
+> **Note:** You can also implicitly initialize SSL before the handshake if you can assume it supported by remote client.
+
+**Example**:
+
+Sent handshake:
 
 ```json
 {
