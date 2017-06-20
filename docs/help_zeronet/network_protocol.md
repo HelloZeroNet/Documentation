@@ -53,39 +53,38 @@ Sent handshake:
   "cmd": "handshake",
   "req_id": 0,
   "params": {
-    "crypt": None,  # Currently active connection encryption
-    "crypt_supported": ["tls-rsa"],  # Supported connection encryption
-    "fileserver_port": 15441,  # Requester client's port number
-    "onion": "zp2ynpztyxj2kw7x",  # Requester client's onion address
-    "protocol": "v2",  # Requester client's protocol version
-    "port_opened": True,   # Requester client's client port open status
-    "peer_id": "-ZN0056-DMK3XX30mOrw",  # Requester client's peer_id (random generated on startup) (optional, not sent over Tor)
-    "rev": 2122,  # Requester client's revision number
-    "target_ip": "192.168.1.13",  # Target client's network address
-    "version": "0.5.6"  # Requester client's version number
+    "crypt": None,
+    "crypt_supported": ["tls-rsa"],
+    "fileserver_port": 15441,
+    "onion": "zp2ynpztyxj2kw7x",
+    "protocol": "v2",
+    "port_opened": True,
+    "peer_id": "-ZN0056-DMK3XX30mOrw",
+    "rev": 2122,
+    "target_ip": "192.168.1.13",
+    "version": "0.5.6"
   }
 }
 ```
 
-The target ip responses with the same informations:
+Return:
 
 ```
 {
- 'protocol': 'v2',
- 'onion': 'boot3rdez4rzn36x',
- 'to': 0,
- 'crypt': None,
- 'cmd': 'response',
- 'rev': 2092,
- 'crypt_supported': [],
- 'target_ip': 'zp2ynpztyxj2kw7x.onion',
- 'version': '0.5.5',
- 'fileserver_port': 15441,
- 'port_opened': False,
- 'peer_id': ''
+ "protocol": "v2",
+ "onion": "boot3rdez4rzn36x",
+ "to": 0,
+ "crypt": None,
+ "cmd": "response",
+ "rev": 2092,
+ "crypt_supported": [],
+ "target_ip": "zp2ynpztyxj2kw7x.onion",
+ "version": "0.5.5",
+ "fileserver_port": 15441,
+ "port_opened": False,
+ "peer_id": ""
 }
 ```
-
 
 # Peer requests
 
