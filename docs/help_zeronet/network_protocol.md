@@ -54,7 +54,7 @@ The target ip responses with the same informations:
 
 # Peer requests
 
-#### getFile _site_, _inner_path_, _location_
+#### getFile _site_, _inner_path_, _location_, _[file_size]_
 Request a file from the client
 
 Parameter            | Description
@@ -62,6 +62,7 @@ Parameter            | Description
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **inner_path**       | File path relative to site directory
 **location**         | Request file from this byte (max 512 bytes got sent in a request, so you need multiple requests for larger files)
+**file_size**        | Total size of the requested file (optional)
 
 **Return**:
 
