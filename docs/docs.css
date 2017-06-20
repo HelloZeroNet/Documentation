@@ -7,7 +7,7 @@ code.hljs { font-size: 90% !important }
 pre { margin-bottom: 40px }
 .rst-content .section ul { line-height: 30px }
 
-.section table { margin-bottom: 20px; text-align: left }
+.section table { margin-bottom: 20px; text-align: left; font-size: 16px; line-height: 20px; }
 .section table th { padding: 8px 15px; border: 1px solid #e1e4e5 }
 .section table td { padding: 8px 15px; border: 1px solid #e1e4e5; background-color: #f3f6f6 }
 .section table tr:nth-child(even) td { background-color: #FFF }
