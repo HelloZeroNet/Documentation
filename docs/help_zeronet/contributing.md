@@ -33,7 +33,7 @@ In fact, a majority of contributors do not submit source code. Even if you like 
 ### Do you like to write code?
 
 - If you know Python, you can pick a task from our [issue tracker on GitHub](https://github.com/HelloZeroNet/ZeroNet/issues).
-- You are also welcomed develop your own ideas. Before you start, please [open a new discussion](https://github.com/HelloZeroNet/ZeroNet/issues/news) to let the community know, so you can make sure we can share our ideas to make the best out of it.
+- You are also welcomed develop your own ideas. Before you start, please [open a new discussion](https://github.com/HelloZeroNet/ZeroNet/issues/new) to let the community know, so you can make sure we can share our ideas to make the best out of it.
 - Keep your coding style consistent. We ask you to follow our coding convention below.
 
 ### Do you like to offer financial support?
