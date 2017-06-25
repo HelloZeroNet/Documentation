@@ -21,7 +21,7 @@ In fact, a majority of contributors do not submit source code. Even if you like 
 
 ### Do you like to make websites?
 
-- Create new ZeroNet sites. Go ahead and make your own blog on ZeroNet. [It is easy and costs little.](../../using_zeronet/create_new_site.md)
+- Create new ZeroNet sites. Go ahead and make your own blog on ZeroNet. [It is easy and costs little.](../using_zeronet/create_new_site.md)
 - “Content is king!” as NoFish puts. The network is worth nothing without content, so we need You to make it succeed.
 
 ### Do you like to do research?
