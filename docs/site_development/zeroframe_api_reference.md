@@ -1067,6 +1067,23 @@ Parameter            | Description
 
 ---
 
+
+# Plugin: Cors
+
+#### corsPermission address
+
+Request Cross origin resource sharing permission with the given site.
+
+Parameter            | Description
+                 --- | ---
+**address**          | The site address you want get cors access
+
+**Return**: ok on success
+
+After the permission is granted the other site's files will be available under **/cors-siteaddress/** virtual directory via http request or by the fileGet API command.
+
+The site will be added to user's client if it's required.
+
 # Admin commands
 _(requires ADMIN permission in data/sites.json)_
 
