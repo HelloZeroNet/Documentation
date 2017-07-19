@@ -683,6 +683,30 @@ updateSite: =>
 ---
 
 
+#### userGetSettings
+
+Get user's saved settings.
+
+**Return:** The user specific site's settings saved using userSetSettings.
+
+
+---
+
+
+#### userSetSettings settings
+
+Set user's site specific settings.
+
+Parameter     | Description
+          --- | ---
+**settings**  | The user's site specific settings you want to store.
+
+**Return:** ok on success
+
+
+---
+
+
 # Plugin: CryptMessage
 
 
