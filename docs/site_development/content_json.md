@@ -204,6 +204,7 @@ Ignore files from signing matching this preg pattern
 
 **Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from data/users/ directory)
 
+> Note: [Some restriction](#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
 
 ---
 
@@ -248,6 +249,7 @@ Preg pattern of optional files
 
 **Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
 
+> Note: [Some restriction](#regex_limitations) apply to  regular expressions avoid possible ReDoS vulnerability.
 
 ---
 
@@ -324,6 +326,8 @@ Node                   | Description
   }
 ```
 
+> Note: [Some restriction](#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
+
 ----
 
 
@@ -332,3 +336,19 @@ Node                   | Description
 Content for the viewport meta tag. (Used for mobile-friendly pages)
 
 **Example**: width=device-width, initial-scale=1.0
+
+
+----
+
+# Regular expressions limitations
+
+To avoid [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack the following restrictions apply to the patterns:
+
+ - `.` character is mandatory before repetition characters of `*,+,{`
+ - Maximum 9 repetition allowed in one pattern
+ - Maximum length of a pattern is 255 characters.
+
+## Examples:
+
+ - `((?!json).)*$` not allowed, because `)` before the `*` character. Possible fix: `.*(?!json)$`
+ - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` not allowed, because it has 12 `.*` repetition patterns. Possible fix: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`

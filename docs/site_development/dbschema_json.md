@@ -10,6 +10,8 @@ The code below will do the following:
  - If an updated data/users/content.json file is received (eg.: new user created):
    - The `"user_id", "user_name", "max_size", "added"` key in value of `content["include"]` is loaded into the `user` table and the key is stored as `path`
 
+> Note: [Some restriction](content_json/#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
+
 ```json
 
 {
