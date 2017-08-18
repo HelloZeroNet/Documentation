@@ -79,3 +79,22 @@ Parameter            | Description
 Return key           | Description
                  --- | ---
 **ok**               | Thanks message on successful update
+
+
+
+---
+
+#### actionCheckport _port_
+Check requested port of the other peer.
+
+
+Parameter            | Description
+                 --- | ---
+**port**             | Port which will be checked.
+
+**Return**:
+
+Return key           | Description
+                 --- | ---
+**status**           | Status of the port ("open" or "closed")
+**ip_external**      | External IP of the requestor
