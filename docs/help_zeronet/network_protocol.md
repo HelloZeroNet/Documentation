@@ -300,6 +300,20 @@ Return key           | Description
 
 ---
 
+#### actionCheckport _port_
+Check requested port of the other peer.
+
+
+Parameter            | Description
+                 --- | ---
+**port**             | Port which will be checked.
+
+**Return**:
+
+Return key           | Description
+                 --- | ---
+**status**           | Status of the port ("open" or "closed")
+**ip_external**      | External IP of the requestor
 
 # Optional file id
 Integer representation of the first 4 character of the hash:
