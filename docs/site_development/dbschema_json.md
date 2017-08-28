@@ -40,7 +40,7 @@ The code below will do the following:
         }
       ],
       "to_keyvalue": ["next_message_id", "next_topic_id"]
-        # Load data.json[next_topic_id] to keyvalues table
+        # Load data.json[next_topic_id] to keyvalue table
         # (key: next_message_id, value: data.json[next_message_id] value)
 
     },
