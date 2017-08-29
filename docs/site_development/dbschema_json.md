@@ -18,7 +18,7 @@ The code below will do the following:
   "db_name": "ZeroTalk", # Database name (only used for debugging)
   "db_file": "data/users/zerotalk.db", # Database file relative to site's directory
   "version": 2, # 1 = Json table has path column that includes directory and filename
-                # 2 = Json table has seperate directory and file_name column
+                # 2 = Json table has separate directory and file_name column
                 # 3 = Same as version 2, but also has site column (for merger sites)
   "maps": { # Json to database mappings
     ".*/data.json": { # Regex pattern of file relative to db_file
@@ -40,7 +40,7 @@ The code below will do the following:
         }
       ],
       "to_keyvalue": ["next_message_id", "next_topic_id"]
-        # Load data.json[next_topic_id] to keyvalues table
+        # Load data.json[next_topic_id] to keyvalue table
         # (key: next_message_id, value: data.json[next_message_id] value)
 
     },
