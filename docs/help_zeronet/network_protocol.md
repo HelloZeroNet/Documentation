@@ -138,7 +138,7 @@ Parameter            | Description
 Return key           | Description
                  --- | ---
 **peers**           | List of IPv4 peers he has for the site (packed)
-**peers_onion**     | List of peers as Tor Onion Serivces (packed)
+**peers_onion**     | List of Tor Onion Serivces peers for this site (packed)
 
 Each element in the `peers` list is a packed IPv4 address.
 
