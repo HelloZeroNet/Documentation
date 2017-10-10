@@ -137,8 +137,22 @@ Parameter            | Description
 
 Return key           | Description
                  --- | ---
-**peers**            | List of peer he has for the site (packed)
+**peers**           | List of IPv4 peers he has for the site (packed)
+**peers_onion**     | List of Tor Onion Serivces peers for this site (packed)
 
+Each element in the `peers` list is a packed IPv4 address.
+
+IP address | Port
+---------- | ----
+`4 bytes` | `2 bytes`
+
+Each element in the `peers_onion` list is a packed Tor Onion Service address.
+
+B32-decoded onion address | Port
+------------------------- | ----
+`binary_str[0:-2]`        | `binary_str[-2:]`
+
+To restore the onion address, pass the first part through `base64.b32encode` and append `.onion` to the return value.
 
 ---
 
