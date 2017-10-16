@@ -635,13 +635,14 @@ Parameter                 | Description
 ---
 
 
-#### siteSign _[privatekey], [inner_path]_
+#### siteSign _[privatekey], [inner_path], [remove_missing_optional]_
 Sign a content.json of the site
 
-Parameter                 | Description
-                      --- | ---
-**privatekey** (optional) | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional) | Inner path of the content json you want to sign (default: content.json)
+Parameter                              | Description
+                                   --- | ---
+**privatekey** (optional)              | Private key used for signing (default: current user's privatekey)
+**inner_path** (optional)              | Inner path of the content json you want to sign (default: content.json)
+**remove_missing_optional** (optional) | Remove the optional files from content.json that no longer present in the directory (default: False)
 
 **Return**: "ok" on success else the error message
 
