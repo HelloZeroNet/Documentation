@@ -1085,12 +1085,68 @@ After the permission is granted the other site's files will be available under *
 
 The site will be added to user's client if it's required.
 
-# Admin commands
-_(requires ADMIN permission in data/sites.json)_
-
-
 
 ---
+
+
+# Plugin: Bigfile
+
+
+#### BigfileUploadInit _[inner_path]_, _[size]_
+
+Initialize a new upload endpoint for a bigfile.
+
+Parameter            | Description
+                 --- | ---
+**inner_path**       | Upload location
+**size**             | File size
+
+
+**Return**: A dict with the information about the upload:
+
+Parameter              | Description
+                   --- | ---
+**url**                | Http upload endpoint
+**pice_size**          | Size of each separately hashed part of the file
+**inner_path**         | File path within the site
+**file_relative_path** | File path relative to content.json
+
+> __Note:__ Not supported non-ascii characters will be automatically removed from `inner_path` and `file_relative_path` values
+
+**Example**
+
+```javascript
+var input = document.createElement('input')
+document.body.appendChild(input)
+input.type = "file"
+input.style.visibility = "hidden"
+
+input.onchange = () => {
+	var file = input.files[0]
+	page.cmd("bigfileUploadInit", ["optional/"+file.name, file.size], (init_res) => {
+		var formdata = new FormData()
+		formdata.append(file.name, file)
+
+		var req = new XMLHttpRequest()
+		req.upload.addEventListener("progress", console.log)
+		req.upload.addEventListener("loadend", () =>
+			page.cmd("wrapperConfirm", ["Upload finished!", "Open file"],
+				() => { window.top.location = init_res.inner_path }
+			)
+		)
+		req.withCredentials = true
+		req.open("POST", init_res.url)
+		req.send(formdata)
+	})
+}
+input.click()
+```
+
+---
+
+
+# Admin commands
+_(requires ADMIN permission in data/sites.json)_
 
 
 #### configSet _key, value_
