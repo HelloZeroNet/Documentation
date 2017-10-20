@@ -51,7 +51,9 @@ If you still see blank page:
 
 If you want to hide your IP install the latest version of ZeroNet then click Tor > Enable Tor for every connection on ZeroHello.
 
-On Windows Tor is bundled with ZeroNet for other OS [follow Tor install instructions](https://www.torproject.org/docs/installguide.html),
+On Windows Tor is bundled with ZeroNet, ZeroNet will attempt to download and unpack Tor component on its first run. But in any case if it fails you can install it manually following the instruction in `core\tools\tor\manual_install.txt`.
+
+For other OS [follow Tor install instructions](https://www.torproject.org/docs/installguide.html),
 edit your torrc configuration file by removing `#` from line `# ControlPort 9051` then restart your Tor service and ZeroNet.
 
 > __Tip:__ You can verify your IP address using ZeroNet's [Stats](http://127.0.0.1:43110/Stats) page.
