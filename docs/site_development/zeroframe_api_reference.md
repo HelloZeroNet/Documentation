@@ -431,6 +431,19 @@ Parameter        | Description
 ---
 
 
+#### fileNeed _inner_path, [timeout]_
+Initialize download of a (optional) file.
+
+Parameter               | Description
+                    --- | ---
+**inner_path**          | The file you want to get
+**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
+
+**Return**: "ok" on successfull download
+
+
+---
+
 #### fileQuery _dir_inner_path, query_
 Simple json file query command
 
