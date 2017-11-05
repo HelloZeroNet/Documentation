@@ -1120,7 +1120,7 @@ Parameter            | Description
 Parameter              | Description
                    --- | ---
 **url**                | Http upload endpoint
-**pice_size**          | Size of each separately hashed part of the file
+**piece_size**         | Size of each separately hashed part of the file
 **inner_path**         | File path within the site
 **file_relative_path** | File path relative to content.json
 
