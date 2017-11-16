@@ -156,7 +156,7 @@ To restore the onion address, pass the first part through `base64.b32encode` and
 
 ---
 
-#### update _site_, _inner_path_, _body_
+#### update _site_, _inner_path_, _body_, _[diffs]_
 Update a site file.
 
 
@@ -165,12 +165,33 @@ Parameter            | Description
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **inner_path**       | File path relative to site directory
 **body**             | Full content of the updated file
+**diffs** (optional) | Dict of changed lines of the modified files
 
 **Return**:
 
 Return key           | Description
                  --- | ---
 **ok**               | Thanks message on successful update :)
+
+**Diffs format**
+
+A dict that contains the modifications
+
+ - Key: changed file's relative path to content.json (eg.: `data.json`)
+ - Value: The list of diff opcodes for the file (eg.: `[['=', 5], ['+', '\nhello new line'], ['-', 6]]`)
+
+Possible opcodes:
+
+Opcode                                   | Description
+                                     --- | ---
+**['=', number of same characters]**     | Have not changed part of the file (eg.: `['=', 5]`)
+**['+', new text]**                      | Added characters (eg.: `['+', '\nhello new line']`)
+**['-', number of removed characters]**  | Full content of the updated file (eg.: `['-', 6]`)
+
+After the update received, the client tries to patch the files using the diffs.
+If it failes to match the sha hash provided by the content.json (had different version of the file) it automatically re-downloads the whole file from the sender of the update.
+
+> __Note:__ The patches are limited to 30KB per file and only used for .json files
 
 ---
 
