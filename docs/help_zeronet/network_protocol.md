@@ -164,8 +164,8 @@ Parameter            | Description
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **inner_path**       | File path relative to site directory
-**body**             | Full content of the updated file
-**diffs** (optional) | [Diff opcodes](#possible-diff-opcodes) of the modified files
+**body**             | Full content of the updated content.json
+**diffs** (optional) | [Diff opcodes](#possible-diff-opcodes) for the modified files in the content.json
 
 **Return**:
 
