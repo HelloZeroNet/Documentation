@@ -165,7 +165,7 @@ Parameter            | Description
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **inner_path**       | File path relative to site directory
 **body**             | Full content of the updated file
-**diffs** (optional) | Dict of changed lines of the modified files
+**diffs** (optional) | [Diff opcodes](#possible-diff-opcodes) of the modified files
 
 **Return**:
 
@@ -173,14 +173,14 @@ Return key           | Description
                  --- | ---
 **ok**               | Thanks message on successful update :)
 
-**Diffs format**
+##### Diffs format
 
 A dict that contains the modifications
 
  - Key: changed file's relative path to content.json (eg.: `data.json`)
  - Value: The list of diff opcodes for the file (eg.: `[['=', 5], ['+', '\nhello new line'], ['-', 6]]`)
 
-Possible opcodes:
+##### Possible diff opcodes:
 
 Opcode                                   | Description
                                      --- | ---
