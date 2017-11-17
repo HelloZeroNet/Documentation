@@ -363,7 +363,7 @@ Return key           | Description
 
 #### getPieceFields _site_
 
-Returns all big file [piecefield](#piecefield) that client has for that site in a dict.
+Returns all big file [piecefield](#bigfile-piecefield) that client has for that site in a dict.
 
 Parameter            | Description
                  --- | ---
@@ -374,7 +374,7 @@ Parameter            | Description
 
 Return key             | Description
                    --- | ---
-**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile_merkle_root)<br>Value: Packed [piecefield](#piecefield)
+**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
 
 ---
 
@@ -385,7 +385,7 @@ Set the client's [piecefields](#picefield) for that site.
 Parameter              | Description
                    --- | ---
 **site**               | Requested site
-**piecefields_packed** | Key: Bigfile's sha512/256 merkle root hash<br>Value: Packed [piecefield](#piecefield)
+**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
 
 
 **Return**:
@@ -395,7 +395,7 @@ Return key           | Description
 **ok**               | Updated
 
 
-#### Piecefield
+##### Bigfile piecefield
 
 Holds the the big files downloaded pieces information in a simple string with 1/0 values. (1 = Downloaded, 0 = Not downloaded)
 
@@ -409,9 +409,9 @@ Turns the string to an list of int by counting the repeating characters starting
 
 After the conversion it turns it to more efficient [typed array](https://docs.python.org/2/library/array.html) using `array.array('H', piecefield)`
 
-#### Bigfile merkle root
+##### Bigfile merkle root
 
-During the big file hashing procedure beside the per-piece sha512/256 hash stored in the [piecemap](#bigfile_piecemap) file
+During the big file hashing procedure beside the per-piece sha512/256 hash stored in the [piecemap](#bigfile-piecemap) file
 it also calculates sha512/256 merkle root of the file using the [merkle-tools](https://github.com/tierion/merkle-tools) package.
 The merkle root only used to identify file file, not (yet) for verifying the pieces.
 
@@ -419,7 +419,7 @@ The merkle root only used to identify file file, not (yet) for verifying the pie
 
 > __Note__: The merkle root not used to verify the pieces, because it would take more storage/bw to transfer and store the merkle-proofs for partial verification, than the per-piece hash map file itself.
 
-#### Bigfile piecemap
+##### Bigfile piecemap
 
 It holds the per-piece sha512/256 hashes. The piece size and the picemap filename is defined in content.json, eg.:
 
