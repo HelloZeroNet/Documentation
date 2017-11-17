@@ -411,17 +411,16 @@ After the conversion it turns it to more efficient [typed array](https://docs.py
 
 ##### Bigfile merkle root
 
-During the big file hashing procedure beside the per-piece sha512/256 hash stored in the [piecemap](#bigfile-piecemap) file
-it also calculates sha512/256 merkle root of the file using the [merkle-tools](https://github.com/tierion/merkle-tools) package.
-The merkle root only used to identify file file, not (yet) for verifying the pieces.
+During the big file hashing procedure, in addition to storing the per-piece sha512/256 hash digests in the [piecemap](#bigfile-piecemap) file, the algorithm also calculates the SHA-512/256 merkle root of the file using the [merkle-tools](https://github.com/tierion/merkle-tools) implementation.
+The merkle root is only used as an ID to identify the big file, not (yet) for verifying the pieces.
 
-> __Note__: The merkle root chosen to identify the file instead of the file's actual sha512/256 hash to avoid double hashing it. (once for piecemap once for the whole file)
+> __Note__: The merkle root is chosen to identify the file, instead of the file's actual SHA-512/256 hash. Obviously, using the latter results in hashing the same file twice. (once for piecemap once for the whole file)
 
-> __Note__: The merkle root not used to verify the pieces, because it would take more storage/bw to transfer and store the merkle-proofs for partial verification, than the per-piece hash map file itself.
+> __Note__: The merkle root is not used to verify the integrity of the pieces or the big file, because doing so would take more bandwidth and space to transfer and store the merkle-proofs for partial verification, than the per-piece hash map file itself.
 
 ##### Bigfile piecemap
 
-It holds the per-piece sha512/256 hashes. The piece size and the picemap filename is defined in content.json, eg.:
+It holds the per-piece SHA-512/256 hashes. The piece size and the picemap filename is defined in `content.json`, eg.:
 
 ```
 ...
@@ -435,7 +434,7 @@ It holds the per-piece sha512/256 hashes. The piece size and the picemap filenam
 ...
 ```
 
-The piecemap files packed with [msgpack](https://msgpack.org/) format with the data structure:
+Having the following data structure, the piecemap file is packed into the [msgpack](https://msgpack.org/) format:
 
 ```
 {
