@@ -333,6 +333,13 @@ Return key           | Description
 }
 ```
 
+##### Optional file id
+Integer representation of the first 4 character of the hash:
+```
+>>> int("ea2c2acb30bd5e1249021976536574dd3f0fd83340e023bb4e78d0d818adf30a"[0:4], 16)
+59948
+```
+
 ---
 
 #### checkport _port_
@@ -350,9 +357,3 @@ Return key           | Description
 **status**           | Status of the port ("open" or "closed")
 **ip_external**      | External IP of the requestor
 
-# Optional file id
-Integer representation of the first 4 character of the hash:
-```
->>> int("ea2c2acb30bd5e1249021976536574dd3f0fd83340e023bb4e78d0d818adf30a"[0:4], 16)
-59948
-```
