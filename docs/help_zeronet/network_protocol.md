@@ -335,7 +335,7 @@ Return key           | Description
 
 ---
 
-#### actionCheckport _port_
+#### checkport _port_
 Check requested port of the other peer.
 
 
