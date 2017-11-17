@@ -374,7 +374,7 @@ Parameter            | Description
 
 Return key             | Description
                    --- | ---
-**piecefields_packed** | Key: Bigfile's sha512/256 merkle root hash<br>Value: Packed [piecefield](#piecefield)
+**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile_merkle_root)<br>Value: Packed [piecefield](#piecefield)
 
 ---
 
@@ -397,7 +397,7 @@ Return key           | Description
 
 #### Piecefield
 
-Holds the the big files downloaded pieces information in a simple string with 1/0 values.
+Holds the the big files downloaded pieces information in a simple string with 1/0 values. (1 = Downloaded, 0 = Not downloaded)
 
 > __Example__: `1110000001` means the file is sized 9-10MB and the client downloaded the first 3MB and the last 1MB at 1MB piecesize.
 
@@ -408,3 +408,37 @@ Turns the string to an list of int by counting the repeating characters starting
 > __Example__: `1110000001` to `[3, 6, 1]`, `0000000001` to `[0, 9, 1]`, `1111111111` to `[10]`
 
 After the conversion it turns it to more efficient [typed array](https://docs.python.org/2/library/array.html) using `array.array('H', piecefield)`
+
+#### Bigfile merkle root
+
+During the big file hashing procedure beside the per-piece sha512/256 hash stored in the [piecemap](#bigfile_piecemap) file
+it also calculates sha512/256 merkle root of the file using the [merkle-tools](https://github.com/tierion/merkle-tools) package.
+The merkle root only used to identify file file, not (yet) for verifying the pieces.
+
+> __Note__: The merkle root chosen to identify the file instead of the file's actual sha512/256 hash to avoid double hashing it. (once for piecemap once for the whole file)
+
+> __Note__: The merkle root not used to verify the pieces, because it would take more storage/bw to transfer and store the merkle-proofs for partial verification, than the per-piece hash map file itself.
+
+#### Bigfile piecemap
+
+It holds the per-piece sha512/256 hashes. The piece size and the picemap filename is defined in content.json, eg.:
+
+```
+...
+ "files_optional": {
+  "bigfile.mp4": {
+   "piece_size": 1048576,
+   "piecemap": "bigfile.mp4.piecemap.msgpack",
+   "sha512": "d1f0d150e1e73bb1e684d370224315d7ba21e656189eb646ef7cc394d033bc2b",
+   "size": 42958831
+  },
+...
+```
+
+The piecemap files packed with [msgpack](https://msgpack.org/) format with the data structure:
+
+```
+{
+  "bigfile.mp4": {"sha512_pieces": [piece1_sha512/256_digest, piece2_sha512/256_digest, ...]}
+}
+```
