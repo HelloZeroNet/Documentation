@@ -357,3 +357,54 @@ Return key           | Description
 **status**           | Status of the port ("open" or "closed")
 **ip_external**      | External IP of the requestor
 
+---
+
+# Bigfile Plugin
+
+#### getPieceFields _site_
+
+Returns all big file [piecefield](#piecefield) that client has for that site in a dict.
+
+Parameter            | Description
+                 --- | ---
+**site**             | Requested site
+
+
+**Return**:
+
+Return key             | Description
+                   --- | ---
+**piecefields_packed** | Key: Bigfile's sha512/256 merkle root hash<br>Value: Packed [piecefield](#piecefield)
+
+---
+
+#### setPieceFields _site_, _piecefields_packed_
+
+Set the client's [piecefields](#picefield) for that site.
+
+Parameter              | Description
+                   --- | ---
+**site**               | Requested site
+**piecefields_packed** | Key: Bigfile's sha512/256 merkle root hash<br>Value: Packed [piecefield](#piecefield)
+
+
+**Return**:
+
+Return key           | Description
+                 --- | ---
+**ok**               | Updated
+
+
+#### Piecefield
+
+Holds the the big files downloaded pieces information in a simple string with 1/0 values.
+
+> __Example__: `1110000001` means the file is sized 9-10MB and the client downloaded the first 3MB and the last 1MB at 1MB piecesize.
+
+**Packed format**:
+
+Turns the string to an list of int by counting the repeating characters starting with `1`.
+
+> __Example__: `1110000001` to `[3, 6, 1]`, `0000000001` to `[0, 9, 1]`, `1111111111` to `[10]`
+
+After the conversion it turns it to more efficient [typed array](https://docs.python.org/2/library/array.html) using `array.array('H', piecefield)`
