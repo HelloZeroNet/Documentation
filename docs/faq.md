@@ -39,8 +39,8 @@ In Tor mode it's recommended to use ZeroNet in Tor Browser:
 - Enter `127.0.0.1` to field **No proxy for**
 - Open http://127.0.0.1:43110 in the browser
 
-If you still see blank page: 
- - Click on NoScript's button (first on the toolbar) 
+If you still see blank page:
+ - Click on NoScript's button (first on the toolbar)
  - Choose "Temporary allow all this page"
  - Reload the page
 
@@ -86,6 +86,23 @@ Edit config to enable control protocol:
 
 > __Tip:__ It's also possible to use Tor without modifying torrc (or to use older versions of Tor clients), by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
 
+
+---
+
+#### Is it possible to use a configuration file?
+
+You can put your configuration options to a `zeronet.conf` file. Example:
+
+```
+[global]
+data_dir = my-data-dir
+log_dir = my-log-dir
+ui_restrict =
+ 1.2.3.4
+ 2.3.4.5
+```
+
+To list the possible options use the `zeronet.py --help` command
 
 ---
 
