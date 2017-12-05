@@ -82,7 +82,7 @@ Parameter              | Description
 
 ---
 
-#### wrapperOpenWindow _url, [target], [specs]
+#### wrapperOpenWindow _url, [target], [specs]_
 
 Navigates or opens a new popup window.
 
@@ -148,6 +148,7 @@ Parameter           | Description
 
 **Return**: None
 
+**Example:**
 ```coffeescript
 @cmd "wrapperPushState", [{"scrollY": 100}, "Profile page", "Profile"]
 ```
@@ -168,6 +169,16 @@ Parameter           | Description
 
 ```coffeescript
 @cmd "wrapperReplaceState", [{"scrollY": 100}, "Profile page", "Profile"]
+```
+
+---
+
+#### wrapperRequestFullscreen
+Set the current page to fullscreen. (request permission for the site on first call)
+
+**Example:**
+```javascript
+page.cmd("wrapperRequestFullscreen")
 ```
 
 
