@@ -63,6 +63,21 @@ Applies the windows.location.hash to page url. Call when you page is fully loade
 
 ---
 
+#### wrapperGetAjaxKey
+**Return**: The key you need to initilize ajax requests
+
+**Example:**
+```javascript
+ajax_key = await page.cmdp("wrapperGetAjaxKey")
+req = new window.XMLHttpRequest()
+req.open("GET", "content.json?ajax_key=" + ajax_key)
+req.setRequestHeader("Range", "bytes=10-200")  // Optional: only if you want request partial file
+req.send()
+console.log(req.response)
+```
+
+---
+
 #### wrapperNotification _type, message, [timeout]_
 Display a notification
 
@@ -175,6 +190,8 @@ Parameter           | Description
 
 #### wrapperRequestFullscreen
 Set the current page to fullscreen. (request permission for the site on first call)
+
+> **Note:** Starting from ZeroNet Rev3136 you can use the fullscreen javascript API directly, without fullscreen request
 
 **Example:**
 ```javascript
