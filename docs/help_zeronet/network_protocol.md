@@ -131,6 +131,7 @@ Parameter            | Description
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **peers**            | List of peers that the requester has (packed)
+**peers_onion**      | List of Tor Onion peers that the requester has (packed)
 **need**             | Number of peers the requester want
 
 **Return**:
@@ -138,7 +139,7 @@ Parameter            | Description
 Return key           | Description
                  --- | ---
 **peers**           | List of IPv4 peers he has for the site (packed)
-**peers_onion**     | List of Tor Onion Serivces peers for this site (packed)
+**peers_onion**     | List of Tor Onion peers for this site (packed)
 
 Each element in the `peers` list is a packed IPv4 address.
 
