@@ -109,6 +109,27 @@ Return key           | Description
 
 ---
 
+#### streamFile _site_, _inner_path_, _location_, _[file_size]_
+Stream a file from the client
+
+**Return**:
+
+Return key           | Description
+                 --- | ---
+**stream_bytes**    | The length of file data after the MessagePack payload
+
+To avoid having python-msgpack serialize large binary strings, the file body is appended directly after the MessagePack payload. For example,
+
+```
+> {"cmd": "streamFile", "id": 1, "inner_path": "content.json", "size": 1234}
+< {"cmd": "response", "to": 1, "stream_bytes": 1234}
+< content of the file
+```
+
+> ZeroNet implementation detail: For file segments larger than 256 kb, streaming is enabled by default.
+
+---
+
 
 #### ping
 Checks if the client is still alive
