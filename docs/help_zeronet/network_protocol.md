@@ -3,7 +3,7 @@
  - Every message is encoded using [MessagePack](http://msgpack.org/)
  - Every request has 3 parameter:
     * `cmd`: The request command
-    * `req_id`: The request's unique id (simple, incremented nonce), the client has to include this when reply to the command
+    * `req_id`: The request's unique id (simple, incremented nonce per-connection), the client has to include this when reply to the command.
     * `params`: Parameters for the request
  - Example request: `{"cmd": "getFile", "req_id": 1, "params:" {"site": "1EU...", "inner_path": "content.json", "location": 0}}`
  - Example response: `{"cmd": "response", "to": 1, "body": "content.json content", "location": 1132, "size": 1132}`
