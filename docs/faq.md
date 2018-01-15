@@ -142,7 +142,7 @@ Then navigate to [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](htt
 #### How can I register a .bit domain?
 
 You can register .bit domains using [Namecoin](https://namecoin.info/).
-Manage your domains using the client's GUI or by the [command line interface](http://www.christopherpoole.net/registering-a-bit-domain-with-namecoin.html).
+Manage your domains using the client's GUI or by the [command line interface](https://github.com/namecoin/wiki/blob/master/How-to-register-and-configure-.bit-domains.md).
 
 After the registration is done you have to edit your domain's record by adding a zeronet section to it, eg.:
 
