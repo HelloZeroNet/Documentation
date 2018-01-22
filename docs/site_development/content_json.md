@@ -127,7 +127,11 @@ The above signed message is signed using the address, "1PcxwuHYxuJEmM4ydtB1vbiAY
 
 ### signs
 
-ECDSA signs for the the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes).
+ECDSA signs for the the content.json file content:
+
+ - 'sign', 'signs' JSON nodes removed
+ - JSON dumped with keys sorted alphabetically, without whitespace
+ - Signature generated using on the dumped data using [standard Bitcoin message signature format](https://github.com/bitcoin/bitcoin/pull/524) (length(prefix),prefix,length(message),message with prefix="Bitcoin Signed Message:\n")
 
 **Example**:
 ```json
