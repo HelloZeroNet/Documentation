@@ -1,6 +1,10 @@
-.toctree-l3 { margin-left: -12px; }
+.toctree-l2 { margin-left: -12px; }
+.toctree-l3 { margin-left: 0px; }
+.toctree-l4 { margin-left: 12px; }
 .wy-menu-vertical span { padding-top: 20px; text-transform: uppercase; }
 .wy-menu-vertical .subnav a { padding: 0.4045em 1.627em }
+.wy-menu-vertical li ul.subnav ul.subnav { padding-left: inherit; margin-left: -10px; }
+.wy-menu-vertical .subnav li.current > a { padding-left: 1.627em }
 li.toctree-l3:first-child { display: none }
 code { padding: 3px 6px; font-size: 80% !important; border-bottom: 2px solid #e1e4e5; color: black }
 code.hljs { font-size: 90% !important }
@@ -21,7 +25,8 @@ hr { margin: 50px 0 }
 ul { font-size: 16px }
 
 /* Theme default color is the same color as links; Text using the same color of links is bad usability */
-h3, h4, h5, h6 { color: #2980b9 }
+h1, h2 { font-weight: normal; }
+h3, h4, h5, h6 { color: #2980b9; font-weight: normal; }
 
 .section a { border-bottom: 1px solid #BBB; color: #000 !important }
 .section a:hover { border-bottom: 1px solid #3091d1 }
@@ -35,3 +40,5 @@ h3, h4, h5, h6 { color: #2980b9 }
 	padding: 10px 15px; display: inline-block; border-radius: 2px; border-bottom: 2px solid #CDBD1E; transition: all 0.5s;
 	background-color: #FFF85F; font-size: 20px; line-height: 31px; background-position: left center
 }
+
+body { font-size: 90%; }
