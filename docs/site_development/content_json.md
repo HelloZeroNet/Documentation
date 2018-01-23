@@ -131,7 +131,9 @@ ECDSA signs for the the content.json file content:
 
  - 'sign', 'signs' JSON nodes removed
  - JSON dumped with keys sorted alphabetically, without whitespace
- - Signature generated using on the dumped data using [standard Bitcoin message signature format](https://github.com/bitcoin/bitcoin/pull/524) (length(prefix),prefix,length(message),message with prefix="Bitcoin Signed Message:\n")
+ - Signature generated using on the dumped data using Electrum Bitcoin message signature format:
+    * [Header](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): length(prefix),prefix,length(message),message with prefix="Bitcoin Signed Message:\n"),
+    * [Serialization format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): recovery_id + r + s where (27 <= recovery_id <= 30)
 
 **Example**:
 ```json
