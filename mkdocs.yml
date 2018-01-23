@@ -26,4 +26,4 @@ pages:
   - "Network protocol": "help_zeronet/network_protocol.md"
   - "Donation": "help_zeronet/donate.md"
 
-theme_dir: readthedocs
+theme: readthedocs
