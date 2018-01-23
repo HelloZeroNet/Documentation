@@ -1,7 +1,16 @@
+
+
 $(function() {
 	//$("[role=contentinfo]").append("<a href='#loadComments' class='loadcomments'>Load comments</a>");
 	setTimeout(loadComments, 3000)
+	fixGithubLink($('.injected a:contains(View)'))
+	fixGithubLink($('.injected a:contains(Edit)'))
 })
+
+function fixGithubLink(e) {
+	if (e.length)
+		e.attr("href", e.attr("href").replace(/\/home\/docs\/checkouts\/readthedocs.org\/.*?\/latest/, ""))
+}
 
 function loadComments() {
 	$("[role=contentinfo]").append('<div id="disqus_thread"></div>')
