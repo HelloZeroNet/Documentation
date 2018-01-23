@@ -3,13 +3,15 @@
 $(function() {
 	//$("[role=contentinfo]").append("<a href='#loadComments' class='loadcomments'>Load comments</a>");
 	setTimeout(loadComments, 3000)
-	fixGithubLink($('.injected a:contains(View)'))
-	fixGithubLink($('.injected a:contains(Edit)'))
+	$(".rst-current-version").on("click", function() {
+		fixGithubLink($('.injected a:contains(View)'))
+		fixGithubLink($('.injected a:contains(Edit)'))
+	})
 })
 
-function fixGithubLink(e) {
-	if (e.length)
-		e.attr("href", e.attr("href").replace(/\/home\/docs\/checkouts\/readthedocs.org\/.*?\/latest/, ""))
+function fixGithubLink(elem) {
+	if (elem.length)
+		elem.attr("href", elem.attr("href").replace(/\/home\/docs\/checkouts\/readthedocs.org\/.*?\/latest/, ""))
 }
 
 function loadComments() {
