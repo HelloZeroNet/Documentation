@@ -55,10 +55,11 @@ The sub-directory on source site where this site was cloned from.
 Size and sha512 hash of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
-```json
+```python
     "css/all.css": {
       "sha512": "869b09328f07bac538c313c4702baa5276544346418378199fa5cef644c139e8",
       "size": 148208
+    }
 ```
 
 
@@ -70,10 +71,11 @@ Size and sha512 hash of automatically downloaded files contained in your site. A
 Size and sha512 hash of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
-```json
+```python
     "data/myvideo.mp4": {
       "sha512": "538c09328aa52765443464135cef644c144346418378199fa5cef61837819538",
       "size": 832103
+    }
 ```
 
 
@@ -96,7 +98,7 @@ Time when the content.json was generated.
 ECDSA sign of the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). For backward compatibility, will be removed soon.
 
 **Example**:
-```json
+```python
   "sign": [
     43117356513690007125104018825100786623580298637039067305407092800990252156956,
     94139380599940414070721501960181245022427741524702752954181461080408625270000
@@ -137,7 +139,7 @@ ECDSA signature for the the content.json file content:
     * Double vertical bar `||` denotes byte concatenation.
 
 **Example**:
-```json
+```python
   "signs": {
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
   },
@@ -222,10 +224,10 @@ Include an another content.json
 
 **Example**:
 
-```json
+```python
 {
   "data/users/content.json": {
-    "signers": [ # Possible signers address for the file
+    "signers": [  # Possible signers address for the file
       "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
     ],
     "signers_required": 1 # The *number* of Valid signs required to accept the file (Multisig possibility),
@@ -313,7 +315,7 @@ Node                   | Description
 **permissions**        | Per-user permissions. (false = banned user)
 
 **Example**:
-```json
+```python
   "user_contents": {
     "cert_signers": {
       "zeroid.bit": [ "1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz" ]
