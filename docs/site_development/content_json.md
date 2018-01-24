@@ -55,10 +55,11 @@ The sub-directory on source site where this site was cloned from.
 Size and sha512 hash of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
-```json
+```python
     "css/all.css": {
       "sha512": "869b09328f07bac538c313c4702baa5276544346418378199fa5cef644c139e8",
       "size": 148208
+    }
 ```
 
 
@@ -70,10 +71,11 @@ Size and sha512 hash of automatically downloaded files contained in your site. A
 Size and sha512 hash of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
-```json
+```python
     "data/myvideo.mp4": {
       "sha512": "538c09328aa52765443464135cef644c144346418378199fa5cef61837819538",
       "size": 832103
+    }
 ```
 
 
@@ -96,7 +98,7 @@ Time when the content.json was generated.
 ECDSA sign of the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). For backward compatibility, will be removed soon.
 
 **Example**:
-```json
+```python
   "sign": [
     43117356513690007125104018825100786623580298637039067305407092800990252156956,
     94139380599940414070721501960181245022427741524702752954181461080408625270000
@@ -127,16 +129,17 @@ The above signed message is signed using the address, "1PcxwuHYxuJEmM4ydtB1vbiAY
 
 ### signs
 
-ECDSA signs for the the content.json file content:
+ECDSA signature for the the content.json file content:
 
- - 'sign', 'signs' JSON nodes removed
+ - `sign`, `signs` JSON nodes removed
  - JSON dumped with keys sorted alphabetically, without whitespace
- - Signature generated using on the dumped data using Electrum Bitcoin message signature format:
-    * [Header](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): length(prefix),prefix,length(message),message with prefix="Bitcoin Signed Message:\n"),
-    * [Serialization format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): recovery_id + r + s where (27 <= recovery_id <= 30)
+ - Signature generated on the dumped data, using Electrum Bitcoin message signature format:
+    * [Message encoding](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): `sha256("\x18" || "Bitcoin Signed Message:\n" || num_to_var_int(len(message)) || message)`
+    * [Serialization format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): `recovery_id || r || s`, where 27 ≤ recovery_id ≤ 30; signature length = 1 + 32 + 32 = 65 bytes.
+    * Double vertical bar `||` denotes byte concatenation.
 
 **Example**:
-```json
+```python
   "signs": {
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
   },
@@ -221,10 +224,10 @@ Include an another content.json
 
 **Example**:
 
-```json
+```python
 {
   "data/users/content.json": {
-    "signers": [ # Possible signers address for the file
+    "signers": [  # Possible signers address for the file
       "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
     ],
     "signers_required": 1 # The *number* of Valid signs required to accept the file (Multisig possibility),
@@ -312,7 +315,7 @@ Node                   | Description
 **permissions**        | Per-user permissions. (false = banned user)
 
 **Example**:
-```json
+```python
   "user_contents": {
     "cert_signers": {
       "zeroid.bit": [ "1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz" ]
