@@ -127,11 +127,11 @@ The above signed message is signed using the address, "1PcxwuHYxuJEmM4ydtB1vbiAY
 
 ### signs
 
-ECDSA signs for the the content.json file content:
+ECDSA signature for the the content.json file content:
 
- - 'sign', 'signs' JSON nodes removed
+ - `sign`, `signs` JSON nodes removed
  - JSON dumped with keys sorted alphabetically, without whitespace
- - Signature generated using on the dumped data using Electrum Bitcoin message signature format:
+ - Signature generated on the dumped data, using Electrum Bitcoin message signature format:
     * [Message encoding](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): `sha256("\x18" || "Bitcoin Signed Message:\n" || num_to_var_int(len(message)) || message)`
     * [Serialization format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): `recovery_id || r || s`, where 27 ≤ recovery_id ≤ 30; signature length = 1 + 32 + 32 = 35 bytes.
     * Double vertical bar `||` denotes byte concatenation.
