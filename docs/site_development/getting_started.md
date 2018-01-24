@@ -15,7 +15,10 @@ In this tutorial we going to build a P2P, decentralized, server and backend-less
 
 ZeroNet comes with a `--debug` flag that will make site development easier.
 
-To run ZeroNet in debug mode use: `python zeronet.py --debug`
+To run ZeroNet in debug mode use:
+
+* On Linux: `python zeronet.py --debug`
+* On Windows: `lib\ZeroNet.cmd --debug`
 
 ### Debug mode features:
 
@@ -30,4 +33,3 @@ To run ZeroNet in debug mode use: `python zeronet.py --debug`
  - Merged CSS files: All CSS files inside the site folder will be merged into one file called `all.css`. You can choose to include only this file to your site. If you want to keep the other CSS files to make the development easier, you can add them to the ignore key of your `content.json`. This way, they won't be published with your site. (eg: add to your `content.json` `"ignore": "(js|css)/(?!all.(js|css))"` this will ignore all CSS and JS files except `all.js` and `all.css`)
  - Merged JS files: All JS files inside the site folder will be merged into one file called `all.js`. If a CoffeeScript compiler is present (bundled for Windows) it will convert `.coffee` to `.js`.
  - Order in which files are merged into all.css/all.js: Files inside subdirectories of the css/js folder comes first; Files in the css/js folder will be merged according to file name ordering (01_a.css, 02_a.css, etc)
-
