@@ -1260,7 +1260,7 @@ Parameter            | Description
 **Example**
 
 ```javascript
-Page.cmd("as", ["138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP", "siteSetLimit"], console.log )
+Page.cmd("as", ["138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP", "siteSetLimit", 20], console.log )
 ```
 
 ```javascript
