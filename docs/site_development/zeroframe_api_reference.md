@@ -353,16 +353,40 @@ route: (cmd, data) ->
 ---
 
 
-#### dbQuery _query_
+#### dbQuery _query, [params]_
 Run a query on the sql cache
 
 Parameter            | Description
                  --- | ---
 **query**            | Sql query command
+**params**           | Parameter substitution to the sql query
 
 **Return**: <list> Result of the query
 
+
 **Example:**
+```javascript
+Page.cmd("dbQuery", [
+   "SELECT * FROM json WHERE file_name = :file_name",
+   {file_name: "data.json"}
+], (res) => { console.log(res.length) })
+```
+
+```javascript
+Page.cmd("dbQuery", [
+    "SELECT * FROM json WHERE file_name IN :file_names",
+    {file_names: ["data.json", "content.json"]}
+], (res) => { console.log(res.length) })
+```
+
+```javascript
+Page.cmd("dbQuery", [
+    "SELECT * FROM json ?",
+    {file_name: ["data.json", "content.json"]}
+], (res) => { console.log(res.length) })
+```
+
+
 ```coffeescript
 @log "Updating user info...", @my_address
 Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT JOIN json USING(path) WHERE path='#{@my_address}/data.json'"], (res) =>
