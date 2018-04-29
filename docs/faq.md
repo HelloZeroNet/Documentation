@@ -66,16 +66,7 @@ edit your torrc configuration file by removing `#` from line `# ControlPort 9051
 
 #### How to make ZeroNet work with Tor under Linux?
 
-Upgrade to latest version of Tor (we need 0.2.7.5+), follow [these](https://www.torproject.org/docs/debian.html.en) instructions eg. for Debian:
-
- - `echo 'deb http://deb.torproject.org/torproject.org jessie main'>> /etc/apt/sources.list.d/tor.list`
- - `gpg --keyserver keys.gnupg.net --recv 886DDD89`
- - `gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -`
- - `apt-get update`
- - `apt-get install tor`
-
-Edit config to enable control protocol:
-
+ - `apt install tor`
  - `mcedit /etc/tor/torrc`
  - Remove the `#` character from lines `ControlPort 9051` and `CookieAuthentication 1` (line ~57)
  - `/etc/init.d/tor restart`
