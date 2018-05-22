@@ -1180,7 +1180,7 @@ Return currently used disk space by optional files
 ---
 
 
-#### actionOptionalLimitSet _limit_
+#### optionalLimitSet _limit_
 
 Set the optional file limit
 
@@ -1190,7 +1190,7 @@ Parameter            | Description
 
 ---
 
-#### actionOptionalHelpList _[address]_
+#### optionalHelpList _[address]_
 
 List the auto-downloaded directories of optional files
 
@@ -1203,7 +1203,7 @@ Parameter            | Description
 ---
 
 
-#### actionOptionalHelp directory, title, _[address]_
+#### optionalHelp directory, title, _[address]_
 
 Add directory to auto-download list
 
@@ -1215,7 +1215,7 @@ Parameter            | Description
 
 ---
 
-#### actionOptionalHelpRemove directory, _[address]_
+#### optionalHelpRemove directory, _[address]_
 
 Remove an auto-download entry
 
@@ -1226,7 +1226,7 @@ Parameter            | Description
 
 ---
 
-#### actionOptionalHelpAll value, _[address]_
+#### optionalHelpAll value, _[address]_
 
 Help download every new uploaded optional file to the site
 
@@ -1402,5 +1402,3 @@ Parameter           | Description
 **address**         | Address of site want to resume
 
 **Return**: None
-
-
