@@ -4,7 +4,7 @@
 * Unpack anywhere
 * Run `ZeroNet.exe` (win), `ZeroNet(.app)` (macOS), `ZeroNet.sh` (linux)
 
-#### Manual install for Debian Linux
+### Manual install for Debian Linux
 
 * `sudo apt-get update`
 * `sudo apt-get install msgpack-python python-gevent`
