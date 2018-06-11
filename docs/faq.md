@@ -73,7 +73,10 @@ edit your torrc configuration file by removing `#` from line `# ControlPort 9051
  - Add permission yourself to read the auth cookie by `usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
  - Logout/Login with your user to apply group changes
 
-> __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
+Start Tor, and then start ZeroNet like this: `zeronet.py --tor always`. For concurrent dual (clearnet and Tor) use, use `--tor enable`.
+
+
+> __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`. If ZeroNet user cannot access the Tor authentication cookie file, ensure you have `CookieAuthFileGroupReadable 1` and `CookieAuthFile /full/path/to/cookie/file>` that is accessible to user(s) who runs ZeroNet and Tor. 
 
 > __Tip:__ It's also possible to use Tor without modifying torrc (or to use older versions of Tor clients), by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
 
@@ -236,7 +239,7 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
 
 #### How can I create a new ZeroNet site?
 
-[Follow those instructions.](/using_zeronet/create_new_site/)
+[Follow these instructions.](/using_zeronet/create_new_site/)
 
 ---
 
