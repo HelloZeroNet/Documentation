@@ -2,12 +2,12 @@
 
 
 
-# Wrapper
+## Wrapper
 
 _These commands handled by wrapper frame and does not sent to UiServer using websocket_
 
 
-#### wrapperConfirm _message, [button_caption]_
+### wrapperConfirm _message, [button_caption]_
 Display a notification with confirm button
 
 Parameter              | Description
@@ -36,7 +36,7 @@ siteDelete: (address) ->
 ---
 
 
-#### wrapperInnerLoaded
+### wrapperInnerLoaded
 
 Applies the windows.location.hash to page url. Call when you page is fully loaded to jump to the desired anchor point.
 
@@ -44,7 +44,7 @@ Applies the windows.location.hash to page url. Call when you page is fully loade
 ---
 
 
-#### wrapperGetLocalStorage
+### wrapperGetLocalStorage
 **Return**: Browser's local store for the site
 
 **Example:**
@@ -58,12 +58,12 @@ Applies the windows.location.hash to page url. Call when you page is fully loade
 
 ---
 
-#### wrapperGetState
+### wrapperGetState
 **Return**: Browser's current history state object
 
 ---
 
-#### wrapperGetAjaxKey
+### wrapperGetAjaxKey
 **Return**: The key you need to initilize ajax requests
 
 **Example:**
@@ -78,7 +78,7 @@ console.log(req.response)
 
 ---
 
-#### wrapperNotification _type, message, [timeout]_
+### wrapperNotification _type, message, [timeout]_
 Display a notification
 
 Parameter              | Description
@@ -97,7 +97,7 @@ Parameter              | Description
 
 ---
 
-#### wrapperOpenWindow _url, [target], [specs]_
+### wrapperOpenWindow _url, [target], [specs]_
 
 Navigates or opens a new popup window.
 
@@ -115,7 +115,7 @@ Parameter              | Description
 ---
 
 
-#### wrapperPermissionAdd _permission_
+### wrapperPermissionAdd _permission_
 
 Request new permission for site
 
@@ -127,7 +127,7 @@ Parameter        | Description
 
 ---
 
-#### wrapperPrompt _message, [type]_
+### wrapperPrompt _message, [type]_
 
 Prompt text input from user
 
@@ -152,7 +152,7 @@ Parameter           | Description
 
 ---
 
-#### wrapperPushState _state, title, url_
+### wrapperPushState _state, title, url_
 Change the url and adds new entry to browser's history. See: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
 
 Parameter           | Description
@@ -171,7 +171,7 @@ Parameter           | Description
 
 ---
 
-#### wrapperReplaceState _state, title, url_
+### wrapperReplaceState _state, title, url_
 Change the url without adding new entry to browser's history. See: [replaceState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)
 
 Parameter           | Description
@@ -188,7 +188,7 @@ Parameter           | Description
 
 ---
 
-#### wrapperRequestFullscreen
+### wrapperRequestFullscreen
 Set the current page to fullscreen. (request permission for the site on first call)
 
 > **Note:** Starting from ZeroNet Rev3136 you can use the fullscreen javascript API directly, without fullscreen request
@@ -201,7 +201,7 @@ page.cmd("wrapperRequestFullscreen")
 
 ---
 
-#### wrapperSetLocalStorage _data_
+### wrapperSetLocalStorage _data_
 Set browser's local store data stored for the site
 
 Parameter              | Description
@@ -219,7 +219,7 @@ Page.cmd "wrapperSetLocalStorage", Page.local_storage
 
 ---
 
-#### wrapperSetTitle _title_
+### wrapperSetTitle _title_
 Set browser's title
 
 Parameter              | Description
@@ -236,7 +236,7 @@ Page.cmd "wrapperSetTitle", "newtitle"
 ---
 
 
-#### wrapperSetViewport _viewport_
+### wrapperSetViewport _viewport_
 
 Set sites's viewport meta tag content (required for mobile sites)
 
@@ -258,7 +258,7 @@ Parameter           | Description
 
 
 
-# UiServer
+## UiServer
 
 The UiServer is for ZeroNet what the LAMP setup is for normal websites.
 
@@ -266,7 +266,7 @@ The UiServer will do all the 'backend' work (eg: querying the DB, accessing file
 
 
 
-#### certAdd _domain, auth_type, auth_user_name, cert_
+### certAdd _domain, auth_type, auth_user_name, cert_
 Add a new certificate to current user.
 
 Parameter            | Description
@@ -290,7 +290,7 @@ Parameter            | Description
 ---
 
 
-#### certSelect _accepted_domains_
+### certSelect _accepted_domains_
 Display certificate selector.
 
 Parameter            | Description
@@ -308,7 +308,7 @@ Parameter            | Description
 ---
 
 
-#### channelJoin _channel_
+### channelJoin _channel_
 
 Request notifications about sites's events.
 
@@ -353,7 +353,7 @@ route: (cmd, data) ->
 ---
 
 
-#### dbQuery _query, [params]_
+### dbQuery _query, [params]_
 Run a query on the sql cache
 
 Parameter            | Description
@@ -407,7 +407,7 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 ---
 
 
-#### fileDelete _inner_path_
+### fileDelete _inner_path_
 Delete a file
 
 Parameter        | Description
@@ -420,7 +420,7 @@ Parameter        | Description
 ---
 
 
-#### fileGet _inner_path, [required], [format], [timeout]_
+### fileGet _inner_path, [required], [format], [timeout]_
 Get file content
 
 Parameter               | Description
@@ -470,7 +470,7 @@ submitTopicVote: (e) =>
 ---
 
 
-#### fileList _inner_path_
+### fileList _inner_path_
 List of files in a directory
 
 Parameter        | Description
@@ -483,7 +483,7 @@ Parameter        | Description
 ---
 
 
-#### fileNeed _inner_path, [timeout]_
+### fileNeed _inner_path, [timeout]_
 Initialize download of a (optional) file.
 
 Parameter               | Description
@@ -496,7 +496,7 @@ Parameter               | Description
 
 ---
 
-#### fileQuery _dir_inner_path, query_
+### fileQuery _dir_inner_path, query_
 Simple json file query command
 
 Parameter            | Description
@@ -526,7 +526,7 @@ Parameter            | Description
 ---
 
 
-#### fileRules _inner_path_
+### fileRules _inner_path_
 Return the rules for the file.
 
 Parameter            | Description
@@ -558,7 +558,7 @@ Parameter            | Description
 ---
 
 
-#### fileWrite _inner_path, content_
+### fileWrite _inner_path, content_
 
 Write file content
 
@@ -591,7 +591,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 
 
-#### serverInfo
+### serverInfo
 
 **Return:** <dict> All information about the server
 
@@ -621,7 +621,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
-#### siteInfo
+### siteInfo
 
 **Return**: <dict> All information about the site
 
@@ -674,7 +674,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
-#### sitePublish _[privatekey], [inner_path], [sign]_
+### sitePublish _[privatekey], [inner_path], [sign]_
 Publish a content.json of the site
 
 Parameter                 | Description
@@ -700,7 +700,7 @@ Parameter                 | Description
 ---
 
 
-#### siteSign _[privatekey], [inner_path], [remove_missing_optional]_
+### siteSign _[privatekey], [inner_path], [remove_missing_optional]_
 Sign a content.json of the site
 
 Parameter                              | Description
@@ -726,7 +726,7 @@ if @site_info["privatekey"] # Private key stored in users.json
 
 
 
-#### siteUpdate _address_
+### siteUpdate _address_
 
 Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
 
@@ -749,7 +749,7 @@ updateSite: =>
 ---
 
 
-#### userGetSettings
+### userGetSettings
 
 Get user's saved settings.
 
@@ -759,7 +759,7 @@ Get user's saved settings.
 ---
 
 
-#### userSetSettings settings
+### userSetSettings settings
 
 Set user's site specific settings.
 
@@ -773,10 +773,10 @@ Parameter     | Description
 ---
 
 
-# Plugin: Bigfile
+## Plugin: Bigfile
 
 
-#### BigfileUploadInit _[inner_path]_, _[size]_
+### BigfileUploadInit _[inner_path]_, _[size]_
 
 Initialize a new upload endpoint for a bigfile.
 
@@ -829,16 +829,16 @@ input.click()
 
 ---
 
-# Plugin: Chart
+## Plugin: Chart
 
-#### chartDbQuery _query, [params]_
+### chartDbQuery _query, [params]_
 
 Run database query on chart database.
 
 Arguments and return value: Same as [dbQuery](#dbquery-query-param)
 
 
-#### chartGetPeerLocations
+### chartGetPeerLocations
 
 Get list of unique peers in client
 
@@ -855,11 +855,11 @@ Page.cmd("chartGetPeerLocations")
 
 ---
 
-# Plugin: Cors
+## Plugin: Cors
 
 Allow cross-site file access under virtual directory **/cors-siteaddress/** and grant cross-site database query using the [as](#as-address-cmd-arguments) API command.
 
-#### corsPermission address
+### corsPermission address
 
 Request Cross origin resource sharing permission with the given site.
 
@@ -877,10 +877,10 @@ The site will be added to user's client if it's required.
 ---
 
 
-# Plugin: CryptMessage
+## Plugin: CryptMessage
 
 
-#### userPublickey _[index]_
+### userPublickey _[index]_
 
 Get user's site specific publickey
 
@@ -893,7 +893,7 @@ Parameter            | Description
 
 ---
 
-#### eciesEncrypt _text, [publickey], [return_aes_key]_
+### eciesEncrypt _text, [publickey], [return_aes_key]_
 
 Encrypt a text using a publickey
 
@@ -908,7 +908,7 @@ Parameter                      | Description
 
 ---
 
-#### eciesDecrypt _params, [privatekey]_
+### eciesDecrypt _params, [privatekey]_
 
 Try to decrypt list of texts
 
@@ -922,7 +922,7 @@ Parameter                      | Description
 
 ---
 
-#### aesEncrypt _text, [key], [iv]_
+### aesEncrypt _text, [key], [iv]_
 
 Encrypt a text using the key and the iv
 
@@ -938,8 +938,8 @@ Parameter                      | Description
 
 ---
 
-#### aesDecrypt _iv, encrypted_text, key_
-#### aesDecrypt _encrypted_texts, keys_
+### aesDecrypt _iv, encrypted_text, key_
+### aesDecrypt _encrypted_texts, keys_
 
 Decrypt text using the IV and AES key
 
@@ -958,10 +958,10 @@ Parameter                      | Description
 ---
 
 
-# Plugin: Newsfeed
+## Plugin: Newsfeed
 
 
-#### feedFollow _feeds_
+### feedFollow _feeds_
 
 Set followed sql queries.
 
@@ -1000,7 +1000,7 @@ Page.cmd feedFollow [{"Posts": [query, params]}]
 
 ---
 
-#### feedListFollow
+### feedListFollow
 
 Return of current followed feeds
 
@@ -1010,7 +1010,7 @@ Return of current followed feeds
 
 ---
 
-#### feedQuery _[limit], [day_limit]_
+### feedQuery _[limit], [day_limit]_
 
 Execute all followed sql query
 
@@ -1024,10 +1024,10 @@ Parameter            | Description
 
 ---
 
-# Plugin: MergerSite
+## Plugin: MergerSite
 
 
-#### mergerSiteAdd _addresses_
+### mergerSiteAdd _addresses_
 
 Start downloading new merger site(s)
 
@@ -1038,7 +1038,7 @@ Parameter            | Description
 
 ---
 
-#### mergerSiteDelete _address_
+### mergerSiteDelete _address_
 
 Stop seeding and delete a merged site
 
@@ -1049,7 +1049,7 @@ Parameter            | Description
 
 ---
 
-#### mergerSiteList _[query_site_info]_
+### mergerSiteList _[query_site_info]_
 
 Return merged sites.
 
@@ -1062,9 +1062,9 @@ Parameter            | Description
 ---
 
 
-# Plugin: Mute
+## Plugin: Mute
 
-#### muteAdd _auth_address_, _cert_user_id_, _reason_
+### muteAdd _auth_address_, _cert_user_id_, _reason_
 
 Add new user to mute list. (Requires confirmation for non-ADMIN sites)
 
@@ -1083,7 +1083,7 @@ Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit
 
 ---
 
-#### muteRemove _auth_address_
+### muteRemove _auth_address_
 
 Remove a user from mute list. (Requires confirmation for non-ADMIN sites)
 
@@ -1100,7 +1100,7 @@ Page.cmd("muteRemove", '1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz')
 
 ---
 
-#### muteList
+### muteList
 
 List muted users. (Requires ADMIN permission on site)
 
@@ -1110,9 +1110,9 @@ List muted users. (Requires ADMIN permission on site)
 ---
 
 
-# Plugin: OptionalManager
+## Plugin: OptionalManager
 
-#### optionalFileList _[address]_, _[orderby]_, _[limit]_
+### optionalFileList _[address]_, _[orderby]_, _[limit]_
 
 Return list of optional files
 
@@ -1126,7 +1126,7 @@ Parameter            | Description
 
 ---
 
-#### optionalFileInfo _inner_path_
+### optionalFileInfo _inner_path_
 
 Query optional file info from database
 
@@ -1138,7 +1138,7 @@ Parameter            | Description
 
 ---
 
-#### optionalFilePin _inner_path_, _[address]_
+### optionalFilePin _inner_path_, _[address]_
 
 Pin (exclude from automatized optional file cleanup) downloaded optional file
 
@@ -1149,7 +1149,7 @@ Parameter            | Description
 
 ---
 
-#### optionalFileUnpin _inner_path_, _[address]_
+### optionalFileUnpin _inner_path_, _[address]_
 
 Remove pinning (include from automatized optional file cleanup) of downloaded optional file
 
@@ -1160,7 +1160,7 @@ Parameter            | Description
 
 ---
 
-#### optionalFileDelete _inner_path_, _[address]_
+### optionalFileDelete _inner_path_, _[address]_
 
 Query a downloaded optional file
 
@@ -1171,7 +1171,7 @@ Parameter            | Description
 
 ---
 
-#### optionalLimitStats
+### optionalLimitStats
 
 Return currently used disk space by optional files
 
@@ -1180,7 +1180,7 @@ Return currently used disk space by optional files
 ---
 
 
-#### optionalLimitSet _limit_
+### optionalLimitSet _limit_
 
 Set the optional file limit
 
@@ -1190,7 +1190,7 @@ Parameter            | Description
 
 ---
 
-#### optionalHelpList _[address]_
+### optionalHelpList _[address]_
 
 List the auto-downloaded directories of optional files
 
@@ -1203,7 +1203,7 @@ Parameter            | Description
 ---
 
 
-#### optionalHelp directory, title, _[address]_
+### optionalHelp directory, title, _[address]_
 
 Add directory to auto-download list
 
@@ -1215,7 +1215,7 @@ Parameter            | Description
 
 ---
 
-#### optionalHelpRemove directory, _[address]_
+### optionalHelpRemove directory, _[address]_
 
 Remove an auto-download entry
 
@@ -1226,7 +1226,7 @@ Parameter            | Description
 
 ---
 
-#### optionalHelpAll value, _[address]_
+### optionalHelpAll value, _[address]_
 
 Help download every new uploaded optional file to the site
 
@@ -1243,7 +1243,7 @@ Parameter            | Description
 _(requires ADMIN permission in data/sites.json)_
 
 
-#### as _address, cmd, [arguments]_
+### as _address, cmd, [arguments]_
 
 Execute command in other site's context
 
@@ -1275,7 +1275,7 @@ Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.lo
 
 **Return**: ok
 
-#### configSet _key, value_
+### configSet _key, value_
 
 Create or update an entry in ZeroNet config file. (zeronet.conf by default)
 
@@ -1293,7 +1293,7 @@ Parameter            | Description
 
 
 
-#### certSet _domain_
+### certSet _domain_
 
 Set the used certificate for current site.
 
@@ -1307,7 +1307,7 @@ Parameter            | Description
 ---
 
 
-#### channelJoinAllsite _channel_
+### channelJoinAllsite _channel_
 
 Request notifications about every site's events.
 
@@ -1323,7 +1323,7 @@ Parameter           | Description
 ---
 
 
-#### serverPortcheck
+### serverPortcheck
 
 Start checking if port is opened
 
@@ -1333,7 +1333,7 @@ Start checking if port is opened
 ---
 
 
-#### serverShutdown
+### serverShutdown
 
 Stop running ZeroNet client.
 
@@ -1344,7 +1344,7 @@ Stop running ZeroNet client.
 ---
 
 
-#### serverUpdate
+### serverUpdate
 
 Re-download ZeroNet from github.
 
@@ -1354,7 +1354,7 @@ Re-download ZeroNet from github.
 ---
 
 
-#### siteClone _address_, _[root_inner_path]_
+### siteClone _address_, _[root_inner_path]_
 Copy site files into a new one.
 
 Every file and directory will be skipped if it has a `-default` subfixed version and the subfixed version will be copied instead of it.
@@ -1373,7 +1373,7 @@ Parameter           | Description
 ---
 
 
-#### siteList
+### siteList
 
 **Return**: <list> SiteInfo list of all downloaded sites
 
@@ -1381,7 +1381,7 @@ Parameter           | Description
 ---
 
 
-#### sitePause _address_
+### sitePause _address_
 Pause site serving
 
 Parameter           | Description
@@ -1394,7 +1394,7 @@ Parameter           | Description
 ---
 
 
-#### siteResume _address_
+### siteResume _address_
 Resume site serving
 
 Parameter           | Description
