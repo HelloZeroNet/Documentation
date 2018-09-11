@@ -1,4 +1,4 @@
-# What is ZeroNet?
+## What is ZeroNet?
 
 ZeroNet uses Bitcoin cryptography and BitTorrent technology to build a **decentralized censorship-resistant network**.
 
@@ -9,7 +9,7 @@ When a site is updated by its owner, all nodes serving that site (previous visit
 ZeroNet comes with a built-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
 
 
-# Why?
+## Why?
 
 * We believe in open, free, and uncensored communication.
 * No censorship: After something is published there is no way to remove it.
@@ -37,7 +37,7 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 [comment]: <> (This architecture means that when a site URL is created, as long as one peer is serving it, there is no way to take the URL down.)
 
 
-# Features
+## Features
  * Easy, zero configuration setup.
  * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
    based authorization: Your account is protected by the same cryptography as your Bitcoin wallet.
@@ -51,7 +51,7 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
  * Works with any browser/OS.
 
 
-# How does it work?
+## How does it work?
 
 * After you install and run ZeroNet, you open a site by visiting:
   `http://127.0.0.1:43110/{zeronet_site_address}`
@@ -67,7 +67,7 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 ##### [Slideshow about ZeroNet cryptography, content updates, multi-user sites &raquo;](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub?start=false&loop=false&delayms=3000)
 
 
-# Screenshots
+## Screenshots
 
 ![Screenshot](./img/zerohello.png)
 
@@ -75,13 +75,13 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 
 ##### [More screenshots &raquo;](/using_zeronet/sample_sites/)
 
-# Current limitations
+## Current limitations
 
 * No torrent-like, file splitting for big file support
 * File transactions are not compressed ~~or encrypted yet~~ (TLS encryption added)
 * No private sites
 
-# Help to keep this project alive
+## Help to keep this project alive
 
 Bitcoin: 1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX
 

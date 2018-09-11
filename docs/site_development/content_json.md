@@ -7,7 +7,7 @@ This file will carry, among other things, a list of all files on your site and a
 Here is a list of supported keys:
 
 
-# Generated automatically
+## Generated automatically
 
 
 ---
@@ -159,7 +159,7 @@ ZeroNet version used to generate content.json file.
 ---
 
 
-# Settings
+## Settings
 
 
 ### background-color
@@ -349,7 +349,7 @@ Content for the viewport meta tag. (Used for mobile-friendly pages)
 
 ----
 
-# Regular expressions limitations
+## Regular expressions limitations
 
 To avoid [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack the following restrictions apply to the patterns:
 
@@ -357,7 +357,7 @@ To avoid [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity att
  - Maximum 9 repetition allowed in one pattern
  - Maximum length of a pattern is 255 characters.
 
-## Examples:
+### Examples:
 
  - `((?!json).)*$` not allowed, because `)` before the `*` character. Possible fix: `.*(?!json)$`
  - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` not allowed, because it has 12 `.*` repetition patterns. Possible fix: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`

@@ -6,7 +6,14 @@ repo_url: https://github.com/HelloZeroNet/ZeroNet
 
 extra_css: [docs.css]
 extra_javascript: [docs.js]
-
+theme:
+  feature:
+    tabs: true
+  palette:
+    primary: 'deep purple'
+    accent: 'deep purple'
+  logo: 'logo/zeronet_logo.svg'
+  name: 'material'
 
 pages:
 - Introduction: "index.md"
@@ -25,5 +32,3 @@ pages:
   - "Contributing to ZeroNet": "help_zeronet/contributing.md"
   - "Network protocol": "help_zeronet/network_protocol.md"
   - "Donation": "help_zeronet/donate.md"
-
-theme: readthedocs
