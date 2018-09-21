@@ -66,11 +66,11 @@ edit your torrc configuration file by removing `#` from line `# ControlPort 9051
 
 #### How to make ZeroNet work with Tor under Linux?
 
- - `apt install tor`
- - `mcedit /etc/tor/torrc`
+ - `sudo apt install tor`
+ - `sudo nano /etc/tor/torrc`
  - Remove the `#` character from lines `ControlPort 9051` and `CookieAuthentication 1` (line ~57)
  - `/etc/init.d/tor restart`
- - Add permission yourself to read the auth cookie by `usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
+ - Add permission yourself to read the auth cookie by `sudo usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
  - Logout/Login with your user to apply group changes
 
 > __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
