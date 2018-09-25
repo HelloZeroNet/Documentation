@@ -30,5 +30,6 @@ pages:
   - "Certificate authority": "site_development/cert_authority.md"
 - "Help ZeroNet development":
   - "Contributing to ZeroNet": "help_zeronet/contributing.md"
+  - "Coding Conventions": "help_zeronet/coding_conventions.md"
   - "Network protocol": "help_zeronet/network_protocol.md"
   - "Donation": "help_zeronet/donate.md"
