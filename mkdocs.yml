@@ -15,7 +15,7 @@ theme:
   logo: 'logo/zeronet_logo.svg'
   name: 'material'
 
-pages:
+nav:
 - Introduction: "index.md"
 - Frequently asked questions: "faq.md"
 - Start using ZeroNet:
