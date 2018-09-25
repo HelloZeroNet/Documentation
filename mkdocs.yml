@@ -19,9 +19,9 @@ pages:
 - Introduction: "index.md"
 - Frequently asked questions: "faq.md"
 - Start using ZeroNet:
-  - "Installing": using_zeronet/installing.md
-  - "Sample sites": using_zeronet/sample_sites.md
-  - "Create new site": using_zeronet/create_new_site.md
+  - "Installing": "using_zeronet/installing.md"
+  - "Sample sites": "using_zeronet/sample_sites.md"
+  - "Create new site": "using_zeronet/create_new_site.md"
 - "Site Development":
   - "Getting Started": "site_development/getting_started.md"
   - "ZeroFrame API reference": "site_development/zeroframe_api_reference.md"
