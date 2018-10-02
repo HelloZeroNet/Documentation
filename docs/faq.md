@@ -9,11 +9,11 @@ If you want to create a new site it's highly recommended to have an open port.
 At startup ZeroNet tries to open a port for you on your router using
 [UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play), if this fails you have to do it manually:
 
-- Try access your router's web interface using [http://192.168.1.1](http://192.168.1.1)
+- Try to access your router's web interface using [http://192.168.1.1](http://192.168.1.1)
 or [http://192.168.0.1](http://192.168.0.1)
 - Look for an "Enable UPnP support" or similar option then restart ZeroNet.
 
-If it still doesn't work then try to find a 'port forwarding' section. This is different in every router. [Here is a tutorial on YouTube.](https://www.youtube.com/watch?v=aQXJ7sLSz14) The port to forward is 15441.
+If it still doesn't work then try to find a 'port forwarding' section of your router page. This is different for every router. [Here is a tutorial on YouTube.](https://www.youtube.com/watch?v=aQXJ7sLSz14) The port to forward is 15441.
 
 
 ---
@@ -29,9 +29,9 @@ ZeroNet is made to work with anonymity networks: you can easily hide your IP usi
 ---
 
 
-#### How to use ZeroNet in Tor browser?
+#### How to use ZeroNet with the Tor browser?
 
-In Tor mode it's recommended to use ZeroNet in Tor Browser:
+In Tor mode it is recommended to use ZeroNet from within the Tor Browser:
 
 - Start the Tor Browser
 - Go to address `about:preferences#advanced`
@@ -39,7 +39,7 @@ In Tor mode it's recommended to use ZeroNet in Tor Browser:
 - Enter `127.0.0.1` to field **No proxy for**
 - Open http://127.0.0.1:43110 in the browser
 
-If you still see blank page:
+If you still see a blank page:
  - Click on NoScript's button (first on the toolbar)
  - Choose "Temporary allow all this page"
  - Reload the page
@@ -49,31 +49,30 @@ If you still see blank page:
 
 #### How to use ZeroNet with Tor?
 
-If you want to hide your IP install the latest version of ZeroNet then click Tor > Enable Tor for every connection on ZeroHello.
+If you want to hide your IP address, install the latest version of ZeroNet then click Tor > Enable Tor for every connection on ZeroHello.
 
-On Windows Tor is bundled with ZeroNet, ZeroNet will attempt to download and unpack Tor component on its first run. But in any case if it fails you can install it manually following the instruction in `core\tools\tor\manual_install.txt`.
+On Windows, Tor is bundled with ZeroNet. ZeroNet will attempt to download and unpack Tor on its first run. If this fails for any reason, you can install it manually following the instruction in `core\tools\tor\manual_install.txt`.
 
-For other OS [follow Tor install instructions](https://www.torproject.org/docs/installguide.html),
-edit your torrc configuration file by removing `#` from line `# ControlPort 9051` then restart your Tor service and ZeroNet.
+For other OS's, follow the instructions in the "How to make ZeroNet work with Tor under Linux/MacOS" section.
 
 > __Tip:__ You can verify your IP address using ZeroNet's [Stats](http://127.0.0.1:43110/Stats) page.
 
-> __Tip:__ If you get connection errors make sure you have the latest version of Tor installed. (0.2.7.5+ required)
+> __Tip:__ If you get connection errors, make sure you have the latest version of Tor installed. (0.2.7.5+ required)
 
 
 ---
 
 
-#### How to make ZeroNet work with Tor under Linux?
+#### How to make ZeroNet work with Tor under Linux/MacOS?
 
- - `sudo apt install tor`
+ - Install Tor for your OS following Tor's official guidelines: [Linux](https://www.torproject.org/download/download-unix.html.en) [Mac](https://www.torproject.org/docs/tor-doc-osx.html.en).
  - `sudo nano /etc/tor/torrc`
  - Remove the `#` character from lines `ControlPort 9051` and `CookieAuthentication 1` (line ~57)
- - `/etc/init.d/tor restart`
- - Add permission yourself to read the auth cookie by `sudo usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
+ - Restart tor
+ - Add permission for yourself to read the auth cookie. With Debian Linux, the command is `sudo usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
  - Logout/Login with your user to apply group changes
 
-> __Tip:__ You can verify if your Tor running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
+> __Tip:__ You can verify if your Tor setup is running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
 
 > __Tip:__ It's also possible to use Tor without modifying torrc (or to use older versions of Tor clients), by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
 
@@ -82,7 +81,7 @@ edit your torrc configuration file by removing `#` from line `# ControlPort 9051
 
 #### Is it possible to use a configuration file?
 
-You can put your configuration options to a `zeronet.conf` file. Example:
+Any command line configuration flag can also be used as a configuration option. Place these options line-by-line into a file called `zeronet.conf` in your top-level zeronet directory (the one with zeronet.py). Example:
 
 ```
 [global]
@@ -93,14 +92,14 @@ ui_restrict =
  2.3.4.5
 ```
 
-To list the possible options use the `zeronet.py --help` command
+To list possible options, use the `zeronet.py --help` command
 
 ---
 
 
 #### How to make Tor work if my ISP or goverment blocks it?
 
-ZeroNet does not include [Tor pluggable transports](https://www.torproject.org/docs/pluggable-transports.html.en) yet. The easiest way to make Tor work in a censored network is to start the Tor browser, configure it to connect to the Tor network with working pluggable transports, and modify ZeroNet's config to use Tor browser's proxy and control port by starting ZeroNet with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or by adding these parameters to zeronet.conf
+ZeroNet does not include [Tor pluggable transports](https://www.torproject.org/docs/pluggable-transports.html.en) yet. The easiest way to make Tor work in a censored network is to start the Tor browser, configure it to connect to the Tor network with working pluggable transports, and modify ZeroNet's config to use Tor browser's proxy and control port by starting ZeroNet with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or by adding these parameters to `zeronet.conf`.
 
 ```
 [global]
@@ -112,15 +111,15 @@ tor_proxy = 127.0.0.1:9150
 ---
 
 
-#### Can I use the same username on multiple machine?
+#### Can I use the same username on multiple machines?
 
-Yes, you have to copy the `data/users.json` file to your new machine.
+Yes, simply copy the `data/users.json` file to your new machine.
 
 
 ---
 
 
-#### How to create a "fancy" site address?
+#### How to create a "fancy" (non .bit) site address?
 
 Use [vanitygen](https://bitcointalk.org/index.php?topic=25804.0) to generate one. Once you get your keys, create `data/1YourPublicKey...tCkBzAXTKvJk4uj8` directory. Put some files there.
 
@@ -135,7 +134,7 @@ Then navigate to [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](htt
 You can register .bit domains using [Namecoin](https://namecoin.info/).
 Manage your domains using the client's GUI or by the [command line interface](https://github.com/namecoin/wiki/blob/master/How-to-register-and-configure-.bit-domains.md).
 
-After the registration is done you have to edit your domain's record by adding a zeronet section to it, eg.:
+After the registration is done you have to edit your domain's record by adding a zeronet section to it, e.g.:
 
 ```
 {
@@ -148,7 +147,7 @@ After the registration is done you have to edit your domain's record by adding a
 ...
 }
 ```
-"" means the top domain, any other that is a sub-domain.
+An empty string (`""`) means the top domain, anything other than that is a sub-domain.
 
 > __Tip:__ You can buy Namecoin for Bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
 
@@ -184,19 +183,20 @@ You are in full control of what you are hosting. If you find suspicious content 
 
 
 #### Is it possible to install ZeroNet to a remote machine?
+
 Yes, you have to enable the UiPassword plugin by renaming the __plugins/disabled-UiPassword__ directory to __plugins/UiPassword__,
 then start ZeroNet on the remote machine using <br>`zeronet.py --ui_ip "*" --ui_password anypassword`.
 This will bind the ZeroNet UI webserver to all interfaces, but to keep it secure you can only access it by entering the given password.
 
 > __Tip:__ You can also restrict the interface based on ip address by using `--ui_restrict ip1 ip2`.
 
-> __Tip:__ You can specify the password in config file by creating a `zeronet.conf` file and add `[global]`, `ui_password = anypassword` lines to it.
+> __Tip:__ You can specify the password in the config file by creating a `zeronet.conf` file and adding `[global]` and `ui_password = anypassword` lines to it.
 
 
 ---
 
 
-#### Is there anyway to track the bandwidth ZeroNet is using?
+#### Is there any way to track the bandwidth ZeroNet is using?
 
 The sent/received bytes are displayed at ZeroNet's sidebar.<br>(open it by dragging the topright `0` button to left)
 
@@ -208,7 +208,7 @@ The sent/received bytes are displayed at ZeroNet's sidebar.<br>(open it by dragg
 
 #### What happens if two people use the same keys to modify a site?
 
-Every content.json file is timestamped, the clients always accepts the newest one.
+Every content.json file is timestamped, the clients always accept the newest one with a valid signature.
 
 
 ---
@@ -217,9 +217,9 @@ Every content.json file is timestamped, the clients always accepts the newest on
 #### Does ZeroNet use Bitcoin's blockchain?
 
 No, ZeroNet only uses the cryptography of Bitcoin for site addresses and content signing/verification.
-The users identification is also based on Bitcoin's [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) format.
+User identification is based on Bitcoin's [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) format.
 
-Namecoin's blockchain is being used for domain registrations.
+Namecoin's blockchain is being used for domain registrations, however clients do not download the blockchain. Blockchain metadata is instead passed over the ZeroNet network.
 
 
 ---
@@ -227,8 +227,7 @@ Namecoin's blockchain is being used for domain registrations.
 
 #### Does ZeroNet only support HTML, CSS websites?
 
-ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it.
-(VCS repositories, your own thin-client, database, etc.)
+ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it, such as (VCS repositories, your own thin-client, database, etc.
 
 
 ---
@@ -236,23 +235,23 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
 
 #### How can I create a new ZeroNet site?
 
-[Follow those instructions.](/using_zeronet/create_new_site/)
+[Follow these instructions.](/using_zeronet/create_new_site/)
 
 ---
 
 
-#### How does it work?
+#### What happens when I access a site?
 
-- When you want to open a new site it asks visitors IP addresses from BitTorrent network
-- First downloads a file named __content.json__, which holds all other filenames,
-  __hashes__ and the site owner's cryptographic signature
-- __Verifies__ the downloaded content.json file using the site's __address__ and the site owner's __signature__ from the file
-- __Downloads other file__ (html, css, js...) and verifies them using the SHA512 hash for content.json file
-- Each visited site becomes __also served by you__.
+- When you want to open a new site it asks for visitor's IP addresses from BitTorrent trackers.
+- Initially, a file named __content.json__ is downloaded, which holds all other filenames,
+  __hashes__ and the site owner's cryptographic signature.
+- The downloaded content.json file is __verified__ using the site's __address__ and the site owner's __signature__ from the file.
+- Other files (html, css, js...) are then __downloaded__ and verified using their size and SHA512 hash from content.json.
+- Each visited site then becomes __also served by you__.
 - If the site owner (who has the private key for the site address) __modifies__ the site, then he/she signs
-  the new content.json and __publishes it to the peers__. After the peers have verified the content.json
-  integrity (using the signature), they __download the modified files__ and publish the new content to other peers.
+  the new content.json and __publishes it to peers__. After the peers have verified the file's 
+  integrity (using the signature), they __download the modified files__ and serve the new content to other peers.
 
 More info:
- [Description of ZeroNet sample sites](/using_zeronet/sample_sites/),
- [Slides about how does ZeroNet work](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
+ [ZeroNet sample sites](/using_zeronet/sample_sites/),
+ [Slideshow about how ZeroNet works](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
