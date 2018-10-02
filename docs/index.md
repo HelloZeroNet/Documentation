@@ -2,11 +2,11 @@
 
 ZeroNet uses Bitcoin cryptography and BitTorrent technology to build a **decentralized censorship-resistant network**.
 
-Users can publish static or dynamic websites into ZeroNet and visitors can choose to also serve the website. Websites will remain online even if it is being served by only one peer.
+Users can publish static or dynamic websites to ZeroNet and visitors can choose to also serve the site themselves. Websites will remain online as long as one peer is still online.
 
-When a site is updated by its owner, all nodes serving that site (previous visitors) will receive only the incremental updates done to the site content.
+When a site is updated by its owner, all nodes serving that site (previous visitors) will receive only the incremental updates made to the site content.
 
-ZeroNet comes with a built-in SQL database. This makes content-heavy site development easy. The DB is also synced with hosting nodes with incremental updates.
+ZeroNet comes with a built-in SQL database. This makes content-heavy site development easy. The DB is then synced to hosting nodes via incremental updates.
 
 
 ## Why?
@@ -41,10 +41,10 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
  * Easy, zero configuration setup.
  * Password-less [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
    based authorization: Your account is protected by the same cryptography as your Bitcoin wallet.
- * Real-time updated sites.
+ * Sites updated in real-time, no refreshing needed.
  * Namecoin .bit domains support.
  * SQL Database support: Allows for easier site development and faster page load times.
- * Anonymity: Full Tor network support with .onion hidden services instead of ipv4 addresses
+ * Anonymity: Full Tor network support with .onion hidden services instead of ipv4 addresses.
  * TLS encrypted connections.
  * Automatic, uPnP port opening.
  * Plugin for multiuser (openproxy) support.
@@ -55,10 +55,10 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 
 * After you install and run ZeroNet, you open a site by visiting:
   `http://127.0.0.1:43110/{zeronet_site_address}`
-  (eg.  `http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D`).
+  (e.g.  `http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D`).
 * ZeroNet will then use the BitTorrent network to find peers that are seeding the site and will download the site content (HTML, CSS, JS...) from these peers.
-* Each visited site becomes also served by you.
-* Every site contains a list of all files used in the site in a SHA512 hash and a signature generated using the site owner private key.
+* Each site visited is then served by your client. Sites can removed or blacklisted if necessary.
+* Every site contains a list of all of its files, each entry containing a SHA512 hash and a signature generated using the site owner's private key.
 * If the site owner modifies the site, then he/she signs a new list and publishes it to the peers.
   After the peers have verified the files list integrity (using the
   signature), they download the modified files and publish the new content to
@@ -77,7 +77,7 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 
 ## Current limitations
 
-* No torrent-like, file splitting for big file support
+* ~~No torrent-like, file splitting for big file support~~ (BigFile plugin enables this)
 * File transactions are not compressed ~~or encrypted yet~~ (TLS encryption added)
 * No private sites
 
