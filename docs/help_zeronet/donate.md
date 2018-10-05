@@ -123,5 +123,5 @@ The task's received donation goes directly to the developer(s) who successfully 
 
 * Better OSX/Safari compatibility made possible by [BrowserStack.com](https://www.browserstack.com/)
 
-
+<script src='../../jquery.min.js'></script>
 <script src='../../bitcoinbar/bitcoinbar.js'></script>

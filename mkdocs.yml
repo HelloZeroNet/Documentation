@@ -10,11 +10,11 @@ theme:
   feature:
     tabs: true
   palette:
-    primary: 'deep purple'
-    accent: 'deep purple'
-  logo: 'logo/zeronet_logo.svg'
-  name: 'material'
-  favicon: 'logo/favicon.ico'
+    primary: "deep purple"
+    accent: "deep purple"
+  logo: "logo/zeronet_logo.svg"
+  name: "material"
+  favicon: "logo/favicon.ico"
 
 nav:
 - Introduction: "index.md"

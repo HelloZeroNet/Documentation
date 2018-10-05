@@ -1,5 +1,3 @@
-
-
 $(function() {
 	//$("[role=contentinfo]").append("<a href='#loadComments' class='loadcomments'>Load comments</a>");
 	setTimeout(loadComments, 3000)
