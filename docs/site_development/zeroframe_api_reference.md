@@ -1,10 +1,14 @@
 # ZeroFrame API Reference
 
+## The ZeroFrame API
 
+ZeroFrame is an API that allows ZeroNet websites to interact with the ZeroNet daemon. It allows sites to save/retrieve files, publish changes and many other things. A copy of the library is included at `js/ZeroFrame.js` whenever a new site is created.
+
+The library can be imported like any other JavaScript file, or site developers also have the option of [importing through NPM](ZeroFrame API Page, ##Import?). Please see the [ZeroFrame API Reference]() for API details.
 
 ## Wrapper
 
-_These commands handled by wrapper frame and does not sent to UiServer using websocket_
+_These commands are handled by the wrapper frame and are thus not sent to the UiServer using websocket._
 
 
 ### wrapperConfirm _message, [button_caption]_
