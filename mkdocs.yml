@@ -21,17 +21,17 @@ nav:
 - Introduction: "index.md"
 - Frequently asked questions: "faq.md"
 - Start using ZeroNet:
-  - "Installing": "using_zeronet/installing.md"
-  - "Sample sites": "using_zeronet/sample_sites.md"
-  - "Create new site": "using_zeronet/create_new_site.md"
-- "Site Development":
-  - "Getting Started": "site_development/getting_started.md"
-  - "ZeroFrame API reference": "site_development/zeroframe_api_reference.md"
-  - "Structure of content.json": "site_development/content_json.md"
-  - "Structure of dbschema.json": "site_development/dbschema_json.md"
-  - "Certificate authority": "site_development/cert_authority.md"
-- "Help ZeroNet development":
-  - "Contributing to ZeroNet": "help_zeronet/contributing.md"
-  - "Coding Conventions": "help_zeronet/coding_conventions.md"
-  - "Network protocol": "help_zeronet/network_protocol.md"
-  - "Donation": "help_zeronet/donate.md"
+  - "using_zeronet/installing.md"
+  - "using_zeronet/sample_sites.md"
+  - "using_zeronet/create_new_site.md"
+- Site Development:
+  - "site_development/getting_started.md"
+  - "site_development/zeroframe_api_reference.md"
+  - "site_development/content_json.md"
+  - "site_development/dbschema_json.md"
+  - "site_development/cert_authority.md"
+- Help ZeroNet development:
+  - "help_zeronet/contributing.md"
+  - "help_zeronet/coding_conventions.md"
+  - "help_zeronet/network_protocol.md"
+  - "help_zeronet/donate.md"
