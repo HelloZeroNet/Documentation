@@ -17,6 +17,10 @@ theme:
   name: "readthedocs"
   favicon: "logo/favicon.ico"
 
+markdown_extensions:
+  - toc:
+      permalink: true
+
 nav:
 - Introduction: "index.md"
 - Frequently asked questions: "faq.md"
