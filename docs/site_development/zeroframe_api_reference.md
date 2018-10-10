@@ -1243,7 +1243,7 @@ Parameter            | Description
 ---
 
 
-# Admin commands
+## Admin commands
 _(requires ADMIN permission in data/sites.json)_
 
 
