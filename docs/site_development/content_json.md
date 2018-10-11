@@ -119,9 +119,10 @@ Possible signer addresses for the root content.json signed using the site addres
 *Example*:
 ```
 signs_required: 1:1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G,1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE
-signed message: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
+signers_sign: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
 ```
-The above signed message is signed using the address 1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G
+
+The above signed message is signed using the address "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
 
 ---
 
@@ -234,7 +235,7 @@ Include another content.json in the site. This is typically used for subsequent 
     "signers_required": 1 # The *number* of Valid signs required to accept the file (Multisig possibility),
     "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
     "includes_allowed": false, # Whether nested includes are allowed
-    "max_size": 10000, # Max total filesize allowed in the include (in bytes)
+    "max_size": 10000, # Max allowed size of included content.json and files it signs (in bytes)
   }
 }
 ```
