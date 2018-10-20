@@ -1,6 +1,6 @@
 ## What is ZeroNet?
 
-ZeroNet uses Bitcoin cryptography and BitTorrent technology to build a **decentralized censorship-resistant network**.
+ZeroNet uses Tor (for anonimity), cryptography (Bitcoin signatures, but no need to waste money or use BTC itself) and BitTorrent technology to build a **decentralized censorship-resistant network**.
 
 Users can publish static or dynamic websites to ZeroNet and visitors can choose to also serve the site themselves. Websites will remain online as long as one peer is still online.
 
