@@ -21,7 +21,8 @@ ZeroNet comes with a `--debug` flag that will make site development easier.
 
 To run ZeroNet in debug mode use: `python zeronet.py --debug`
 
-If you are using compiled/bundle version of ZeroNet:
+If you are using compiled/bundled version of ZeroNet:
+
 * On Windows: `lib\ZeroNet.cmd --debug`
 * On Linux: `./ZeroNet.sh --debug`
 * On Mac: `./ZeroNet.app/Contents/MacOS/ZeroNet --debug`
