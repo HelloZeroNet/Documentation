@@ -70,6 +70,13 @@ ul { font-size: 16px }
   100% { bottom: 0; }
 }
 
+/* Make notice stretch across the bottom on mobile */
+@media screen and (max-width: 450px) {
+  .notice {
+    width: 100%;
+  }
+}
+
 input, .md-search__input::placeholder, .md-search__input ~ .md-search__icon {
   color: #ecedee;
 }
