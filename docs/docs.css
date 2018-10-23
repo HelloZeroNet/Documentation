@@ -47,6 +47,36 @@ ul { font-size: 16px }
   margin-top: -5px;
 }
 
+/* redirect notice */
+.notice {
+  text-align: center;
+  position: fixed;
+  bottom: -50%;
+  right: 0px;
+  border: 1px solid #ccc;
+  padding: 1em;
+  background-color: #d8d8d8;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 4s;
+  animation: slide 1.0s forwards;
+  animation-delay: 2s;
+}
+
+@-webkit-keyframes slide {
+  100% { bottom: 0; }
+}
+
+@keyframes slide {
+  100% { bottom: 0; }
+}
+
+/* Make notice stretch across the bottom on mobile */
+@media screen and (max-width: 450px) {
+  .notice {
+    width: 100%;
+  }
+}
+
 input, .md-search__input::placeholder, .md-search__input ~ .md-search__icon {
   color: #ecedee;
 }
