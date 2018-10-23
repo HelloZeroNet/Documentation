@@ -15,7 +15,7 @@ theme:
     primary: "deep purple"
     accent: "deep purple"
   logo: "logo/zeronet_logo.svg"
-  name: "readthedocs"
+  name: "material"
   favicon: "logo/favicon.ico"
 
 markdown_extensions:
