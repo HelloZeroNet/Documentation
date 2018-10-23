@@ -50,16 +50,14 @@ ul { font-size: 16px }
 /* redirect notice */
 .notice {
   text-align: center;
-  position: fixed;
-  bottom: -50%;
-  right: 0px;
-  border: 1px solid #ccc;
+  border: 1px solid #fd9;
   padding: 1em;
-  background-color: #d8d8d8;
+  background-color: #fff1d3;
   -webkit-animation: slide 0.5s forwards;
   -webkit-animation-delay: 4s;
   animation: slide 1.0s forwards;
   animation-delay: 2s;
+      margin-bottom: 20px;
 }
 
 @-webkit-keyframes slide {

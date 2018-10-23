@@ -1,5 +1,6 @@
 const currentDocsURL = 'https://zeronet.io/docs'
 const oldDocsURL = 'https://zeronet.readthedocs.io'
+var isRedirectChecked = false
 
 // Point user to new documentation URL if necessary
 if (window.location.href.startsWith(oldDocsURL)) {
@@ -9,32 +10,28 @@ if (window.location.href.startsWith(oldDocsURL)) {
 // addRedirectNotice shows a message about the current docs being outdated
 function showRedirectNotice() {
     const notice = `
-    <div class="notice">
-        <h4>Hello there!</h4>
+    <div class="notice" onmouseover="checkPageExists()">
+        <h4>Documentation moved!</h4>
         <p>
             You're currently reading <strong>outdated</strong> documentation.<br>
-            View the new docs at <a href="#" onclick="redirect()">` + currentDocsURL + `</a>
+            View the new docs at <a href="https://zeronet.io/docs" id='link_redirect'>` + currentDocsURL + `</a>
         </p>
     </div>
     `
-    document.body.innerHTML += notice
+    document.querySelector(".wy-nav-content").insertAdjacentHTML("afterbegin", notice);
 }
 
-// redirect takes the user to the new documentation, and the same page
-// if it exists, otherwise the homepage
-function redirect() {
+// modify the redirect link to more specific one if it's still exists in new docs
+function checkPageExists() {
+    if (isRedirectChecked) return false;
+    isRedirectChecked = true
     let newDocsURL = currentDocsURL + window.location.pathname.slice('/en/latest'.length);
-    if (pageExists(newDocsURL)) {
-        window.location = newDocsURL;
-    } else {
-        window.location = currentDocsURL;
-    }
-}
-
-// pageExists takes in a URL and checks if it returns a 404
-function pageExists(newDocsURL) {
     var request = new XMLHttpRequest;
-    request.open('GET', newDocsURL, true);
+    request.open('GET', newDocsURL);
     request.send();
-    return (request.status == 200)
+    request.onload = function() {
+        if (request.status == 200) {
+            document.querySelector("#link_redirect").href = newDocsURL;
+        }
+    }
 }
