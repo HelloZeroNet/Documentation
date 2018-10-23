@@ -1,3 +1,4 @@
+
 site_name: ZeroNet
 site_url: https://github.com/HelloZeroNet/ZeroNet
 site_description: Decentralized websites using Bitcoin crypto and the BitTorrent network
@@ -20,6 +21,7 @@ theme:
 markdown_extensions:
   - toc:
       permalink: true
+  - codehilite
 
 nav:
 - Introduction: "index.md"
