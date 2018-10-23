@@ -1,16 +1,17 @@
 # Structure of content.json
 
-Every ZeroNet site will have a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
+Every ZeroNet site has a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
-This file will carry, among other things, a list of all files on your site and a signature created with your private key. This is done to avoid file tampering (ie: only you, or people you trust, can update the site content).
+This file will carry, among other things, a list of all files on your site and a signature created with your private key. This is used to ensure authenticity of site files and avoid tampering (ie: only you, or people you trust, can update your site's content).
 
-Here is a list of supported keys:
-
-
-## Generated automatically
+Here is a list of supported `content.json` keys:
 
 
 ---
+
+## Generated automatically
+
+_These keys are added automatically when the site is created or cloned._
 
 ### address
 
@@ -24,7 +25,7 @@ Your site address
 
 ### address_index
 
-The site's address BIP32 sub-key index of your BIP32 seed. Auto-added when you clone a site. It allows to recover the site privatekey from your BIP32 seed.
+The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you clone a site. It allows recovery of the site's privatekey from your BIP32 seed.
 
 **Example**: 30926910
 
@@ -33,7 +34,7 @@ The site's address BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 
 ### cloned_from
 
-The site address where the site is cloned from.
+Only for cloned sites. The site address where the site is cloned from.
 
 **Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
 
@@ -42,7 +43,7 @@ The site address where the site is cloned from.
 
 ### clone_root
 
-The sub-directory on source site where this site was cloned from.
+Only for cloned sites. The sub-directory on the site which this was cloned from.
 
 **Example**: template-new
 
@@ -52,7 +53,7 @@ The sub-directory on source site where this site was cloned from.
 
 ### files
 
-Size and sha512 hash of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
+Size and sha512 hashes of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```python
@@ -68,7 +69,7 @@ Size and sha512 hash of automatically downloaded files contained in your site. A
 
 ### files_optional
 
-Size and sha512 hash of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
+Size and sha512 hashes of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```python
@@ -111,18 +112,17 @@ ECDSA sign of the content.json file content. (keys sorted, without whitespace an
 
 ### signers_sign
 
-Possible signers address for the root content.json signed using the site address private key. (Multisig possibility)
+Possible signer addresses for the root content.json signed using the site address private key. Multiple entries are allowed here, allowing for site Multisig functionality.
 
 **Format of the signed string**: [number_of_signers_required]:[signer address],[signer address]
 
-**Example**: <small>HKNDz9IUHcBc/l2Jm2Bl70XQDL9HYHhJ2hUdg8AMyunACLgxyXBr7EW1/ME4hGkaFZSFmIxlInmxH+BrMVXbnLw=</small>
-
-*Another Example*:
+*Example*:
 ```
 signs_required: 1:1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G,1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE
-signed message: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
+signers_sign: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
 ```
-The above signed message is signed using the address, "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G"
+
+The above signed message is signed using the address "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
 
 ---
 
@@ -151,15 +151,15 @@ ECDSA signature for the the content.json file content:
 
 ### zeronet_version
 
-ZeroNet version used to generate content.json file.
+The ZeroNet version used to generate content.json file.
 
 **Example**: 0.2.5
 
-
 ---
 
+## Optional Settings
 
-## Settings
+_These options can be added if the functionality is needed._
 
 
 ### background-color
@@ -176,9 +176,11 @@ Background color of the wrapper
 
 Allow to clone the site if **true**.
 
-To make your site properly cloneable you have to add data files for clean start (eg. without any blog posts).
-To do this you have to add **-default** postfix to your data files and directories.
-On the cloning process every file and directory is skipped if it has **-default** postfixed alternative and then the **-default** postfix will be removed from the affected files and directories.
+To make your site properly cloneable you have to have a separate folder of data
+files for a clean start (e.g. without any blog posts).  To do this you have to
+add the **-default** postfix to your data files and directories.  During the
+cloning process, only directories with the **-default** postfix are
+copied. The postfix is removed from the new site.
 
 
 
@@ -187,7 +189,7 @@ On the cloning process every file and directory is skipped if it has **-default*
 
 ### description
 
-Description of your site, displayed under site title on ZeroHello.
+Description of your site, displayed under the site title on ZeroHello.
 
 **Example**: Decentralized forum demo
 
@@ -209,31 +211,31 @@ Namecoin domain name of your site. ZeroHello will link to this if the user has Z
 
 ### ignore
 
-Ignore files from signing matching this preg pattern
+Do not sign files matching this pattern.
 
-**Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from data/users/ directory)
+**Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from the `data/users/` directory)
 
-> Note: [Some restriction](#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
+Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
 
 ---
 
 
 ### includes
 
-Include an another content.json
+Include another content.json in the site. This is typically used for subsequent content.json files that are used to govern user data.
 
 **Example**:
 
 ```python
-{
+"includes": {
   "data/users/content.json": {
     "signers": [  # Possible signers address for the file
       "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
     ],
     "signers_required": 1 # The *number* of Valid signs required to accept the file (Multisig possibility),
     "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
-    "includes_allowed": false, # Nested includes allowed or not
-    "max_size": 10000, # Max sum filesize allowed in the include (in bytes)
+    "includes_allowed": false, # Whether nested includes are allowed
+    "max_size": 10000, # Max allowed size of included content.json and files it signs (in bytes)
   }
 }
 ```
@@ -244,7 +246,7 @@ Include an another content.json
 
 ### merged_type
 
-Data source for specified merger site type
+The type of merger this site is a part of.
 
 **Example**: `ZeroMe`
 
@@ -254,18 +256,18 @@ Data source for specified merger site type
 
 ### optional
 
-Preg pattern of optional files
+Preg pattern of optional files.
 
 **Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
 
-> Note: [Some restriction](#regex_limitations) apply to  regular expressions avoid possible ReDoS vulnerability.
+Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
 
 ---
 
 
 ### signs_required
 
-The **number** of valid signs required to accept the file (Multisig possibility)
+The **number** of valid signs required to accept the file. Allows for Multisig functionality.
 
 
 **Example**: 1
@@ -276,7 +278,7 @@ The **number** of valid signs required to accept the file (Multisig possibility)
 
 ### title
 
-Site's title, visible in browser title and on ZeroHello.
+The site's title, visible in the browser title and on ZeroHello.
 
 **Example**: ZeroTalk
 
@@ -286,7 +288,7 @@ Site's title, visible in browser title and on ZeroHello.
 
 ### translate
 
-Files need be translated. (use language json files in `languages` dictionary)
+Files need be translated. (use language json files in the `languages` directory)
 
 **Example**: ["index.html", "js/all.js"]
 
@@ -296,7 +298,7 @@ Files need be translated. (use language json files in `languages` dictionary)
 
 ### favicon
 
-Site's favicon. Replace default ZeroNet favicon with a site-specific favicon.
+The site's favicon. Replaces the default ZeroNet logo with a site-specific icon. Can be a .ico, .png, .svg, etc.
 
 **Example**: favicon.ico
 
@@ -306,11 +308,11 @@ Site's favicon. Replace default ZeroNet favicon with a site-specific favicon.
 
 ### user_contents
 
-Rules of allowed user content of current directory.
+Rules of allowed user content within the current directory.
 
 Node                   | Description
                   ---  | ---
-**cert_signers**       | Accepted domains and it's valid signer's addresses
+**cert_signers**       | Accepted domains and valid signer addresses
 **permission_rules**   | Allowed file names and total directory size based on cert domain or authorization method
 **permissions**        | Per-user permissions. (false = banned user)
 
@@ -335,7 +337,7 @@ Node                   | Description
   }
 ```
 
-> Note: [Some restriction](#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
+Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
 
 ----
 
@@ -349,15 +351,15 @@ Content for the viewport meta tag. (Used for mobile-friendly pages)
 
 ----
 
-## Regular expressions limitations
+## Regular expression limitations
 
-To avoid [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack the following restrictions apply to the patterns:
+To avoid the [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack, the following restrictions are applied to each pattern:
 
  - `.` character is mandatory before repetition characters of `*,+,{`
- - Maximum 9 repetition allowed in one pattern
- - Maximum length of a pattern is 255 characters.
+ - Maximum 9 repetitions are allowed in a single pattern
+ - The maximum length of a pattern is 255 characters
 
 ### Examples:
 
- - `((?!json).)*$` not allowed, because `)` before the `*` character. Possible fix: `.*(?!json)$`
+ - `((?!json).)*$` not allowed, because of `)` before the `*` character. Possible fix: `.*(?!json)$`
  - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` not allowed, because it has 12 `.*` repetition patterns. Possible fix: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`
