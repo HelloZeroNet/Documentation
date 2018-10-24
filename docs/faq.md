@@ -235,7 +235,7 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
 
 #### How can I create a new ZeroNet site?
 
-[Follow these instructions.](/using_zeronet/create_new_site/)
+[Follow these instructions.](../using_zeronet/create_new_site/)
 
 ---
 
@@ -253,5 +253,5 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
   integrity (using the signature), they __download the modified files__ and serve the new content to other peers.
 
 More info:
- [ZeroNet sample sites](/using_zeronet/sample_sites/),
+ [ZeroNet sample sites](../using_zeronet/sample_sites/),
  [Slideshow about how ZeroNet works](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
