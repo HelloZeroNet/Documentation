@@ -77,14 +77,15 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 
 ## Current limitations
 
-* ~~No torrent-like, file splitting for big file support~~ (BigFile plugin enables this)
-* File transactions are not compressed ~~or encrypted yet~~ (TLS encryption added)
+* <strike>No torrent-like, file splitting for big file support</strike> (BigFile plugin enables this)
+* File transactions are not compressed <strike>or encrypted yet</strike> (TLS encryption added)
 * No private sites
 
 ## Help to keep this project alive
 
 Bitcoin: 1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX
 
+[Full donation page](help_zeronet/donate/)
 
 ### Thank you!
 
