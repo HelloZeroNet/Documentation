@@ -3,15 +3,10 @@
   font-size: 75%;
 }
 
-.md-logo {
-  height: 24px;
-  width: 24px;
-}
-
 .md-logo img {
   height: 36px;
-  width: 36px;
-  margin-top: -5px;
+  margin-right: -20px;
+  margin-top: -6px;
 }
 
 /* redirect notice */
