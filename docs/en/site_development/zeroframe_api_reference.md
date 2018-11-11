@@ -8,199 +8,454 @@ The library can be imported like any other JavaScript file, or site developers a
 
 ## Wrapper
 
-_These commands are handled by the wrapper frame and are thus not sent to the UiServer using websocket._
-
+Commands that interact with code outside of the iframe.
 
 ### wrapperConfirm
-Display a notification with confirm button
+Display a notification with a confirmation.
 
-Parameter              | Description
-                  ---  | ---
-**message**            | The message you want to display
-**button_caption** (optional) | Caption of the confirmation button (default: OK)
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
 
-**Return**: True if clicked on button
+    message = 'Are you sure you want to delete this?' 
+    buttonTitle = 'Delete' 
 
-**Example:**
-```coffeescript
-# Delete site
-siteDelete: (address) ->
-	site = @sites[address]
-	title = site.content.title
-	if title.length > 40
-		title = title.substring(0, 15)+"..."+title.substring(title.length-10)
-	@cmd "wrapperConfirm", ["Are you sure you sure? <b>#{title}</b>", "Delete"], (confirmed) =>
-		@log "Deleting #{site.address}...", confirmed
-		if confirmed
-			$(".site-#{site.address}").addClass("deleted")
-			@cmd "siteDelete", {"address": address}
-```
+    zeroframe.cmd 'wrapperConfirm', [message, buttonTitle], (confirmed) =>
+      if confirmed
+        console.log 'Deleting post...'
+    ```
 
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
 
+    let message = 'Are you sure you want to delete this?';
+    let buttonTitle = 'delete';
+
+    zeroframe.cmd('wrapperConfirm', [message, buttonTitle], (confirmed) => {
+      if (confirmed) {
+        console.log('Deleting post...');
+      }
+    };
+    ```
+
+    **Output:**
+
+    User clicks confirm:
+
+    ```javascript
+    "Deleting post..."
+    ```
+
+    !!! info "Note"
+
+        The callback function is not run if the user dismisses the notification.
 ---
 
 
 ### wrapperInnerLoaded
+Because `#anchors` in the URL only apply to the outer web page, and not the inner iframe where ZeroNet sites live, this command must be used to do so. When your site is fully loaded, call this method to apply the current anchor to the inner iframe's `src` URL. 
 
-Applies the windows.location.hash to page url. Call when you page is fully loaded to jump to the desired anchor point.
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
 
+    zeroframe.cmd 'wrapperInnerLoaded', []
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperInnerLoaded', []);
+    ```
+
+    **Output:**
+
+    If the user is on `http://127.0.0.1:43110/mysite.bit#my-title`:
+
+    ```
+    [Wrapper] Added hash to location http://127.0.0.1:43110/mysite.bit/?wrapper_nonce=some_nonce#my-title
+    ```
+
+
+---
+
+### innerLoaded
+Alias for [wrapperInnerLoaded](#wrapperinnerloaded).
 
 ---
 
 
 ### wrapperGetLocalStorage
-**Return**: Browser's local store for the site
+Retrieve the contents of the ZeroNet site's Local Storage.
 
-**Example:**
-```coffeescript
-@cmd "wrapperGetLocalStorage", [], (res) =>
-	res ?= {}
-	@log "Local storage value:", res
-```
+!!! info "Note"
 
+    As ZeroNet sites all run off the same domain, the same Local Storage is
+    technically shared by all sites, which is a security risk. Thus, the
+    UiWrapper compartmentalizes each site to only be able to access their own
+    portion.
 
+**Return**: The Local Storage for this site as JSON.
+
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd "wrapperGetLocalStorage", [], (res) =>
+      res ?= {}
+      console.log "Local storage value:", res
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd("wrapperGetLocalStorage", [], (res) => {
+      res = res || {};
+      console.log("Local Storage contents:", res);
+    });
+    ```
+
+    **Output:**
+
+    If Local Storage is empty:
+
+    ```javascript
+    Local Storage contents: {}
+    ```
+
+    If Local Storage has been modified with [wrapperSetLocalStorage](#wrappersetlocalstorage):
+
+    ```javascript
+    Local Storage contents: {"score": 500}
+    ```
 
 ---
 
 ### wrapperGetState
-**Return**: Browser's current history state object
+Return the history state of the current tab from the browser.
+
+**Return**: Browser's current history state object.
+
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperGetState', {}, (state) ->
+      console.log state
+    ```
+
+    ```javascript tab="JavaScript"
+    zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperGetState', {}, (state) => {
+      console.log(state);
+    });
+    ```
+
+    **Output:**
+
+    ```
+    null
+    ```
 
 ---
 
 ### wrapperGetAjaxKey
-**Return**: The key you need to initilize ajax requests
+**Return**: Retrieve a key that can be used to make ajax requests.
 
-**Example:**
-```javascript
-ajax_key = await page.cmdp("wrapperGetAjaxKey")
-req = new window.XMLHttpRequest()
-req.open("GET", "content.json?ajax_key=" + ajax_key)
-req.setRequestHeader("Range", "bytes=10-200")  // Optional: only if you want request partial file
-req.send()
-console.log(req.response)
-```
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperGetAjaxKey', {}, (ajax_key) ->
+      req = new window.XMLHttpRequest()
+      req.open 'GET', "content.json?ajax_key=#{ajax_key}"
+      # Optional: only if you want to request a partial file
+      # req.setRequestHeader 'Range', 'bytes=10-200'
+      req.onload = ->
+        console.log req.response
+      req.send()
+    ```
+
+    ```javascript tab="JavaScript"
+    zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperGetAjaxKey', {}, (ajax_key) => {
+      const req = new window.XMLHttpRequest();
+      req.open('GET', `content.json?ajax_key=${ajax_key}`);
+      // Optional: only if you want request partial file
+      // req.setRequestHeader('Range', 'bytes=10-200');
+      req.onload = () => {
+        console.log(req.response);
+      };
+      req.send();
+    });
+    ```
+
+    **Output:**
+
+    The file we requested. In this case, the `content.json` of the current site:
+
+    ```javascript
+    {
+      "address": "1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D",
+      "address_index": 66669697,
+      "background-color": "#FFF",
+      "description": "",
+      "files": {
+        "index.html": {
+        "sha512": "542f7724432a22ceb8821b4241af4d36cfd81e101b72d425c6c59e148856537e",
+        "size": 1114
+        },
+        "js/ZeroFrame.js": {
+        "sha512": "42125c7aa72496455e044e3fd940e0f05db86824c781381edb7a70f71a5f0882",
+        "size": 3370
+        }
+      },
+      "ignore": "",
+      "inner_path": "content.json",
+      "modified": 1541199581,
+      "postmessage_nonce_security": true,
+      "signers_sign": "G6Aq7MXMzCjvEdqCToGTDZ7mrsCfaQzZdoBqHg4Cle2NHGno1Pgx2dvgeTFpsWkFP/oAA4CHKt2Zu+KueJM+7Mg=",
+      "signs": {
+        "1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D": "COr0M7+egjY29ZhW7mQp4MPHYuwrgOKVk6kl1CnRPef2QPbUQARYigo0cId8nIs7Y6Fnaj+uHR2HPvh09XVGb1Q="
+      },
+      "signs_required": 1,
+      "title": "my site",
+      "translate": ["js/all.js"],
+      "zeronet_version": "0.6.4"
+    }
+    ```
+
+    !!! info "Note"
+
+        The recommended usecase of this is for communicating with non-ZeroNet
+        sources. This is not the recommended way to retrieve the contents of
+        a file for a site. For that, use the [fileGet](#fileget) command
+        instead.
+
+        Retrieving files from other ZeroNet sites can be done via the [CORS
+        plugin](#plugin-cors).
 
 ---
 
 ### wrapperNotification
-Display a notification
+Display a notification.
 
 Parameter              | Description
                   ---  | ---
-**type**               | Possible values: info, error, done
+**type**               | The style of the notification. Possible values: `info`, `error`, `done`
 **message**            | The message you want to display
 **timeout** (optional) | Hide display after this interval (milliseconds)
 
-**Return**: None
+**Return**: None.
 
-**Example:**
-```coffeescript
-@cmd "wrapperNotification", ["done", "Your registration has been sent!", 10000]
-```
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperNotification', ['done', 'Your registration has been sent!', 10000]
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperNotification', ['done', 'Your registration has been sent!', 10000]);
+    ```
 
 
 ---
 
 ### wrapperOpenWindow
-
-Navigates or opens a new popup window.
+Navigates to or opens a new popup window.
 
 Parameter              | Description
                   ---  | ---
-**url**                | Url of the opened page
+**url**                | URL of the opened page
 **target** (optional)  | Target window name
-**specs** (optional)   | Special properties of the window (see: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
+**specs** (optional)   | Special properties of the window (see: [window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open))
 
-**Example:**
-```coffeescript
-@cmd "wrapperOpenWindow", ["https://zeronet.io", "_blank", "width=550,height=600,location=no,menubar=no"]
-```
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperOpenWindow', ['https://zeronet.io', '_blank', 'width=550,height=600,location=no,menubar=no']
+    ```
+
+    ```javascript tab="JavaScript"
+    zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperOpenWindow', ['https://zeronet.io', '_blank', 'width=550,height=600,location=no,menubar=no']);
+    ```
 
 ---
 
 
 ### wrapperPermissionAdd
-
-Request new permission for site
-
+Request a new permission for site.
 
 Parameter        | Description
              --- | ---
-**permission**   | Name of permission (eg. Merger:ZeroMe)
+**permission**   | Name of permission (e.g. Merger:ZeroMe)
+
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperPermissionAdd', ['Merger:ZeroMe'], (res) ->
+      if res == 'ok'
+        console.log 'Permission granted.'
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperPermissionAdd', ['Merger:ZeroMe'], (res) => {
+      if (res === 'ok') {
+        console.log('Permission granted.');
+      }
+    });
+    ```
+
+    **Output:**
+
+    If the user accepted the permission request:
+
+    ```
+    Permission granted.
+    ```
+
+    If the user denied or did not answer the request, the method will not be
+    run.
 
 
 ---
 
 ### wrapperPrompt
-
-Prompt text input from user
+Prompt for text input from the user.
 
 Parameter           | Description
                ---  | ---
 **message**         | The message you want to display
-**type** (optional) | Type of the input (default: text)
+**type** (optional) | The input field type (e.g. `text`, `password`)
 
-**Return**: Text entered to input
+**Return**: Entered input text.
 
-**Example:**
-```coffeescript
-# Prompt the private key
-@cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
-    $(".publishbar .button").addClass("loading")
-    # Send sign content.json and publish request to server
-    @cmd "sitePublish", [privatekey], (res) =>
-        $(".publishbar .button").removeClass("loading")
-        @log "Publish result:", res
-```
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    # Prompt for a site's private key
+    zeroframe.cmd 'wrapperPrompt', ['Enter your private key:', 'password'], (privatekey) ->
+      # Sign and publish content.json
+      zeroframe.cmd 'sitePublish', [privatekey], (res) ->
+        console.log 'Publish result:', res
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe = new ZeroFrame();
+
+    // Prompt for a site's private key
+    zeroframe.cmd('wrapperPrompt', ['Enter your private key:', 'password'], function(privatekey) {
+      // Sign and publish content.json
+      zeroframe.cmd('sitePublish', [privatekey], function(res) {
+        console.log('Publish result:', res);
+      });
+    });
+    ```
+
+    **Output:**
+
+    ```
+    Publish result: ok
+    ```
 
 
 ---
 
 ### wrapperPushState
-Change the url and adds new entry to browser's history. See: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
+Change the url while and adding a new entry to the browser's history. See [JavaScript pushState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method). And see [wrapperReplaceState](#wrapperreplacestate) to do so without adding a new history entry.
 
 Parameter           | Description
                ---  | ---
-**state**           | State javascript object
+**state**           | State JavaScript object
 **title**           | Title of the page
-**url**             | Url of the page
+**url**             | URL path of the page
 
-**Return**: None
+**Return**: None.
 
-**Example:**
-```coffeescript
-@cmd "wrapperPushState", [{"scrollY": 100}, "Profile page", "Profile"]
-```
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperPushState', [{'scrollY': 100}, 'Profile page', 'Profile']
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperPushState', [{'scrollY': 100}, 'Profile page', 'Profile']);
+    ```
 
 
 ---
 
 ### wrapperReplaceState
-Change the url without adding new entry to browser's history. See: [replaceState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)
+Change the url without adding a new entry to the browser's history. See [JavaScript replaceState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method).
 
 Parameter           | Description
                ---  | ---
-**state**           | State javascript object
+**state**           | State JavaScript object
 **title**           | Title of the page
-**url**             | Url of the page
+**url**             | URL path of the page
 
-**Return**: None
+**Return**: None.
 
-```coffeescript
-@cmd "wrapperReplaceState", [{"scrollY": 100}, "Profile page", "Profile"]
-```
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperReplaceState', [{'scrollY': 100}, 'Profile page', 'Profile']
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperReplaceState', [{'scrollY': 100}, 'Profile page', 'Profile']);
+    ```
+
 
 ---
 
 ### wrapperRequestFullscreen
-Set the current page to fullscreen. (request permission for the site on first call)
 
-> **Note:** Starting from ZeroNet Rev3136 you can use the fullscreen javascript API directly, without fullscreen request
+!!! warning "Deprecated"
 
-**Example:**
-```javascript
-page.cmd("wrapperRequestFullscreen")
-```
+    Starting from ZeroNet Rev3136 you can use the fullscreen javascript API directly, without needing to ask the wrapper first.
+
+Set the current page to fullscreen.
+
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd('wrapperRequestFullscreen')
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperRequestFullscreen')
+    ```
 
 
 ---
@@ -212,62 +467,108 @@ Parameter              | Description
                   ---  | ---
 **data**               | Any data structure you want to store for the site
 
-**Return**: None
+**Return**: None.
 
-**Example:**
-```coffeescript
-Page.local_storage["topic.#{@topic_id}_#{@topic_user_id}.visited"] = Time.timestamp()
-Page.cmd "wrapperSetLocalStorage", Page.local_storage
-```
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    setTimeout(->
+      zeroframe.cmd 'wrapperSetLocalStorage', {'score': 500}, (res) =>
+        console.log 'Score saved.'
+    , 100)
+    ```
+
+    ```javascript tab="JavaScript"
+    import 'js/ZeroFrame.js'
+
+    setTimeout(() => {
+      zeroframe.cmd('wrapperSetLocalStorage', {'score': 500}, (res) => {
+        console.log('Score saved.');
+      });
+    }, 100);
+
+    const zeroframe = new ZeroFrame();
+    ```
+
+    !!! info "Note"
+
+        `wrapperSetLocalStorage` relies on `site_info`, an object containing
+        information about the site that is retrieved from ZeroNet daemon on
+        ZeroFrame's load In order to allow for this to happen, we delay the
+        execution of `wrapperSetLocalStorage` by 100ms.
+
+    **Output:**
+
+    If local storage is empty:
+
+    ```javascript
+    Score saved.
+    ```
 
 
 ---
 
 ### wrapperSetTitle
-Set browser's title
+Set the title of the site.
 
 Parameter              | Description
                   ---  | ---
 **title**              | New browser tab title
 
-**Return**: None
+**Return**: None.
 
-**Example:**
-```coffeescript
-Page.cmd "wrapperSetTitle", "newtitle"
-```
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperSetTitle', 'My New Title'
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperSetTitle', 'My New Title');
+    ```
+
+    Site title will now be `My New Title`.
+
 
 ---
 
 
 ### wrapperSetViewport
-
-Set sites's viewport meta tag content (required for mobile sites)
-
+Set sites's viewport meta tag content (required for mobile sites).
 
 Parameter           | Description
                ---  | ---
 **viewport**        | The viewport meta tag content
 
-**Return**: None
+**Return**: None.
 
-**Example:**
-```coffeescript
-# Prompt the private key
-@cmd "wrapperSetViewport", "width=device-width, initial-scale=1.0"
-```
+??? "Example"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperSetViewport', 'width=device-width, initial-scale=1.0'
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperSetViewport', 'width=device-width, initial-scale=1.0');
+    ```
 
 
 ---
 
 
-
 ## UiServer
 
-The UiServer is for ZeroNet what the LAMP setup is for normal websites.
-
-The UiServer will do all the 'backend' work (eg: querying the DB, accessing files, etc). This are the API calls you will need to make your site dynamic.
-
+The UiServer does all the 'backend' work (eg: querying the DB, accessing files,
+etc). These are the API calls you will need to make your site dynamic.
 
 ### announcerInfo
 Tracker statistics for current site
@@ -292,7 +593,7 @@ Tracker statistics for current site
 
 
 ### certAdd
-Add a new certificate to current user.
+Add a new certificate to the current user.
 
 Parameter            | Description
                  --- | ---
@@ -301,7 +602,7 @@ Parameter            | Description
 **auth_user_name**   | User name used on registration
 **cert**             | The cert itself: `auth_address#auth_type/auth_user_name` string signed by the cert site owner
 
-**Return**: "ok", "Not changed" or {"error": error_message}
+**Return**: `"ok"`, `"Not changed"` or `{"error": error_message}`.
 
 **Example:**
 ```coffeescript
@@ -324,7 +625,7 @@ Parameter            | Description
 **accept_any**       | Does not limits the accepted certificate providers
 **accepted_pattern** | Regexp pattern for accepted certificate providers address
 
-**Return**: None
+**Return**: None.
 
 **Example:**
 ```coffeescript
@@ -343,7 +644,7 @@ Parameter   | Description
         --- | ---
 **channel** | Channel to join
 
-**Return**: None
+**Return**: None.
 
 **Channels**:
 
@@ -388,7 +689,7 @@ Parameter            | Description
 **query**            | Sql query command
 **params**           | Parameter substitution to the sql query
 
-**Return**: <list> Result of the query
+**Return**: Result of the query as an array.
 
 
 **Example:**
@@ -447,20 +748,20 @@ Parameter        | Description
 
 
 ### fileDelete
-Delete a file
+Delete a file.
 
 Parameter        | Description
              --- | ---
 **inner_path**   | The file you want to delete
 
-**Return**: "ok" on success else the error message
+**Return**: `"ok"` on success, the error message otherwise.
 
 
 ---
 
 
 ### fileGet
-Get file content
+Get the contents of a file.
 
 Parameter               | Description
                     --- | ---
@@ -469,7 +770,7 @@ Parameter               | Description
 **format** (optional)   | Encoding of returned data. (text or base64) (default: text)
 **timeout** (optional)  | Maximum wait time to data arrive (default: 300)
 
-**Return**: <string> The content of the file
+**Return**: <string> The content of the file.
 
 
 **Example:**
@@ -516,7 +817,7 @@ Parameter        | Description
              --- | ---
 **inner_path**   | Directory you want to list
 
-**Return**: List of files in the directory (recursive)
+**Return**: List of files in the directory (recursive).
 
 
 ---
@@ -530,7 +831,7 @@ Parameter               | Description
 **inner_path**          | The file you want to get
 **timeout** (optional)  | Maximum wait time to data arrive (default: 300)
 
-**Return**: "ok" on successfull download
+**Return**: `"ok"` on successful download.
 
 
 ---
@@ -543,7 +844,7 @@ Parameter            | Description
 **dir_inner_path**   | Pattern of queried files
 **query**            | Query command (optional)
 
-**Return**: <list> Matched content
+**Return**: Matched content as an array.
 
 **Query examples:**
 
@@ -572,7 +873,7 @@ Parameter            | Description
                  --- | ---
 **inner_path**       | File inner path
 
-**Return**: <list> Matched content
+**Return**: Matched content as an array.
 
 **Example result:**
 
@@ -607,7 +908,7 @@ Parameter          | Description
 **inner_path**     | Inner path of the file you want to write
 **content_base64** | Content you want to write to file (base64 encoded)
 
-**Return**: "ok" on success else the error message
+**Return**: `"ok"` on success, the error message otherwise.
 
 **Example:**
 ```coffeescript
@@ -640,7 +941,7 @@ Test UiServer websocket connection
 
 ### serverInfo
 
-**Return:** <dict> All information about the server
+**Return:** All information about the server as a JavaScript object.
 
 **Example:**
 ```coffeescript
@@ -670,7 +971,7 @@ Test UiServer websocket connection
 
 ### siteInfo
 
-**Return**: <dict> All information about the site
+**Return**: All information about the site as a JavaScript object.
 
 **Example:**
 ```coffeescript
@@ -730,7 +1031,7 @@ Parameter                 | Description
 **inner_path** (optional) | Inner path of the content json you want to publish (default: content.json)
 **sign** (optional)       | If True then sign the content.json before publish (default: True)
 
-**Return**: "ok" on success else the error message
+**Return**: `"ok"` on success, the error message otherwise.
 
 **Example:**
 ```coffeescript
@@ -765,7 +1066,7 @@ Parameter                              | Description
 **inner_path** (optional)              | Inner path of the content json you want to sign (default: content.json)
 **remove_missing_optional** (optional) | Remove the optional files from content.json that no longer present in the directory (default: False)
 
-**Return**: "ok" on success else the error message
+**Return**: `"ok"` on success, the error message otherwise.
 
 > __Note:__
 > Use "stored" as privatekey if its definied in users.json (eg. cloned sites)
@@ -790,7 +1091,7 @@ Parameter     | Description
           --- | ---
 **address**   | Address of site want to update (only current site allowed without site ADMIN permission)
 
-**Return:** None
+**Return:** None.
 
 **Example:**
 ```coffeescript
@@ -823,7 +1124,7 @@ Parameter     | Description
           --- | ---
 **settings**  | The user's site specific settings you want to store.
 
-**Return:** ok on success
+**Return:** `"ok"` on success.
 
 
 ---
@@ -896,9 +1197,9 @@ Arguments and return value: Same as [dbQuery](#dbquery-query-param)
 
 ### chartGetPeerLocations
 
-Get list of unique peers in client
+Get a list of unique peers from the client.
 
-**Return**: List of unique peers
+**Return**: A list of unique peers.
 
 **Example**:
 ```javascript
@@ -923,7 +1224,7 @@ Parameter            | Description
                  --- | ---
 **address**          | The site address you want get cors access
 
-**Return**: ok on success
+**Return**: `"ok"` on success.
 
 After the permission is granted the other site's files will be available under **/cors-siteaddress/** virtual directory via http request or by the fileGet API command.
 
@@ -938,29 +1239,29 @@ The site will be added to user's client if it's required.
 
 ### userPublickey
 
-Get user's site specific publickey
+Get user's site specific public key.
 
 Parameter            | Description
                  --- | ---
-**index** (optional) | Sub-publickey within site (default: 0)
+**index** (optional) | Sub-public key within site (default: 0)
 
 
-**Return**: base64 encoded publickey
+**Return**: Base64-encoded public key.
 
 ---
 
 ### eciesEncrypt
 
-Encrypt a text using a publickey
+Encrypt a text using a public key.
 
 Parameter                      | Description
                            --- | ---
 **text**                       | Text to encrypt
-**publickey** (optional)       | User's publickey index (int) or base64 encoded publickey (default: 0)
+**publickey** (optional)       | User's public key index (int) or base64 encoded public key (default: 0)
 **return_aes_key** (optional)  | Get the AES key used in encryption (default: False)
 
 
-**Return**: Encrypted text in base64 format or [Encrypted text in base64 format, AES key in base64 format]
+**Return**: Encrypted text in base64 format or [Encrypted text in base64 format, AES key in base64 format].
 
 ---
 
@@ -974,7 +1275,7 @@ Parameter                      | Description
 **privatekey** (optional)      | User's privatekey index (int) or base64 encoded privatekey (default: 0)
 
 
-**Return**: Decrypted text or list of decrypted texts (null for failed decodings)
+**Return**: Decrypted text or array of decrypted texts (null for failed decodings).
 
 ---
 
@@ -989,7 +1290,7 @@ Parameter                      | Description
 **iv** (optional)              | Base64 encoded iv (default: generate new)
 
 
-**Return**: [base64 encoded key, base64 encoded iv, base64 encoded encrypted text]
+**Return**: [base64 encoded key, base64 encoded iv, base64 encoded encrypted text].
 
 
 ---
@@ -1002,12 +1303,12 @@ Parameter                      | Description
                            --- | ---
 **iv**                         | IV in Base64 format
 **encrypted_text**             | Encrypted text in Base64 format
-**encrypted_texts**            | List of [base64 encoded iv, base64 encoded encrypted text] pairs
+**encrypted_texts**            | Array of [base64 encoded iv, base64 encoded encrypted text] pairs
 **key**                        | Base64 encoded password for the text
 **keys**                       | Keys for decoding (tries every one for every pairs)
 
 
-**Return**: Decoded text or list of decoded texts
+**Return**: Decoded text or array of decoded texts.
 
 
 ---
@@ -1034,7 +1335,7 @@ Parameter      | Description
            --- | ---
 **feeds**      | Format: {"query name": [SQL query, [param1, param2, ...], ...}, parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
 
-**Return**: ok
+**Return**: `"ok"`.
 
 **Example:**
 ```coffeescript
@@ -1059,23 +1360,22 @@ Page.cmd feedFollow [{"Posts": [query, params]}]
 
 Return of current followed feeds
 
-
-**Return**: The currently followed feeds in the same format as in the feedFollow commands
+**Return**: The currently followed feeds in the same format as in the feedFollow commands.
 
 
 ---
 
 ### feedQuery
 
-Execute all followed sql query
+Execute all queries for followed sites/pages in the user's notifications feed.
 
-
-**Return**: The result of the followed Sql queries
+**Return**: The result of the followed SQL queries.
 
 Parameter            | Description
                  --- | ---
 **limit**            | Limit of results per followed site (default: 10)
-**day_limit**        | Return no older than number of this days (default: 3)
+**day_limit**        | Events no older than number of this days (default: 3)
+
 
 ---
 
@@ -1084,7 +1384,7 @@ Parameter            | Description
 
 ### mergerSiteAdd
 
-Start downloading new merger site(s)
+Start downloading new merger site(s).
 
 Parameter            | Description
                  --- | ---
@@ -1095,11 +1395,11 @@ Parameter            | Description
 
 ### mergerSiteDelete
 
-Stop seeding and delete a merged site
+Stop seeding and delete a merged site.
 
 Parameter            | Description
                  --- | ---
-**address**           | Site address
+**address**          | Site address
 
 
 ---
@@ -1110,7 +1410,7 @@ Return merged sites.
 
 Parameter            | Description
                  --- | ---
-**query_site_info**  | If True, then gives back detailed site info for merged sites
+**query_site_info**  | If true, then gives back detailed site infomation for merged sites
 
 
 ---
@@ -1125,11 +1425,11 @@ Add new user to mute list. (Requires confirmation for non-ADMIN sites)
 
 Parameter            | Description
                  --- | ---
-**auth_address**     | Directory name of the user's data.
+**auth_address**     | Directory name of the user's data
 **cert_user_id**     | Cert user name of the user
 **reason**           | Reason of the muting
 
-**Return**: ok if confirmed
+**Return**: `"ok"` if confirmed.
 
 **Example:**
 ```coffeescript
@@ -1140,13 +1440,13 @@ Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit
 
 ### muteRemove
 
-Remove a user from mute list. (Requires confirmation for non-ADMIN sites)
+Remove a user from mute list. (Requires confirmation for **non-admin** sites).
 
 Parameter            | Description
                  --- | ---
-**auth_address**     | Directory name of the user's data.
+**auth_address**     | Directory name of the user's data
 
-**Return**: ok if confirmed
+**Return**: `"ok"` if confirmed.
 
 **Example:**
 ```coffeescript
@@ -1157,9 +1457,9 @@ Page.cmd("muteRemove", '1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz')
 
 ### muteList
 
-List muted users. (Requires ADMIN permission on site)
+List muted users. (Requires **admin** permission on site).
 
-**Return**: List of muted users
+**Return**: Array of muted users.
 
 
 ---
@@ -1170,7 +1470,7 @@ List muted users. (Requires ADMIN permission on site)
 
 ### optionalFileList
 
-Return list of optional files
+Return an array of optional file information.
 
 Parameter            | Description
                  --- | ---
@@ -1178,25 +1478,55 @@ Parameter            | Description
 **orderby**          | Order of returned optional files (default: time_downloaded DESC)
 **limit**            | Max number of returned optional files (default: 10)
 
-**Return**: Database row of optional files: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
+**Return**: Database rows with the following columns for each optional file returned:
+
+Column name         | Description
+                --- | ---
+**file_id**         | The ID of the file
+**site_id**         | The ID of the site the file is from
+**inner_path**      | The path of the file starting from the site root
+**hash_id**         | The hash of the file
+**size**            | The size of the file (in bytes)
+**peer**            | How many peers this file has
+**uploaded**        | How many bytes of this file have been uploaded to other peers
+**is_downloaded**   | Whether this file has been completely downloaded
+**is_pinned**       | Whether this file has been pinned
+**time_added**      | When this file was added
+**time_downloaded** | When this file finished downloading
+**time_accessed**   | When this file was last accessed
 
 ---
 
 ### optionalFileInfo
 
-Query optional file info from database
+Query information about a single optional file given its path.
 
 Parameter            | Description
                  --- | ---
-**inner_path**       | The path of the file
+**inner_path**       | The path of the file starting from the site root
 
-**Return**: Database row of optional file: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
+**Return**: Database row with the following columns:
+
+Column name         | Description
+                --- | ---
+**file_id**         | The ID of the file
+**site_id**         | The ID of the site the file is from
+**inner_path**      | The path of the file starting from the site root
+**hash_id**         | The hash of the file
+**size**            | The size of the file (in bytes)
+**peer**            | How many peers this file has
+**uploaded**        | How many bytes of this file have been uploaded to other peers
+**is_downloaded**   | Whether this file has been completely downloaded
+**is_pinned**       | Whether this file has been pinned
+**time_added**      | When this file was added
+**time_downloaded** | When this file finished downloading
+**time_accessed**   | When this file was last accessed
 
 ---
 
 ### optionalFilePin
 
-Pin (exclude from automatized optional file cleanup) downloaded optional file
+Pin a downloaded optional file. The file is now excluded from automated optional file cleanup.
 
 Parameter            | Description
                  --- | ---
@@ -1207,7 +1537,7 @@ Parameter            | Description
 
 ### optionalFileUnpin
 
-Remove pinning (include from automatized optional file cleanup) of downloaded optional file
+Remove pinning of a downloaded optional file. The file is now included in automated optional file cleanup.
 
 Parameter            | Description
                  --- | ---
@@ -1218,7 +1548,7 @@ Parameter            | Description
 
 ### optionalFileDelete
 
-Query a downloaded optional file
+Delete a downloaded optional file.
 
 Parameter            | Description
                  --- | ---
@@ -1229,39 +1559,39 @@ Parameter            | Description
 
 ### optionalLimitStats
 
-Return currently used disk space by optional files
+Return currently used disk space by optional files.
 
-**Return**: limit, used and free space statistics
+**Return**: limit, used and free space statistics.
 
 ---
 
 
 ### optionalLimitSet
 
-Set the optional file limit
+Set the optional file limit.
 
 Parameter            | Description
                  --- | ---
-**limit**            | Max space used by the optional files in gb or percent of used space
+**limit**            | Max space used by the optional files in GB or percentage of used space
 
 ---
 
 ### optionalHelpList
 
-List the auto-downloaded directories of optional files
+List the auto-downloaded directories of optional files.
 
 Parameter            | Description
                  --- | ---
 **address**          | Address of site you want to list helped directories (default: current site)
 
-**Return**: Dict of auto-downloaded directories and descriptions
+**Return**: Auto-downloaded directories and descriptions as a JavaScript object.
 
 ---
 
 
 ### optionalHelp
 
-Add directory to auto-download list
+Add directory to auto-download list.
 
 Parameter            | Description
                  --- | ---
@@ -1273,12 +1603,13 @@ Parameter            | Description
 
 ### optionalHelpRemove
 
-Remove an auto-download entry
+Prevent auto-download of optional files within a directory. Only effective if
+[optionalHelp](#optionalhelp) is enabled on the site.
 
 Parameter            | Description
                  --- | ---
 **directory**        | Directory you want to remove from auto-download list
-**address**          | Address of affected site (default: current site)
+**address**          | Address of site (default: current site)
 
 ---
 

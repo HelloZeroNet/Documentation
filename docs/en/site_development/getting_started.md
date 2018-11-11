@@ -29,11 +29,32 @@ If you are using compiled/bundled version of ZeroNet:
 
 #### Debug mode features:
 
-- Automatic CoffeeScript -> JavaScript conversion (All examples used in this documentation and sample sites are written in [CoffeeScript](http://coffeescript.org/))
+- Automatic [CoffeeScript](http://coffeescript.org/) -> JavaScript conversion
 - Debug messages will appear in the console
 - Auto reload of some source files (UiRequest, UiWebsocket, FileRequest) on modification to prevent restarting (Requires [PyFilesystem](http://pyfilesystem.org/) on GNU/Linux)
 - `http://127.0.0.1:43110/Debug` Traceback and interactive Python console at the last error position (using the wonderful Werkzeug debugger - Requires [Werkzeug](http://werkzeug.pocoo.org/))
 - `http://127.0.0.1:43110/Console` Spawns an interactive Python console (Requires [Werkzeug](http://werkzeug.pocoo.org/))
+
+### Writing in CoffeeScript
+
+To aid in writing CoffeeScript-based ZeroNet sites and to make use of ZeroNet's
+built-in CoffeeScript -> JavaScript converter, first enable debug mode as
+described in [Debug](#zeronet-debug-mode). Additionally, ensure the site you
+wish to work on is marked as one you own by enabling "This is my site" via
+the site sidebar.
+
+<!-- Is this right? -->
+ZeroNet will compile all CoffeeScript files it can find into a file called `all.js`, and deposit it in a `js/` folder at the top level of your site. This file will also include all your JavaScript code as well. Then you can simply import all your dynamic code into your HTML with the following before the `</body>` tag:
+
+```html
+<script type="text/javascript" src="js/all.js?lang={lang}"></script>
+```
+
+<!-- Why? -->
+!!! info "Note"
+
+    `{lang}` is a *placeholder variable*, and will be automatically replaced by the appropriate value by ZeroNet when the site is loaded.
+
 
 ### Disable HTTP Browser Caching
 

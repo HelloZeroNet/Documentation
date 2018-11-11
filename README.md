@@ -3,12 +3,14 @@ https://zeronet.io/docs
 
 ## Building
 
-First install the following:
+First install the following from pip:
 
 * mkdocs
-* mkdocs-material - python package
+* mkdocs-material
+* pymdown-extensions
 
-Then simply run `mkdocs serve` to host a local version of the docs.
+Then simply run `mkdocs serve` to host a local version of the docs, or `mkdocs
+build` to output a static version.
 
 ## French doc
 
