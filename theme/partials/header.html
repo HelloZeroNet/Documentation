@@ -1,0 +1,58 @@
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="{{ config.site_url | default(nav.homepage.url, true) | url }}" title="{{ config.site_name }}" class="md-header-nav__button md-logo">
+          {% if config.theme.logo.icon %}
+            <i class="md-icon">{{ config.theme.logo.icon }}</i>
+          {% else %}
+            <img src="{{ config.theme.logo | url }}" width="24" height="24">
+          {% endif %}
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          {% block site_name %}
+            {% if config.site_name == page.title %}
+              {{ config.site_name }}
+            {% else %}
+              <span class="md-header-nav__topic">
+                {{ config.site_name }}
+              </span>
+              <span class="md-header-nav__topic">
+                {{ page.title }}
+              </span>
+            {% endif %}
+          {% endblock %}
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        {% block search_box %}
+          {% if "search" in config["plugins"] %}
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            {% include "partials/search.html" %}
+          {% endif %}
+        {% endblock %}
+      </div>
+      {% if config.repo_url %}
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            {% include "partials/source.html" %}
+          </div>
+        </div>
+      {% endif %}
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <div class="md-header-nav__source">
+          <div class="md-source">
+            <div class="md-source__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path fill="white" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -9,6 +9,7 @@ edit_uri: ../Documentation/edit/master/docs/
 extra_css: [docs.css]
 extra_javascript: [docs.js]
 theme:
+  language: 'en'
   feature:
     tabs: true
   palette:
@@ -16,6 +17,7 @@ theme:
     accent: "deep purple"
   logo: "logo/zeronet_logo.svg"
   name: "material"
+  custom_dir: "theme"
   favicon: "logo/favicon.ico"
 
 markdown_extensions:
@@ -24,20 +26,20 @@ markdown_extensions:
   - codehilite
 
 nav:
-- Introduction: "index.md"
-- Frequently asked questions: "faq.md"
+- Introduction: "en/index.md"
+- Frequently asked questions: "en/faq.md"
 - Start using ZeroNet:
-  - "using_zeronet/installing.md"
-  - "using_zeronet/sample_sites.md"
-  - "using_zeronet/create_new_site.md"
+  - "en/using_zeronet/installing.md"
+  - "en/using_zeronet/sample_sites.md"
+  - "en/using_zeronet/create_new_site.md"
 - Site Development:
-  - "site_development/getting_started.md"
-  - "site_development/zeroframe_api_reference.md"
-  - "site_development/content_json.md"
-  - "site_development/dbschema_json.md"
-  - "site_development/cert_authority.md"
+  - "en/site_development/getting_started.md"
+  - "en/site_development/zeroframe_api_reference.md"
+  - "en/site_development/content_json.md"
+  - "en/site_development/dbschema_json.md"
+  - "en/site_development/cert_authority.md"
 - Help ZeroNet development:
-  - "help_zeronet/contributing.md"
-  - "help_zeronet/coding_conventions.md"
-  - "help_zeronet/network_protocol.md"
-  - "help_zeronet/donate.md"
+  - "en/help_zeronet/contributing.md"
+  - "en/help_zeronet/coding_conventions.md"
+  - "en/help_zeronet/network_protocol.md"
+  - "en/help_zeronet/donate.md"
