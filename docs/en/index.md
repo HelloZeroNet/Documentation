@@ -69,9 +69,9 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
 
 ## Screenshots
 
-![Screenshot](./img/zerohello.png)
+![Screenshot](../img/zerohello.png)
 
-![ZeroTalk](./img/zerotalk.png)
+![ZeroTalk](../img/zerotalk.png)
 
 ##### [More screenshots &raquo;](/using_zeronet/sample_sites/)
 
