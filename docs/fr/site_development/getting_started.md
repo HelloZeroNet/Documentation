@@ -1,4 +1,4 @@
-# Getting Started
+# Commencer
 
 ZeroNet allows you to publish static and dynamic websites on a distributed web platform.
 
