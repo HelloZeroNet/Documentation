@@ -1,12 +1,12 @@
-# Help to keep ZeroNet development alive
+# Contribution financière
 
 
-## ZeroNet: 2018 first half
+## ZeroNet: 2018 premier semestre
 <a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="9.5"></a>
 
-* General donation towards ZeroNet development
+* Donation général pour le dévelopment de ZeroNet
 
-<div>or using PayPal:
+<div>ou avec PayPal:
 <a href="https://www.paypal.me/zeronet/0usd"><img alt="" border="0" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png"></a>
 </form>
 
@@ -15,16 +15,16 @@
 ---
 
 
-## Bitmessage support
+## Bitmessage intégration
 
 <a href="bitcoin:1JxwXnjkv5M822aoJEVJawnS2uKnnT216Z?Label=ZeroNet+Bitmessage+donation" class="bitcoinbar" data-address="1JxwXnjkv5M822aoJEVJawnS2uKnnT216Z" data-goal="1.0"></a>
 
- * Send and receive Bitmessage messages using local client's XMLRPC API interface
+ * Envoyer et recevoir des messages Bitmessage
 
-Benefits:
+Avantages :
 
- * Send your permission request to site owner via bitmessage
- * Possible private messaging/commenting webui integration to sites
+ * Envoyer votre requète de permission au propriétaire du site via bitmessage
+ * Possibilité d'intégrer un webui privée pour les messages/commentaires sur les sites
 
 [Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/65)
 
@@ -33,13 +33,13 @@ Benefits:
 ---
 
 
-## <s>Namecoin domain support</s> (done in version 0.2.8)
+## <s>Intégration Namecoin</s> (done in version 0.2.8)
 
- * Use Namecoin domain names to access sites
+ * Utiliser les noms de domaines Namecoin pour accéder aux sites
 
-Benefits:
+Avantages :
 
- * Easier to remember site addresses
+ * Adresses lisible et facile à retenir
 
 [Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/31)
 
@@ -47,16 +47,16 @@ Benefits:
 ---
 
 
-## DHT support
+## DHT Intégration
 
 <a href="bitcoin:122tqTo5jTsZfF4xFodhM54b5HUkeVQL4E?Label=ZeroNet+DHT+donation" class="bitcoinbar" data-address="122tqTo5jTsZfF4xFodhM54b5HUkeVQL4E" data-goal="3.0"></a>
 
- * Peer discovery using DHT
+ * Découverte de pair via DHT (comme pour BitTorrent)
 
-Benefits:
+Avantages :
 
- * Peer discovery no longer relies on torrent network
- * Ipv6 and Tor peer discovery
+ * La découverte de pair ne dépendra plus du réseau torrent
+ * Ipv6 et découverte de pair Tor
 
 [Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/57)
 
@@ -64,15 +64,15 @@ Benefits:
 ---
 
 
-## Private sites
+## Sites privés
 
 <a href="bitcoin:1Q3jV3bAZxKBdMtVjnzfpcsmtXDspjGMnG?Label=ZeroNet+Private+sites" class="bitcoinbar" data-address="1Q3jV3bAZxKBdMtVjnzfpcsmtXDspjGMnG" data-goal="2.0"></a>
 
- * Passworded or public key based peer auth to sites
+ * Site avec authorization utilisant un mot de passe ou basé sur un système de clé publique
 
-Benefits:
+Avantages :
 
- * Secure control over peers who has access to your site
+ * Contrôle sur quel pair a accès à votre site
 
 [Github issue](https://github.com/HelloZeroNet/ZeroNet/issues/62)
 
@@ -80,7 +80,7 @@ Benefits:
 ---
 
 
-## <s>Full Tor support</s> (done in version 0.3.5)
+## <s>Tor intégration</s> (done in version 0.3.5)
 
  * Allow to seed sites and connect other peers using Tor network (Probably depends on DHT support)
 
