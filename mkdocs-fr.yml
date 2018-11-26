@@ -8,6 +8,7 @@ edit_uri: ../Documentation/edit/master/docs/
 
 extra_css: [docs.css, stylesheets/menu.css, stylesheets/bitcoinbar.css]
 extra_javascript: [docs.js, jquery.min.js, javascript/menu.js, javascript/bitcoinbar.js]
+
 theme:
   language: 'fr'
   feature:
@@ -24,6 +25,10 @@ markdown_extensions:
   - toc:
       permalink: true
   - codehilite
+
+plugins:
+  - search:
+      lang: ['fr']
 
 nav:
 - Introduction: "fr/index.md"

@@ -21,8 +21,15 @@ Build:
 
 ## Create a new translation
 
-You will need to duplicate the `mkdocs.yml` file and rename it to add the language code it is used for.
+You will need to duplicate the `mkdocs.yml` file and rename it to add the language code according to ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) it is used for.
 Example : `mkdocs-fr.yml`
+
+Modify the default lang for lunr search :
+```
+plugins:
+  - search:
+      lang: ['fr']
+```
 
 Modify the language theme to fit the one you translate it for.
 Example :
@@ -42,4 +49,11 @@ Now you can translate the documentation. Thank you.
 
 ```
 python generate.py
+```
+
+## Docker
+
+```
+docker build -t nginx-zeronet-doc .
+docker run --name zeronet-doc -p 8000:8000 -v $PWD/site:/usr/src/app -d nginx-zeronet-doc
 ```

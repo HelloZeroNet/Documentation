@@ -25,6 +25,10 @@ markdown_extensions:
       permalink: true
   - codehilite
 
+plugins:
+  - search:
+      lang: ['en']
+
 nav:
 - Introduction: "en/index.md"
 - Frequently asked questions: "en/faq.md"
