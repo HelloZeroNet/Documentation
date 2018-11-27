@@ -10,3 +10,10 @@ function translationClicked (event) {
     document.getElementById('menuDropDown').style.display = 'inline-block'
   }
 }
+
+function goToTranslation (event, currentLang, lang) {
+  event.preventDefault()
+
+  window.location.href = window.location.href.replace(currentLang, lang)
+
+}
