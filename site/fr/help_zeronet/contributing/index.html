@@ -1,0 +1,989 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Site web décentralisé utilisant Bitcoin crypto et BitTorrent protocole">
+      
+      
+        <link rel="canonical" href="https://github.com/HelloZeroNet/ZeroNet/fr/help_zeronet/contributing/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copier dans le presse-papier">
+      
+        <meta name="lang:clipboard.copied" content="Copié dans le presse-papier">
+      
+        <meta name="lang:search.language" content="fr">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="Aucun document trouvé">
+      
+        <meta name="lang:search.result.one" content="1 document trouvé">
+      
+        <meta name="lang:search.result.other" content="# documents trouvés">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../logo/favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.1.0">
+    
+    
+      
+        <title>Contributing to ZeroNet - ZeroNet</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.11e41852.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#7e57c2">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.20ef595d.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../docs.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/menu.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/bitcoinbar.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#contributing-to-zeronet" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://github.com/HelloZeroNet/ZeroNet" title="ZeroNet" class="md-header-nav__button md-logo">
+          
+            <img src="../../../logo/zeronet_logo.svg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                ZeroNet
+              </span>
+              <span class="md-header-nav__topic">
+                Contributing to ZeroNet
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Taper pour démarrer la recherche
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/HelloZeroNet/ZeroNet/" title="Aller au dépôt" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <div class="md-header-nav__source">
+          <div class="md-source" style="cursor: pointer;">
+            <div id="translation" class="md-source__icon" onClick="translationClicked(event)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+               <path fill="white" d="M18.604 16.111c.018.276.048.531.092.758-.583.106-.606-.469-.092-.758zm-4.354.16h.996l-.498-1.43-.498 1.43zm2.75-6.105c3.697 0 7 2.465 7 5.837 0 1.196-.432 2.37-1.193 3.281-.033 1.068.596 2.6 1.162 3.715-1.518-.274-3.676-.88-4.654-1.48-5.387 1.313-9.315-1.984-9.315-5.516 0-3.39 3.326-5.837 7-5.837zm-.437 7.584l-1.44-3.792h-.76l-1.447 3.792h.812l.312-.875h1.422l.313.875h.788zm3.988-2.296l.079-.353-.642-.125-.064.292c-.215-.032-.445-.036-.679-.012l.028-.458h.717v-.608h-.631l.084-.335-.627-.188c-.046.154-.084.304-.123.523h-.715v.608h.638c-.018.196-.026.399-.03.605-.704.259-1.002.751-1.002 1.198 0 .528.416.992 1.074.932.817-.074 1.362-.691 1.682-1.45.332.19.471.511.346.807-.115.275-.455.536-1.104.523v.654c.721.011 1.429-.262 1.707-.923.27-.647-.041-1.352-.738-1.69zm-1.25 1.073c.17-.177.305-.401.407-.626-.147-.013-.306-.009-.462.012.011.22.028.425.055.614zm-10.492 2.703c-1.887-.271-3.571-1.165-4.827-2.478-.182-.189-.315-.636-.019-.819l.302-.078c.235-.199-.221-1.009-.04-1.14.561-.401.295-.893-.051-1.299-.146-.172-.948-1-1.038-.853.067-.226-.146-.772-.274-.987-.217-.362-.502-.585-.617-.982-.046-.158-.046-.64-.139-.751-.038-.045-.327-.167-.317-.233.278-1.655 1.044-3.143 2.149-4.318l.746-.301c.468-.703.495-.158.916-.341.141 0 .301-.578.452-.667.261-.169.062-.169.013-.245-.104-.168 2.191-1.003 2.229-.853.032.127-1.135.734-1.007.716-.296.039-.352.571-.297.568.147-.005 1.074-.704 1.506-.555.423.146 1.183-.336 1.48-.582.149-.125.286-.344.483-.344.909 0 2.268.374 2.579.56.474.283-.204.263-.277.447-.058.142-.19.335-.249.412-.102.133-.399.077-.341-.082.059-.167.348-.231-.086-.271-.445-.041-.568-.341-1.014.034-.134.113-.234.286-.321.433-.123.21-.42.201-.544.396-.12.192.07.512.304.371.062-.038.765.645.674.095-.059-.364.196-.612.201-.887.003-.184.28-.066.206.03-.097.121-.203.534.051.554.096.008.339-.158.425-.084-.096-.002-.315.383-.3.376-.108.048-.233-.021-.15.21.074.228-.408.201-.495.247-.037.02-.417-.114-.408-.028-.131-.109.037-.379-.072-.422-.11.168-.058.512-.294.512-.202 0-.482.229-.604.369-.087.097-.609.308-.666.302.299.031.286.25.261.437-.06.433-.995.032-.956.196.038.158-.107.586-.139.724-.029.125.402.205.378.267.002-.007.583-.199.64-.25l.131-.293c.11-.073.226-.133.35-.179l.149-.258c.05-.02.645-.112.686-.092.149.068.428.353.532.483.036.047.227.117.227.188.069.107-.051.148-.006.223.104.193.132-.401.087-.29 0-.189.142.071.174.049l-.657-.654c-.204-.342.543.183.64.247.096.063.285.629.537.501.158-.08-.004-.139.106-.229l.449-.09c-.357.261.279.602.182.556.16.074.254-.058.354-.021.057.022.663.015.566-.082.151.076.082.748-.044.851-.204.169-1.182.1-1.399-.057-.361-.262-.297.279-.473.352-.344.142-.857-.463-1.218-.482.176.026.015-.445.015-.478-.139-.171-1.02.019-1.252.05-.434.058-.89.052-1.223.324-.234.189-.237.5-.477.651-.156.095-.325.064-.456.189-.234.222-.504.552-.637.845-.054.123.072.416.041.574-.307.967.076 2.308 1.248 2.456.25.032.506.144.759.117 1.332-2.88 4.568-4.92 8.347-4.92.932 0 1.831.124 2.678.354-1.105-4.322-5.012-7.521-9.678-7.521-5.523 0-10 4.477-10 10s4.477 10 10 10l.074-.004c-.509-.533-.931-1.128-1.265-1.766zm4.778-13.035c.068-.008-.089.138-.089.138.027.212.183.327.479.435.36.129.03.375-.176.317-.114-.032-.704-.21-.725.021 0 .138-.56.001-.473-.145.061-.098.041-.319.152-.464.16-.21.313-.096.318.026.002.327.332-.306.514-.328zm-4.532-.292c.08.113.688-.163.591-.146.187-.094.024-.104-.082-.159-.035-.179-.065-.456-.177-.566l.074-.085c-.173-.249-.301.302-.301.302l.09-.026-.042.113c.071.129.019.207.007.277l-.124.077c-.045.055.215.062.217.071.009.028-.313.074-.253.142zm-.396-.286c-.069.071.002.116.073.085.104-.045.244-.044.26-.183l.066-.084c.029-.043-.057-.114-.092-.121l-.124.086-.061.016-.056.072.006.04-.072.089zm2.634 2.107c-.055 0-.369.029-.34.084.178.293.403-.076.34-.084z"></path>
+              </svg>
+              <span style="text-transform: uppercase;">fr</span>
+              <svg id="menuDropUp" style="margin-left:0; display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="white"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+              <svg id="menuDropDown" style="margin-left:0;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="white"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+            </div>
+          </div>
+          <div id="translationMenu" style="display: none;" class="md-menu" tabindex="-1">
+            <ul class="md-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+              <li class="md-list-item" role="menuitem">
+                <a class="md-list-item__text" href="" onClick="goToTranslation(event, 'fr' ,'en')">English</a>
+              </li>
+              <li class="md-list-item" role="menuitem">
+                <a class="md-list-item__text" href="" onClick="goToTranslation(event, 'fr' ,'fr')">Français</a>
+              </li>
+              <span class="md-divider"></span>
+              <li class="md-list-item" role="menuitem">
+                <a class="md-list-item__text" href="/fr/translation">Translation HowTo</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../" title="Introduction" class="md-tabs__link">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../using_zeronet/installing/" title="Commencer à utiliser ZeroNet" class="md-tabs__link">
+          Commencer à utiliser ZeroNet
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../site_development/getting_started/" title="Commencer à déveloper" class="md-tabs__link">
+          Commencer à déveloper
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" title="Contribuer à ZeroNet" class="md-tabs__link md-tabs__link--active">
+          Contribuer à ZeroNet
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://github.com/HelloZeroNet/ZeroNet" title="ZeroNet" class="md-nav__button md-logo">
+      
+        <img src="../../../logo/zeronet_logo.svg" width="48" height="48">
+      
+    </a>
+    ZeroNet
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/HelloZeroNet/ZeroNet/" title="Aller au dépôt" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../faq/" title="Questions Fréquentes" class="md-nav__link">
+      Questions Fréquentes
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Commencer à utiliser ZeroNet
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Commencer à utiliser ZeroNet
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../using_zeronet/installing/" title="Installing ZeroNet" class="md-nav__link">
+      Installing ZeroNet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../using_zeronet/sample_sites/" title="Sample ZeroNet sites" class="md-nav__link">
+      Sample ZeroNet sites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../using_zeronet/create_new_site/" title="Create new ZeroNet site" class="md-nav__link">
+      Create new ZeroNet site
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Commencer à déveloper
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Commencer à déveloper
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../site_development/getting_started/" title="Commencer" class="md-nav__link">
+      Commencer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../site_development/zeroframe_api_reference/" title="ZeroFrame API Reference" class="md-nav__link">
+      ZeroFrame API Reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../site_development/content_json/" title="Structure of content.json" class="md-nav__link">
+      Structure of content.json
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../site_development/dbschema_json/" title="Structure of dbschema.json" class="md-nav__link">
+      Structure of dbschema.json
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../site_development/cert_authority/" title="Certificate Authority" class="md-nav__link">
+      Certificate Authority
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Contribuer à ZeroNet
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Contribuer à ZeroNet
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Contributing to ZeroNet
+      </label>
+    
+    <a href="./" title="Contributing to ZeroNet" class="md-nav__link md-nav__link--active">
+      Contributing to ZeroNet
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table des matières</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#you-dont-have-to-contribute-source-code" title="You don’t have to contribute source code" class="md-nav__link">
+    You don’t have to contribute source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-write" title="Do you like to write?" class="md-nav__link">
+    Do you like to write?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-helping-people" title="Do you like helping people?" class="md-nav__link">
+    Do you like helping people?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-make-websites" title="Do you like to make websites?" class="md-nav__link">
+    Do you like to make websites?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-do-research" title="Do you like to do research?" class="md-nav__link">
+    Do you like to do research?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-write-code" title="Do you like to write code?" class="md-nav__link">
+    Do you like to write code?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-offer-financial-support" title="Do you like to offer financial support?" class="md-nav__link">
+    Do you like to offer financial support?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coding-convention" title="Coding convention" class="md-nav__link">
+    Coding convention
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naming" title="Naming" class="md-nav__link">
+    Naming
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" title="Variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-files-directories-and-naming" title="Source files directories and naming" class="md-nav__link">
+    Source files directories and naming
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../coding_conventions/" title="Coding standards if you want to collaborate to ZeroNet" class="md-nav__link">
+      Coding standards if you want to collaborate to ZeroNet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../network_protocol/" title="ZeroNet network protocol" class="md-nav__link">
+      ZeroNet network protocol
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../donate/" title="Contribution financière" class="md-nav__link">
+      Contribution financière
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table des matières</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#you-dont-have-to-contribute-source-code" title="You don’t have to contribute source code" class="md-nav__link">
+    You don’t have to contribute source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-write" title="Do you like to write?" class="md-nav__link">
+    Do you like to write?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-helping-people" title="Do you like helping people?" class="md-nav__link">
+    Do you like helping people?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-make-websites" title="Do you like to make websites?" class="md-nav__link">
+    Do you like to make websites?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-do-research" title="Do you like to do research?" class="md-nav__link">
+    Do you like to do research?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-write-code" title="Do you like to write code?" class="md-nav__link">
+    Do you like to write code?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#do-you-like-to-offer-financial-support" title="Do you like to offer financial support?" class="md-nav__link">
+    Do you like to offer financial support?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coding-convention" title="Coding convention" class="md-nav__link">
+    Coding convention
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naming" title="Naming" class="md-nav__link">
+    Naming
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" title="Variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source-files-directories-and-naming" title="Source files directories and naming" class="md-nav__link">
+    Source files directories and naming
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/HelloZeroNet/Documentation/edit/master/docs/fr/help_zeronet/contributing.md" title="Editer cette page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="contributing-to-zeronet">Contributing to ZeroNet<a class="headerlink" href="#contributing-to-zeronet" title="Permanent link">&para;</a></h1>
+<p>Thank you for using ZeroNet. ZeroNet is a collaborative effort of 67+ decentralization enthusiasts just like you. We appreciate all users that catch bugs, improve documentation and have good ideas of designing new protocols. Here are a few guidelines we ask you to follow to get started with making your contribution.</p>
+<h3 id="you-dont-have-to-contribute-source-code">You don’t have to contribute source code<a class="headerlink" href="#you-dont-have-to-contribute-source-code" title="Permanent link">&para;</a></h3>
+<p>In fact, a majority of contributors do not submit source code. Even if you like to write programs, other types of contribution are also welcomed.</p>
+<h3 id="do-you-like-to-write">Do you like to write?<a class="headerlink" href="#do-you-like-to-write" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Write about ZeroNet.</li>
+<li>Write tutorials to help people set things up.</li>
+<li>Help translate ZeroNet.</li>
+<li>Improve this documentation. This documentation is a written by many community members all over the world.</li>
+</ul>
+<h3 id="do-you-like-helping-people">Do you like helping people?<a class="headerlink" href="#do-you-like-helping-people" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Subscribe to our <a href="https://github.com/HelloZeroNet/ZeroNet/issues">issue tracker on GitHub</a> and help people solve problems.</li>
+<li>Join us on <a href="https://gitter.im/HelloZeroNet/ZeroNet">Gitter</a> and IRC channel <a href="https://kiwiirc.com/client/irc.freenode.net/zeronet">#zeronet @ freenode</a> and help answer questions.</li>
+<li>Set up a seed box and help make the network faster.</li>
+</ul>
+<h3 id="do-you-like-to-make-websites">Do you like to make websites?<a class="headerlink" href="#do-you-like-to-make-websites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Create new ZeroNet sites. Go ahead and make your own blog on ZeroNet. <a href="../../using_zeronet/create_new_site/">It is easy and costs little.</a></li>
+<li>“Content is king!” as NoFish puts. The network is worth nothing without content, so we need You to make it succeed.</li>
+</ul>
+<h3 id="do-you-like-to-do-research">Do you like to do research?<a class="headerlink" href="#do-you-like-to-do-research" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Help us investigate our <a href="https://github.com/HelloZeroNet/ZeroNet/labels/help%20wanted">hard issues</a>.</li>
+<li>Join our discussion of designing new features and protocols, such as <a href="https://github.com/HelloZeroNet/ZeroNet/issues/45">I2P support</a> and <a href="https://github.com/HelloZeroNet/ZeroNet/issues/57">DHT support</a>.</li>
+<li>Do you own a <a href="https://github.com/HelloZeroNet/ZeroNet#linux-terminal">Raspberry Pi</a>, a <a href="http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:94:Running+ZeroNet+on+a+$9%C2%A0computer">C.H.I.P.</a> or an <a href="https://github.com/HelloZeroNet/ZeroNet/issues/783">open router</a>? Try running ZeroNet on it and tell us how well ZeroNet works on your device.</li>
+</ul>
+<h3 id="do-you-like-to-write-code">Do you like to write code?<a class="headerlink" href="#do-you-like-to-write-code" title="Permanent link">&para;</a></h3>
+<ul>
+<li>If you know Python, you can pick a task from our <a href="https://github.com/HelloZeroNet/ZeroNet/issues">issue tracker on GitHub</a>.</li>
+<li>You are also welcomed develop your own ideas. Before you start, please <a href="https://github.com/HelloZeroNet/ZeroNet/issues/new">open a new discussion</a> to let the community know, so you can make sure we can share our ideas to make the best out of it.</li>
+<li>Keep your coding style consistent. We ask you to follow our coding convention below.</li>
+</ul>
+<h3 id="do-you-like-to-offer-financial-support">Do you like to offer financial support?<a class="headerlink" href="#do-you-like-to-offer-financial-support" title="Permanent link">&para;</a></h3>
+<ul>
+<li>You can <a href="../donate/">donate bitcoins</a> to support ZeroNet.</li>
+</ul>
+<h2 id="coding-convention">Coding convention<a class="headerlink" href="#coding-convention" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Follow <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a></li>
+<li>Simple is better than complex</li>
+<li>Premature optimization is the root of all evil</li>
+</ul>
+<h3 id="naming">Naming<a class="headerlink" href="#naming" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ClassNames: Capitalized, CamelCased</li>
+<li>functionNames: starts with lowercase, camelCased</li>
+<li>variable_names: lowercased, under_scored</li>
+</ul>
+<h3 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h3>
+<ul>
+<li>file_path: File path relative to working dir (data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)</li>
+<li>inner_path: File relative to site dir (css/all.css)</li>
+<li>file_name: all.css</li>
+<li>file: Python file object</li>
+<li>privatekey: Private key for the site (without <code>_</code>)</li>
+</ul>
+<h3 id="source-files-directories-and-naming">Source files directories and naming<a class="headerlink" href="#source-files-directories-and-naming" title="Permanent link">&para;</a></h3>
+<ul>
+<li>One class per file is preferred</li>
+<li>Source file name and directory comes from ClassName: WorkerManager class = Worker/WorkerManager.py</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../site_development/cert_authority/" title="Certificate Authority" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Précédent
+                </span>
+                Certificate Authority
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../coding_conventions/" title="Coding standards if you want to collaborate to ZeroNet" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Suivant
+                </span>
+                Coding standards if you want to collaborate to ZeroNet
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.6e01afa6.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.fr.js"></script>
+              
+            
+          
+          
+        
+      
+      <script type="text/javascript">
+        console.log("fr")
+      </script>
+      
+        <script>app.initialize({version:"1.0.4",url:{base:"../../..", search_index_suffix: "fr"}})</script>
+      
+      
+        <script src="../../../docs.js"></script>
+      
+        <script src="../../../jquery.min.js"></script>
+      
+        <script src="../../../javascript/menu.js"></script>
+      
+        <script src="../../../javascript/bitcoinbar.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

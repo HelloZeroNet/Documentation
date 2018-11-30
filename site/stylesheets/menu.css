@@ -1,0 +1,32 @@
+.md-menu {
+  background-color: white;
+  display: inline-block;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-radius: 4px;
+  position: absolute;
+  left: 42px;
+  top: 42px;
+  /*padding: 8px 18px;*/
+}
+
+.md-menu .md-list {
+  padding-left: 0;
+}
+
+.md-list-item__text {
+  color: rgba(0, 0, 0, 0.76);
+  font-size: 1.2em;
+}
+
+.md-list-item {
+  margin: 18px 20px;
+  cursor: pointer;
+}
+
+.md-divider {
+  background-color: #e1e4e8;
+  height: 1px;
+  margin: 8px 1px;
+  display: block;
+  width: 100%;
+}
