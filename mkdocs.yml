@@ -18,9 +18,9 @@ theme:
   palette:
     primary: "deep purple"
     accent: "deep purple"
-  logo: "img/zeronet_logo.svg"
+  logo: "logo/zeronet_logo.svg"
   name: "material"
-  favicon: "img/favicon.ico"
+  favicon: "logo/favicon.ico"
   custom_dir: "docs/resources"
 
 markdown_extensions:
