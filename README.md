@@ -1,5 +1,5 @@
 Available at
-https://zeronet.readthedocs.org/
+https://zeronet.io/docs
 
 ## Building
 
