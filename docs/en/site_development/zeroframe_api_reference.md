@@ -269,6 +269,27 @@ The UiServer is for ZeroNet what the LAMP setup is for normal websites.
 The UiServer will do all the 'backend' work (eg: querying the DB, accessing files, etc). This are the API calls you will need to make your site dynamic.
 
 
+### announcerInfo
+Tracker statistics for current site
+
+**Return**:
+```json
+{
+	"stats": {
+		"zero://45.77.23.92:15555": {
+			"status": "announced",
+			"num_success": 1,
+			"time_last_error": 0,
+			"time_status": 1541776998.782,
+			"num_request": 1,
+			"time_request": 1541776996.884,
+			"num_error": 0
+		},
+		...
+	}
+}
+```
+
 
 ### certAdd
 Add a new certificate to current user.
@@ -300,12 +321,14 @@ Display certificate selector.
 Parameter            | Description
                  --- | ---
 **accepted_domains** | List of domains that accepted by site as authorization provider
+**accept_any**       | Does not limits the accepted certificate providers
+**accepted_pattern** | Regexp pattern for accepted certificate providers address
 
 **Return**: None
 
 **Example:**
 ```coffeescript
-@cmd "certSelect", {"accepted_domains": ["zeroid.bit"]}
+@cmd "certSelect", {"accepted_domains": ["zeroid.bit"], "accepted_pattern": "1ZeroiD[0-9]"}
 ```
 
 
@@ -407,6 +430,18 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 ```
 
 
+---
+
+
+### dirList
+List a content of a directory
+
+Parameter        | Description
+             --- | ---
+**inner_path**   | Directory you want to list
+
+**Return**: List of file and directory names
+
 
 ---
 
@@ -475,7 +510,7 @@ submitTopicVote: (e) =>
 
 
 ### fileList
-List of files in a directory
+Recursively list of files in a directory
 
 Parameter        | Description
              --- | ---
@@ -594,6 +629,14 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ---
 
 
+### ping
+Test UiServer websocket connection
+
+**Return:** pong
+
+
+---
+
 
 ### serverInfo
 
@@ -699,6 +742,15 @@ Parameter                 | Description
 		$(".publishbar .button").removeClass("loading")
 		@log "Publish result:", res
 ```
+
+
+---
+
+
+### siteReload
+Reload content.json file content and scans for optional files
+
+**Return**: "ok" on success
 
 
 ---
@@ -1405,4 +1457,4 @@ Parameter           | Description
                ---  | ---
 **address**         | Address of site want to resume
 
-**Return**: None
+**Return**: None 
