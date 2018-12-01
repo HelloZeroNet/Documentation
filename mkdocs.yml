@@ -6,17 +6,22 @@ site_description: Decentralized websites using Bitcoin crypto and the BitTorrent
 repo_url: https://github.com/HelloZeroNet/ZeroNet
 edit_uri: ../Documentation/edit/master/docs/
 
+docs_dir: docs/en
+site_dir: site
+
 extra_css: [docs.css]
 extra_javascript: [docs.js]
+
 theme:
   feature:
     tabs: true
   palette:
     primary: "deep purple"
     accent: "deep purple"
-  logo: "logo/zeronet_logo.svg"
-  name: "readthedocs"
-  favicon: "logo/favicon.ico"
+  logo: "img/zeronet_logo.svg"
+  name: "material"
+  favicon: "img/favicon.ico"
+  custom_dir: "docs/resources"
 
 markdown_extensions:
   - toc:
