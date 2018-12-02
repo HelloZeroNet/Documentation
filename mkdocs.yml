@@ -9,8 +9,8 @@ edit_uri: ../Documentation/edit/master/docs/
 docs_dir: docs/en
 site_dir: site
 
-extra_css: [docs.css]
-extra_javascript: [docs.js]
+extra_css: [docs.css, stylesheets/menu.css]
+extra_javascript: [docs.js, javascripts/menu.js]
 
 theme:
   feature:
