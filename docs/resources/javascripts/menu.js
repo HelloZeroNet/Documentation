@@ -25,7 +25,7 @@ function goToTranslation (event, currentLang, lang) {
     window.location.href = tmp.join('/')
   } else {
     if (lang === 'en') {
-      window.location.href = window.location.href.replace('/'+currentLang+'/', '')
+      window.location.href = window.location.href.replace('/'+currentLang+'/', '/')
     } else {
       window.location.href = window.location.href.replace('/'+currentLang+'/', '/'+lang+'/')
     }
