@@ -7,7 +7,7 @@ repo_url: https://github.com/HelloZeroNet/ZeroNet
 edit_uri: ../Documentation/edit/master/docs/
 
 extra_css: [docs.css, stylesheets/menu.css]
-extra_javascript: [docs.js, jquery.min.js, javascripts/menu.js]
+extra_javascript: [docs.js, javascripts/menu.js]
 
 docs_dir: docs/fr
 site_dir: site/fr
@@ -23,6 +23,7 @@ theme:
   name: "material"
   favicon: "logo/favicon.ico"
   custom_dir: "docs/resources"
+  font: false
 
 markdown_extensions:
   - toc:

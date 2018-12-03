@@ -6,13 +6,14 @@ site_description: Decentralized websites using Bitcoin crypto and the BitTorrent
 repo_url: https://github.com/HelloZeroNet/ZeroNet
 edit_uri: ../Documentation/edit/master/docs/
 
-docs_dir: docs/en
-site_dir: site
-
 extra_css: [docs.css, stylesheets/menu.css]
 extra_javascript: [docs.js, javascripts/menu.js]
 
+docs_dir: docs/en
+site_dir: site
+
 theme:
+  language: 'en'
   feature:
     tabs: true
   palette:
@@ -22,11 +23,16 @@ theme:
   name: "material"
   favicon: "logo/favicon.ico"
   custom_dir: "docs/resources"
+  font: false
 
 markdown_extensions:
   - toc:
       permalink: true
   - codehilite
+
+plugins:
+  - search:
+      lang: ['en']
 
 nav:
 - Introduction: "index.md"
