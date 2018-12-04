@@ -13,7 +13,15 @@ function translationClicked (event) {
 function goToTranslation (event, currentLang, lang) {
   event.preventDefault()
 
+<<<<<<< HEAD
   let tmp = window.location.pathname.split('/')
+=======
+  if (currentLang === lang) {
+    window.location.reload(false)
+  }
+
+  let tmp = window.location.pathname.split('/')
+>>>>>>> Just reload the page when trying to access the page language you are already visiting
 
   if (currentLang === 'en') {
     // For zeronet.io/docs/ and zeronet.io/docs-dev/
