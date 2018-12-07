@@ -1,7 +1,7 @@
 # ZeroNet network protocol
 
  - Every message is encoded using [MessagePack](http://msgpack.org/)
- - Every request has 3 parameter:
+ - Every request has 3 parameters:
     * `cmd`: The request command
     * `req_id`: The request's unique id (simple, incremented nonce per-connection), the client has to include this when reply to the command.
     * `params`: Parameters for the request
@@ -419,7 +419,7 @@ Return key           | Description
 
 ##### Bigfile piecefield
 
-Holds the the big files downloaded pieces information in a simple string with 1/0 values. (1 = Downloaded, 0 = Not downloaded)
+Holds the big files downloaded pieces information in a simple string with 1/0 values. (1 = Downloaded, 0 = Not downloaded)
 
 > __Example__: `1110000001` means the file is sized 9-10MB and the client downloaded the first 3MB and the last 1MB at 1MB piecesize.
 
