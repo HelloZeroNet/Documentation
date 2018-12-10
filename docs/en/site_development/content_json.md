@@ -312,6 +312,8 @@ Rules of allowed user content within the current directory.
 
 Node                   | Description
                   ---  | ---
+**archived**           | Delete the specified user content directory that is signed earler than the specified timestamp (key: directory name, value: timestamp)
+**archived_before**    | Delete all user content directory if that is signed earler than the specified timestamp
 **cert_signers**       | Accepted domains and valid signer addresses
 **permission_rules**   | Allowed file names and total directory size based on cert domain or authorization method
 **permissions**        | Per-user permissions. (false = banned user)
@@ -319,6 +321,10 @@ Node                   | Description
 **Example**:
 ```python
   "user_contents": {
+    "archived": {
+      "1165u6pt5mQNFjyhMVwy6azB7bZuQGLA9b": 1523088096
+    },
+    "archived_before": 1523088096,
     "cert_signers": {
       "zeroid.bit": [ "1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz" ]
     },
