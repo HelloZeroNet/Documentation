@@ -35,3 +35,29 @@ function checkPageExists() {
         }
     }
 }
+
+function applyZeroNetPatches() {
+    console.log("applyZeroNetPatches")
+
+    // Fix hashtag links
+    let base_href = document.location.href.replace("index.html", "").replace(/[&?]wrapper_nonce=[A-Za-z0-9]+/, "")
+    let base_tag = $("<base target='_top'/>")
+    base_tag.attr("href", base_href)
+    $(document.head).append(base_tag)
+
+    // Fix apply hashtag scroll positions
+    var page = new ZeroFrame()
+    page.cmd("innerLoaded")
+
+    // Fix cookie error
+    document.__defineGetter__("cookie", function() { return "" })
+
+    // Fix search button in small screens
+    $(".md-header").css("padding-right", "70px")
+
+    // Fix ajax
+    page.monkeyPatchAjax()
+}
+
+inside_zeronet_wrapper = document.location.toString().indexOf("wrapper_nonce") != -1
+if (inside_zeronet_wrapper) applyZeroNetPatches()
