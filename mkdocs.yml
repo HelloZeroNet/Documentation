@@ -7,7 +7,7 @@ repo_url: https://github.com/HelloZeroNet/ZeroNet
 edit_uri: ../Documentation/edit/master/docs/en/
 
 extra_css: [docs.css, stylesheets/menu.css]
-extra_javascript: [docs.js, javascripts/menu.js]
+extra_javascript: [ZeroFrame.js, jquery.min.js, docs.js, javascripts/menu.js]
 
 docs_dir: docs/en
 site_dir: site
