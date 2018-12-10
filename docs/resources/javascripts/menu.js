@@ -17,7 +17,7 @@ function goToTranslation (event, currentLang, lang) {
 
   if (currentLang === 'en') {
     // For zeronet.io/docs/ and zeronet.io/docs-dev/
-    if (tmp[0].startsWith('docs') || window.inside_zeronet_wrapper) {
+    if (tmp[1].startsWith('docs') || window.inside_zeronet_wrapper) {
       tmp.splice(2, 0, lang)
     } else {
       tmp.splice(1, 0, lang)
@@ -39,11 +39,11 @@ function goToHowTo (event, currentLang) {
 
   let tmp = window.location.pathname.split('/')
   // For zeronet.io/docs/ and zeronet.io/docs-dev/
-  if (tmp[3].startsWith('docs')) {
+  if (tmp[1].startsWith('docs') || window.inside_zeronet_wrapper) {
     if (currentLang === 'en') {
-      window.top.location.href = '/'+tmp[3]+'/translation'
+      window.top.location.href = '/'+tmp[1]+'/translation'
     } else {
-      window.top.location.href = '/'+tmp[3]+'/'+ currentLang +'/translation'
+      window.top.location.href = '/'+tmp[1]+'/'+ currentLang +'/translation'
     }
   } else {
     window.top.location.href = '/translation'
