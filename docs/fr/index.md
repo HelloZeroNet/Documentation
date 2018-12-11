@@ -50,6 +50,15 @@ ZeroNet est distribué avec une base de donnée SQL prête à l'utilisation. Cel
 
 ## Comment ça fonctionne ?
 
+* Après avoir installé et lancé ZeroNet, vous pouvez visiter un site en tapant l'url :
+  `http://127.0.0.1:43110/{zeronet_site_address}`
+  (exemple - `http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D`)
+* ZeroNet utilisera le réseau BitTorrent pour trouver des pairs qui partage le site et commencera à télécharger son contenu (HTML, CSS, JS...) depuis ces pairs.
+* Chaque site visité sera ensuite distribué depuis votre ordinateur/serveur. Ces sites peuvent effacer ou blacklister si nécessaire.
+* Tous les sites contiennent une liste de tous ses fichiers,  chaque entrée étant assigné un hash SHA512 et une signature générée à partir de la clé privée du propriétaire du site.
+* Si le propriétaire du site modifie celui-ci, alors la personne signe la nouvelle liste et la publie aux pairs. Après avoir vérifié l'intégrité de la liste (utilisant la signature), ils peuvent télécharger les fichiers modifiés an publié le nouveau contenu à d'autres pairs.
+
+##### [Slideshow about ZeroNet cryptography, content updates, multi-user sites &raquo;](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub?start=false&loop=false&delayms=3000)
 
 ## Capture d'écrans
 
@@ -61,6 +70,9 @@ ZeroNet est distribué avec une base de donnée SQL prête à l'utilisation. Cel
 
 ## Limites
 
+* <strike>Pas de découpement des gros fichiers à la Torrent</strike> (BigFile plugin ajouté)
+* Transfert de fichier non compressé <strike>ou chiffré</strike> (chiffrement TLS ajouté)
+* Pas de sites privés
 
 ## Contribution financière
 
@@ -70,5 +82,5 @@ Bitcoin: 1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX
 
 ### Merci !
 
-* More info, help, changelog, zeronet sites: [http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
-* Come, chat with us: [#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) or on [gitter](https://gitter.im/HelloZeroNet/ZeroNet)
+* Plus d'info, aide, changelog, sites zeronet : [http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
+* Viens ! Regarde comme on est bien. Discuter avec nous : [#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) or on [gitter](https://gitter.im/HelloZeroNet/ZeroNet)

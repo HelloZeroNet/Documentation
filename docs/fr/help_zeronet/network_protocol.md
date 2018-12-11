@@ -1,52 +1,53 @@
-# ZeroNet network protocol
+# Le protocole réseau ZeroNet
 
- - Every message is encoded using [MessagePack](http://msgpack.org/)
- - Every request has 3 parameter:
-    * `cmd`: The request command
-    * `req_id`: The request's unique id (simple, incremented nonce per-connection), the client has to include this when reply to the command.
-    * `params`: Parameters for the request
- - Example request: `{"cmd": "getFile", "req_id": 1, "params:" {"site": "1EU...", "inner_path": "content.json", "location": 0}}`
- - Example response: `{"cmd": "response", "to": 1, "body": "content.json content", "location": 1132, "size": 1132}`
- - Example error response: `{"cmd": "response", "to": 1, "error": "Unknown site"}`
+ - Tous les messages sont encodés avec [MessagePack](http://msgpack.org/)
+ - Toute requête possède 3 paramètres:
+    * `cmd`: La requête commande
+    * `req_id`: L'unique id de la requête (simple, nonce incrémenté à chaque connection)
+    * `params`: Paramètre de la requête
+ - Exemple de requête : `{"cmd": "getFile", "req_id": 1, "params:" {"site": "1EU...", "inner_path": "content.json", "location": 0}}`
+ - Exemple de réponse : `{"cmd": "response", "to": 1, "body": "content.json content", "location": 1132, "size": 1132}`
+ - Exemple de réponse signalant une erreur: `{"cmd": "response", "to": 1, "error": "Unknown site"}`
 
 
-# Handshake
-Every connection begins with a handshake by sending a request to the target network address:
+# Poignée de main (Handshake)
 
-Parameter            | Description
+Chaque connection commence avec une poignée de main en envoyant une requête à l'adresse du réseau spécifiée :
+
+Paramètre            | Description
                  --- | ---
-**crypt**            | Null/None, only used in respones
-**crypt_supported**  | An array of connection encryption methods supported by the client
-**fileserver_port**  | The client's fileserver port
-**onion**            | (Only used on tor) The client's onion address
-**protocol**         | The protocol version the client uses (v1 or v2)
-**port_opened**      | The client's client port open status
-**peer_id**          | (Not used on tor) The client's peer_id
-**rev**              | The client's revision number
-**version**          | The client's version
-**target_ip**        | The server's network address
+**crypt**            | Null/None, seulement utilisé dans les réponses
+**crypt_supported**  | Une collection de méthode de chiffrement supportée par le client
+**fileserver_port**  | Le port de distribution des fichiers du client
+**onion**            | (Seulement avec Tor) L'adresse onion du client
+**protocol**         | La version du protocole utilisé (v1 ou v2)
+**port_opened**      | Le status du port client du client
+**peer_id**          | (Pas utilisé avec Tor) L'id du client
+**rev**              | La version de révision du client
+**version**          | La version du client
+**target_ip**        | L'adresse du serveur sur le réseau
 
-The target initialize the encryption on the socket based on `crypt_supported`, then return:
+La cible initialise la connection chiffrée via socket en se basant sur le paramètre `crypt_supported`, puis retourne :
 
-Return key           | Description
+Résultat             | Description
                  --- | ---
-**crypt**            | The encryption to use
-**crypt_supported**  | An array of connection encryption methods supported by the server
-**fileserver_port**  | The server's fileserver port
-**onion**            | (Only used on tor) The server's onion address
-**protocol**         | The protocol version the server uses (v1 or v2)
-**port_opened**      | The server's client port open status
-**peer_id**          | (Not used on tor) The server's peer_id
-**rev**              | The server's revision number
-**version**          | The server's version
-**target_ip**        | The client's network address
+**crypt**            | La méthode de chrifremment utilisée
+**crypt_supported**  |  Une collection de méthode de chiffrement supportée par le serveur
+**fileserver_port**  | Le port de distribution des fichiers du serveur
+**onion**            | (Seulement avec Tor) L'adresse onion du serveur
+**protocol**         | La version du protocole utilisé (v1 ou v2)
+**port_opened**      | Le status du port client du serveur
+**peer_id**          | (Pas utilisé avec Tor) L'id du serveur
+**rev**              | La version de révision du serveur
+**version**          | La version du serveur
+**target_ip**        | L'adresse du client sur le réseau
 
-> **Note:** No encryption used on .onion connections, as the Tor network provides the transport security by default.
-> **Note:** You can also implicitly initialize SSL before the handshake if you can assume it supported by remote client.
+> **Note:** Pas de chiffrement sur utilisé pour les connections en .onion car le réseau Tor a déjà une couche de chiffrement activé par défaut.
+> **Note:** Vous pouvez aussi explicitement initialisé SSL avant le "handshake" si vous pensez que le client le supporte.
 
 **Example**:
 
-Sent handshake:
+Envoi "Handshake":
 
 ```json
 {
@@ -67,7 +68,7 @@ Sent handshake:
 }
 ```
 
-Return:
+Résultat:
 
 ```
 {
@@ -86,39 +87,39 @@ Return:
 }
 ```
 
-# Peer requests
+# Requêtes de pair
 
 #### getFile _site_, _inner_path_, _location_, _[file_size]_
-Request a file from the client
+Requête d'un fichier depuis le client
 
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**inner_path**       | File path relative to site directory
-**location**         | Request file from this byte (max 512 bytes got sent in a request, so you need multiple requests for larger files)
-**file_size**        | Total size of the requested file (optional)
+**site**             | Adresse du site (exemple: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**inner_path**       | Chemin relative du fichier dans le répertoire du site
+**location**         | Demander ce fichier en commençant par ce byte (max 512 bytes sont envoyés dans la requête, donc il faut plusieurs requêtes pour un large fichier)
+**file_size**        | Taille totale du fichier demandé (optionel)
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**body**             | The requested file content
-**location**         | The location of the last byte sent
-**size**             | Total size of the file
+**body**             | Le contenu du fichier demandé
+**location**         | La place du dernier byte envoyé dans le fichier
+**size**             | La taille totale du fichier
 
 
 ---
 
 #### streamFile _site_, _inner_path_, _location_, _[file_size]_
-Stream a file from the client
+Stream un fichier depuis le client
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**stream_bytes**    | The length of file data after the MessagePack payload
+**stream_bytes**    | La taille des données du fichier après MessagePack payload
 
-To avoid having python-msgpack serialize large binary strings, the file body is appended directly after the MessagePack payload. For example,
+Afin d'éviter d'avoir python-msgpack sérialiser de chaîne de cractère trop conséquent, le corps du fichier est directement ajouté après le MessagePack payload. Par exemple,
 
 ```
 > {"cmd": "streamFile", "id": 1, "inner_path": "content.json", "size": 1234}
@@ -126,17 +127,17 @@ To avoid having python-msgpack serialize large binary strings, the file body is 
 < content of the file
 ```
 
-> ZeroNet implementation detail: For file segments larger than 256 kb, streaming is enabled by default.
+> Détail sur l'implémentation dans ZeroNet : Pour les ségments de fichier plus gros que 256kb, le streaming est activé par défaut.
 
 ---
 
 
 #### ping
-Checks if the client is still alive
+Vérifie si le client est toujours en vie
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
 **body**             | Pong
 
@@ -145,94 +146,92 @@ Return key           | Description
 
 
 #### pex _site_, _peers_, _need_
-Exchange peers with the client.
-Peers packed to 6 bytes (4byte IP using inet_ntoa + 2byte for port)
+Echange de paris avec le client.
+Pairs packagé en 6 bytes (4 bytes IP avec inet_ntoa + 2 bytes pour le port)
 
-Parameter            | Description
+Pramètres            | Déscription
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**peers**            | List of peers that the requester has (packed)
-**peers_onion**      | List of Tor Onion peers that the requester has (packed)
-**need**             | Number of peers the requester want
+**site**             | Adresse du site (exemple: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**peers**            | Liste des pairs que la personne envoyant la requête connait (packagé)
+**peers_onion**      | Liste des pairs Tor Onion que la personne envoyant connait (packagé)
+**need**             | Nombre de pairs demandé
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**peers**           | List of IPv4 peers he has for the site (packed)
-**peers_onion**     | List of Tor Onion peers for this site (packed)
+**peers**           | Liste des pairs IPV4 connu pour ce site (packagé)
+**peers_onion**     | Liste des pairs Tor Onion pour ce site (packagé)
 
-Each element in the `peers` list is a packed IPv4 address.
+Chaque élèment dans la liste `peers` est sous la forme d'adresse IPv4 packagé.
 
-IP address | Port
+Adresse IP | Port
 ---------- | ----
 `4 bytes` | `2 bytes`
 
-Each element in the `peers_onion` list is a packed Tor Onion Service address.
+Chaque élèment de la liste `peers_onion` est sous la forme d'adresse Tor Onion Service.
 
 B32-decoded onion address | Port
 ------------------------- | ----
 `binary_str[0:-2]`        | `binary_str[-2:]`
 
-To restore the onion address, pass the first part through `base64.b32encode` and append `.onion` to the return value.
-
+Pour retrouver la l'adresse onion, passe la première partie dans `base64.b32encode` puis ajoute `.onion` à  la valeur retournée.
 ---
 
 #### update _site_, _inner_path_, _body_, _[diffs]_
-Update a site file.
+Met à jour le fichier d'un site.
 
-
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**inner_path**       | File path relative to site directory
-**body**             | Full content of the updated content.json
-**diffs** (optional) | [Diff opcodes](#possible-diff-opcodes) for the modified files in the content.json
+**site**             | Adresse du site (exemple: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**inner_path**       | Chemin relative du fichier dans le répertoire du site
+**body**             | Contenu du fichier content.json mis à jour
+**diffs** (optionel) | [Code modifié (diff)](#possible-diff-opcodes) des fichiers modifiés dans le content.json
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**ok**               | Thanks message on successful update :)
+**ok**               | Message de remerciement lors d'une mise à jour réussite :)
 
-##### Diffs format
+##### Format Diffs
 
-A dict that contains the modifications
+A "dict" qui contient les modifications
 
- - Key: changed file's relative path to content.json (eg.: `data.json`)
- - Value: The list of diff opcodes for the file (eg.: `[['=', 5], ['+', '\nhello new line'], ['-', 6]]`)
+ - Key: chemin du fichier modifié relative au content.json (eg.: `data.json`)
+ - Value: La liste des diff opcodes pour le fichier (eg.: `[['=', 5], ['+', '\nhello new line'], ['-', 6]]`)
 
-##### Possible diff opcodes:
+##### Diff opcodes possibles:
 
-Opcode                                   | Description
+Opcode                                   | Déscription
                                      --- | ---
-**['=', number of same characters]**     | Have not changed part of the file (eg.: `['=', 5]`)
-**['+', new text]**                      | Added characters (eg.: `['+', '\nhello new line']`)
-**['-', number of removed characters]**  | Full content of the updated file (eg.: `['-', 6]`)
+**['=', nombre de même caractère]**      | Partie du fichier sans modification (eg.: `['=', 5]`)
+**['+', nouveau texte]**                 | Caractères ajoutés (eg.: `['+', '\nhello new line']`)
+**['-', nombre de caractère supprimés]** | Caractères suprimés (eg.: `['-', 6]`)
 
-After the update received, the client tries to patch the files using the diffs.
-If it failes to match the sha hash provided by the content.json (had different version of the file) it automatically re-downloads the whole file from the sender of the update.
+Après avoir reçu la mise à jour, le client essaye de patcher les fichiers en utilisant les diffs.
+Si le résultat ne correspond pas au hash SHA256 fourni par le fichier content.json (différente version du fichier), le client re-télécharge le fichier dans son intégralité depuis le pair qui a émit le message de mis à jour.
 
-> __Note:__ The patches are limited to 30KB per file and only used for .json files
+> __Note:__ Les patches sont limités à 30KB par fichier et seulement utilisé pour les fichiers en .json.
 
 ---
 
 #### listModified _site_, _since_
-Lists the content.json files modified since the given parameter. It used to fetch the site's user submitted content.
+Listes les fichiers répertoriés dans le content.json et modifié depuis le paramètre `since` envoyé. Il était utilisé pour récupérer le contenu soumit par un utilisateur du site.
 
 
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**since**            | List content.json files since this timestamp.
+**site**             | Adresse du site (exemple: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**since**            | Liste des fichiers modifiés depuis ce timestamp.
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**modified_files**   | Key: content.json inner_path<br>Value: last modification date
+**modified_files**   | Key: content.json inner_path<br>Value: Date de la dernière modification
 
-**Example**:
+**Exemple**:
 
 ```json
 > zeronet.py --silent peerCmd 127.0.0.1 15441 listModified "{'site': '1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8', 'since': 1497507030}"
@@ -269,19 +268,19 @@ Return key           | Description
 
 
 #### getHashfield _site_
-Get the client's downloaded [optional file ids](#optional-file-id).
+Récupérer [les identifiants uniques des fichiers optionels](#optional-file-id).
 
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**site**             | Adresse du site (exemple: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**hashfield_raw**    | Optional file ids encoded using `array.array("H", [1000, 1001..]).tostring()`
+**hashfield_raw**    | Identifiants des fichiers optionels encodés avec `array.array("H", [1000, 1001..]).tostring()`
 
-**Example**:
+**Exemple**:
 ```json
 > zeronet.py --silent peerCmd 192.168.1.13 15441 getHashfield "{'site': '1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h'}
 {
@@ -295,39 +294,39 @@ Return key           | Description
 
 
 #### setHashfield _site_, _hashfield_raw_
-Set the list of [optional file ids](#optional-file-id) that the requester client has.
+Ajoute la liste des [identifiants des fichiers optionels](#optional-file-id) que le client requêteur possède.
 
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**hashfield_raw**    | Optional file ids encoded using `array.array("H", [1000, 1001..]).tostring()`
+**site**             | Adresse du site (exemple: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**hashfield_raw**    | Identifiants des fichiers optionels encodés avec `array.array("H", [1000, 1001..]).tostring()`
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**ok**               | Updated
+**ok**               | Mis à jour :)
 
 
 ---
 
 
 #### findHashIds _site_, _hash_ids_
-Queries if the client know any peer that has the requested hash_ids
+Demande si le client connait un pair possèdant ces hash_ids
 
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**hash_ids**         | List of optional file ids the client currently looking for
+**site**             | Adresse du site (exemple: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**hash_ids**         | Liste des identifiants des fichiers optionels que le client recherche
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**peers**            | Key: Optional file id<br>Value: List of ipv4 peers encoded using `socket.inet_aton(ip) + struct.pack("H", port)`
-**peers_onion**      | Key: Optional file id<br>Value: List of onion peers encoded using `base64.b32decode(onion.replace(".onion", "").upper()) + struct.pack("H", port)`
+**peers**            | Key: identifiant du fichier optionel <br>Value: Liste des pairs ipv4 encodés avec `socket.inet_aton(ip) + struct.pack("H", port)`
+**peers_onion**      | Key: identifiant du fichier optionel<br>Value: Liste des pairs onion encodés avec `base64.b32decode(onion.replace(".onion", "").upper()) + struct.pack("H", port)`
 
-**Example**:
+**Exemple**:
 ```json
 > zeronet.py --silent peerCmd 192.168.1.13 15441 findHashIds "{'site': '1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h', 'hash_ids': [59948, 29811]}"
 {
@@ -355,8 +354,8 @@ Return key           | Description
 }
 ```
 
-##### Optional file id
-Integer representation of the first 4 character of the hash:
+##### Identifiant pour fichier optionel
+Nombre entier représentant les 4 premiers cractères du hash :
 ```
 >>> int("ea2c2acb30bd5e1249021976536574dd3f0fd83340e023bb4e78d0d818adf30a"[0:4], 16)
 59948
@@ -365,49 +364,48 @@ Integer representation of the first 4 character of the hash:
 ---
 
 #### checkport _port_
-Check requested port of the other peer.
+Vérifie le port spécifié de l'autre pair.
 
-
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**port**             | Port which will be checked.
+**port**             | Port à vérifier.
 
 **Return**:
 
-Return key           | Description
+Résultat             | Déscription
                  --- | ---
-**status**           | Status of the port ("open" or "closed")
-**ip_external**      | External IP of the requestor
+**status**           | Statut du port spécifié ("open"/ouvert ou "closed"/fermé)
+**ip_external**      | IP externe du demandeur
 
 ---
 
-# Bigfile Plugin
+# Le plugin BigFile
 
 #### getPieceFields _site_
 
-Returns all big file [piecefield](#bigfile-piecefield) that client has for that site in a dict.
+Renvoie tous les [morceaux de fichiers](#bigfile-piecefield) de tout les larges fichiers du client dans une liste.
 
-Parameter            | Description
+Paramètre            | Déscription
                  --- | ---
-**site**             | Requested site
+**site**             | Adresse du site
 
 
 **Return**:
 
-Return key             | Description
+Résultat               | Déscription
                    --- | ---
-**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
+**piecefields_packed** | Key: Hash Sha512/256 [de la racine de merkle](#bigfile-merkle-root) du large fichier<br>Value: [piecefield](#bigfile-piecefield) packagé.
 
 ---
 
 #### setPieceFields _site_, _piecefields_packed_
 
-Set the client's [piecefields](#picefield) for that site.
+Ajoute au client les [piecefields](#picefield) pour ce site.
 
-Parameter              | Description
+Paramètre              | Déscription
                    --- | ---
-**site**               | Requested site
-**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
+**site**               | Adresse du site
+**piecefields_packed** | Key: Hash Sha512/256 [de la racine de merkle](#bigfile-merkle-root) du large fichier<br>Value: [piecefield](#bigfile-piecefield) packagé.
 
 
 **Return**:
@@ -419,30 +417,30 @@ Return key           | Description
 
 ##### Bigfile piecefield
 
-Holds the the big files downloaded pieces information in a simple string with 1/0 values. (1 = Downloaded, 0 = Not downloaded)
+Détient les informations sur les pièces d'un large fichier, l'information est représenté par les valeurs 1/0 (1 = téléchargé, 0 = pas téléchargé).
 
-> __Example__: `1110000001` means the file is sized 9-10MB and the client downloaded the first 3MB and the last 1MB at 1MB piecesize.
+> __Example__: `1110000001` signifie que le fichier est de taille 9-10MB et le client a téléchargé le 3MB du debut du fichier et le dernier 1MB (chaque pièce fait 1MB).s
 
-**Packed format**:
+**Format packagé**:
 
-Turns the string to an list of int by counting the repeating characters starting with `1`.
+Transforme la chaîne de cractère en une liste d'entier en comptant le nombre de répititions en commençant avec `1`.
 
-> __Example__: `1110000001` to `[3, 6, 1]`, `0000000001` to `[0, 9, 1]`, `1111111111` to `[10]`
+> __Example__: `1110000001` devient `[3, 6, 1]`, `0000000001` devient `[0, 9, 1]`, `1111111111` devient `[10]`
 
-After the conversion it turns it to more efficient [typed array](https://docs.python.org/2/library/array.html) using `array.array('H', piecefield)`
+Après la conversion il est ensuite transformé en un [`array`](https://docs.python.org/2/library/array.html) avec `array.array('H', piecefield)`
 
 ##### Bigfile merkle root
 
-During the big file hashing procedure, in addition to storing the per-piece sha512/256 hash digests in the [piecemap](#bigfile-piecemap) file, the algorithm also calculates the SHA-512/256 merkle root of the file using the [merkle-tools](https://github.com/tierion/merkle-tools) implementation.
-The merkle root is only used as an ID to identify the big file, not (yet) for verifying the pieces.
+Pendant la procédure qui consiste à hasher un large fichier, en plus de collelecter les sha512/256 dans le fichier [piecemap](#bigfile-piecemap), l'algorithme calcule aussi le SHA-512/256 l'arbre de merkle avec [l'outil `merkle-tools`](https://github.com/tierion/merkle-tools).
+L'arbre de merkle est seulement utilisé comme un identifiant unique pour le large fichier, pas (encore) pour vérifier les morceaux du fichier.
 
-> __Note__: The merkle root is chosen to identify the file, instead of the file's actual SHA-512/256 hash. Obviously, using the latter results in hashing the same file twice. (once for piecemap once for the whole file)
+> __Note__: L'arbre de merkle est choisi pour identifier le fichier, au lieu de l'actuel hash SHA-512/256 du fichier. De toute évidence, utilisant ce dernier résultat pour le hasher deux fois. (une fois pour piecemap et une autre pour le fichier en entier)
 
-> __Note__: The merkle root is not used to verify the integrity of the pieces or the big file, because doing so would take more bandwidth and space to transfer and store the merkle-proofs for partial verification, than the per-piece hash map file itself.
+> __Note__: L'arbre de merkle n'est pas utilisé pour vérifier l'intégrité des pièces ou du large fichier, parce que cela nécessiterait beaucoup de bande passante et d'espace pour transférer et collecter les preuves partiels de vérification, alors que le fichier `piecemap` est suffisant et prend moins de place.
 
 ##### Bigfile piecemap
 
-It holds the per-piece SHA-512/256 hashes. The piece size and the picemap filename is defined in `content.json`, eg.:
+Il contient les hashs SHA-512/256 de chaque morceau. La taille du morceau et le nom du ficher piecemap sont défini dans le `content.json`, exemple :
 
 ```
 ...
@@ -456,7 +454,7 @@ It holds the per-piece SHA-512/256 hashes. The piece size and the picemap filena
 ...
 ```
 
-Having the following data structure, the piecemap file is packed into the [msgpack](https://msgpack.org/) format:
+Avec la structure définit, le fichier piecemap est packagé au format [msgpack](https://msgpack.org/) :
 
 ```
 {

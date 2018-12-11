@@ -1,78 +1,78 @@
-# Certificate Authority
+# Autorité de certification
 
-An account without password? A certificate for me? You realize the ID system of ZeroNet does not conform to convention. In this section, you are going to learn about how user certificate and certificate authority work in ZeroNet.
+Un compte sans mot de passe ? Un certificat pour moi ? On peut noter que le système d'identification de ZeroNet est éloigné des conventions. Dans cette section, nous allons parler de comment les comptes utilisateurs et les autorités de certification fonctionnent dans ZeroNet.
 
-## What does a certificate authority do?
+## Qu'est ce qu'une autorité de certification fait ?
 
-In ZeroNet, everything is signed by Bitcoin signing keys. A certificate provides a unique and memorizable name for a Bitcoin address. A certificate authority (or an ID provider) is responsible for proving the relationship between a unique friendly name and a Bitcoin address.
+Dans ZeroNet, tout est signé avec des clefs Bitcoin. Un certificat offre un nom lisible et unique pour une adresse Bitcoin. Une autorité de certification (ou un )
 
-## Certificate format
+## Format du certificat
 
-### Body
+### Corps
 
-The body of a certificate contains a Bitcoin address, a portal type, and a memorizable user name.
+Le corps d'un certificat contiens une adresse Bitcoin, un type de portail, et un nom d'utilisateur humainement lisible.
 
 ```
 [BitcoinAddress]#[PortalType]/[UserName]
 ```
 
-**Example:**
+**Exemple:**
 
 ```
 1H28iygiKXe3GUMcD77HiifVqtf3858Aft#web/hellozeronet
 ```
 
-- Bitcoin address: `1H28iygiKXe3GUMcD77HiifVqtf3858Aft`
-- Portal type: `web`
-- User name: `hellozeronet`
+- Adresse Bitcoin: `1H28iygiKXe3GUMcD77HiifVqtf3858Aft`
+- Type de portail: `web`
+- Nom d'utilisateur: `hellozeronet`
 
-**General rules:**
+**Règles générales:**
 
-The Bitcoin address, the portal type and the user name **must not** contain the character `#`, `@` or `/`
+L'adresse Bitcoin, le type de portail et le nom d'utilisateur **ne doit pas** contenir les caractères `#`, `@` ou `/`.
 
-Only 0-9 and a-z are allowed in a user name. All English letters in a user name **must** be in lower case. Characters not in the allowed set **must not** be used as parts of a user name. A user name **should not** be too long. A user name **should** be legible and **should not** interfere with user interface rendering.
+Seul les chiffres de 0-9 et les lettres a-z sont autorisés dans le nom d'utilisateur. Toute les lettre anglaises dans le nom d'utilisateur **doivent** être en minuscule. Les caractères non autorisés **ne doivent pas** être utilisé dans le nom d'utilisateur. Un nom d'utilisateur **ne devrait pas** être trop long. Un nom d'utilisateur **devrait** être lisible et **ne devrait pas** intéreférer avec le rendu de l'interface.
 
-A user name **must** be unique in the pool of all registered user names.
+Un nom d'utilisateur **doit** être unique.
 
 ### Signature
 
-A certificate signing algorithm loads a secret signing key and generates a deterministic Bitcoin signature for the body.
+Un algorithm de signature de certificat utilise une clef secrète et génère une signature Bitcoin déterministique pour le corps.
 
-**From the source code:**
+**Code source :**
 
 ```python
 sign = os.popen("python zeronet.py --debug cryptSign %s#bitmsg/%s %s 2>&1" % (auth_address, user_name, config.site_privatekey)).readlines()[-1].strip()
 ```
 
-### Certificate
+### Certificat
 
-By looking at the source code of ZeroID, we know how a certificate is stored in its public database.
+En regardant le code source de ZeroID, on note comment le certificat est stocké dans la base de donnée.
 
 ```python
 data["users"][user_name] = "bitmsg,%s,%s" % (auth_address, sign)
 ```
 
-**Example:**
+**Exemple:**
 
 ```
 "hellozeronet": "web,1H28iygiKXe3GUMcD77HiifVqtf3858Aft,HA2A+iKekECD3hasrsN8IrR86BnXQ63kPH+9A85JLO9hLUpRJTBn62UfnuuF92B9CIc6+EewAIqzIn9UoVq2LPA="
 ```
 
-A certificate can be stored in various formats. However, all formats must include:
+Un certficat peut être stocké sous de multiple formats. Cependant, tout les formats doivent inclure :
 
-- The Bitcoin address: `1H28iygiKXe3GUMcD77HiifVqtf3858Aft`
-- The portal type: `web`
-- The user name: `hellozeronet`
-- The signature from authority: `HA2A+iKekECD3hasrsN8IrR86BnXQ63kPH+9A85JLO9hLUpRJTBn62UfnuuF92B9CIc6+EewAIqzIn9UoVq2LPA=`
+- L'adresse Bitcoin : `1H28iygiKXe3GUMcD77HiifVqtf3858Aft`
+- Le type de portail : `web`
+- Le nomo d'utilisateur : `hellozeronet`
+- La signature de l'autorité: `HA2A+iKekECD3hasrsN8IrR86BnXQ63kPH+9A85JLO9hLUpRJTBn62UfnuuF92B9CIc6+EewAIqzIn9UoVq2LPA=`
 
-## Usage in `content.json`
+## Utilisation dans `content.json`
 
-Site owners can choose which certificate authorities to trust.
+Les propriétaires des sites peuvent choisir quel autorité de certificat utilisé.
 
-The Blue Hub, for example, accepts certificates signed by ZeroID. This rule is defined in its `data/users/content.json`
+Le Blue Hub, par exemple, accepte les certificats signés par ZeroId. La règle est définis dans son `data/users/content.json`
 
-- The ID provider has a friendly name: `zeroid.bit`
-- The public key digest of the ID provider is: `1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz`
+- L'émetteur d'ID a un nom lisible : `zeroid.bit`
+- La clef publiaue de l'émetteur d'ID est : `1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz`
 
 ```json
 "user_contents": {
@@ -84,7 +84,7 @@ The Blue Hub, for example, accepts certificates signed by ZeroID. This rule is d
 }
 ```
 
-Every user presents his certificate in the manifest file in his Bitcoin folder. For example, `data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json` says:
+Chaque utilisateur présente son certificat dans le fichier manifest de répertoire utilisateur (nommé après son adresse Bitcoin). Par exemple, `data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json` dit :
 
 ```json
 {
@@ -106,43 +106,43 @@ Every user presents his certificate in the manifest file in his Bitcoin folder. 
 }
 ```
 
-Site specific:
+Site :
 
-- Expected site URL: `"address": "1BLueGvui1GdbtsjcKqCf4F67uKfritG49"`
-- Expected file path: `"inner_path": "data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json"`
+- Url du site requis: `"address": "1BLueGvui1GdbtsjcKqCf4F67uKfritG49"`
+- Chemin du fichier requis: `"inner_path": "data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json"`
 
-Certificate information:
+Information certificat :
 
-- ID provider: `zeroid.bit`
-- User name: `nofish`
-- User Bitcoin address: `1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj`
-- Portal type: `web`
-- Signature from ID provider: `HPiZsWEJ5eLnspUj8nQ75WXbSanLz0YhQf5KJDq+4bWe6wNW98Vv9PXNyPDNu2VX4bCEXhRC65pS3CM7cOrjjik=`
+- Fournisseur d'ID: `zeroid.bit`
+- Nom d'utilisateur: `nofish`
+- Adresse Bitcoin de l'utilisateur: `1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj`
+- Type de portail: `web`
+- Signature du fournisseur d'ID: `HPiZsWEJ5eLnspUj8nQ75WXbSanLz0YhQf5KJDq+4bWe6wNW98Vv9PXNyPDNu2VX4bCEXhRC65pS3CM7cOrjjik=`
 
-### The verifying process
+### La procédure de vérification
 
-1. The verifying algorithm reads `data/users/content.json` to determine what is the expected site for the user content.
+1. L'algorithme qui vérifie la signature lit le contenu du fichier `data/users/content.json` pour déterminer les spécifités pour le contenus utilisateur.
 
-2. The verifying algorithm reads `data/users/content.json` to look up the public key digest of the ID provider.
+2. L'algorithme lit ensuite `data/users/content.json` pour rechercher la clef publique du fournisseur de l'ID.
 
-3. Given a user Bitcoin address, a portal type and a user name, the verifying algorithm reconstructs the body of the certificate.
+3. Avec une adresse Bitcoin d'utilisateur, un type de portail et un nom d'utilisateur, l'algorithme reconstruit le corps du certificat.
 
-4. The verifying algorithm checks the signature from the ID provider, with the public key defined in `data/users/content.json`, to ensure the authenticity of the certificate body.
+4. L'algorithme vérifie la signature du fournisseur d'ID, avec la clef publique définit dans `data/users/content.json`, pour s'assurer de l'authenticité du corps du certificat.
 
-5. The verifying algorithm loads the user public key and checks the authenticity of the user content.
+5. L'algorithme utilise la clef publique de l'utilisateur pour vérifier l'authencité du contenu de l'utilisateur.
 
-## Features and limitations of certificate authorities
+## Avantages et limites des autorités de certifications
 
-- A certificate authority provides memorizable names for user public key digests. It also helps mitigate spam and unsolicited content.
+- Une autorité de certification fournit un nom humainement lisible pour la clef publique d'un utilisateur. Cela aide aussi à diminuer les spams et le contenu non-solicité.
 
-- A user does not have to give away secret information such as passwords. In addition, a user only has to authenticate once.
+- Un utilisateur ne doit pas divilguer des informations secrètes comme un mot de passe (système actuel). De plus, l'utilisateur doit seulement s'authentifier une fois.
 
-- A certificate authority does not have to be approved by any ZeroNet developers. A site owner can choose which certificate authorities to trust for the sake of user content quality.
+- Une autorité de certificaion n'a pas à être approuvé par aucun développeur ZeroNet. Un propriétaire de site peut chosir quelle autorité il/elle souhaite utiliser pour son site afin d'améliorer la qualité de son service pour l'utilisateur.
 
-- A certificate authority is responsible for maintaining its user name pool.
+- Une autorité de certification est responsable de la maintenance de son groupe d'utilisateur.
 
-- ZeroID does not revoke or renew certificates.
+- ZeroID ne supprime pas et ne renouvelle pas les certifcats lui-même.
 
-## Can I live without certificate authorities?
+## Est-ce que je peux utiliser ZeroNet sans un certificat ?
 
-Generally, a certificate is required when you add things to someone else's site. You do not need a certificate when you are modifying your own site.
+Généralement, un certificat est demandé lorsque vous souhaitez poster du contenu sur le site de quelqu'un d'autre. Vous n'avez pas besoin de certificat lorsque vous mettez à jour le contenu de votre propre site.
