@@ -1,0 +1,54 @@
+
+site_name: ZeroNet
+site_url: https://zeronet.io
+site_description: 使用比特币加密技术与BitTorrent的分布式网络
+
+repo_url: https://github.com/HelloZeroNet/ZeroNet
+edit_uri: ../Documentation/edit/master/docs/zh/
+
+extra_css: [docs.css, stylesheets/menu.css]
+extra_javascript: [ZeroFrame.js, jquery.min.js, docs.js, javascripts/menu.js]
+
+docs_dir: docs/zh
+site_dir: site
+
+theme:
+  language: 'zh'
+  feature:
+    tabs: true
+  palette:
+    primary: "deep purple"
+    accent: "deep purple"
+  logo: "logo/zeronet_logo.svg"
+  name: "material"
+  favicon: "logo/favicon.ico"
+  custom_dir: "docs/resources"
+  font: false
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - codehilite
+
+plugins:
+  - search:
+      lang: ['en']
+
+nav:
+- 概述: "index.md"
+- 常见问题: "faq.md"
+- 开始使用ZeroNet:
+  - "using_zeronet/installing.md"
+  - "using_zeronet/sample_sites.md"
+  - "using_zeronet/create_new_site.md"
+- 网站开发:
+  - "site_development/getting_started.md"
+  - "site_development/zeroframe_api_reference.md"
+  - "site_development/content_json.md"
+  - "site_development/dbschema_json.md"
+  - "site_development/cert_authority.md"
+- 帮助开发ZeroNet:
+  - "help_zeronet/contributing.md"
+  - "help_zeronet/coding_conventions.md"
+  - "help_zeronet/network_protocol.md"
+  - "help_zeronet/donate.md"
