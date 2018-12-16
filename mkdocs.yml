@@ -19,7 +19,7 @@ theme:
   palette:
     primary: "deep purple"
     accent: "deep purple"
-  logo: "logo/zeronet_logo.svg"
+  logo: "logo/logo-white.png"
   name: "material"
   favicon: "logo/favicon.ico"
   custom_dir: "docs/resources"
@@ -29,6 +29,9 @@ markdown_extensions:
   - toc:
       permalink: true
   - codehilite
+  - markdown.extensions.admonition
+  - pymdownx.superfences
+  - pymdownx.details
 
 plugins:
   - search:
