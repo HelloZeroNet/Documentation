@@ -14,10 +14,10 @@ _These commands are handled by the wrapper frame and are thus not sent to the Ui
 ### wrapperConfirm
 Display a notification with confirm button
 
-Parameter              | Description
-                  ---  | ---
-**message**            | The message you want to display
-**button_caption** (optional) | Caption of the confirmation button (default: OK)
+| Parameter                     | Description                                      |
+|-------------------------------|--------------------------------------------------|
+| **message**                   | The message you want to display                  |
+| **button_caption** (optional) | Caption of the confirmation button (default: OK) |
 
 **Return**: True if clicked on button
 
@@ -85,11 +85,11 @@ console.log(req.response)
 ### wrapperNotification
 Display a notification
 
-Parameter              | Description
-                  ---  | ---
-**type**               | Possible values: info, error, done
-**message**            | The message you want to display
-**timeout** (optional) | Hide display after this interval (milliseconds)
+| Parameter              | Description                                     |
+|------------------------|-------------------------------------------------|
+| **type**               | Possible values: info, error, done              |
+| **message**            | The message you want to display                 |
+| **timeout** (optional) | Hide display after this interval (milliseconds) |
 
 **Return**: None
 
@@ -105,11 +105,11 @@ Parameter              | Description
 
 Navigates or opens a new popup window.
 
-Parameter              | Description
-                  ---  | ---
-**url**                | Url of the opened page
-**target** (optional)  | Target window name
-**specs** (optional)   | Special properties of the window (see: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
+| Parameter             | Description                                                                                                  |
+|-----------------------|--------------------------------------------------------------------------------------------------------------|
+| **url**               | Url of the opened page                                                                                       |
+| **target** (optional) | Target window name                                                                                           |
+| **specs** (optional)  | Special properties of the window (see: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp)) |
 
 **Example:**
 ```coffeescript
@@ -124,9 +124,9 @@ Parameter              | Description
 Request new permission for site
 
 
-Parameter        | Description
-             --- | ---
-**permission**   | Name of permission (eg. Merger:ZeroMe)
+| Parameter      | Description                            |
+|----------------|----------------------------------------|
+| **permission** | Name of permission (eg. Merger:ZeroMe) |
 
 
 ---
@@ -135,10 +135,10 @@ Parameter        | Description
 
 Prompt text input from user
 
-Parameter           | Description
-               ---  | ---
-**message**         | The message you want to display
-**type** (optional) | Type of the input (default: text)
+| Parameter           | Description                       |
+|---------------------|-----------------------------------|
+| **message**         | The message you want to display   |
+| **type** (optional) | Type of the input (default: text) |
 
 **Return**: Text entered to input
 
@@ -159,11 +159,11 @@ Parameter           | Description
 ### wrapperPushState
 Change the url and adds new entry to browser's history. See: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
 
-Parameter           | Description
-               ---  | ---
-**state**           | State javascript object
-**title**           | Title of the page
-**url**             | Url of the page
+| Parameter | Description             |
+|-----------|-------------------------|
+| **state** | State javascript object |
+| **title** | Title of the page       |
+| **url**   | Url of the page         |
 
 **Return**: None
 
@@ -178,11 +178,11 @@ Parameter           | Description
 ### wrapperReplaceState
 Change the url without adding new entry to browser's history. See: [replaceState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)
 
-Parameter           | Description
-               ---  | ---
-**state**           | State javascript object
-**title**           | Title of the page
-**url**             | Url of the page
+| Parameter | Description             |
+|-----------|-------------------------|
+| **state** | State javascript object |
+| **title** | Title of the page       |
+| **url**   | Url of the page         |
 
 **Return**: None
 
@@ -208,9 +208,9 @@ page.cmd("wrapperRequestFullscreen")
 ### wrapperSetLocalStorage
 Set browser's local store data stored for the site
 
-Parameter              | Description
-                  ---  | ---
-**data**               | Any data structure you want to store for the site
+| Parameter | Description                                       |
+|-----------|---------------------------------------------------|
+| **data**  | Any data structure you want to store for the site |
 
 **Return**: None
 
@@ -226,9 +226,9 @@ Page.cmd "wrapperSetLocalStorage", Page.local_storage
 ### wrapperSetTitle
 Set browser's title
 
-Parameter              | Description
-                  ---  | ---
-**title**              | New browser tab title
+| Parameter | Description           |
+|-----------|-----------------------|
+| **title** | New browser tab title |
 
 **Return**: None
 
@@ -245,9 +245,9 @@ Page.cmd "wrapperSetTitle", "newtitle"
 Set sites's viewport meta tag content (required for mobile sites)
 
 
-Parameter           | Description
-               ---  | ---
-**viewport**        | The viewport meta tag content
+| Parameter    | Description                   |
+|--------------|-------------------------------|
+| **viewport** | The viewport meta tag content |
 
 **Return**: None
 
@@ -294,12 +294,12 @@ Tracker statistics for current site
 ### certAdd
 Add a new certificate to current user.
 
-Parameter            | Description
-                 --- | ---
-**domain**           | Certificate issuer domain
-**auth_type**        | Auth type used on registration
-**auth_user_name**   | User name used on registration
-**cert**             | The cert itself: `auth_address#auth_type/auth_user_name` string signed by the cert site owner
+| Parameter          | Description                                                                                   |
+|--------------------|-----------------------------------------------------------------------------------------------|
+| **domain**         | Certificate issuer domain                                                                     |
+| **auth_type**      | Auth type used on registration                                                                |
+| **auth_user_name** | User name used on registration                                                                |
+| **cert**           | The cert itself: `auth_address#auth_type/auth_user_name` string signed by the cert site owner |
 
 **Return**: "ok", "Not changed" or {"error": error_message}
 
@@ -318,11 +318,11 @@ Parameter            | Description
 ### certSelect
 Display certificate selector.
 
-Parameter            | Description
-                 --- | ---
-**accepted_domains** | List of domains that accepted by site as authorization provider
-**accept_any**       | Does not limits the accepted certificate providers
-**accepted_pattern** | Regexp pattern for accepted certificate providers address
+| Parameter            | Description                                                     |
+|----------------------|-----------------------------------------------------------------|
+| **accepted_domains** | List of domains that accepted by site as authorization provider |
+| **accept_any**       | Does not limits the accepted certificate providers              |
+| **accepted_pattern** | Regexp pattern for accepted certificate providers address       |
 
 **Return**: None
 
@@ -339,9 +339,9 @@ Parameter            | Description
 
 Request notifications about sites's events.
 
-Parameter   | Description
-        --- | ---
-**channel** | Channel to join
+| Parameter   | Description     |
+|-------------|-----------------|
+| **channel** | Channel to join |
 
 **Return**: None
 
@@ -383,10 +383,10 @@ route: (cmd, data) ->
 ### dbQuery
 Run a query on the sql cache
 
-Parameter            | Description
-                 --- | ---
-**query**            | Sql query command
-**params**           | Parameter substitution to the sql query
+| Parameter  | Description                             |
+|------------|-----------------------------------------|
+| **query**  | Sql query command                       |
+| **params** | Parameter substitution to the sql query |
 
 **Return**: <list> Result of the query
 
@@ -436,9 +436,9 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 ### dirList
 List a content of a directory
 
-Parameter        | Description
-             --- | ---
-**inner_path**   | Directory you want to list
+| Parameter      | Description                |
+|----------------|----------------------------|
+| **inner_path** | Directory you want to list |
 
 **Return**: List of file and directory names
 
@@ -449,9 +449,9 @@ Parameter        | Description
 ### fileDelete
 Delete a file
 
-Parameter        | Description
-             --- | ---
-**inner_path**   | The file you want to delete
+| Parameter      | Description                 |
+|----------------|-----------------------------|
+| **inner_path** | The file you want to delete |
 
 **Return**: "ok" on success else the error message
 
@@ -462,12 +462,12 @@ Parameter        | Description
 ### fileGet
 Get file content
 
-Parameter               | Description
-                    --- | ---
-**inner_path**          | The file you want to get
-**required** (optional) | Try and wait for the file if it's not exists. (default: True)
-**format** (optional)   | Encoding of returned data. (text or base64) (default: text)
-**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
+| Parameter               | Description                                                   |
+|-------------------------|---------------------------------------------------------------|
+| **inner_path**          | The file you want to get                                      |
+| **required** (optional) | Try and wait for the file if it's not exists. (default: True) |
+| **format** (optional)   | Encoding of returned data. (text or base64) (default: text)   |
+| **timeout** (optional)  | Maximum wait time to data arrive (default: 300)               |
 
 **Return**: <string> The content of the file
 
@@ -512,9 +512,9 @@ submitTopicVote: (e) =>
 ### fileList
 Recursively list of files in a directory
 
-Parameter        | Description
-             --- | ---
-**inner_path**   | Directory you want to list
+| Parameter      | Description                |
+|----------------|----------------------------|
+| **inner_path** | Directory you want to list |
 
 **Return**: List of files in the directory (recursive)
 
@@ -525,10 +525,10 @@ Parameter        | Description
 ### fileNeed
 Initialize download of a (optional) file.
 
-Parameter               | Description
-                    --- | ---
-**inner_path**          | The file you want to get
-**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
+| Parameter              | Description                                     |
+|------------------------|-------------------------------------------------|
+| **inner_path**         | The file you want to get                        |
+| **timeout** (optional) | Maximum wait time to data arrive (default: 300) |
 
 **Return**: "ok" on successfull download
 
@@ -538,10 +538,10 @@ Parameter               | Description
 ### fileQuery
 Simple json file query command
 
-Parameter            | Description
-                 --- | ---
-**dir_inner_path**   | Pattern of queried files
-**query**            | Query command (optional)
+| Parameter          | Description              |
+|--------------------|--------------------------|
+| **dir_inner_path** | Pattern of queried files |
+| **query**          | Query command (optional) |
 
 **Return**: <list> Matched content
 
@@ -568,9 +568,9 @@ Parameter            | Description
 ### fileRules
 Return the rules for the file.
 
-Parameter            | Description
-                 --- | ---
-**inner_path**       | File inner path
+| Parameter      | Description     |
+|----------------|-----------------|
+| **inner_path** | File inner path |
 
 **Return**: <list> Matched content
 
@@ -602,10 +602,10 @@ Parameter            | Description
 Write file content
 
 
-Parameter          | Description
-               --- | ---
-**inner_path**     | Inner path of the file you want to write
-**content_base64** | Content you want to write to file (base64 encoded)
+| Parameter          | Description                                        |
+|--------------------|----------------------------------------------------|
+| **inner_path**     | Inner path of the file you want to write           |
+| **content_base64** | Content you want to write to file (base64 encoded) |
 
 **Return**: "ok" on success else the error message
 
@@ -724,11 +724,11 @@ Test UiServer websocket connection
 ### sitePublish
 Publish a content.json of the site
 
-Parameter                 | Description
-                      --- | ---
-**privatekey** (optional) | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional) | Inner path of the content json you want to publish (default: content.json)
-**sign** (optional)       | If True then sign the content.json before publish (default: True)
+| Parameter                 | Description                                                                |
+|---------------------------|----------------------------------------------------------------------------|
+| **privatekey** (optional) | Private key used for signing (default: current user's privatekey)          |
+| **inner_path** (optional) | Inner path of the content json you want to publish (default: content.json) |
+| **sign** (optional)       | If True then sign the content.json before publish (default: True)          |
 
 **Return**: "ok" on success else the error message
 
@@ -759,16 +759,16 @@ Reload content.json file content and scans for optional files
 ### siteSign
 Sign a content.json of the site
 
-Parameter                              | Description
-                                   --- | ---
-**privatekey** (optional)              | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional)              | Inner path of the content json you want to sign (default: content.json)
-**remove_missing_optional** (optional) | Remove the optional files from content.json that no longer present in the directory (default: False)
+| Parameter                              | Description                                                                                          |
+|----------------------------------------|------------------------------------------------------------------------------------------------------|
+| **privatekey** (optional)              | Private key used for signing (default: current user's privatekey)                                    |
+| **inner_path** (optional)              | Inner path of the content json you want to sign (default: content.json)                              |
+| **remove_missing_optional** (optional) | Remove the optional files from content.json that no longer present in the directory (default: False) |
 
 **Return**: "ok" on success else the error message
 
 > __Note:__
-> Use "stored" as privatekey if its definied in users.json (eg. cloned sites)
+> Use "stored" as privatekey if its defined in users.json (eg. cloned sites)
 
 **Example:**
 ```coffeescript
@@ -786,9 +786,9 @@ if @site_info["privatekey"] # Private key stored in users.json
 
 Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
 
-Parameter     | Description
-          --- | ---
-**address**   | Address of site want to update (only current site allowed without site ADMIN permission)
+| Parameter   | Description                                                                              |
+|-------------|------------------------------------------------------------------------------------------|
+| **address** | Address of site want to update (only current site allowed without site ADMIN permission) |
 
 **Return:** None
 
@@ -819,9 +819,9 @@ Get user's saved settings.
 
 Set user's site specific settings.
 
-Parameter     | Description
-          --- | ---
-**settings**  | The user's site specific settings you want to store.
+| Parameter    | Description                                          |
+|--------------|------------------------------------------------------|
+| **settings** | The user's site specific settings you want to store. |
 
 **Return:** ok on success
 
@@ -836,20 +836,20 @@ Parameter     | Description
 
 Initialize a new upload endpoint for a bigfile.
 
-Parameter            | Description
-                 --- | ---
-**inner_path**       | Upload location
-**size**             | File size
+| Parameter      | Description     |
+|----------------|-----------------|
+| **inner_path** | Upload location |
+| **size**       | File size       |
 
 
 **Return**: A dict with the information about the upload:
 
-Parameter              | Description
-                   --- | ---
-**url**                | Http upload endpoint
-**piece_size**         | Size of each separately hashed part of the file
-**inner_path**         | File path within the site
-**file_relative_path** | File path relative to content.json
+| Parameter              | Description                                     |
+|------------------------|-------------------------------------------------|
+| **url**                | Http upload endpoint                            |
+| **piece_size**         | Size of each separately hashed part of the file |
+| **inner_path**         | File path within the site                       |
+| **file_relative_path** | File path relative to content.json              |
 
 > __Note:__ Not supported non-ascii characters will be automatically removed from `inner_path` and `file_relative_path` values
 
@@ -919,9 +919,9 @@ Allow cross-site file access under virtual directory **/cors-siteaddress/** and 
 
 Request Cross origin resource sharing permission with the given site.
 
-Parameter            | Description
-                 --- | ---
-**address**          | The site address you want get cors access
+| Parameter   | Description                               |
+|-------------|-------------------------------------------|
+| **address** | The site address you want get cors access |
 
 **Return**: ok on success
 
@@ -940,9 +940,9 @@ The site will be added to user's client if it's required.
 
 Get user's site specific publickey
 
-Parameter            | Description
-                 --- | ---
-**index** (optional) | Sub-publickey within site (default: 0)
+| Parameter            | Description                            |
+|----------------------|----------------------------------------|
+| **index** (optional) | Sub-publickey within site (default: 0) |
 
 
 **Return**: base64 encoded publickey
@@ -953,11 +953,11 @@ Parameter            | Description
 
 Encrypt a text using a publickey
 
-Parameter                      | Description
-                           --- | ---
-**text**                       | Text to encrypt
-**publickey** (optional)       | User's publickey index (int) or base64 encoded publickey (default: 0)
-**return_aes_key** (optional)  | Get the AES key used in encryption (default: False)
+| Parameter                     | Description                                                           |
+|-------------------------------|-----------------------------------------------------------------------|
+| **text**                      | Text to encrypt                                                       |
+| **publickey** (optional)      | User's publickey index (int) or base64 encoded publickey (default: 0) |
+| **return_aes_key** (optional) | Get the AES key used in encryption (default: False)                   |
 
 
 **Return**: Encrypted text in base64 format or [Encrypted text in base64 format, AES key in base64 format]
@@ -968,10 +968,10 @@ Parameter                      | Description
 
 Try to decrypt list of texts
 
-Parameter                      | Description
-                           --- | ---
-**params**                     | A text or list of encrypted texts
-**privatekey** (optional)      | User's privatekey index (int) or base64 encoded privatekey (default: 0)
+| Parameter                 | Description                                                             |
+|---------------------------|-------------------------------------------------------------------------|
+| **params**                | A text or list of encrypted texts                                       |
+| **privatekey** (optional) | User's privatekey index (int) or base64 encoded privatekey (default: 0) |
 
 
 **Return**: Decrypted text or list of decrypted texts (null for failed decodings)
@@ -982,11 +982,11 @@ Parameter                      | Description
 
 Encrypt a text using the key and the iv
 
-Parameter                      | Description
-                           --- | ---
-**text**                       | A text encrypt using AES
-**key** (optional)             | Base64 encoded password (default: generate new)
-**iv** (optional)              | Base64 encoded iv (default: generate new)
+| Parameter          | Description                                     |
+|--------------------|-------------------------------------------------|
+| **text**           | A text encrypt using AES                        |
+| **key** (optional) | Base64 encoded password (default: generate new) |
+| **iv** (optional)  | Base64 encoded iv (default: generate new)       |
 
 
 **Return**: [base64 encoded key, base64 encoded iv, base64 encoded encrypted text]
@@ -998,13 +998,13 @@ Parameter                      | Description
 
 Decrypt text using the IV and AES key
 
-Parameter                      | Description
-                           --- | ---
-**iv**                         | IV in Base64 format
-**encrypted_text**             | Encrypted text in Base64 format
-**encrypted_texts**            | List of [base64 encoded iv, base64 encoded encrypted text] pairs
-**key**                        | Base64 encoded password for the text
-**keys**                       | Keys for decoding (tries every one for every pairs)
+| Parameter           | Description                                                      |
+|---------------------|------------------------------------------------------------------|
+| **iv**              | IV in Base64 format                                              |
+| **encrypted_text**  | Encrypted text in Base64 format                                  |
+| **encrypted_texts** | List of [base64 encoded iv, base64 encoded encrypted text] pairs |
+| **key**             | Base64 encoded password for the text                             |
+| **keys**            | Keys for decoding (tries every one for every pairs)              |
 
 
 **Return**: Decoded text or list of decoded texts
@@ -1022,17 +1022,17 @@ Set followed sql queries.
 
 The SQL query should result in rows with cols:
 
-Field          | Description
-           --- | ---
-**type**       | Type: post, article, comment, mention
-**date_added** | Event time
-**title**      | Event's first line to be displayed
-**body**       | Event's second and third line
-**url**        | Link to event's page
+| Field          | Description                           |
+|----------------|---------------------------------------|
+| **type**       | Type: post, article, comment, mention |
+| **date_added** | Event time                            |
+| **title**      | Event's first line to be displayed    |
+| **body**       | Event's second and third line         |
+| **url**        | Link to event's page                  |
 
-Parameter      | Description
-           --- | ---
-**feeds**      | Format: {"query name": [SQL query, [param1, param2, ...], ...}, parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
+| Parameter | Description                                                                                                                                                |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **feeds** | Format: {"query name": [SQL query, [param1, param2, ...], ...}, parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query. |
 
 **Return**: ok
 
@@ -1072,10 +1072,10 @@ Execute all followed sql query
 
 **Return**: The result of the followed Sql queries
 
-Parameter            | Description
-                 --- | ---
-**limit**            | Limit of results per followed site (default: 10)
-**day_limit**        | Return no older than number of this days (default: 3)
+| Parameter     | Description                                           |
+|---------------|-------------------------------------------------------|
+| **limit**     | Limit of results per followed site (default: 10)      |
+| **day_limit** | Return no older than number of this days (default: 3) |
 
 ---
 
@@ -1086,9 +1086,9 @@ Parameter            | Description
 
 Start downloading new merger site(s)
 
-Parameter            | Description
-                 --- | ---
-**addresses**        | Site address or list of site addresses
+| Parameter     | Description                            |
+|---------------|----------------------------------------|
+| **addresses** | Site address or list of site addresses |
 
 
 ---
@@ -1097,9 +1097,9 @@ Parameter            | Description
 
 Stop seeding and delete a merged site
 
-Parameter            | Description
-                 --- | ---
-**address**           | Site address
+| Parameter   | Description  |
+|-------------|--------------|
+| **address** | Site address |
 
 
 ---
@@ -1108,9 +1108,9 @@ Parameter            | Description
 
 Return merged sites.
 
-Parameter            | Description
-                 --- | ---
-**query_site_info**  | If True, then gives back detailed site info for merged sites
+| Parameter           | Description                                                  |
+|---------------------|--------------------------------------------------------------|
+| **query_site_info** | If True, then gives back detailed site info for merged sites |
 
 
 ---
@@ -1123,11 +1123,11 @@ Parameter            | Description
 
 Add new user to mute list. (Requires confirmation for non-ADMIN sites)
 
-Parameter            | Description
-                 --- | ---
-**auth_address**     | Directory name of the user's data.
-**cert_user_id**     | Cert user name of the user
-**reason**           | Reason of the muting
+| Parameter        | Description                        |
+|------------------|------------------------------------|
+| **auth_address** | Directory name of the user's data. |
+| **cert_user_id** | Cert user name of the user         |
+| **reason**       | Reason of the muting               |
 
 **Return**: ok if confirmed
 
@@ -1142,9 +1142,9 @@ Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit
 
 Remove a user from mute list. (Requires confirmation for non-ADMIN sites)
 
-Parameter            | Description
-                 --- | ---
-**auth_address**     | Directory name of the user's data.
+| Parameter        | Description                        |
+|------------------|------------------------------------|
+| **auth_address** | Directory name of the user's data. |
 
 **Return**: ok if confirmed
 
@@ -1172,11 +1172,11 @@ List muted users. (Requires ADMIN permission on site)
 
 Return list of optional files
 
-Parameter            | Description
-                 --- | ---
-**address**          | The site address you want to list optional files (default: current site)
-**orderby**          | Order of returned optional files (default: time_downloaded DESC)
-**limit**            | Max number of returned optional files (default: 10)
+| Parameter   | Description                                                              |
+|-------------|--------------------------------------------------------------------------|
+| **address** | The site address you want to list optional files (default: current site) |
+| **orderby** | Order of returned optional files (default: time_downloaded DESC)         |
+| **limit**   | Max number of returned optional files (default: 10)                      |
 
 **Return**: Database row of optional files: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
 
@@ -1186,9 +1186,9 @@ Parameter            | Description
 
 Query optional file info from database
 
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
+| Parameter      | Description          |
+|----------------|----------------------|
+| **inner_path** | The path of the file |
 
 **Return**: Database row of optional file: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
 
@@ -1198,10 +1198,10 @@ Parameter            | Description
 
 Pin (exclude from automatized optional file cleanup) downloaded optional file
 
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+| Parameter      | Description                                  |
+|----------------|----------------------------------------------|
+| **inner_path** | The path of the file                         |
+| **address**    | Address for the file (default: current site) |
 
 ---
 
@@ -1209,10 +1209,10 @@ Parameter            | Description
 
 Remove pinning (include from automatized optional file cleanup) of downloaded optional file
 
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+| Parameter      | Description                                  |
+|----------------|----------------------------------------------|
+| **inner_path** | The path of the file                         |
+| **address**    | Address for the file (default: current site) |
 
 ---
 
@@ -1220,10 +1220,10 @@ Parameter            | Description
 
 Query a downloaded optional file
 
-Parameter            | Description
-                 --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+| Parameter      | Description                                  |
+|----------------|----------------------------------------------|
+| **inner_path** | The path of the file                         |
+| **address**    | Address for the file (default: current site) |
 
 ---
 
@@ -1240,9 +1240,9 @@ Return currently used disk space by optional files
 
 Set the optional file limit
 
-Parameter            | Description
-                 --- | ---
-**limit**            | Max space used by the optional files in gb or percent of used space
+| Parameter | Description                                                         |
+|-----------|---------------------------------------------------------------------|
+| **limit** | Max space used by the optional files in gb or percent of used space |
 
 ---
 
@@ -1250,9 +1250,9 @@ Parameter            | Description
 
 List the auto-downloaded directories of optional files
 
-Parameter            | Description
-                 --- | ---
-**address**          | Address of site you want to list helped directories (default: current site)
+| Parameter   | Description                                                                 |
+|-------------|-----------------------------------------------------------------------------|
+| **address** | Address of site you want to list helped directories (default: current site) |
 
 **Return**: Dict of auto-downloaded directories and descriptions
 
@@ -1263,11 +1263,11 @@ Parameter            | Description
 
 Add directory to auto-download list
 
-Parameter            | Description
-                 --- | ---
-**directory**        | Directory you want to add to auto-download list
-**title**            | Title for the entry (displayed on ZeroHello)
-**address**          | Address of site you want to add the auto-download directory (default: current site)
+| Parameter     | Description                                                                         |
+|---------------|-------------------------------------------------------------------------------------|
+| **directory** | Directory you want to add to auto-download list                                     |
+| **title**     | Title for the entry (displayed on ZeroHello)                                        |
+| **address**   | Address of site you want to add the auto-download directory (default: current site) |
 
 ---
 
@@ -1275,10 +1275,10 @@ Parameter            | Description
 
 Remove an auto-download entry
 
-Parameter            | Description
-                 --- | ---
-**directory**        | Directory you want to remove from auto-download list
-**address**          | Address of affected site (default: current site)
+| Parameter     | Description                                          |
+|---------------|------------------------------------------------------|
+| **directory** | Directory you want to remove from auto-download list |
+| **address**   | Address of affected site (default: current site)     |
 
 ---
 
@@ -1286,10 +1286,10 @@ Parameter            | Description
 
 Help download every new uploaded optional file to the site
 
-Parameter            | Description
-                 --- | ---
-**value**            | Enable or Disable the auto-download
-**address**          | Address of affected site (default: current site)
+| Parameter   | Description                                      |
+|-------------|--------------------------------------------------|
+| **value**   | Enable or Disable the auto-download              |
+| **address** | Address of affected site (default: current site) |
 
 
 ---
@@ -1304,11 +1304,11 @@ _(requires ADMIN permission in data/sites.json)_
 Execute command in other site's context
 
 
-Parameter            | Description
-                 --- | ---
-**address**          | The context site's address
-**cmd**              | API command name
-**arguments**        | API command arguments
+| Parameter     | Description                |
+|---------------|----------------------------|
+| **address**   | The context site's address |
+| **cmd**       | API command name           |
+| **arguments** | API command arguments      |
 
 **Return**: Command's return value
 
@@ -1336,10 +1336,10 @@ Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.lo
 Create or update an entry in ZeroNet config file. (zeronet.conf by default)
 
 
-Parameter            | Description
-                 --- | ---
-**key**              | Configuration entry name
-**value**            | Configuration entry new value
+| Parameter | Description                   |
+|-----------|-------------------------------|
+| **key**   | Configuration entry name      |
+| **value** | Configuration entry new value |
 
 
 **Return**: ok
@@ -1353,9 +1353,9 @@ Parameter            | Description
 
 Set the used certificate for current site.
 
-Parameter            | Description
-                 --- | ---
-**domain**           | Domain of the certificate issuer
+| Parameter  | Description                      |
+|------------|----------------------------------|
+| **domain** | Domain of the certificate issuer |
 
 **Return**: None
 
@@ -1367,9 +1367,9 @@ Parameter            | Description
 
 Request notifications about every site's events.
 
-Parameter           | Description
-               ---  | ---
-**channel**         | Channel to join (see channelJoin)
+| Parameter   | Description                       |
+|-------------|-----------------------------------|
+| **channel** | Channel to join (see channelJoin) |
 
 **Return**: None
 
@@ -1418,10 +1418,10 @@ Every file and directory will be skipped if it has a `-default` subfixed version
 
 Eg. If you have a `data` and a `data-default` directory: The `data` directory will not be copied and the `data-default` directory will be renamed to data.
 
-Parameter           | Description
-               ---  | ---
-**address**         | Address of site want to clone
-**root_inner_path** | The source directory of the new site
+| Parameter           | Description                          |
+|---------------------|--------------------------------------|
+| **address**         | Address of site want to clone        |
+| **root_inner_path** | The source directory of the new site |
 
 **Return**: None, automatically redirects to new site on completion
 
@@ -1440,9 +1440,9 @@ Parameter           | Description
 ### sitePause
 Pause site serving
 
-Parameter           | Description
-               ---  | ---
-**address**         | Address of site want to pause
+| Parameter   | Description                   |
+|-------------|-------------------------------|
+| **address** | Address of site want to pause |
 
 **Return**: None
 
@@ -1453,8 +1453,8 @@ Parameter           | Description
 ### siteResume
 Resume site serving
 
-Parameter           | Description
-               ---  | ---
-**address**         | Address of site want to resume
+| Parameter   | Description                    |
+|-------------|--------------------------------|
+| **address** | Address of site want to resume |
 
 **Return**: None 
