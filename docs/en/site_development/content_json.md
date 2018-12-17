@@ -310,13 +310,14 @@ The site's favicon. Replaces the default ZeroNet logo with a site-specific icon.
 
 Rules of allowed user content within the current directory.
 
-Node                   | Description
-                  ---  | ---
-**archived**           | Delete the specified user content directory that is signed earler than the specified timestamp (key: directory name, value: timestamp)
-**archived_before**    | Delete all user content directory if that is signed earler than the specified timestamp
-**cert_signers**       | Accepted domains and valid signer addresses
-**permission_rules**   | Allowed file names and total directory size based on cert domain or authorization method
-**permissions**        | Per-user permissions. (false = banned user)
+Node                     | Description
+                    ---  | ---
+**archived**             | Delete the specified user content directory that is signed earler than the specified timestamp (key: directory name, value: timestamp)
+**archived_before**      | Delete all user content directory if that is signed earler than the specified timestamp
+**cert_signers**         | Accepted domains and valid signer addresses
+**cert_signers_pattern** | Accepted cert signers regexp pattern
+**permission_rules**     | Allowed file names and total directory size based on cert domain or authorization method
+**permissions**          | Per-user permissions. (false = banned user)
 
 **Example**:
 ```python
@@ -328,6 +329,7 @@ Node                   | Description
     "cert_signers": {
       "zeroid.bit": [ "1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz" ]
     },
+    "cert_signers_pattern": "1Zero[0-9].*",
     "permission_rules": {
       ".*": {
         "files_allowed": "data.json",
