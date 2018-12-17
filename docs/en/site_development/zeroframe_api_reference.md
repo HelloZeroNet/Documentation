@@ -17,8 +17,8 @@ Display a notification with a confirmation.
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
-    message = 'Are you sure you want to delete this?' 
-    buttonTitle = 'Delete' 
+    message = 'Are you sure you want to delete this?'
+    buttonTitle = 'Delete'
 
     zeroframe.cmd 'wrapperConfirm', [message, buttonTitle], (confirmed) =>
       if confirmed
@@ -53,7 +53,7 @@ Display a notification with a confirmation.
 
 
 ### wrapperInnerLoaded
-Because `#anchors` in the URL only apply to the outer web page, and not the inner iframe where ZeroNet sites live, this command must be used to do so. When your site is fully loaded, call this method to apply the current anchor to the inner iframe's `src` URL. 
+Because `#anchors` in the URL only apply to the outer web page, and not the inner iframe where ZeroNet sites live, this command must be used to do so. When your site is fully loaded, call this method to apply the current anchor to the inner iframe's `src` URL.
 
 ??? "Example"
     ```coffeescript tab="CoffeeScript"
@@ -619,11 +619,11 @@ Parameter            | Description
 ### certSelect
 Display certificate selector.
 
-Parameter            | Description
-                 --- | ---
-**accepted_domains** | List of domains that accepted by site as authorization provider
-**accept_any**       | Does not limits the accepted certificate providers
-**accepted_pattern** | Regexp pattern for accepted certificate providers address
+Parameter                       | Description
+                            --- | ---
+**accepted_domains** (optional) | List of domains that accepted by site as authorization provider (default: [])
+**accept_any** (optional)       | Does not limits the accepted certificate providers (default: False)
+**accepted_pattern** (optional) | Regexp pattern for accepted certificate providers address (default: None)
 
 **Return**: None.
 
@@ -1788,4 +1788,4 @@ Parameter           | Description
                ---  | ---
 **address**         | Address of site want to resume
 
-**Return**: None 
+**Return**: None
