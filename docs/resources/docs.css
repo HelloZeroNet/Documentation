@@ -1,5 +1,7 @@
 body { background-color: #FFF }
 
+.md-tabs, .md-header { background-color: #4e3f69 !important }
+
 .md-typeset pre {
   line-height: 1.5;
   font-size: 75%;
