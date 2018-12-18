@@ -13,6 +13,10 @@ function translationClicked (event) {
 function goToTranslation (event, currentLang, lang) {
   event.preventDefault()
 
+  if (currentLang === lang) {
+    window.location.reload(false)
+  }
+
   let tmp = window.location.pathname.split('/')
 
   if (currentLang === 'en') {
