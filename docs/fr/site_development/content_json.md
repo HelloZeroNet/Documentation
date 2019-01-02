@@ -1,21 +1,20 @@
-# Structure of content.json
+# Structure du fichier content.json
 
-Every ZeroNet site has a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
+Tout les sites ZeroNet ont un fichier `content.json`. ([Exemple de fichier content.json](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
-This file will carry, among other things, a list of all files on your site and a signature created with your private key. This is used to ensure authenticity of site files and avoid tampering (ie: only you, or people you trust, can update your site's content).
+Ce fichier aura, entre autre, une liste de tout les fichiers sur votre site et une signature crée avec votre clée privée. C'est utilisé pour assurer l'authenticité des fichiers du site et éviter des modifications non souhaités. (NB: seulement vous, ou des personnes que vous avez choissit, peuvent mettre à jour le contenu du site).
 
-Here is a list of supported `content.json` keys:
-
+Voici une liste des champs supporté dans le fichier `content.json` :
 
 ---
 
-## Generated automatically
+## Champs générés automatiquement
 
-_These keys are added automatically when the site is created or cloned._
+_Ces chaps sint ajoutés automatiquement lorsque le site est créé ou cloné._
 
 ### address
 
-Your site address
+L'adresse de votre site
 
 **Example**: 1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ
 
@@ -25,7 +24,7 @@ Your site address
 
 ### address_index
 
-The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you clone a site. It allows recovery of the site's privatekey from your BIP32 seed.
+L'index de la sous-clé BIP 32 correspondant à l'adresse de votre site. Ajouté automatiquement lorsque que vous clonez un site. Cela permet de regénéré votre clé privé à partir de votre BIP32 source (ou 'seed').
 
 **Example**: 30926910
 
@@ -34,7 +33,7 @@ The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 
 ### cloned_from
 
-Only for cloned sites. The site address where the site is cloned from.
+Seulement pour les sites clonés. L'adresse du site depuis lequel il a été cloné.
 
 **Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
 
@@ -43,7 +42,7 @@ Only for cloned sites. The site address where the site is cloned from.
 
 ### clone_root
 
-Only for cloned sites. The sub-directory on the site which this was cloned from.
+Seulement pour les sites clonés. Le sous-répertoire du site qui a été cloné.
 
 **Example**: template-new
 
@@ -53,7 +52,7 @@ Only for cloned sites. The sub-directory on the site which this was cloned from.
 
 ### files
 
-Size and sha512 hashes of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
+Taille et sha512 des fichiers automatiquement téléchargés appartenant au site. Automatiquement ajouté avec la commande  `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```python
@@ -69,7 +68,7 @@ Size and sha512 hashes of automatically downloaded files contained in your site.
 
 ### files_optional
 
-Size and sha512 hashes of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
+Taille et sha512 des fichiers optionnels appartenant au site. Automatiquement ajouté avec la commande `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```python
@@ -86,7 +85,7 @@ Size and sha512 hashes of optional files contained in your site. Automatically a
 
 ### modified
 
-Time when the content.json was generated.
+Temps (timestamps) lorsque le content.json est généré.
 
 **Example**: 1425857522.076
 
@@ -96,7 +95,7 @@ Time when the content.json was generated.
 
 ### sign (deprecated)
 
-ECDSA sign of the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). For backward compatibility, will be removed soon.
+Signature ECDSA du contenu du fichier content.json. (champs dans l'ordre, sans espace et les noeuds `sign` et `signers_sign`). Pour compatibilité avec les version antérieur, sera retiré bientôt.
 
 **Example**:
 ```python
@@ -112,9 +111,9 @@ ECDSA sign of the content.json file content. (keys sorted, without whitespace an
 
 ### signers_sign
 
-Possible signer addresses for the root content.json signed using the site address private key. Multiple entries are allowed here, allowing for site Multisig functionality.
+Les adresses authorisés à signer le principale content.json signé utilisant la clé privée de l'adresse du site. Plusieurs entrées sont possible ici, permettant d'activer la fonctionalité multisig.
 
-**Format of the signed string**: [number_of_signers_required]:[signer address],[signer address]
+**Format de la chaine de caractère signé**: [number_of_signers_required]:[signer address],[signer address]
 
 *Example*:
 ```
@@ -122,23 +121,23 @@ signs_required: 1:1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G,1CK6KHY6MHgYvmRQ4PAafKYDrg1
 signers_sign: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
 ```
 
-The above signed message is signed using the address "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
+Le messagne signé ci-dessus a été signé avec l'adresse  "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
 
 ---
 
 
 ### signs
 
-ECDSA signature for the the content.json file content:
+Signature ECDSA pour le contenu du content.json :
 
- - `sign`, `signs` JSON nodes removed
- - JSON dumped with keys sorted alphabetically, without whitespace
- - Signature generated on the dumped data, using Electrum Bitcoin message signature format:
-    * [Message encoding](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): `sha256("\x18" || "Bitcoin Signed Message:\n" || num_to_var_int(len(message)) || message)`
-    * [Serialization format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): `recovery_id || r || s`, where 27 ≤ recovery_id ≤ 30; signature length = 1 + 32 + 32 = 65 bytes.
-    * Double vertical bar `||` denotes byte concatenation.
+ - `sign`, `signs` champs JSON sont retirés
+ - JSON reformatté avec ses champs dans l'ordre alphabétique et sans espace  
+ - Signature généré sur les données formatées avec Electrum Bitcoin format de signature de message :
+    * [Message encodé](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): `sha256("\x18" || "Bitcoin Signed Message:\n" || num_to_var_int(len(message)) || message)`
+    * [Format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): `recovery_id || r || s`, où 27 ≤ recovery_id ≤ 30; taille de la signature = 1 + 32 + 32 = 65 bytes.
+    * La double barre verticale `||` représente la concatenation des bytes.
 
-**Example**:
+**Exemple**:
 ```python
   "signs": {
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
@@ -151,22 +150,22 @@ ECDSA signature for the the content.json file content:
 
 ### zeronet_version
 
-The ZeroNet version used to generate content.json file.
+La version de Zeronet utilisé pour générer le fichier `content.json`.
 
-**Example**: 0.2.5
+**Exemple**: 0.2.5
 
 ---
 
-## Optional Settings
+## Champs optionels
 
-_These options can be added if the functionality is needed._
+_Les champs suivants peuvent être ajouté si besoin._
 
 
 ### background-color
 
-Background color of the wrapper
+Couleur de fond du wrapper.
 
-**Example**: #F5F5F5
+**Exemple**: #F5F5F5
 
 
 ---
@@ -174,7 +173,7 @@ Background color of the wrapper
 
 ### cloneable
 
-Allow to clone the site if **true**.
+Authorise n'importe qui à cloner le site si **true**.
 
 To make your site properly cloneable you have to have a separate folder of data
 files for a clean start (e.g. without any blog posts).  To do this you have to
