@@ -147,6 +147,7 @@ ECDSA signature for the the content.json file content:
 **Code example**
 ```python
 import json
+import btctools
 
 privatekey = "super_secret_private_key"
 privatekey_address = "private_key_address"
