@@ -144,7 +144,23 @@ ECDSA signature for the the content.json file content:
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
   },
 ```
+**Code example**
+```python
+import json
+import btctools
 
+privatekey = "super_secret_private_key"
+privatekey_address = "private_key_address"
+
+with open('content.json') as f:
+    new_content = json.load(f)
+
+del(new_content["signs"])  # Delete old signs
+sign_content = json.dumps(new_content, sort_keys=True)
+sign = btctools.ecdsa_sign(sign_content, privatekey)
+new_content["signs"] = {}
+new_content["signs"][privatekey_address] = sign
+```
 
 ----
 
