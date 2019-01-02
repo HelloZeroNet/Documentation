@@ -129,7 +129,7 @@ The above signed message is signed using the address "1PcxwuHYxuJEmM4ydtB1vbiAY6
 
 ### signs
 
-ECDSA signature for the the content.json file content:
+ECDSA signature for the content.json file content:
 
  - `sign`, `signs` JSON nodes removed
  - JSON dumped with keys sorted alphabetically, without whitespace
