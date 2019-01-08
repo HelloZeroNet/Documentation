@@ -188,9 +188,9 @@ copied. The postfix is removed from the new site.
 
 ### description
 
-Description of your site, displayed under the site title on ZeroHello.
+Description de votre site, il sera affiché sous son titre dans ZeroHello.
 
-**Example**: Decentralized forum demo
+**Example**: Démo de forum décentralizé
 
 
 ---
