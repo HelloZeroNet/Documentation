@@ -190,7 +190,7 @@ copied. The postfix is removed from the new site.
 
 Description de votre site, il sera affiché sous son titre dans ZeroHello.
 
-**Example**: Démo de forum décentralizé
+**Example**: Forum décentralisé (démo)
 
 
 ---
@@ -198,7 +198,7 @@ Description de votre site, il sera affiché sous son titre dans ZeroHello.
 
 ### domain
 
-Namecoin domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
+Le nom de domaine Namecoin pour votre site. ZeroHello lien redirigera vers celui-ci le plugin Zeroname est activé.
 
 **Example**: Blog.ZeroNetwork.bit
 
@@ -210,31 +210,31 @@ Namecoin domain name of your site. ZeroHello will link to this if the user has Z
 
 ### ignore
 
-Do not sign files matching this pattern.
+Ne pas signer les fichiers associés à cette règle.
 
-**Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from the `data/users/` directory)
+**Exemple**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore tout les fichiers js et css sauf all.js et all.css et ignore le contenu du dossier `data/users/`)
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+Note: [Quelques restrictions](#regular-expression-limitations) sur les combinaisons possibles.
 
 ---
 
 
 ### includes
 
-Include another content.json in the site. This is typically used for subsequent content.json files that are used to govern user data.
+Ajoute un autre content.json au site. C'est souvent utilisé pour ajouter un sous content.json pour les données des utilisateurs.
 
-**Example**:
+**Exemple**:
 
 ```python
 "includes": {
   "data/users/content.json": {
-    "signers": [  # Possible signers address for the file
+    "signers": [  # Signataire autorisé pour ce site
       "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
     ],
-    "signers_required": 1 # The *number* of Valid signs required to accept the file (Multisig possibility),
-    "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
-    "includes_allowed": false, # Whether nested includes are allowed
-    "max_size": 10000, # Max allowed size of included content.json and files it signs (in bytes)
+    "signers_required": 1 # Nombre de signature valide nécessaire pour accepter le fichier
+    "files_allowed": "data.json", # Fichiers autorisés (peut être une expression régulière)
+    "includes_allowed": false, # Si des sous-includes sont autorisés
+    "max_size": 10000, # Taille maximale du content.json inclus et fichiers signés (en bytes)
   }
 }
 ```
@@ -245,9 +245,9 @@ Include another content.json in the site. This is typically used for subsequent 
 
 ### merged_type
 
-The type of merger this site is a part of.
+Le type de groupe ('merger') ce site fait partie.
 
-**Example**: `ZeroMe`
+**Exemple**: `ZeroMe`
 
 
 ---
@@ -255,21 +255,20 @@ The type of merger this site is a part of.
 
 ### optional
 
-Preg pattern of optional files.
+Expression régulière pour les fichiers optionnels.
 
-**Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
+**Exemple**: `(data/mp4/.*|updater/.*)` (tout dans le répertoire `data/mp4` et `updater/` est optionnel)
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+Note: [Quelques restrictions](#regular-expression-limitations) sur les combinaisons possibles.
 
 ---
 
 
 ### signs_required
 
-The **number** of valid signs required to accept the file. Allows for Multisig functionality.
+Le **nombre** de signature valide nécessaire pour accepter le fichier. Permet d'obtenir des site Multisig.
 
-
-**Example**: 1
+**Exemple**: 1
 
 
 ---
@@ -277,9 +276,9 @@ The **number** of valid signs required to accept the file. Allows for Multisig f
 
 ### title
 
-The site's title, visible in the browser title and on ZeroHello.
+Le titre du site, visible depuis le navigateur et sur ZeroHello.
 
-**Example**: ZeroTalk
+**Exemple**: ZeroTalk
 
 
 ----
@@ -287,9 +286,9 @@ The site's title, visible in the browser title and on ZeroHello.
 
 ### translate
 
-Files need be translated. (use language json files in the `languages` directory)
+Fichier à traduire. (utilise les fichiers de language json qui sont dans le répertoire `languages`)
 
-**Example**: ["index.html", "js/all.js"]
+**Exemple**: ["index.html", "js/all.js"]
 
 
 ----
@@ -297,9 +296,9 @@ Files need be translated. (use language json files in the `languages` directory)
 
 ### favicon
 
-The site's favicon. Replaces the default ZeroNet logo with a site-specific icon. Can be a .ico, .png, .svg, etc.
+Le favicon du site. Va remplacer l'icône Zeronet qui est utilisé par défault avec l'icône spécifié. Il peut être .ico, .png, .svg, etc.
 
-**Example**: favicon.ico
+**Exemple**: favicon.ico
 
 
 ----
@@ -307,20 +306,28 @@ The site's favicon. Replaces the default ZeroNet logo with a site-specific icon.
 
 ### user_contents
 
-Rules of allowed user content within the current directory.
+Règles autorisées pour le contenu de l'utilisateur dans ce répertoire.
 
-Node                   | Description
-                  ---  | ---
-**cert_signers**       | Accepted domains and valid signer addresses
-**permission_rules**   | Allowed file names and total directory size based on cert domain or authorization method
-**permissions**        | Per-user permissions. (false = banned user)
+Noeud                    | Déscription
+                    ---  | ---
+**archived**             | Efface le contenu du répertoire de l'utilisateur spécifié qui a été signé avant la date specifié (key: directory name, value: timestamp)
+**archived_before**      | Efface tout le contenu des répertoires d'utilisateur qui ont été signé avant la date spécifié (unix timestamp)
+**cert_signers**         | Nom de domaine acceptée et addresse de signataire valide
+**cert_signers_pattern** | Expression régulière accepté pour les signataire de certificat
+**permission_rules**     | Noms de fichiers autorisés et taille du répertoire autorisés par domaine
+**permissions**          | Permission cas par cas
 
-**Example**:
+**Exemple**:
 ```python
   "user_contents": {
+    "archived": {
+      "1165u6pt5mQNFjyhMVwy6azB7bZuQGLA9b": 1523088096
+    },
+    "archived_before": 1523088096,
     "cert_signers": {
       "zeroid.bit": [ "1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz" ]
     },
+    "cert_signers_pattern": "1Zero[0-9].*",
     "permission_rules": {
       ".*": {
         "files_allowed": "data.json",
@@ -336,29 +343,29 @@ Node                   | Description
   }
 ```
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+Note: [Quelques restrictions](#regular-expression-limitations) sur les combinaisons possibles.
 
 ----
 
 
 ### viewport
 
-Content for the viewport meta tag. (Used for mobile-friendly pages)
+Contenu pour le meta tag "viewport". (A utiliser pour les pages mobile-friendly)
 
-**Example**: width=device-width, initial-scale=1.0
+**Exemple**: width=device-width, initial-scale=1.0
 
 
 ----
 
 ## Regular expression limitations
 
-To avoid the [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack, the following restrictions are applied to each pattern:
+Pour éviter des attaques [ReDoS](https://en.wikipedia.org/wiki/ReDoS), les restrictions suivantes sur chaque expression sont appliqués:
 
- - `.` character is mandatory before repetition characters of `*,+,{`
- - Maximum 9 repetitions are allowed in a single pattern
- - The maximum length of a pattern is 255 characters
+ - Le `.` caractère est obligatoire avant la répitions des caractères `*,+,{`
+ - Une expression peut avoir au maximum 9 répétitions
+ - La longueur maximale d'une expression est de 255 caractères
 
-### Examples:
+### Exemples:
 
- - `((?!json).)*$` not allowed, because of `)` before the `*` character. Possible fix: `.*(?!json)$`
- - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` not allowed, because it has 12 `.*` repetition patterns. Possible fix: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`
+ - `((?!json).)*$` pas autorisé à cause du `)` avant le caractère `*`. Alternative : `.*(?!json)$`
+ - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` pas autorisé car possède 12 répétitions `.*`. Alternative: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`
