@@ -1,21 +1,20 @@
-# Structure of content.json
+# Structure du fichier content.json
 
-Every ZeroNet site has a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
+Tout les sites ZeroNet ont un fichier `content.json`. ([Exemple de fichier content.json](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
-This file will carry, among other things, a list of all files on your site and a signature created with your private key. This is used to ensure authenticity of site files and avoid tampering (ie: only you, or people you trust, can update your site's content).
+Ce fichier aura, entre autre, une liste de tout les fichiers sur votre site et une signature crée avec votre clée privée. C'est utilisé pour assurer l'authenticité des fichiers du site et éviter des modifications non souhaités. (NB: seulement vous, ou des personnes que vous avez choissit, peuvent mettre à jour le contenu du site).
 
-Here is a list of supported `content.json` keys:
-
+Voici une liste des champs supporté dans le fichier `content.json` :
 
 ---
 
-## Generated automatically
+## Champs générés automatiquement
 
-_These keys are added automatically when the site is created or cloned._
+_Ces chaps sint ajoutés automatiquement lorsque le site est créé ou cloné._
 
 ### address
 
-Your site address
+L'adresse de votre site
 
 **Example**: 1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ
 
@@ -25,7 +24,7 @@ Your site address
 
 ### address_index
 
-The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you clone a site. It allows recovery of the site's privatekey from your BIP32 seed.
+L'index de la sous-clé BIP 32 correspondant à l'adresse de votre site. Ajouté automatiquement lorsque que vous clonez un site. Cela permet de regénéré votre clé privé à partir de votre BIP32 source (ou 'seed').
 
 **Example**: 30926910
 
@@ -34,7 +33,7 @@ The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 
 ### cloned_from
 
-Only for cloned sites. The site address where the site is cloned from.
+Seulement pour les sites clonés. L'adresse du site depuis lequel il a été cloné.
 
 **Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
 
@@ -43,7 +42,7 @@ Only for cloned sites. The site address where the site is cloned from.
 
 ### clone_root
 
-Only for cloned sites. The sub-directory on the site which this was cloned from.
+Seulement pour les sites clonés. Le sous-répertoire du site qui a été cloné.
 
 **Example**: template-new
 
@@ -53,7 +52,7 @@ Only for cloned sites. The sub-directory on the site which this was cloned from.
 
 ### files
 
-Size and sha512 hashes of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
+Taille et sha512 des fichiers automatiquement téléchargés appartenant au site. Automatiquement ajouté avec la commande  `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```python
@@ -69,7 +68,7 @@ Size and sha512 hashes of automatically downloaded files contained in your site.
 
 ### files_optional
 
-Size and sha512 hashes of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
+Taille et sha512 des fichiers optionnels appartenant au site. Automatiquement ajouté avec la commande `zeronet.py siteSign siteaddress privatekey`.
 
 **Example**:
 ```python
@@ -86,7 +85,7 @@ Size and sha512 hashes of optional files contained in your site. Automatically a
 
 ### modified
 
-Time when the content.json was generated.
+Temps (timestamps) lorsque le content.json est généré.
 
 **Example**: 1425857522.076
 
@@ -96,7 +95,7 @@ Time when the content.json was generated.
 
 ### sign (deprecated)
 
-ECDSA sign of the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). For backward compatibility, will be removed soon.
+Signature ECDSA du contenu du fichier content.json. (champs dans l'ordre, sans espace et les noeuds `sign` et `signers_sign`). Pour compatibilité avec les version antérieur, sera retiré bientôt.
 
 **Example**:
 ```python
@@ -112,9 +111,9 @@ ECDSA sign of the content.json file content. (keys sorted, without whitespace an
 
 ### signers_sign
 
-Possible signer addresses for the root content.json signed using the site address private key. Multiple entries are allowed here, allowing for site Multisig functionality.
+Les adresses authorisés à signer le principale content.json signé utilisant la clé privée de l'adresse du site. Plusieurs entrées sont possible ici, permettant d'activer la fonctionalité multisig.
 
-**Format of the signed string**: [number_of_signers_required]:[signer address],[signer address]
+**Format de la chaine de caractère signé**: [number_of_signers_required]:[signer address],[signer address]
 
 *Example*:
 ```
@@ -122,23 +121,23 @@ signs_required: 1:1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G,1CK6KHY6MHgYvmRQ4PAafKYDrg1
 signers_sign: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
 ```
 
-The above signed message is signed using the address "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
+Le messagne signé ci-dessus a été signé avec l'adresse  "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
 
 ---
 
 
 ### signs
 
-ECDSA signature for the the content.json file content:
+Signature ECDSA pour le contenu du content.json :
 
- - `sign`, `signs` JSON nodes removed
- - JSON dumped with keys sorted alphabetically, without whitespace
- - Signature generated on the dumped data, using Electrum Bitcoin message signature format:
-    * [Message encoding](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): `sha256("\x18" || "Bitcoin Signed Message:\n" || num_to_var_int(len(message)) || message)`
-    * [Serialization format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): `recovery_id || r || s`, where 27 ≤ recovery_id ≤ 30; signature length = 1 + 32 + 32 = 65 bytes.
-    * Double vertical bar `||` denotes byte concatenation.
+ - `sign`, `signs` champs JSON sont retirés
+ - JSON reformatté avec ses champs dans l'ordre alphabétique et sans espace  
+ - Signature généré sur les données formatées avec Electrum Bitcoin format de signature de message :
+    * [Message encodé](https://github.com/vbuterin/pybitcointools/blob/87806f3c984e258a5f30814a089b5c29cbcf0952/bitcoin/main.py#L405): `sha256("\x18" || "Bitcoin Signed Message:\n" || num_to_var_int(len(message)) || message)`
+    * [Format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): `recovery_id || r || s`, où 27 ≤ recovery_id ≤ 30; taille de la signature = 1 + 32 + 32 = 65 bytes.
+    * La double barre verticale `||` représente la concatenation des bytes.
 
-**Example**:
+**Exemple**:
 ```python
   "signs": {
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
@@ -151,22 +150,22 @@ ECDSA signature for the the content.json file content:
 
 ### zeronet_version
 
-The ZeroNet version used to generate content.json file.
+La version de Zeronet utilisé pour générer le fichier `content.json`.
 
-**Example**: 0.2.5
+**Exemple**: 0.2.5
 
 ---
 
-## Optional Settings
+## Champs optionels
 
-_These options can be added if the functionality is needed._
+_Les champs suivants peuvent être ajouté si besoin._
 
 
 ### background-color
 
-Background color of the wrapper
+Couleur de fond du wrapper.
 
-**Example**: #F5F5F5
+**Exemple**: #F5F5F5
 
 
 ---
@@ -174,7 +173,7 @@ Background color of the wrapper
 
 ### cloneable
 
-Allow to clone the site if **true**.
+Authorise n'importe qui à cloner le site si **true**.
 
 To make your site properly cloneable you have to have a separate folder of data
 files for a clean start (e.g. without any blog posts).  To do this you have to
@@ -189,9 +188,9 @@ copied. The postfix is removed from the new site.
 
 ### description
 
-Description of your site, displayed under the site title on ZeroHello.
+Description de votre site, il sera affiché sous son titre dans ZeroHello.
 
-**Example**: Decentralized forum demo
+**Example**: Forum décentralisé (démo)
 
 
 ---
@@ -199,7 +198,7 @@ Description of your site, displayed under the site title on ZeroHello.
 
 ### domain
 
-Namecoin domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
+Le nom de domaine Namecoin pour votre site. ZeroHello lien redirigera vers celui-ci le plugin Zeroname est activé.
 
 **Example**: Blog.ZeroNetwork.bit
 
@@ -211,31 +210,31 @@ Namecoin domain name of your site. ZeroHello will link to this if the user has Z
 
 ### ignore
 
-Do not sign files matching this pattern.
+Ne pas signer les fichiers associés à cette règle.
 
-**Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from the `data/users/` directory)
+**Exemple**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore tout les fichiers js et css sauf all.js et all.css et ignore le contenu du dossier `data/users/`)
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+Note: [Quelques restrictions](#regular-expression-limitations) sur les combinaisons possibles.
 
 ---
 
 
 ### includes
 
-Include another content.json in the site. This is typically used for subsequent content.json files that are used to govern user data.
+Ajoute un autre content.json au site. C'est souvent utilisé pour ajouter un sous content.json pour les données des utilisateurs.
 
-**Example**:
+**Exemple**:
 
 ```python
 "includes": {
   "data/users/content.json": {
-    "signers": [  # Possible signers address for the file
+    "signers": [  # Signataire autorisé pour ce site
       "1LSxsKfC9S9TVXGGNSM3vPHjyW82jgCX5f"
     ],
-    "signers_required": 1 # The *number* of Valid signs required to accept the file (Multisig possibility),
-    "files_allowed": "data.json", # Preg pattern for the allowed files in the include file
-    "includes_allowed": false, # Whether nested includes are allowed
-    "max_size": 10000, # Max allowed size of included content.json and files it signs (in bytes)
+    "signers_required": 1 # Nombre de signature valide nécessaire pour accepter le fichier
+    "files_allowed": "data.json", # Fichiers autorisés (peut être une expression régulière)
+    "includes_allowed": false, # Si des sous-includes sont autorisés
+    "max_size": 10000, # Taille maximale du content.json inclus et fichiers signés (en bytes)
   }
 }
 ```
@@ -246,9 +245,9 @@ Include another content.json in the site. This is typically used for subsequent 
 
 ### merged_type
 
-The type of merger this site is a part of.
+Le type de groupe ('merger') ce site fait partie.
 
-**Example**: `ZeroMe`
+**Exemple**: `ZeroMe`
 
 
 ---
@@ -256,21 +255,20 @@ The type of merger this site is a part of.
 
 ### optional
 
-Preg pattern of optional files.
+Expression régulière pour les fichiers optionnels.
 
-**Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
+**Exemple**: `(data/mp4/.*|updater/.*)` (tout dans le répertoire `data/mp4` et `updater/` est optionnel)
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+Note: [Quelques restrictions](#regular-expression-limitations) sur les combinaisons possibles.
 
 ---
 
 
 ### signs_required
 
-The **number** of valid signs required to accept the file. Allows for Multisig functionality.
+Le **nombre** de signature valide nécessaire pour accepter le fichier. Permet d'obtenir des site Multisig.
 
-
-**Example**: 1
+**Exemple**: 1
 
 
 ---
@@ -278,9 +276,9 @@ The **number** of valid signs required to accept the file. Allows for Multisig f
 
 ### title
 
-The site's title, visible in the browser title and on ZeroHello.
+Le titre du site, visible depuis le navigateur et sur ZeroHello.
 
-**Example**: ZeroTalk
+**Exemple**: ZeroTalk
 
 
 ----
@@ -288,9 +286,9 @@ The site's title, visible in the browser title and on ZeroHello.
 
 ### translate
 
-Files need be translated. (use language json files in the `languages` directory)
+Fichier à traduire. (utilise les fichiers de language json qui sont dans le répertoire `languages`)
 
-**Example**: ["index.html", "js/all.js"]
+**Exemple**: ["index.html", "js/all.js"]
 
 
 ----
@@ -298,9 +296,9 @@ Files need be translated. (use language json files in the `languages` directory)
 
 ### favicon
 
-The site's favicon. Replaces the default ZeroNet logo with a site-specific icon. Can be a .ico, .png, .svg, etc.
+Le favicon du site. Va remplacer l'icône Zeronet qui est utilisé par défault avec l'icône spécifié. Il peut être .ico, .png, .svg, etc.
 
-**Example**: favicon.ico
+**Exemple**: favicon.ico
 
 
 ----
@@ -308,20 +306,28 @@ The site's favicon. Replaces the default ZeroNet logo with a site-specific icon.
 
 ### user_contents
 
-Rules of allowed user content within the current directory.
+Règles autorisées pour le contenu de l'utilisateur dans ce répertoire.
 
-Node                   | Description
-                  ---  | ---
-**cert_signers**       | Accepted domains and valid signer addresses
-**permission_rules**   | Allowed file names and total directory size based on cert domain or authorization method
-**permissions**        | Per-user permissions. (false = banned user)
+Noeud                    | Déscription
+                    ---  | ---
+**archived**             | Efface le contenu du répertoire de l'utilisateur spécifié qui a été signé avant la date specifié (key: directory name, value: timestamp)
+**archived_before**      | Efface tout le contenu des répertoires d'utilisateur qui ont été signé avant la date spécifié (unix timestamp)
+**cert_signers**         | Nom de domaine acceptée et addresse de signataire valide
+**cert_signers_pattern** | Expression régulière accepté pour les signataire de certificat
+**permission_rules**     | Noms de fichiers autorisés et taille du répertoire autorisés par domaine
+**permissions**          | Permission cas par cas
 
-**Example**:
+**Exemple**:
 ```python
   "user_contents": {
+    "archived": {
+      "1165u6pt5mQNFjyhMVwy6azB7bZuQGLA9b": 1523088096
+    },
+    "archived_before": 1523088096,
     "cert_signers": {
       "zeroid.bit": [ "1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz" ]
     },
+    "cert_signers_pattern": "1Zero[0-9].*",
     "permission_rules": {
       ".*": {
         "files_allowed": "data.json",
@@ -337,29 +343,29 @@ Node                   | Description
   }
 ```
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+Note: [Quelques restrictions](#regular-expression-limitations) sur les combinaisons possibles.
 
 ----
 
 
 ### viewport
 
-Content for the viewport meta tag. (Used for mobile-friendly pages)
+Contenu pour le meta tag "viewport". (A utiliser pour les pages mobile-friendly)
 
-**Example**: width=device-width, initial-scale=1.0
+**Exemple**: width=device-width, initial-scale=1.0
 
 
 ----
 
 ## Regular expression limitations
 
-To avoid the [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack, the following restrictions are applied to each pattern:
+Pour éviter des attaques [ReDoS](https://en.wikipedia.org/wiki/ReDoS), les restrictions suivantes sur chaque expression sont appliqués:
 
- - `.` character is mandatory before repetition characters of `*,+,{`
- - Maximum 9 repetitions are allowed in a single pattern
- - The maximum length of a pattern is 255 characters
+ - Le `.` caractère est obligatoire avant la répitions des caractères `*,+,{`
+ - Une expression peut avoir au maximum 9 répétitions
+ - La longueur maximale d'une expression est de 255 caractères
 
-### Examples:
+### Exemples:
 
- - `((?!json).)*$` not allowed, because of `)` before the `*` character. Possible fix: `.*(?!json)$`
- - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` not allowed, because it has 12 `.*` repetition patterns. Possible fix: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`
+ - `((?!json).)*$` pas autorisé à cause du `)` avant le caractère `*`. Alternative : `.*(?!json)$`
+ - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` pas autorisé car possède 12 répétitions `.*`. Alternative: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`

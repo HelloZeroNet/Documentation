@@ -129,7 +129,7 @@ The above signed message is signed using the address "1PcxwuHYxuJEmM4ydtB1vbiAY6
 
 ### signs
 
-ECDSA signature for the the content.json file content:
+ECDSA signature for the content.json file content:
 
  - `sign`, `signs` JSON nodes removed
  - JSON dumped with keys sorted alphabetically, without whitespace
@@ -274,7 +274,7 @@ The type of merger this site is a part of.
 
 Preg pattern of optional files.
 
-**Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
+**Example**: `(data/mp4/.*|updater/.*)` (everything in `data/mp4` and `updater` directory is optional)
 
 Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
 
@@ -328,8 +328,8 @@ Rules of allowed user content within the current directory.
 
 Node                     | Description
                     ---  | ---
-**archived**             | Delete the specified user content directory that is signed earler than the specified timestamp (key: directory name, value: timestamp)
-**archived_before**      | Delete all user content directory if that is signed earler than the specified timestamp
+**archived**             | Delete the specified user content directory that is signed earlier than the specified timestamp (key: directory name, value: timestamp)
+**archived_before**      | Delete all user content directory if that is signed earlier than the specified timestamp
 **cert_signers**         | Accepted domains and valid signer addresses
 **cert_signers_pattern** | Accepted cert signers regexp pattern
 **permission_rules**     | Allowed file names and total directory size based on cert domain or authorization method
