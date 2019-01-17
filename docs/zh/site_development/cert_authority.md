@@ -36,7 +36,7 @@ A user name **must** be unique in the pool of all registered user names.
 
 ### 签名
 
-A certificate signing algorithm loads a secret signing key and generates a deterministic Bitcoin signature for the body.
+证书签名算法加载秘密签名密钥并为正文生成确定性比特币签名。
 
 **From the source code:**
 
