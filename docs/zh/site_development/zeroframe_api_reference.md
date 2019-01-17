@@ -1,18 +1,18 @@
-# ZeroFrame API Reference
+# ZeroFrame API参考
 
-## The ZeroFrame API
+## ZeroFrame API
 
-ZeroFrame is an API that allows ZeroNet websites to interact with the ZeroNet daemon. It allows sites to save/retrieve files, publish changes and many other things. A copy of the library is included at `js/ZeroFrame.js` whenever a new site is created.
+ZeroFrame是一个允许ZeroNet网站与ZeroNet守护进程交互的API。 它允许站点保存/检索文件，发布更改和许多其他内容。 每当创建新站点时，库的副本都包含在`js/ZeroFrame.js`中。
 
-The library can be imported like any other JavaScript file, or site developers also have the option of [importing through NPM](ZeroFrame API Page, ##Import?). Please see the [ZeroFrame API Reference]() for API details.
+可以像任何其他JavaScript文件一样导入库，或者站点开发人员也可以选择[通过NPM导入](ZeroFrame API Page, ##Import?)。 有关API详细信息，请参阅[ZeroFrame API参考]()。
 
-## Wrapper
+## 包装器
 
-_These commands are handled by the wrapper frame and are thus not sent to the UiServer using websocket._
+_这些命令由包装器帧处理，因此不使用websocket发送到UiServer._
 
 
 ### wrapperConfirm
-Display a notification with confirm button
+使用确认按钮显示通知
 
 Parameter              | Description
                   ---  | ---
@@ -42,8 +42,7 @@ siteDelete: (address) ->
 
 ### wrapperInnerLoaded
 
-Applies the windows.location.hash to page url. Call when you page is fully loaded to jump to the desired anchor point.
-
+将windows.location.hash应用于页面url。 页面完全加载后调用以跳转到所需的锚点。
 
 ---
 
@@ -51,7 +50,7 @@ Applies the windows.location.hash to page url. Call when you page is fully loade
 ### wrapperGetLocalStorage
 **Return**: Browser's local store for the site
 
-**Example:**
+**示例:**
 ```coffeescript
 @cmd "wrapperGetLocalStorage", [], (res) =>
 	res ?= {}
@@ -70,7 +69,7 @@ Applies the windows.location.hash to page url. Call when you page is fully loade
 ### wrapperGetAjaxKey
 **Return**: The key you need to initilize ajax requests
 
-**Example:**
+**示例:**
 ```javascript
 ajax_key = await page.cmdp("wrapperGetAjaxKey")
 req = new window.XMLHttpRequest()
@@ -93,7 +92,7 @@ Parameter              | Description
 
 **Return**: None
 
-**Example:**
+**示例:**
 ```coffeescript
 @cmd "wrapperNotification", ["done", "Your registration has been sent!", 10000]
 ```
@@ -111,7 +110,7 @@ Parameter              | Description
 **target** (optional)  | Target window name
 **specs** (optional)   | Special properties of the window (see: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
 
-**Example:**
+**示例:**
 ```coffeescript
 @cmd "wrapperOpenWindow", ["https://zeronet.io", "_blank", "width=550,height=600,location=no,menubar=no"]
 ```
@@ -142,7 +141,7 @@ Parameter           | Description
 
 **Return**: Text entered to input
 
-**Example:**
+**示例:**
 ```coffeescript
 # Prompt the private key
 @cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
@@ -167,7 +166,7 @@ Parameter           | Description
 
 **Return**: None
 
-**Example:**
+**示例:**
 ```coffeescript
 @cmd "wrapperPushState", [{"scrollY": 100}, "Profile page", "Profile"]
 ```
@@ -630,7 +629,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 
 ### ping
-Test UiServer websocket connection
+测试UiServer websocket连接
 
 **Return:** pong
 
@@ -722,7 +721,7 @@ Test UiServer websocket connection
 
 
 ### sitePublish
-Publish a content.json of the site
+发布站点的content.json
 
 Parameter                 | Description
                       --- | ---
@@ -748,7 +747,7 @@ Parameter                 | Description
 
 
 ### siteReload
-Reload content.json file content and scans for optional files
+重新加载content.json文件内容并扫描可选文件
 
 **Return**: "ok" on success
 
@@ -757,7 +756,7 @@ Reload content.json file content and scans for optional files
 
 
 ### siteSign
-Sign a content.json of the site
+签署该网站的content.json
 
 Parameter                              | Description
                                    --- | ---
@@ -784,7 +783,7 @@ if @site_info["privatekey"] # Private key stored in users.json
 
 ### siteUpdate
 
-Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
+强制检查并从其他节点下载更改的内容（仅当用户处于被动模式并使用旧版Zeronet时才需要）
 
 Parameter     | Description
           --- | ---
@@ -807,7 +806,7 @@ updateSite: =>
 
 ### userGetSettings
 
-Get user's saved settings.
+获取用户保存的设置。
 
 **Return:** The user specific site's settings saved using userSetSettings.
 
@@ -817,7 +816,7 @@ Get user's saved settings.
 
 ### userSetSettings
 
-Set user's site specific settings.
+设置用户的站点特定设置。
 
 Parameter     | Description
           --- | ---
@@ -834,7 +833,7 @@ Parameter     | Description
 
 ### BigfileUploadInit
 
-Initialize a new upload endpoint for a bigfile.
+初始化bigfile的新上载端点。
 
 Parameter            | Description
                  --- | ---
@@ -889,7 +888,7 @@ input.click()
 
 ### chartDbQuery
 
-Run database query on chart database.
+在图表数据库上运行数据库查询。
 
 Arguments and return value: Same as [dbQuery](#dbquery-query-param)
 
