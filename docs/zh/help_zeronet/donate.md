@@ -1,7 +1,7 @@
 <link rel=stylesheet href="../../bitcoinbar/bitcoinbar.css">
 
 
-# Help to keep ZeroNet development alive
+# 帮助保持ZeroNet的发展
 
 
 ## ZeroNet: 2018 first half
@@ -18,7 +18,7 @@
 ---
 
 
-## Bitmessage support
+## Bitmessage支持
 
 <a href="bitcoin:1JxwXnjkv5M822aoJEVJawnS2uKnnT216Z?Label=ZeroNet+Bitmessage+donation" class="bitcoinbar" data-address="1JxwXnjkv5M822aoJEVJawnS2uKnnT216Z" data-goal="1.0"></a>
 
@@ -50,13 +50,13 @@ Benefits:
 ---
 
 
-## DHT support
+## DHT支持
 
 <a href="bitcoin:122tqTo5jTsZfF4xFodhM54b5HUkeVQL4E?Label=ZeroNet+DHT+donation" class="bitcoinbar" data-address="122tqTo5jTsZfF4xFodhM54b5HUkeVQL4E" data-goal="3.0"></a>
 
- * Peer discovery using DHT
+ * 使用DHT进行节点发现
 
-Benefits:
+优点:
 
  * Peer discovery no longer relies on torrent network
  * Ipv6 and Tor peer discovery
@@ -67,13 +67,13 @@ Benefits:
 ---
 
 
-## Private sites
+## 私人网站
 
 <a href="bitcoin:1Q3jV3bAZxKBdMtVjnzfpcsmtXDspjGMnG?Label=ZeroNet+Private+sites" class="bitcoinbar" data-address="1Q3jV3bAZxKBdMtVjnzfpcsmtXDspjGMnG" data-goal="2.0"></a>
 
- * Passworded or public key based peer auth to sites
+ * 基于密码或公钥的节点验证到站点
 
-Benefits:
+优点:
 
  * Secure control over peers who has access to your site
 
@@ -83,11 +83,11 @@ Benefits:
 ---
 
 
-## <s>Full Tor support</s> (done in version 0.3.5)
+## <s>全Tor支持</s> (done in version 0.3.5)
 
  * Allow to seed sites and connect other peers using Tor network (Probably depends on DHT support)
 
-Benefits:
+优点:
 
  * Hiding your IP when distributing new content or downloading site
 
@@ -98,11 +98,11 @@ Benefits:
 ---
 
 
-## <s>Multiuser proxy support</s> (done in version 0.2.7)
+## <s>多用户代理支持</s> (done in version 0.2.7)
 
  * User login/logout using bip32 master seed
 
-Benefits:
+优点:
 
  * Makes open ZeroNet proxies usable
  * Use local ZeroNet more than one user
@@ -113,13 +113,13 @@ Benefits:
 ---
 
 
-## Where does the donation go?
+## 捐赠去哪里了？
 
 The task's received donation goes directly to the developer(s) who successfully and properly integrates the feature (please add your plans and ideas to the issue before you start working on anything big).
 
 
 
-# Sponsors
+# 赞助商
 
 * Better OSX/Safari compatibility made possible by [BrowserStack.com](https://www.browserstack.com/)
 
