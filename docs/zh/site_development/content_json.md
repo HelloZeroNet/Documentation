@@ -1,4 +1,4 @@
-# Structure of content.json
+# content.json的结构
 
 Every ZeroNet site has a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
@@ -9,7 +9,7 @@ Here is a list of supported `content.json` keys:
 
 ---
 
-## Generated automatically
+## 自动生成
 
 _These keys are added automatically when the site is created or cloned._
 
@@ -151,7 +151,7 @@ ECDSA signature for the the content.json file content:
 
 ### zeronet_version
 
-The ZeroNet version used to generate content.json file.
+ZeroNet版本用于生成content.json文件。
 
 **Example**: 0.2.5
 
@@ -357,15 +357,15 @@ Content for the viewport meta tag. (Used for mobile-friendly pages)
 
 ----
 
-## Regular expression limitations
+## 正则表达式限制
 
 To avoid the [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack, the following restrictions are applied to each pattern:
 
- - `.` character is mandatory before repetition characters of `*,+,{`
- - Maximum 9 repetitions are allowed in a single pattern
- - The maximum length of a pattern is 255 characters
-
-### Examples:
+ - 在`*,+,{`的重复字符之前，`.`字符是必需的
+ - 单个模式允许最多9次重复
+ - 模式的最大长度为255个字符
+ 
+### 范例:
 
  - `((?!json).)*$` not allowed, because of `)` before the `*` character. Possible fix: `.*(?!json)$`
  - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` not allowed, because it has 12 `.*` repetition patterns. Possible fix: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`

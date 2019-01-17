@@ -1,73 +1,73 @@
-# Sample ZeroNet sites
+# ZeroNet示例网站
 
 ## ZeroHello
 
-The homepage of ZeroNet
+ZeroNet的主页
 
- - Lists all added sites: Title, Peer number, Modification date, etc.
- - Site actions: Update, Pause, Resume, Delete, Check Files and Save as .zip
- - Clone sites to have your own blog / forum
- - ZeroNet Statistics
- - If an update is available, ZeroNet can be updated with one click
+ - 列出所有添加的站点：标题，节点数，修改日期等。
+ - 站点操作：更新，暂停，恢复，删除，检查文件和另存为.zip
+ - 克隆网站以拥有自己的博客/论坛
+ - ZeroNet统计
+ - 如果有更新，只需点击一下即可更新ZeroNet
 
 ![ZeroHello](../img/zerohello.png)
 
-Address: [1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D](http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D)
+地址: [1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D](http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D)
 
-[Source code](https://github.com/HelloZeroNet/ZeroHello)
+[源代码](https://github.com/HelloZeroNet/ZeroHello)
 
 ---
 
 ## ZeroBlog
 
-Self publishing blog demo
+个人发布博客演示
 
- - Inline content editor
- - Markdown syntax
- - Code syntax highlighting
- - Site signing & publishing through the web interface
+ - 内联内容编辑器
+ - Markdown语法
+ - 代码语法高亮
+ - 通过Web界面进行站点签名和发布
 
-How does it work?
+它是如何工作的？
 
- - `data.json` contained within site files contain blog posts and comments. Each user has their own.
+ - 站点文件中`data.json`包含了博客文章和评论。 每个用户都有自己的。
  - Upon pressing `Sign & Publish new content`, the blogger is asked for the site private key (displayed when [creating a new site using zeronet.py siteCreate command](create_new_site/))
  - Your ZeroNet client signs the new/modified files and publishes directly to other peers
  - The site will then be accessible until to other peers to view
 
 ![ZeroBlog](../img/zeroblog.png)
 
-Address: [1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8](http://127.0.0.1:43110/1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8) or [blog.zeronetwork.bit](http://127.0.0.1:43110/blog.zeronetwork.bit)
+地址: [1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8](http://127.0.0.1:43110/1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8) or [blog.zeronetwork.bit](http://127.0.0.1:43110/blog.zeronetwork.bit)
 
-[Source code](https://github.com/HelloZeroNet/ZeroBlog)
+[源代码](https://github.com/HelloZeroNet/ZeroBlog)
 
 
 ---
 
 ## ZeroTalk
 
-Decentralized, P2P forum demo
+分散的P2P论坛演示
 
  - Post and comment creation, modification, deletion and upvoting
  - Commenting and content modifications pushed directly to other peers
  - Only you can sign and modify your own files
  - Real time display of new comments
 
-How does it work?
+它是如何工作的？
 
  - To post and comment you have to request a certificate of registration (a cryptographic sign) from a ZeroID provider
  - After you have the certificate you can publish your content (messages, posts, upvotes) directly to other peers
 
 ![ZeroTalk](../img/zerotalk.png)
 
-Address: [1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT](http://127.0.0.1:43110/1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT) or [talk.zeronetwork.bit](http://127.0.0.1:43110/talk.zeronetwork.bit)
+地址: [1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT](http://127.0.0.1:43110/1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT) or [talk.zeronetwork.bit](http://127.0.0.1:43110/talk.zeronetwork.bit)
 
-[Source code](https://github.com/HelloZeroNet/ZeroTalk)
+[源代码](https://github.com/HelloZeroNet/ZeroTalk)
 
 ---
 
 ## ZeroMail
 
-End-to-end encrypted, distributed, P2P messaging site. To improve privacy it uses a BitMessage-like solution and will not expose the message recipient.
+端到端加密，分布式P2P消息站点。 为了提高隐私性，它使用类似BitMessage的解决方案，不会公开邮件收件人。
 
  - Using ECIES for secret exchange, AES256 for message encoding
  - When you first visit the site, it adds your public key to your data file. At that point anyone is able to send a message to you
@@ -76,15 +76,15 @@ End-to-end encrypted, distributed, P2P messaging site. To improve privacy it use
 
 ![ZeroTalk](../img/zeromail.png)
 
-Address: [1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27](http://127.0.0.1:43110/1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27) or [mail.zeronetwork.bit](http://127.0.0.1:43110/mail.zeronetwork.bit)
+地址: [1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27](http://127.0.0.1:43110/1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27) or [mail.zeronetwork.bit](http://127.0.0.1:43110/mail.zeronetwork.bit)
 
-[Source code](https://github.com/HelloZeroNet/ZeroMail)
+[源代码](https://github.com/HelloZeroNet/ZeroMail)
 
 ---
 
 ## ZeroMe
 
-Decentralized, Twitter-like P2P social network.
+分散的，类似Twitter的P2P社交网络。
 
  - Stores user information in ZeroMe user registry
  - Stores posts and comments in MergerSites called Hubs
@@ -93,27 +93,27 @@ Decentralized, Twitter-like P2P social network.
  
 ![ZeroMe](../img/zerome.png)
 
-Address: [1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH](http://127.0.0.1:43110/1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH)
+地址: [1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH](http://127.0.0.1:43110/1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH)
 
-[Source code](https://github.com/HelloZeroNet/ZeroMe)
+[源代码](https://github.com/HelloZeroNet/ZeroMe)
 
 ---
 
 ## ReactionGIFs
 
-Demo for optional files, files which only download from other peers if your browser requests them.
+可选文件的演示，它是只有在浏览器请求时才从其他节点下载的文件。
 
 ![ReactionGIFs](../img/reactiongifs.jpg)
 
-Address: [1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h](http://127.0.0.1:43110/1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h)
+地址: [1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h](http://127.0.0.1:43110/1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h)
 
-[Source code](https://github.com/HelloZeroNet/ReactionGIFs)
+[源代码](https://github.com/HelloZeroNet/ReactionGIFs)
 
 ---
 
 ## ZeroChat
 
-The finished site for the tutorial of creating a server-less, SQL backed, real-time updated P2P chat application using ZeroNet in less than 100 lines of code.
+在不到100行代码中使用ZeroNet创建无服务器，SQL支持，实时更新的P2P聊天应用程序的教程的完成站点。
 
  - Uses ZeroID certificate for authentication
  - Stores messages in a SQLite database

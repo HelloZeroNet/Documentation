@@ -1,4 +1,4 @@
-# ZeroNet network protocol
+# ZeroNet网络协议
 
  - Every message is encoded using [MessagePack](http://msgpack.org/)
  - Every request has 3 parameter:
@@ -10,8 +10,8 @@
  - Example error response: `{"cmd": "response", "to": 1, "error": "Unknown site"}`
 
 
-# Handshake
-Every connection begins with a handshake by sending a request to the target network address:
+# 握手
+通过向目标网络地址发送请求，每个连接都以握手开始：
 
 Parameter            | Description
                  --- | ---
@@ -86,7 +86,7 @@ Return:
 }
 ```
 
-# Peer requests
+# 节点请求
 
 #### getFile _site_, _inner_path_, _location_, _[file_size]_
 Request a file from the client
@@ -112,7 +112,7 @@ Return key           | Description
 #### streamFile _site_, _inner_path_, _location_, _[file_size]_
 Stream a file from the client
 
-**Return**:
+**返回**:
 
 Return key           | Description
                  --- | ---
@@ -132,7 +132,7 @@ To avoid having python-msgpack serialize large binary strings, the file body is 
 
 
 #### ping
-Checks if the client is still alive
+检查客户端是否还活着
 
 **Return**:
 
