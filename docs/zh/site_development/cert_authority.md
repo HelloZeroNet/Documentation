@@ -1,16 +1,16 @@
-# Certificate Authority
+# 证书颁发机构
 
-An account without password? A certificate for me? You realize the ID system of ZeroNet does not conform to convention. In this section, you are going to learn about how user certificate and certificate authority work in ZeroNet.
+没有密码的帐户？ 我的证书？ 您意识到ZeroNet的ID系统不符合惯例。 在本节中，您将了解用户证书和证书颁发机构如何在ZeroNet中工作。
 
-## What does a certificate authority do?
+## 证书颁发机构做什么？
 
-In ZeroNet, everything is signed by Bitcoin signing keys. A certificate provides a unique and memorizable name for a Bitcoin address. A certificate authority (or an ID provider) is responsible for proving the relationship between a unique friendly name and a Bitcoin address.
+在ZeroNet中，所有内容都由比特币签名密钥签名。 证书为比特币地址提供唯一且可记忆的名称。 证书颁发机构（或ID提供者）负责证明唯一友好名称和比特币地址之间的关系。
 
-## Certificate format
+## 证书格式
 
 ### Body
 
-The body of a certificate contains a Bitcoin address, a portal type, and a memorizable user name.
+证书正文包含比特币地址，门户类型和可记忆的用户名。
 
 ```
 [BitcoinAddress]#[PortalType]/[UserName]
@@ -34,7 +34,7 @@ Only 0-9 and a-z are allowed in a user name. All English letters in a user name 
 
 A user name **must** be unique in the pool of all registered user names.
 
-### Signature
+### 签名
 
 A certificate signing algorithm loads a secret signing key and generates a deterministic Bitcoin signature for the body.
 
@@ -44,9 +44,9 @@ A certificate signing algorithm loads a secret signing key and generates a deter
 sign = os.popen("python zeronet.py --debug cryptSign %s#bitmsg/%s %s 2>&1" % (auth_address, user_name, config.site_privatekey)).readlines()[-1].strip()
 ```
 
-### Certificate
+### 证书
 
-By looking at the source code of ZeroID, we know how a certificate is stored in its public database.
+通过查看ZeroID的源代码，我们知道证书如何存储在其公共数据库中。
 
 ```python
 data["users"][user_name] = "bitmsg,%s,%s" % (auth_address, sign)
@@ -67,9 +67,9 @@ A certificate can be stored in various formats. However, all formats must includ
 
 ## Usage in `content.json`
 
-Site owners can choose which certificate authorities to trust.
+网站所有者可以选择要信任的证书颁发机构。
 
-The Blue Hub, for example, accepts certificates signed by ZeroID. This rule is defined in its `data/users/content.json`
+例如，Blue Hub接受由ZeroID签署的证书。 This rule is defined in its `data/users/content.json`
 
 - The ID provider has a friendly name: `zeroid.bit`
 - The public key digest of the ID provider is: `1iD5ZQJMNXu43w1qLB8sfdHVKppVMduGz`
@@ -84,7 +84,7 @@ The Blue Hub, for example, accepts certificates signed by ZeroID. This rule is d
 }
 ```
 
-Every user presents his certificate in the manifest file in his Bitcoin folder. For example, `data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json` says:
+每个用户都在他的比特币文件夹中的清单文件中显示他的证书。 例如， `data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json` 说:
 
 ```json
 {
@@ -106,12 +106,12 @@ Every user presents his certificate in the manifest file in his Bitcoin folder. 
 }
 ```
 
-Site specific:
+特定站点：
 
 - Expected site URL: `"address": "1BLueGvui1GdbtsjcKqCf4F67uKfritG49"`
 - Expected file path: `"inner_path": "data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json"`
 
-Certificate information:
+证书信息：
 
 - ID provider: `zeroid.bit`
 - User name: `nofish`
@@ -119,7 +119,7 @@ Certificate information:
 - Portal type: `web`
 - Signature from ID provider: `HPiZsWEJ5eLnspUj8nQ75WXbSanLz0YhQf5KJDq+4bWe6wNW98Vv9PXNyPDNu2VX4bCEXhRC65pS3CM7cOrjjik=`
 
-### The verifying process
+### 验证过程
 
 1. The verifying algorithm reads `data/users/content.json` to determine what is the expected site for the user content.
 
@@ -131,18 +131,18 @@ Certificate information:
 
 5. The verifying algorithm loads the user public key and checks the authenticity of the user content.
 
-## Features and limitations of certificate authorities
+## 证书颁发机构的功能和限制
 
-- A certificate authority provides memorizable names for user public key digests. It also helps mitigate spam and unsolicited content.
+- 证书颁发机构为用户公钥摘要提供可记忆的名称。 它还有助于缓解垃圾邮件和未经请求的内容。
 
-- A user does not have to give away secret information such as passwords. In addition, a user only has to authenticate once.
+- 用户不必泄露密码等秘密信息。 此外，用户只需要进行一次身份验证。
 
-- A certificate authority does not have to be approved by any ZeroNet developers. A site owner can choose which certificate authorities to trust for the sake of user content quality.
+- 任何ZeroNet开发人员都无需批准证书颁发机构。 站点所有者可以为了用户内容质量选择信任哪些证书颁发机构。
 
-- A certificate authority is responsible for maintaining its user name pool.
+- 证书颁发机构负责维护其用户名池。
 
-- ZeroID does not revoke or renew certificates.
+- ZeroID不会撤销或续订证书。
 
-## Can I live without certificate authorities?
+## 我可以没有证书颁发机构吗？
 
-Generally, a certificate is required when you add things to someone else's site. You do not need a certificate when you are modifying your own site.
+通常，当您将内容添加到其他人的站点时，需要证书。 在修改自己的站点时，您不需要证书。
