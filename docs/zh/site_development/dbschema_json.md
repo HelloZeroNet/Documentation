@@ -1,8 +1,8 @@
-# Structure of dbschema.json
+# dbschema.json的结构
 
-[Example dbschema.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
+[dbschema.json示例文件](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
 
-The code below will do the following:
+以下代码将执行以下操作:
 
  - If an updated data/users/*/data.json file is received (eg.: a user posted something):
    - Every row in `data["topics"]` is loaded to the `topic` table
@@ -117,7 +117,7 @@ The code below will do the following:
 }
 ```
 
-## Example for data.json file
+## data.json文件的示例
 ```json
 {
   "next_topic_id": 2,
@@ -175,7 +175,7 @@ The code below will do the following:
 }
 ```
 
-## Example for content.json file
+## content.json文件的示例
 
 ```json
 {
