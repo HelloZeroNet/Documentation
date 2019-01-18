@@ -1,21 +1,20 @@
 # content.json的结构
 
-Every ZeroNet site has a `content.json` file. ([Example content.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
+每个ZeroNet站点都有一个`content.json`文件。 ([content.json示例文件](https://github.com/HelloZeroNet/ZeroTalk/blob/master/content.json))
 
-This file will carry, among other things, a list of all files on your site and a signature created with your private key. This is used to ensure authenticity of site files and avoid tampering (ie: only you, or people you trust, can update your site's content).
+除其他外，此文件将包含您网站上所有文件的列表以及使用您的私钥创建的签名。 这用于确保站点文件的真实性并避免篡改（即：只有您或您信任的人才能更新您站点的内容）。
 
-Here is a list of supported `content.json` keys:
-
+以下是支持的`content.json`键列表：
 
 ---
 
 ## 自动生成
 
-_These keys are added automatically when the site is created or cloned._
+_创建或克隆站点时会自动添加这些键。_
 
 ### address
 
-Your site address
+您的网站地址
 
 **Example**: 1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ
 
@@ -34,7 +33,7 @@ The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 
 ### cloned_from
 
-Only for cloned sites. The site address where the site is cloned from.
+仅适用于克隆网站。 克隆站点的站点地址。
 
 **Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
 
@@ -43,7 +42,7 @@ Only for cloned sites. The site address where the site is cloned from.
 
 ### clone_root
 
-Only for cloned sites. The sub-directory on the site which this was cloned from.
+仅适用于克隆网站。 从中克隆的网站上的子目录。
 
 **Example**: template-new
 
@@ -86,7 +85,7 @@ Size and sha512 hashes of optional files contained in your site. Automatically a
 
 ### modified
 
-Time when the content.json was generated.
+生成content.json的时间。
 
 **Example**: 1425857522.076
 
@@ -157,14 +156,14 @@ ZeroNet版本用于生成content.json文件。
 
 ---
 
-## Optional Settings
+## 可选设置
 
-_These options can be added if the functionality is needed._
+_如果需要功能，可以添加这些选项。_
 
 
 ### background-color
 
-Background color of the wrapper
+包装器的背景颜色
 
 **Example**: #F5F5F5
 
@@ -174,7 +173,7 @@ Background color of the wrapper
 
 ### cloneable
 
-Allow to clone the site if **true**.
+如果为**true**，则允许克隆网站。
 
 To make your site properly cloneable you have to have a separate folder of data
 files for a clean start (e.g. without any blog posts).  To do this you have to
@@ -189,7 +188,7 @@ copied. The postfix is removed from the new site.
 
 ### description
 
-Description of your site, displayed under the site title on ZeroHello.
+您的网站描述，显示在ZeroHello的网站标题下。
 
 **Example**: Decentralized forum demo
 
@@ -199,7 +198,7 @@ Description of your site, displayed under the site title on ZeroHello.
 
 ### domain
 
-Namecoin domain name of your site. ZeroHello will link to this if the user has Zeroname plugin enabled.
+您网站的Namecoin域名。 如果用户启用了Zeroname插件，ZeroHello将链接到此。
 
 **Example**: Blog.ZeroNetwork.bit
 
@@ -211,7 +210,7 @@ Namecoin domain name of your site. ZeroHello will link to this if the user has Z
 
 ### ignore
 
-Do not sign files matching this pattern.
+不要签署与此模式匹配的文件。
 
 **Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from the `data/users/` directory)
 
@@ -222,7 +221,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 ### includes
 
-Include another content.json in the site. This is typically used for subsequent content.json files that are used to govern user data.
+在网站中包含另一个content.json。 这通常用于后续管理用户数据的content.json文件。
 
 **Example**:
 
@@ -246,7 +245,7 @@ Include another content.json in the site. This is typically used for subsequent 
 
 ### merged_type
 
-The type of merger this site is a part of.
+该网站所属的合并类型。
 
 **Example**: `ZeroMe`
 
@@ -256,7 +255,7 @@ The type of merger this site is a part of.
 
 ### optional
 
-Preg pattern of optional files.
+Preg模式的可选文件。
 
 **Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
 
@@ -267,7 +266,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 ### signs_required
 
-The **number** of valid signs required to accept the file. Allows for Multisig functionality.
+接受该文件所需的有效标志**数量**。 允许Multisig功能。
 
 
 **Example**: 1
@@ -278,7 +277,7 @@ The **number** of valid signs required to accept the file. Allows for Multisig f
 
 ### title
 
-The site's title, visible in the browser title and on ZeroHello.
+该网站的标题，在浏览器标题和ZeroHello中可见。
 
 **Example**: ZeroTalk
 
@@ -288,7 +287,7 @@ The site's title, visible in the browser title and on ZeroHello.
 
 ### translate
 
-Files need be translated. (use language json files in the `languages` directory)
+文件需要翻译。 （在`languages`目录中使用语言json文件）
 
 **Example**: ["index.html", "js/all.js"]
 
@@ -298,7 +297,7 @@ Files need be translated. (use language json files in the `languages` directory)
 
 ### favicon
 
-The site's favicon. Replaces the default ZeroNet logo with a site-specific icon. Can be a .ico, .png, .svg, etc.
+该网站的图标。 用站点特定的图标替换默认的ZeroNet徽标。 可以是.ico，.png，.svg等。
 
 **Example**: favicon.ico
 
@@ -308,9 +307,9 @@ The site's favicon. Replaces the default ZeroNet logo with a site-specific icon.
 
 ### user_contents
 
-Rules of allowed user content within the current directory.
+当前目录中允许的用户内容的规则。
 
-Node                   | Description
+Node                   | 描述
                   ---  | ---
 **archived**           | Delete the specified user content directory that is signed earler than the specified timestamp (key: directory name, value: timestamp)
 **archived_before**    | Delete all user content directory if that is signed earler than the specified timestamp
@@ -350,7 +349,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 ### viewport
 
-Content for the viewport meta tag. (Used for mobile-friendly pages)
+视区元标记的内容。 （用于适合移动设备的页面）
 
 **Example**: width=device-width, initial-scale=1.0
 
@@ -359,7 +358,7 @@ Content for the viewport meta tag. (Used for mobile-friendly pages)
 
 ## 正则表达式限制
 
-To avoid the [ReDoS](https://en.wikipedia.org/wiki/ReDoS) algorithmic complexity attack, the following restrictions are applied to each pattern:
+为避免[ReDoS](https://en.wikipedia.org/wiki/ReDoS)算法复杂性攻击，以下限制适用于每种模式：
 
  - 在`*,+,{`的重复字符之前，`.`字符是必需的
  - 单个模式允许最多9次重复

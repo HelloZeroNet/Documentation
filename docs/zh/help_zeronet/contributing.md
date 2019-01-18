@@ -1,6 +1,6 @@
 # 为ZeroNet做贡献
 
-感谢您使用ZeroNet。 ZeroNet是67个权力下放爱好者的合作项目，与您一样。 我们感谢所有用户捕获错误，改进文档以及设计新协议的好主意。 以下是我们要求您开始做出贡献的一些指导原则。
+感谢您使用ZeroNet。 ZeroNet是67+个与您一样的分布式爱好者的合作项目。 我们感谢所有用户捕获错误，改进文档以及设计新协议的好主意。 以下是我们要求您开始做出贡献的一些指导原则。
 
 ### 您不必提供源代码
 
@@ -49,8 +49,8 @@
  
 ### 命名
  -  ClassNames：大写，CamelCased
- -  functionNames：以小写，camelCased开头
- -  variable_names：lowercased，under_scored
+ -  functionNames：小写，camelCased开头
+ -  variable_names：小写，under_scored
 
 ### 变量
  -  file_path：相对于工作目录的文件路径(data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)

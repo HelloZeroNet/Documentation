@@ -241,7 +241,7 @@ Page.cmd "wrapperSetTitle", "newtitle"
 
 ### wrapperSetViewport
 
-Set sites's viewport meta tag content (required for mobile sites)
+设置网站的视区元标记内容（移动网站所需）
 
 
 Parameter           | 描述
@@ -263,13 +263,13 @@ Parameter           | 描述
 
 ## UiServer
 
-The UiServer is for ZeroNet what the LAMP setup is for normal websites.
+UiServer适用于ZeroNet，好比LAMP设置适用于普通网站。
 
-The UiServer will do all the 'backend' work (eg: querying the DB, accessing files, etc). This are the API calls you will need to make your site dynamic.
+UiServer将完成所有“后端”工作（例如：查询数据库，访问文件等）。 这是您使网站动态化所需的API调用。
 
 
 ### announcerInfo
-Tracker statistics for current site
+当前站点的跟踪器统计信息
 
 **返回**:
 ```json
@@ -291,7 +291,7 @@ Tracker statistics for current site
 
 
 ### certAdd
-Add a new certificate to current user.
+向当前用户添加新证书。
 
 Parameter            | 描述
                  --- | ---
@@ -315,7 +315,7 @@ Parameter            | 描述
 
 
 ### certSelect
-Display certificate selector.
+显示证书选择器。
 
 Parameter            | 描述
                  --- | ---
@@ -336,7 +336,7 @@ Parameter            | 描述
 
 ### channelJoin
 
-Request notifications about sites's events.
+请求有关网站活动的通知。
 
 Parameter   | 描述
         --- | ---
@@ -598,7 +598,7 @@ Parameter            | 描述
 
 ### fileWrite
 
-Write file content
+写文件内容
 
 
 Parameter          | 描述
@@ -639,7 +639,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 ### serverInfo
 
-**Return:** <dict> All information about the server
+**Return:** <dict> 有关服务器的所有信息
 
 **示例:**
 ```coffeescript
@@ -669,7 +669,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 ### siteInfo
 
-**返回**: <dict> All information about the site
+**返回**: <dict> 有关该网站的所有信息
 
 **示例:**
 ```coffeescript
@@ -828,7 +828,7 @@ Parameter     | 描述
 ---
 
 
-## Plugin: Bigfile
+## 插件: Bigfile
 
 
 ### BigfileUploadInit
@@ -884,7 +884,7 @@ input.click()
 
 ---
 
-## Plugin: Chart
+## 插件: Chart
 
 ### chartDbQuery
 
@@ -910,7 +910,7 @@ Page.cmd("chartGetPeerLocations")
 
 ---
 
-## Plugin: Cors
+## 插件: Cors
 
 Allow cross-site file access under virtual directory **/cors-siteaddress/** and grant cross-site database query using the [as](#as-address-cmd-arguments) API command.
 
@@ -932,7 +932,7 @@ The site will be added to user's client if it's required.
 ---
 
 
-## Plugin: CryptMessage
+## 插件: CryptMessage
 
 
 ### userPublickey
@@ -1012,7 +1012,7 @@ Parameter                      | 描述
 ---
 
 
-## Plugin: Newsfeed
+## 插件: Newsfeed
 
 
 ### feedFollow
@@ -1078,7 +1078,7 @@ Parameter            | 描述
 
 ---
 
-## Plugin: MergerSite
+## 插件: MergerSite
 
 
 ### mergerSiteAdd
@@ -1115,7 +1115,7 @@ Parameter            | 描述
 ---
 
 
-## Plugin: Mute
+## 插件: Mute
 
 
 ### muteAdd
@@ -1164,7 +1164,7 @@ List muted users. (Requires ADMIN permission on site)
 ---
 
 
-## Plugin: OptionalManager
+## 插件: OptionalManager
 
 
 ### optionalFileList
@@ -1294,7 +1294,7 @@ Parameter            | 描述
 ---
 
 
-## Admin commands
+## 管理员命令
 _(requires ADMIN permission in data/sites.json)_
 
 
