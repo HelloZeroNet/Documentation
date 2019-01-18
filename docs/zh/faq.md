@@ -1,53 +1,50 @@
-# Frequently asked questions
+# 经常问的问题
 
 
-#### Do I need to have a port opened?
+#### 我需要打开一个端口吗？
 
-This is __optional__, you can browse and use ZeroNet sites without an open port.
-If you want to create a new site it's highly recommended to have an open port.
+这是 __可选的__, 您可以在没有开放端口的情况下浏览和使用ZeroNet站点。
+如果要创建新站点，强烈建议使用开放端口。
 
-At startup ZeroNet tries to open a port for you on your router using
-[UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play), if this fails you have to do it manually:
+在启动时，ZeroNet尝试使用[UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play)在您的路由器上为您打开一个端口
+，如果失败，您必须手动执行：
 
-- Try to access your router's web interface using [http://192.168.1.1](http://192.168.1.1)
-or [http://192.168.0.1](http://192.168.0.1)
-- Look for an "Enable UPnP support" or similar option then restart ZeroNet.
+ - 尝试使用[http://192.168.1.1](http://192.168.1.1) 或 [http://192.168.0.1](http://192.168.0.1) 访问路由器的Web界面
+ - 查找“启用UPnP支持”或类似选项，然后重新启动ZeroNet。
 
-If it still doesn't work then try to find a 'port forwarding' section of your router page. This is different for every router. [Here is a tutorial on YouTube.](https://www.youtube.com/watch?v=aQXJ7sLSz14) The port to forward is 15441.
-
-
----
-
-
-#### Is ZeroNet anonymous?
-
-It's no more anonymous than BitTorrent, but privacy (the possibility to find out who is the owner of the comment/site) will increase as the network and the sites gains more peers.
-
-ZeroNet is made to work with anonymity networks: you can easily hide your IP using the Tor network.
+如果它仍然不起作用，那么尝试找到路由器页面的“端口转发”部分。 这对每个路由器都不同。 [这是YouTube上的教程。](https://www.youtube.com/watch?v=aQXJ7sLSz14) 要转发的端口是15441。
 
 
 ---
 
 
-#### How to use ZeroNet with the Tor browser?
+#### ZeroNet是匿名的吗？
 
-In Tor mode it is recommended to use ZeroNet from within the Tor Browser:
+它不比BitTorrent更匿名，但随着网络和网站获得更多节点，隐私（找出谁是评论/网站的所有者的可能性）将会增加。
 
-- Start the Tor Browser
-- Go to address `about:preferences#advanced`
-- Click `Settings...`
+ZeroNet可与匿名网络配合使用：您可以使用Tor网络轻松隐藏IP。
+
+---
+
+
+#### 如何在Tor浏览器中使用ZeroNet？
+
+在Tor模式下，建议在Tor浏览器中使用ZeroNet：
+
+- 启动Tor浏览器
+- 去地址 `about:preferences#advanced`
+- 点击 `Settings...`
 - Enter `127.0.0.1` to field **No proxy for**
 - Open http://127.0.0.1:43110 in the browser
 
-If you still see a blank page:
- - Click on NoScript's button (first on the toolbar)
- - Choose "Temporary allow all this page"
- - Reload the page
-
+如果您仍然看到空白页：
+ - 单击NoScript的按钮（工具栏上的第一个）
+ - 选择“临时允许所有此页面”
+ - 重新加载页面
 ---
 
 
-#### How to use ZeroNet with Tor?
+#### 如何在Tor上使用ZeroNet？
 
 If you want to hide your IP address, install the latest version of ZeroNet then click Tor > Enable Tor for every connection on ZeroHello.
 
@@ -63,7 +60,7 @@ For other OS's, follow the instructions in the "How to make ZeroNet work with To
 ---
 
 
-#### How to make ZeroNet work with Tor under Linux/MacOS?
+#### 如何在Linux/MacOS下使ZeroNet与Tor一起使用？
 
  - Install Tor for your OS following Tor's official guidelines: [Linux](https://www.torproject.org/download/download-unix.html.en) [Mac](https://www.torproject.org/docs/tor-doc-osx.html.en).
  - `sudo nano /etc/tor/torrc`
@@ -79,9 +76,9 @@ For other OS's, follow the instructions in the "How to make ZeroNet work with To
 
 ---
 
-#### Is it possible to use a configuration file?
+#### 是否可以使用配置文件？
 
-Any command line configuration flag can also be used as a configuration option. Place these options line-by-line into a file called `zeronet.conf` in your top-level zeronet directory (the one with zeronet.py). Example:
+任何命令行配置标志也可以用作配置选项。 将这些选项逐行放入顶级zeronet目录（zeronet.py）中名为`zeronet.conf`的文件中。 例：
 
 ```
 [global]
@@ -92,12 +89,12 @@ ui_restrict =
  2.3.4.5
 ```
 
-To list possible options, use the `zeronet.py --help` command
+要列出可能的选项，请使用`zeronet.py --help`命令
 
 ---
 
 
-#### How to make Tor work if my ISP or goverment blocks it?
+#### 如果我的ISP或政府阻止它，如何使Tor工作？
 
 ZeroNet does not include [Tor pluggable transports](https://www.torproject.org/docs/pluggable-transports.html.en) yet. The easiest way to make Tor work in a censored network is to start the Tor browser, configure it to connect to the Tor network with working pluggable transports, and modify ZeroNet's config to use Tor browser's proxy and control port by starting ZeroNet with `--tor_controller 127.0.0.1:9151 --tor_proxy 127.0.0.1:9150` or by adding these parameters to `zeronet.conf`.
 
@@ -111,15 +108,15 @@ tor_proxy = 127.0.0.1:9150
 ---
 
 
-#### Can I use the same username on multiple machines?
+#### 我可以在多台机器上使用相同的用户名吗？
 
-Yes, simply copy the `data/users.json` file to your new machine.
+是的，只需将`data / users.json`文件复制到新机器即可。
 
 
 ---
 
 
-#### How to create a "fancy" (non .bit) site address?
+#### 如何创建“花哨的”（非.bit）网站地址？
 
 Use [vanitygen](https://bitcointalk.org/index.php?topic=25804.0) to generate one. Once you get your keys, create `data/1YourPublicKey...tCkBzAXTKvJk4uj8` directory. Put some files there.
 
@@ -129,7 +126,7 @@ Then navigate to [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](htt
 ---
 
 
-#### How can I register a .bit domain?
+#### 如何注册.bit域名？
 
 You can register .bit domains using [Namecoin](https://namecoin.info/).
 Manage your domains using the client's GUI or by the [command line interface](https://github.com/namecoin/wiki/blob/master/How-to-register-and-configure-.bit-domains.md).
@@ -163,40 +160,39 @@ An empty string (`""`) means the top domain, anything other than that is a sub-d
 ---
 
 
-#### Can I use the generated site address/private key to accept Bitcoin payments?
+#### 我可以使用生成的网站地址/私钥接受比特币付款吗？
 
-Yes, it's a standard Bitcoin address. The private key is WIF formatted, so you can import it in most clients.
+是的，这是一个标准的比特币地址。 私钥是WIF格式的，因此您可以在大多数客户端中导入它。
 
-> __Tip:__ It's not recommended to keep a high amount of money on your site's address, because you have to enter your private key every time you modify your site.
-
-
----
-
-
-#### What happens when someone hosts malicious content?
-
-The ZeroNet sites are sandboxed, they have the same privileges as any other website you visit over the Internet.
-You are in full control of what you are hosting. If you find suspicious content you can stop hosting the site at any time.
+> __Tip:__ 我们不建议您在网站的地址上保留大量资金，因为每次修改网站时都必须输入私钥。
 
 
 ---
 
 
-#### Is it possible to install ZeroNet to a remote machine?
+#### 有人托管恶意内容会发生什么？
 
-Yes, you have to enable the UiPassword plugin by renaming the __plugins/disabled-UiPassword__ directory to __plugins/UiPassword__,
-then start ZeroNet on the remote machine using <br>`zeronet.py --ui_ip "*" --ui_password anypassword`.
-This will bind the ZeroNet UI webserver to all interfaces, but to keep it secure you can only access it by entering the given password.
+ZeroNet站点是沙盒，它们具有与您通过Internet访问的任何其他网站相同的权限。
+您可以完全控制您所托管的内容。 如果您发现可疑内容，您可以随时停止托管该网站。
 
-> __Tip:__ You can also restrict the interface based on ip address by using `--ui_restrict ip1 ip2`.
+---
 
-> __Tip:__ You can specify the password in the config file by creating a `zeronet.conf` file and adding `[global]` and `ui_password = anypassword` lines to it.
+
+#### 是否可以将ZeroNet安装到远程机器上？
+
+是的，你必须通过将 __plugins/disabled -UiPassword__ 目录重命名为 __plugins/UiPassword__ 来启用UiPassword插件，
+然后使用<br>`zeronet.py --ui_ip "*" --ui_password anypassword`在远程计算机上启动ZeroNet。
+这会将ZeroNet UI Web服务器绑定到所有接口，但为了保证其安全，您只能通过输入给定的密码来访问它。
+
+> __Tip:__ 您还可以使用`--ui_restrict ip1 ip2`来限制基于IP地址的接口。
+
+> __Tip:__ 您可以通过创建一个`zeronet.conf`文件并在其中添加`[global]`和`ui_password = anypassword`行来在配置文件中指定密码。
 
 
 ---
 
 
-#### Is there any way to track the bandwidth ZeroNet is using?
+#### 有没有办法跟踪ZeroNet正在使用的带宽？
 
 The sent/received bytes are displayed at ZeroNet's sidebar.<br>(open it by dragging the topright `0` button to left)
 
@@ -206,52 +202,52 @@ The sent/received bytes are displayed at ZeroNet's sidebar.<br>(open it by dragg
 ---
 
 
-#### What happens if two people use the same keys to modify a site?
+#### 如果两个人使用相同的密钥修改网站会发生什么？
 
-Every content.json file is timestamped, the clients always accept the newest one with a valid signature.
-
-
----
-
-
-#### Does ZeroNet use Bitcoin's blockchain?
-
-No, ZeroNet only uses the cryptography of Bitcoin for site addresses and content signing/verification.
-User identification is based on Bitcoin's [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) format.
-
-Namecoin's blockchain is being used for domain registrations, however clients do not download the blockchain. Blockchain metadata is instead passed over the ZeroNet network.
+每个content.json文件都带有时间戳，客户端始终接受具有有效签名的最新文件。
 
 
 ---
 
 
-#### Does ZeroNet only support HTML, CSS websites?
+#### ZeroNet是否使用比特币的区块链？
 
-ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it, such as (VCS repositories, your own thin-client, database, etc.
+不，ZeroNet仅使用比特币加密技术进行站点地址和内容签名/验证。
+用户识别基于比特币的[BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)格式。
+
+Namecoin的区块链用于域名注册，但客户不会下载区块链。 相反，区块链元数据通过ZeroNet网络传递。
 
 
 ---
 
 
-#### How can I create a new ZeroNet site?
+#### ZeroNet是否仅支持HTML，CSS网站？
 
-[Follow these instructions.](../using_zeronet/create_new_site/)
+ZeroNet是为动态，实时更新的网站而构建的，但您可以使用它来提供任何类型的文件，例如（VCS存储库，您自己的瘦客户端，数据库等）。
+
 
 ---
 
 
-#### What happens when I access a site?
+#### 如何创建新的ZeroNet站点？
 
-- When you want to open a new site it asks for visitor's IP addresses from BitTorrent trackers.
-- Initially, a file named __content.json__ is downloaded, which holds all other filenames,
-  __hashes__ and the site owner's cryptographic signature.
-- The downloaded content.json file is __verified__ using the site's __address__ and the site owner's __signature__ from the file.
+[请遵循这些说明.](../using_zeronet/create_new_site/)
+
+---
+
+
+#### 访问网站时会发生什么？
+
+- 当您想要打开一个新站点时，它会向BitTorrent跟踪器询问访问者的IP地址。
+- 最初，下载了一个名为 __content.json__ 的文件，该文件包含所有其他文件名，
+  __hashes__ 和网站所有者的加密签名。
+- 使用站点的 __address__ 和文件中站点所有者的 __signature__， __验证__ 下载的content.json文件。
 - Other files (html, css, js...) are then __downloaded__ and verified using their size and SHA512 hash from content.json.
 - Each visited site then becomes __also served by you__.
 - If the site owner (who has the private key for the site address) __modifies__ the site, then he/she signs
   the new content.json and __publishes it to peers__. After the peers have verified the file's 
   integrity (using the signature), they __download the modified files__ and serve the new content to other peers.
 
-More info:
+更多信息:
  [ZeroNet sample sites](../using_zeronet/sample_sites/),
  [Slideshow about how ZeroNet works](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
