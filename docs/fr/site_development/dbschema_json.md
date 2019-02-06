@@ -1,22 +1,22 @@
-# Structure of dbschema.json
+# Structure du fichier dbschema.json
 
-[Example dbschema.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
+[Exemple de fichier dbschema.json](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
 
-The code below will do the following:
+Le code ci-dessous éxécutera les actions suivantes :
 
- - If an updated data/users/*/data.json file is received (eg.: a user posted something):
-   - Every row in `data["topics"]` is loaded to the `topic` table
-   - Every key in `data["comment_votes"]` is loaded to the `comment_vote` table as `comment_hash` col and the values stored in same line as `vote`
- - If an updated data/users/content.json file is received (eg.: new user created):
-   - The `"user_id", "user_name", "max_size", "added"` key in value of `content["include"]` is loaded into the `user` table and the key is stored as `path`
+ - Si un fichier data/users/*/data.json est reçu (eg.: un utilisateur a posté quelque chose):
+   - Toute les lignes dans `data["topics"]` seront ajoutées dans la table `topic`
+   - Tous les noeuds in `data["comment_votes"]` seront ajoutés dans la table `comment_vote` comme la colonne `comment_hash` et les valeurs stockés dans la même ligne que `vote`
+ - Si une mise à jour du fichier data/users/content.json est reçu (eg.: un nouvel utilisateur):
+   - Les valeurs `"user_id", "user_name", "max_size", "added"` dans le noeud `content["include"]` seront ajoutées dans la table `user` et la clé est ajouté à `path`
 
-> Note: [Some restriction](content_json/#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
+> Note: [Quelques restrictions](content_json/#regular-expressions-limitations) s'appliquent pour éviter de potentiel vulnérabilité ReDoS.
 
 ```json
 
 {
-  "db_name": "ZeroTalk", # Database name (only used for debugging)
-  "db_file": "data/users/zerotalk.db", # Database file relative to site's directory
+  "db_name": "ZeroTalk", # Nom de la base de donnée (utiliser seulement pour debugger)
+  "db_file": "data/users/zerotalk.db", # Le chemin relative du fichier de la base de donnée dans le répertoire du site
   "version": 2, # 1 = Json table has path column that includes directory and filename
                 # 2 = Json table has separate directory and file_name column
                 # 3 = Same as version 2, but also has site column (for merger sites)
