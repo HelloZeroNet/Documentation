@@ -1233,6 +1233,68 @@ The site will be added to user's client if it's required.
 
 ---
 
+## Plugin: Multiuser
+
+!!! info "Note"
+    The below commands can only be executed by a site with the "ADMIN" [permission](#wrapperpermissionadd).
+
+
+### userLoginForm
+
+Request to login with a private key.
+
+!!! info "Info"
+    The Multiuser plugin will take this private key, convert it to a master seed,
+    and by setting a cookie in your browser (e.g. `master_address=1bc83cc...`) you
+    can specify which user to act as on all subsequent requests.
+
+    This cookie is sent by the UiWrapper as part of its WebSocket connection
+    handshake. This method was chosen as it doesn't require modifying existing
+    requests, and it also works with communicating to ZeroNet clients that are
+    hosted on a separate machine (such as ZeroNet proxies).
+
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'userLoginForm', []
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('userShowMasterSeed', []);
+    ```
+
+    **Output:**
+
+    None, the login prompt will appear in a window inaccessible to the iframe.
+    
+
+### userShowMasterSeed
+
+Request to show the user's private key.
+
+??? "Example"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'userShowMasterSeed', []
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('userShowMasterSeed', []);
+    ```
+
+    **Output:**
+
+    None, the private key will appear in a window inaccessible to the iframe.
+
+
+---
+
 
 ## Plugin: CryptMessage
 
