@@ -1,6 +1,118 @@
 # Structure of dbschema.json
 
-[Example dbschema.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
+The `dbschema.json` is an optional file stored in your ZeroNet site's root directory. Creating one allows you to use a database with your site, which is highly recommended if your site stores and displays any user data.
+
+It's important to understand that the site database only allows for read-only `SELECT` operations. The contents of the database comes from JSON files stored on your site. The `dbschema.json` tells ZeroNet how to map the contents of those JSON files into database tables. The reason for this configuration is that JSON files are easy to write to and sync to other peers, while a database is easy and fast to query. The database is contained entirely locally. Only the JSON files containing the underlying data are synced and sent to other peers.
+
+To get started, simply create a file named `dbschema.json` in the root directory of your ZeroNet site. Here is a simple template to get you started:
+
+```
+{
+	"db_name": "MySite",
+	"db_file": "data/mysite.db",
+	"version": 2,
+	"maps": {
+		".+/data.json": {
+			"to_table": [
+				{"node": "topic", "table": "topic"},
+				{"node": "topic_vote", "table": "topic_vote", "key_col": "topic_uri", "val_col": "vote"},
+				{"node": "comment", "table": "comment", "key_col": "topic_uri"},
+				{"node": "comment_vote", "table": "comment_vote", "key_col": "comment_uri", "val_col": "vote"}
+			],
+			"to_keyvalue": ["next_comment_id", "next_topic_id"]
+		},
+		".+/content.json": {
+			"to_keyvalue": [ "cert_user_id" ]
+		}
+	},
+	"tables": {
+		"topic": {
+			"cols": [
+				["topic_id", "INTEGER"],
+				["title", "TEXT"],
+				["body", "TEXT"],
+				["type", "TEXT"],
+				["parent_topic_uri", "TEXT"],
+				["added", "DATETIME"],
+				["json_id", "INTEGER REFERENCES json (json_id)"]
+			],
+			"indexes": ["CREATE UNIQUE INDEX topic_key ON topic(topic_id, json_id)"],
+			"schema_changed": 1
+		},
+		"comment": {
+			"cols": [
+				["comment_id", "INTEGER"],
+				["body", "TEXT"],
+				["topic_uri", "TEXT"],
+				["added", "DATETIME"],
+				["json_id", "INTEGER REFERENCES json (json_id)"]
+			],
+			"indexes": ["CREATE INDEX topic_uri ON comment(topic_uri)", "CREATE INDEX comment_added ON comment(added)", "CREATE UNIQUE INDEX comment_key ON comment(json_id, comment_id)"],
+			"schema_changed": 1
+		},
+		"comment_vote": {
+			"cols": [
+				["comment_uri", "TEXT"],
+				["vote", "INTEGER"],
+				["json_id", "INTEGER REFERENCES json (json_id)"]
+			],
+			"indexes": ["CREATE UNIQUE INDEX comment_vote_key ON comment_vote(comment_uri, json_id)", "CREATE INDEX comment_vote_uri ON comment_vote(comment_uri)"],
+			"schema_changed": 1
+		},
+		"topic_vote": {
+			"cols": [
+				["topic_uri", "TEXT"],
+				["vote", "INTEGER"],
+				["json_id", "INTEGER REFERENCES json (json_id)"]
+			],
+			"indexes": ["CREATE UNIQUE INDEX topic_vote_topic_key ON topic_vote(topic_uri, json_id)", "CREATE INDEX topic_vote_uri ON topic_vote(topic_uri)"],
+			"schema_changed": 1
+		}
+	}
+}
+```
+
+This file instructs ZeroNet to create a database at `data/mysite.db` with the following contents:
+
+**Tables:**
+
+* `topic`
+* `topic_vote`
+* `comment`
+* `comment_vote`
+
+Each defined table will create a table in the site database. The columns for which are defined using the `cols` key, as shown in the above example. `cols` is an array of arrays, where each inner array contains two strings. The first is the name of the column, the second is the column attributes. Thus, an entry such as `["body", "TEXT"]` would create a table column of type `TEXT`.
+
+You'll notice each table contains a column named `json_id`, with the attributes `INTEGER references json (json_id)`. `json` is a database table which is managed by ZeroNet. This column allows for attaching useful metadata to query results. For instance, using the database schema defined above, if we ran the following query on the database: `SELECT * from comment` we would get the following:
+
+```
+1|...post body...|1543121082_1K8UbCfDZyXUCc4BRAZMDVdUmgwYTxax4|1543121207|30
+2|...post body...|1542278485_1ELQXPkiUPmfR2ZCJLyhEucP5vqkLWaJdv|1542545233|39
+3|...post body...|1542278485_1ELQXPkiUPmfR2ZCJLyhEucP5vqkLWaJdv|1543055444|39
+...
+```
+
+As a reminder, the columns for comment are `comment_id`, `body`, `topic_uri`, `added`, and `json_id`. Thus our `json_id` values here are `30`, `39`, and `39` again. Each of these numbers represents an identifier for the person that created the comment. One user posted the first comment, and another posted the second and third.
+
+The `json` table is made up of three columns:
+
+* `json_id` which is an `INTEGER`
+* `directory` which is a `VARCHAR(255)`
+* `file_name` which is a `VARCHAR(255)`
+
+Now let's inspect the `json` table with another query: `SELECT * from json where json_id = 30`. We'll get back:
+
+# TODO: Add something more to the dbschema so there's more to using the json_id. Like a cert_user_id. Have to add a `to_json_table` key.
+
+# So ZeroTalk doesn't use this? Weird.
+
+
+**Key-value stores:**
+
+* `next_comment_id`
+* `next_topic_id`
+* `cert_user_id`
+
 
 The code below will do the following:
 
