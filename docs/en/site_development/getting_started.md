@@ -29,7 +29,7 @@ If you are using compiled/bundled version of ZeroNet:
 
 #### Debug mode features:
 
-- Automatic [CoffeeScript](http://coffeescript.org/) -> JavaScript conversion
+- Automatic [CoffeeScript](http://coffeescript.org/) -> JavaScript conversion (if a coffeescript compiler is installed)
 - Debug messages will appear in the console
 - Auto reload of some source files (UiRequest, UiWebsocket, FileRequest) on modification to prevent restarting (Requires [PyFilesystem](http://pyfilesystem.org/) on GNU/Linux)
 - `http://127.0.0.1:43110/Debug` Traceback and interactive Python console at the last error position (using the wonderful Werkzeug debugger - Requires [Werkzeug](http://werkzeug.pocoo.org/))
