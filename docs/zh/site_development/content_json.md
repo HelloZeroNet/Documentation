@@ -311,13 +311,13 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 Node                   | 描述
                   ---  | ---
-**archived**           | Delete the specified user content directory that is signed earler than the specified timestamp (key: directory name, value: timestamp)
-**archived_before**    | Delete all user content directory if that is signed earler than the specified timestamp
-**cert_signers**       | Accepted domains and valid signer addresses
-**permission_rules**   | Allowed file names and total directory size based on cert domain or authorization method
-**permissions**        | Per-user permissions. (false = banned user)
+**archived**           | 删除早于指定时间戳签名的指定用户内容文件夹(键：文件夹名，值：时间戳)
+**archived_before**    | 删除所有签名早于指定时间戳的用户内容文件夹
+**cert_signers**       | 接受的域名和有效的签名者地址
+**permission_rules**   | 基于签名域名或授权方法的允许文件名和总目录大小
+**permissions**        | 每个用户的权限。(false = 禁止的用户)
 
-**Example**:
+**范例**:
 ```python
   "user_contents": {
     "archived": {
