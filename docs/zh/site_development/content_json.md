@@ -16,7 +16,7 @@ _创建或克隆站点时会自动添加这些键。_
 
 您的网站地址
 
-**Example**: 1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ
+**示例**: 1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ
 
 
 ---
@@ -26,7 +26,7 @@ _创建或克隆站点时会自动添加这些键。_
 
 The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you clone a site. It allows recovery of the site's privatekey from your BIP32 seed.
 
-**Example**: 30926910
+**示例**: 30926910
 
 ---
 
@@ -35,7 +35,7 @@ The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 
 仅适用于克隆网站。 克隆站点的站点地址。
 
-**Example**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
+**示例**: 1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8
 
 ---
 
@@ -44,7 +44,7 @@ The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 
 仅适用于克隆网站。 从中克隆的网站上的子目录。
 
-**Example**: template-new
+**示例**: template-new
 
 
 ---
@@ -54,7 +54,7 @@ The site address's BIP32 sub-key index of your BIP32 seed. Auto-added when you c
 
 Size and sha512 hashes of automatically downloaded files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
-**Example**:
+**示例**:
 ```python
     "css/all.css": {
       "sha512": "869b09328f07bac538c313c4702baa5276544346418378199fa5cef644c139e8",
@@ -70,7 +70,7 @@ Size and sha512 hashes of automatically downloaded files contained in your site.
 
 Size and sha512 hashes of optional files contained in your site. Automatically added by the command `zeronet.py siteSign siteaddress privatekey`.
 
-**Example**:
+**示例**:
 ```python
     "data/myvideo.mp4": {
       "sha512": "538c09328aa52765443464135cef644c144346418378199fa5cef61837819538",
@@ -87,7 +87,7 @@ Size and sha512 hashes of optional files contained in your site. Automatically a
 
 生成content.json的时间。
 
-**Example**: 1425857522.076
+**示例**: 1425857522.076
 
 
 ---
@@ -97,7 +97,7 @@ Size and sha512 hashes of optional files contained in your site. Automatically a
 
 ECDSA sign of the content.json file content. (keys sorted, without whitespace and the `sign` and `signers_sign` nodes). For backward compatibility, will be removed soon.
 
-**Example**:
+**示例**:
 ```python
   "sign": [
     43117356513690007125104018825100786623580298637039067305407092800990252156956,
@@ -115,13 +115,13 @@ Possible signer addresses for the root content.json signed using the site addres
 
 **Format of the signed string**: [number_of_signers_required]:[signer address],[signer address]
 
-*Example*:
+*示例*:
 ```
 signs_required: 1:1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G,1CK6KHY6MHgYvmRQ4PAafKYDrg1ejbH1cE
 signers_sign: MEUCIQDuz+CzOVvFkv1P2ra9i5E1p1G0/1cOGecm7GpLpMLhuwIgBIbCL0YHXD1S2+x48QS5VO/rISrkdLiUR+o+x1X0y1A=
 ```
 
-The above signed message is signed using the address "1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
+上述签名消息使用的签名地址是"1PcxwuHYxuJEmM4ydtB1vbiAY6WkNgsz9G".
 
 ---
 
@@ -137,7 +137,7 @@ ECDSA signature for the the content.json file content:
     * [Serialization format](https://github.com/MuxZeroNet/zerolib/blob/f13126e04bf99b1b416a7ea5b5cad7924cdc15a4/zerolib/integrity/bitcoin.py#L82-L93): `recovery_id || r || s`, where 27 ≤ recovery_id ≤ 30; signature length = 1 + 32 + 32 = 65 bytes.
     * Double vertical bar `||` denotes byte concatenation.
 
-**Example**:
+**示例**:
 ```python
   "signs": {
     "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ": "G6/QXFKvACPQ7LhoZG4fgqmeOSK99vGM2arVWkm9pV/WPCfc2ulv6iuQnuzw4v5z82qWswcRq907VPdBsdb9VRo="
@@ -165,7 +165,7 @@ _如果需要功能，可以添加这些选项。_
 
 包装器的背景颜色
 
-**Example**: #F5F5F5
+**示例**: #F5F5F5
 
 
 ---
@@ -175,12 +175,8 @@ _如果需要功能，可以添加这些选项。_
 
 如果为**true**，则允许克隆网站。
 
-To make your site properly cloneable you have to have a separate folder of data
-files for a clean start (e.g. without any blog posts).  To do this you have to
-add the **-default** postfix to your data files and directories.  During the
-cloning process, only directories with the **-default** postfix are
-copied. The postfix is removed from the new site.
-
+为了使您的网站可以正确克隆，您必须有一个单独的数据文件夹，以便干净克隆（例如，没有任何博客文章）。要做到这一点，你必须这样做
+将 **-default** 后缀添加到数据文件和目录上。在克隆过程中，仅复制具有 **-default** 后缀的目录，后缀将在新站点中被自动删除。
 
 
 ---
@@ -190,7 +186,7 @@ copied. The postfix is removed from the new site.
 
 您的网站描述，显示在ZeroHello的网站标题下。
 
-**Example**: Decentralized forum demo
+**示例**: Decentralized forum demo
 
 
 ---
@@ -200,7 +196,7 @@ copied. The postfix is removed from the new site.
 
 您网站的Namecoin域名。 如果用户启用了Zeroname插件，ZeroHello将链接到此。
 
-**Example**: Blog.ZeroNetwork.bit
+**示例**: Blog.ZeroNetwork.bit
 
 
 
@@ -212,9 +208,9 @@ copied. The postfix is removed from the new site.
 
 不要签署与此模式匹配的文件。
 
-**Example**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from the `data/users/` directory)
+**示例**: `((js|css)/(?!all.(js|css))|data/users/.*)` (ignore all js and css files except all.js and all.css and don't add anything from the `data/users/` directory)
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+注意: [一些限制](#regular-expression-limitations) 应用于正则表达式中.
 
 ---
 
@@ -223,7 +219,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 在网站中包含另一个content.json。 这通常用于后续管理用户数据的content.json文件。
 
-**Example**:
+**示例**:
 
 ```python
 "includes": {
@@ -247,7 +243,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 该网站所属的合并类型。
 
-**Example**: `ZeroMe`
+**示例**: `ZeroMe`
 
 
 ---
@@ -257,9 +253,9 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 Preg模式的可选文件。
 
-**Example**: `(data/mp4/.*|updater/.*)` (everything in data/mp4 and updater directory is optional)
+**示例**: `(data/mp4/.*|updater/.*)` (data/mp4和updater目录下的所有内容都是可选的)
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+注意: [一些限制](#regular-expression-limitations) 应用于正则表达式中.
 
 ---
 
@@ -269,7 +265,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 接受该文件所需的有效标志**数量**。 允许Multisig功能。
 
 
-**Example**: 1
+**示例**: 1
 
 
 ---
@@ -279,7 +275,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 该网站的标题，在浏览器标题和ZeroHello中可见。
 
-**Example**: ZeroTalk
+**示例**: ZeroTalk
 
 
 ----
@@ -289,7 +285,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 文件需要翻译。 （在`languages`目录中使用语言json文件）
 
-**Example**: ["index.html", "js/all.js"]
+**示例**: ["index.html", "js/all.js"]
 
 
 ----
@@ -299,7 +295,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 该网站的图标。 用站点特定的图标替换默认的ZeroNet徽标。 可以是.ico，.png，.svg等。
 
-**Example**: favicon.ico
+**示例**: favicon.ico
 
 
 ----
@@ -317,7 +313,7 @@ Node                   | 描述
 **permission_rules**   | 基于签名域名或授权方法的允许文件名和总目录大小
 **permissions**        | 每个用户的权限。(false = 禁止的用户)
 
-**范例**:
+**示例**:
 ```python
   "user_contents": {
     "archived": {
@@ -342,7 +338,7 @@ Node                   | 描述
   }
 ```
 
-Note: [Some restrictions](#regular-expression-limitations) apply to regular expressions.
+注意: [一些限制](#regular-expression-limitations) 应用于正则表达式中.
 
 ----
 
@@ -351,7 +347,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
 
 视区元标记的内容。 （用于适合移动设备的页面）
 
-**Example**: width=device-width, initial-scale=1.0
+**示例**: width=device-width, initial-scale=1.0
 
 
 ----
@@ -364,7 +360,7 @@ Note: [Some restrictions](#regular-expression-limitations) apply to regular expr
  - 单个模式允许最多9次重复
  - 模式的最大长度为255个字符
  
-### 范例:
+### 示例:
 
  - `((?!json).)*$` not allowed, because of `)` before the `*` character. Possible fix: `.*(?!json)$`
  - `(.*.epub|.*.jpg|.*.jpeg|.*.png|data/.*.gif|.*.avi|.*.ogg|.*.webm|.*.mp4|.*.mp3|.*.mkv|.*.eot)` not allowed, because it has 12 `.*` repetition patterns. Possible fix: `.*(epub|jpg|jpeg|png|data/gif|avi|ogg|webm|mp4|mp3|mkv|eot)`
