@@ -17,30 +17,30 @@ Le code ci-dessous éxécutera les actions suivantes :
 {
   "db_name": "ZeroTalk", # Nom de la base de donnée (utiliser seulement pour debugger)
   "db_file": "data/users/zerotalk.db", # Le chemin relative du fichier de la base de donnée dans le répertoire du site
-  "version": 2, # 1 = Json table has path column that includes directory and filename
-                # 2 = Json table has separate directory and file_name column
-                # 3 = Same as version 2, but also has site column (for merger sites)
-  "maps": { # Json to database mappings
-    ".*/data.json": { # Regex pattern of file relative to db_file
-      "to_table": [ # Load values to table
+  "version": 2, # 1 = la table possède des colonnes qui inclut des répertoires et nom de fichier
+                # 2 = la table a des répertoires séparés et des colonnes file_name
+                # 3 = Pareil que version 2, mais possède aussi des colones sites (pour la fonction MergerSite)
+  "maps": { # Relation json à base de donnée
+    ".*/data.json": { # Regex (expression réguilière) du fichier
+      "to_table": [ # Enregistré les valeurs à la table
         {
-          "node": "topics", # Reading data.json[topics] key value
-          "table": "topic" # Feeding data to topic table
+          "node": "topics", # Lecture de data.json[topics] key value
+          "table": "topic" # Enregistre dans la table topic
         },
         {
-          "node": "comment_votes", # Reading data.json[comment_votes] key value
-          "table": "comment_vote", # Feeding data to comment_vote table
+          "node": "comment_votes", # Lecture data.json[comment_votes] key value
+          "table": "comment_vote", # Enregistre data dans la table comment_vote
           "key_col": "comment_hash",
-            # data.json[comment_votes] is a simple dict, the keys of the
-            # dict are loaded to comment_vote table comment_hash column
+            # data.json[comment_votes] est une 'dict' dont les clés de la
+            # 'dict' seront enregistrés dans la table comment_vote dans la colonne comment_hash
 
           "val_col": "vote"
-            # The data.json[comment_votes] dict values loaded to comment_vote table vote column
+            # Les valeurs de la 'dict' data.json[comment_votes] seront enregistrés dans la colonne vote de la table comment_vote
 
         }
       ],
       "to_keyvalue": ["next_message_id", "next_topic_id"]
-        # Load data.json[next_topic_id] to keyvalue table
+        # Enregistre data.json[next_topic_id] dans la table keyvalue
         # (key: next_message_id, value: data.json[next_message_id] value)
 
     },
@@ -51,20 +51,19 @@ Le code ci-dessous éxécutera les actions suivantes :
           "table": "user",
           "key_col": "path",
           "import_cols": ["user_id", "user_name", "max_size", "added"],
-            # Only import these columns to user table
+            # Importe seulement ces colonnes
           "replaces": {
             "path": {"content.json": "data.json"}
-              # Replace content.json to data.json in the
-              # value of path column (required for joining)
+              # remplace content.json par data.json dans la valeur de la colonne 'path' (nécessaire pour les jointures)
           }
         }
       ],
-      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  # Save cert_auth_type and cert_user_id directly to json table (easier and faster data queries)
+      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  # Sauvegarde cert_auth_type et cert_user_id directement dans la table json (plus facile et rapide pour le query des données)
     }
   },
-  "tables": { # Table definitions
-    "topic": { # Define topic table
-      "cols": [ # Cols of the table
+  "tables": { # Definition des tables
+    "topic": { # Définit la structure de la table topic
+      "cols": [ # Colonnes de la table
         ["topic_id", "INTEGER"],
         ["title", "TEXT"],
         ["body", "TEXT"],
@@ -74,11 +73,11 @@ Le code ci-dessous éxécutera les actions suivantes :
         ["json_id", "INTEGER REFERENCES json (json_id)"]
       ],
       "indexes": ["CREATE UNIQUE INDEX topic_key ON topic(topic_id, json_id)"],
-        # Indexes automatically created
+        # Indexes créés automatiquement
 
       "schema_changed": 1426195822
-        # Last time of the schema changed, if the client's version is different then
-        # automatically destroy the old, create the new table then reload the data into it
+        # Timestamp de la dernière modification, si le client a une version différente,
+        # détruit automatiquement la version actuelle, créé une nouvelle et re-engistre des données
 
     },
     "comment_vote": {
@@ -117,7 +116,7 @@ Le code ci-dessous éxécutera les actions suivantes :
 }
 ```
 
-## Example for data.json file
+## Exemple de fichier data.json
 ```json
 {
   "next_topic_id": 2,
@@ -175,7 +174,7 @@ Le code ci-dessous éxécutera les actions suivantes :
 }
 ```
 
-## Example for content.json file
+## Exemple de fichier content.json
 
 ```json
 {
