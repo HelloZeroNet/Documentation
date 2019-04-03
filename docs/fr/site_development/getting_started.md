@@ -1,6 +1,6 @@
 # Commencer
 
-ZeroNet allows you to publish static and dynamic websites on a distributed web platform.
+ZeroNet permet de publier des sites statiques mais aussi dynamique.
 
 In ZeroNet there is no concept of servers. Thus, server-side languages like PHP or Ruby are not needed. Instead, one can create dynamic content using ZeroNet's API (called ZeroFrame), JavaScript (or CoffeeScript) and the SQL database provided to all websites.
 
