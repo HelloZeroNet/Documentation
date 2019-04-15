@@ -4,44 +4,44 @@
 
 以下代码将执行以下操作:
 
- - If an updated data/users/*/data.json file is received (eg.: a user posted something):
-   - Every row in `data["topics"]` is loaded to the `topic` table
-   - Every key in `data["comment_votes"]` is loaded to the `comment_vote` table as `comment_hash` col and the values stored in same line as `vote`
- - If an updated data/users/content.json file is received (eg.: new user created):
-   - The `"user_id", "user_name", "max_size", "added"` key in value of `content["include"]` is loaded into the `user` table and the key is stored as `path`
+ - 如果收到一个更新的 data/users/*/data.json 文件 (例如.: 一个用户发布了某些内容):
+   - `data["topics"]` 中的每行都会被存储到 `topic` 表中
+   - `data["comment_votes"]` 中的每个键都会被存储到 `comment_vote` 表的 `comment_hash` 列中，同时每个键值都会被存储到相同行的 `vote` 中
+ - 如果收到一个更新的 data/users/content.json 文件 (例如.: 新用户创建):
+   -  `content["include"]` 中的 `"user_id", "user_name", "max_size", "added"` 键都会被存储到 `user` 表中，同时相应的键被存储为 `path`
 
-> Note: [Some restriction](content_json/#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
+> 注意: [一些限制](content_json/#regular-expression-limitations) 应用于正则表达式中以避免可能的ReDoS脆弱性.
 
 ```json
 
 {
-  "db_name": "ZeroTalk", # Database name (only used for debugging)
-  "db_file": "data/users/zerotalk.db", # Database file relative to site's directory
+  "db_name": "ZeroTalk", # 数据库名字 (仅仅用于调试)
+  "db_file": "data/users/zerotalk.db", # 相对于站点目录的数据库文件
   "version": 2, # 1 = Json table has path column that includes directory and filename
                 # 2 = Json table has separate directory and file_name column
                 # 3 = Same as version 2, but also has site column (for merger sites)
-  "maps": { # Json to database mappings
-    ".*/data.json": { # Regex pattern of file relative to db_file
-      "to_table": [ # Load values to table
+  "maps": { # Json到数据库的映射
+    ".*/data.json": { # 相对于数据库的文件正则表达式
+      "to_table": [ # 加载值到表中
         {
-          "node": "topics", # Reading data.json[topics] key value
-          "table": "topic" # Feeding data to topic table
+          "node": "topics", # 读取data.json[topics]的键和值
+          "table": "topic" # 将数据写到topic表中
         },
         {
-          "node": "comment_votes", # Reading data.json[comment_votes] key value
-          "table": "comment_vote", # Feeding data to comment_vote table
+          "node": "comment_votes", # 读取data.json[comment_votes]的键和值
+          "table": "comment_vote", # 将数据写到comment_vote表中
           "key_col": "comment_hash",
-            # data.json[comment_votes] is a simple dict, the keys of the
-            # dict are loaded to comment_vote table comment_hash column
+            # data.json[comment_votes]是个简单词典, 词典的键
+            # 存储到comment_vote表的comment_hash列
 
           "val_col": "vote"
-            # The data.json[comment_votes] dict values loaded to comment_vote table vote column
+            # data.json[comment_votes]词典的值存储到comment_vote表的vote列
 
         }
       ],
       "to_keyvalue": ["next_message_id", "next_topic_id"]
-        # Load data.json[next_topic_id] to keyvalue table
-        # (key: next_message_id, value: data.json[next_message_id] value)
+        # 将data.json[next_topic_id]存储到keyvalue表中
+        # (键: next_message_id, 值: data.json[next_message_id] value)
 
     },
     "content.json": {
@@ -51,7 +51,7 @@
           "table": "user",
           "key_col": "path",
           "import_cols": ["user_id", "user_name", "max_size", "added"],
-            # Only import these columns to user table
+            # 仅仅导入这些列到user表
           "replaces": {
             "path": {"content.json": "data.json"}
               # Replace content.json to data.json in the
@@ -59,12 +59,12 @@
           }
         }
       ],
-      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  # Save cert_auth_type and cert_user_id directly to json table (easier and faster data queries)
+      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  # 直接保存cert_auth_type和cert_user_id到json表(更容易、更快的数据查询)
     }
   },
-  "tables": { # Table definitions
-    "topic": { # Define topic table
-      "cols": [ # Cols of the table
+  "tables": { # 表定义
+    "topic": { # 定义topic表
+      "cols": [ # 此表的列
         ["topic_id", "INTEGER"],
         ["title", "TEXT"],
         ["body", "TEXT"],
@@ -74,7 +74,7 @@
         ["json_id", "INTEGER REFERENCES json (json_id)"]
       ],
       "indexes": ["CREATE UNIQUE INDEX topic_key ON topic(topic_id, json_id)"],
-        # Indexes automatically created
+        # 自动创建的索引
 
       "schema_changed": 1426195822
         # Last time of the schema changed, if the client's version is different then
