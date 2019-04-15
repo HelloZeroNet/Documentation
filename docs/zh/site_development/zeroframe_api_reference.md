@@ -16,10 +16,10 @@ _这些命令由包装器帧处理，因此不使用websocket发送到UiServer._
 
 参数                   | 描述
                   ---  | ---
-**message**            | The message you want to display
-**button_caption** (optional) | Caption of the confirmation button (default: OK)
+**message**            | 你想展示的消息
+**button_caption** (可选) | 确认按钮的标题 (默认值: OK)
 
-**返回**: True if clicked on button
+**返回**: 如果点击按钮返回True
 
 **示例:**
 ```coffeescript
@@ -48,7 +48,7 @@ siteDelete: (address) ->
 
 
 ### wrapperGetLocalStorage
-**返回**: Browser's local store for the site
+**返回**: 浏览器对此站点的本地存储
 
 **示例:**
 ```coffeescript
@@ -62,7 +62,7 @@ siteDelete: (address) ->
 ---
 
 ### wrapperGetState
-**返回**: Browser's current history state object
+**返回**: 浏览器当前历史状态对象
 
 ---
 
@@ -82,13 +82,13 @@ console.log(req.response)
 ---
 
 ### wrapperNotification
-Display a notification
+展示一个通知
 
 参数                   | 描述
                   ---  | ---
-**type**               | Possible values: info, error, done
-**message**            | The message you want to display
-**timeout** (optional) | Hide display after this interval (milliseconds)
+**type**               | 可以的值: info, error, done
+**message**            | 你想显示的消息
+**timeout** (可选) | 超过此间隔后隐藏展示 (毫秒)
 
 **返回**: None
 
@@ -102,13 +102,13 @@ Display a notification
 
 ### wrapperOpenWindow
 
-Navigates or opens a new popup window.
+导航或打开一个新的弹出窗口.
 
 参数                   | 描述
                   ---  | ---
-**url**                | Url of the opened page
-**target** (optional)  | Target window name
-**specs** (optional)   | Special properties of the window (see: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
+**url**                | 打开页面的地址
+**target** (可选)  | 目标窗口的名字
+**specs** (可选)   | 窗口的特殊属性 (见: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
 
 **示例:**
 ```coffeescript
@@ -120,26 +120,26 @@ Navigates or opens a new popup window.
 
 ### wrapperPermissionAdd
 
-Request new permission for site
+为站点请求新的允许
 
 
 Parameter        | 描述
              --- | ---
-**permission**   | Name of permission (eg. Merger:ZeroMe)
+**permission**   | 允许的名字 (例如. Merger:ZeroMe)
 
 
 ---
 
 ### wrapperPrompt
 
-Prompt text input from user
+提示来自用户的文本输入
 
 Parameter           | 描述
                ---  | ---
-**message**         | The message you want to display
-**type** (optional) | Type of the input (default: text)
+**message**         | 你想显示的消息
+**type** (可选) | 输入的类型 (默认: text)
 
-**返回**: Text entered to input
+**返回**: 输入的文本
 
 **示例:**
 ```coffeescript
@@ -156,13 +156,13 @@ Parameter           | 描述
 ---
 
 ### wrapperPushState
-Change the url and adds new entry to browser's history. See: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
+改变地址同时为浏览器历史添加新的值. 见: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
 
 Parameter           | 描述
                ---  | ---
 **state**           | State javascript object
-**title**           | Title of the page
-**url**             | Url of the page
+**title**           | 此页面的标题
+**url**             | 此页面的地址
 
 **返回**: None
 
@@ -192,9 +192,9 @@ Parameter           | 描述
 ---
 
 ### wrapperRequestFullscreen
-Set the current page to fullscreen. (request permission for the site on first call)
+设置当前页面为全屏. (request permission for the site on first call)
 
-> **Note:** Starting from ZeroNet Rev3136 you can use the fullscreen javascript API directly, without fullscreen request
+> **注意:** 从ZeroNet Rev3136 开始，你可以不需要请求全屏直接使用javascript的全屏API
 
 **示例:**
 ```javascript
@@ -205,11 +205,11 @@ page.cmd("wrapperRequestFullscreen")
 ---
 
 ### wrapperSetLocalStorage
-Set browser's local store data stored for the site
+为此站点设置浏览器的本地存储数据
 
 参数                   | 描述
                   ---  | ---
-**data**               | Any data structure you want to store for the site
+**data**               | 你想为此站点存储的任何数据结构
 
 **返回**: None
 
@@ -227,7 +227,7 @@ Set browser's title
 
 参数                   | 描述
                   ---  | ---
-**title**              | New browser tab title
+**title**              | 新的浏览器标签页标题
 
 **返回**: None
 
@@ -246,7 +246,7 @@ Page.cmd "wrapperSetTitle", "newtitle"
 
 Parameter           | 描述
                ---  | ---
-**viewport**        | The viewport meta tag content
+**viewport**        | 视区元标签内容
 
 **返回**: None
 
@@ -300,7 +300,7 @@ Parameter            | 描述
 **auth_user_name**   | User name used on registration
 **cert**             | The cert itself: `auth_address#auth_type/auth_user_name` string signed by the cert site owner
 
-**返回**: "ok", "Not changed" or {"error": error_message}
+**返回**: "ok", "Not changed" 或者 {"error": error_message}
 
 **示例:**
 ```coffeescript
@@ -384,10 +384,10 @@ Run a query on the sql cache
 
 Parameter            | 描述
                  --- | ---
-**query**            | Sql query command
-**params**           | Parameter substitution to the sql query
+**query**            | Sql查询命令
+**params**           | 此sql查询的子参数
 
-**返回**: <list> Result of the query
+**返回**: <list> 查询的结果
 
 
 **示例:**
@@ -439,7 +439,7 @@ Parameter        | 描述
              --- | ---
 **inner_path**   | Directory you want to list
 
-**返回**: List of file and directory names
+**返回**: 文件及目录名列表
 
 
 ---
