@@ -67,7 +67,7 @@ siteDelete: (address) ->
 ---
 
 ### wrapperGetAjaxKey
-**返回**: The key you need to initilize ajax requests
+**返回**: 初始化ajax请求所需的密钥
 
 **示例:**
 ```javascript
@@ -107,8 +107,8 @@ console.log(req.response)
 参数                   | 描述
                   ---  | ---
 **url**                | 打开页面的地址
-**target** (可选)  | 目标窗口的名字
-**specs** (可选)   | 窗口的特殊属性 (见: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
+**target** (可选)      | 目标窗口的名字
+**specs** (可选)       | 窗口的特殊属性 (见: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
 
 **示例:**
 ```coffeescript
@@ -123,7 +123,7 @@ console.log(req.response)
 为站点请求新的允许
 
 
-Parameter        | 描述
+参数             | 描述
              --- | ---
 **permission**   | 允许的名字 (例如. Merger:ZeroMe)
 
@@ -134,7 +134,7 @@ Parameter        | 描述
 
 提示来自用户的文本输入
 
-Parameter           | 描述
+参数                | 描述
                ---  | ---
 **message**         | 你想显示的消息
 **type** (可选) | 输入的类型 (默认: text)
@@ -158,7 +158,7 @@ Parameter           | 描述
 ### wrapperPushState
 改变地址同时为浏览器历史添加新的值. 见: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
 
-Parameter           | 描述
+参数                | 描述
                ---  | ---
 **state**           | State javascript object
 **title**           | 此页面的标题
@@ -175,13 +175,13 @@ Parameter           | 描述
 ---
 
 ### wrapperReplaceState
-Change the url without adding new entry to browser's history. See: [replaceState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)
+更改网址且不向浏览器的历史记录添加新条目。 见: [replaceState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)
 
-Parameter           | 描述
+参数                | 描述
                ---  | ---
-**state**           | State javascript object
-**title**           | Title of the page
-**url**             | Url of the page
+**state**           | 状态javascript对象
+**title**           | 页面标题
+**url**             | 页面的网址
 
 **返回**: None
 
@@ -192,7 +192,7 @@ Parameter           | 描述
 ---
 
 ### wrapperRequestFullscreen
-设置当前页面为全屏. (request permission for the site on first call)
+设置当前页面为全屏. (在第一次通话时请求网站的许可)
 
 > **注意:** 从ZeroNet Rev3136 开始，你可以不需要请求全屏直接使用javascript的全屏API
 
@@ -223,7 +223,7 @@ Page.cmd "wrapperSetLocalStorage", Page.local_storage
 ---
 
 ### wrapperSetTitle
-Set browser's title
+设置浏览器的标题
 
 参数                   | 描述
                   ---  | ---
@@ -244,7 +244,7 @@ Page.cmd "wrapperSetTitle", "newtitle"
 设置网站的视区元标记内容（移动网站所需）
 
 
-Parameter           | 描述
+参数                | 描述
                ---  | ---
 **viewport**        | 视区元标签内容
 
@@ -293,12 +293,12 @@ UiServer将完成所有“后端”工作（例如：查询数据库，访问文
 ### certAdd
 向当前用户添加新证书。
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**domain**           | Certificate issuer domain
-**auth_type**        | Auth type used on registration
-**auth_user_name**   | User name used on registration
-**cert**             | The cert itself: `auth_address#auth_type/auth_user_name` string signed by the cert site owner
+**domain**           | 证书颁发者域
+**auth_type**        | 注册时使用的Auth类型
+**auth_user_name**   | 注册时使用的用户名
+**cert**             | 证书本身: 由证书站点所有者签名的字符串 `auth_address#auth_type/auth_user_name` 
 
 **返回**: "ok", "Not changed" 或者 {"error": error_message}
 
@@ -317,11 +317,11 @@ Parameter            | 描述
 ### certSelect
 显示证书选择器。
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**accepted_domains** | List of domains that accepted by site as authorization provider
-**accept_any**       | Does not limits the accepted certificate providers
-**accepted_pattern** | Regexp pattern for accepted certificate providers address
+**accepted_domains** | 站点接受为授权提供者的域列表
+**accept_any**       | 不限制接受的证书提供者
+**accepted_pattern** | 接受的证书提供者地址的正则表达式模式
 
 **返回**: None
 
@@ -338,7 +338,7 @@ Parameter            | 描述
 
 请求有关网站活动的通知。
 
-Parameter   | 描述
+参数        | 描述
         --- | ---
 **channel** | Channel to join
 
@@ -380,9 +380,9 @@ route: (cmd, data) ->
 
 
 ### dbQuery
-Run a query on the sql cache
+在sql缓存上运行查询
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **query**            | Sql查询命令
 **params**           | 此sql查询的子参数
@@ -433,11 +433,11 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 
 
 ### dirList
-List a content of a directory
+列出目录的内容
 
-Parameter        | 描述
+参数             | 描述
              --- | ---
-**inner_path**   | Directory you want to list
+**inner_path**   | 要列出的目录
 
 **返回**: 文件及目录名列表
 
@@ -446,29 +446,29 @@ Parameter        | 描述
 
 
 ### fileDelete
-Delete a file
+删除文件
 
-Parameter        | 描述
+参数             | 描述
              --- | ---
-**inner_path**   | The file you want to delete
+**inner_path**   | 要删除的文件
 
-**返回**: "ok" on success else the error message
+**返回**: 成功时返回"ok"否则出现错误消息
 
 
 ---
 
 
 ### fileGet
-Get file content
+获取文件内容
 
-Parameter               | 描述
+参数                    | 描述
                     --- | ---
-**inner_path**          | The file you want to get
-**required** (optional) | Try and wait for the file if it's not exists. (default: True)
-**format** (optional)   | Encoding of returned data. (text or base64) (default: text)
-**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
+**inner_path**          | 你想要的文件
+**required** (optional) | 如果文件不存在，请尝试等待该文件。 (default: True)
+**format** (optional)   | 对返回数据进行编码。 (text or base64) (default: text)
+**timeout** (optional)  | 数据到达的最长等待时间 (default: 300)
 
-**返回**: <string> The content of the file
+**返回**: <string> 文件的内容
 
 
 **示例:**
@@ -509,40 +509,40 @@ submitTopicVote: (e) =>
 
 
 ### fileList
-Recursively list of files in a directory
+递归列出目录中的文件
 
-Parameter        | 描述
+参数             | 描述
              --- | ---
-**inner_path**   | Directory you want to list
+**inner_path**   | 要列出的目录
 
-**返回**: List of files in the directory (recursive)
+**返回**: 目录中的文件列表（递归）
 
 
 ---
 
 
 ### fileNeed
-Initialize download of a (optional) file.
+初始化（可选）文件的下载。
 
-Parameter               | 描述
+参数                    | 描述
                     --- | ---
-**inner_path**          | The file you want to get
-**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
+**inner_path**          | 你想要的文件
+**timeout** (optional)  | 数据到达的最长等待时间 (default: 300)
 
-**返回**: "ok" on successfull download
+**返回**: 成功下载后返回 "ok"
 
 
 ---
 
 ### fileQuery
-Simple json file query command
+简单的json文件查询命令
 
-Parameter            | 描述
+参数            | 描述
                  --- | ---
-**dir_inner_path**   | Pattern of queried files
-**query**            | Query command (optional)
+**dir_inner_path**   | 查询文件的模式
+**query**            | 查询命令（可选）
 
-**返回**: <list> Matched content
+**返回**: <list> 匹配的内容
 
 **Query examples:**
 
@@ -565,13 +565,13 @@ Parameter            | 描述
 
 
 ### fileRules
-Return the rules for the file.
+返回文件的规则。
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**inner_path**       | File inner path
+**inner_path**       | 文件内部路径
 
-**返回**: <list> Matched content
+**返回**: <list> 匹配的内容
 
 **Example result:**
 
@@ -601,12 +601,12 @@ Parameter            | 描述
 写文件内容
 
 
-Parameter          | 描述
+参数               | 描述
                --- | ---
-**inner_path**     | Inner path of the file you want to write
-**content_base64** | Content you want to write to file (base64 encoded)
+**inner_path**     | 要写入的文件的内部路径
+**content_base64** | 要写入文件的内容（base64编码）
 
-**返回**: "ok" on success else the error message
+**返回**: 成功返回"ok"否则出现错误消息
 
 **示例:**
 ```coffeescript
@@ -631,7 +631,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ### ping
 测试UiServer websocket连接
 
-**Return:** pong
+**返回:** pong
 
 
 ---
@@ -639,7 +639,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 ### serverInfo
 
-**Return:** <dict> 有关服务器的所有信息
+**返回:** <dict> 有关服务器的所有信息
 
 **示例:**
 ```coffeescript
@@ -723,13 +723,13 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 ### sitePublish
 发布站点的content.json
 
-Parameter                 | 描述
+参数                      | 描述
                       --- | ---
-**privatekey** (optional) | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional) | Inner path of the content json you want to publish (default: content.json)
-**sign** (optional)       | If True then sign the content.json before publish (default: True)
+**privatekey** (optional) | 用于签名的私钥（默认值：当前用户的私钥）
+**inner_path** (optional) | 要发布的内容json的内部路径（默认值：content.json）
+**sign** (optional)       | 如果为True则在发布之前签名content.json（默认值：True）
 
-**返回**: "ok" on success else the error message
+**返回**: 成功返回"ok"否则出现错误消息
 
 **示例:**
 ```coffeescript
@@ -749,7 +749,7 @@ Parameter                 | 描述
 ### siteReload
 重新加载content.json文件内容并扫描可选文件
 
-**返回**: "ok" on success
+**返回**: 成功返回"ok"
 
 
 ---
@@ -758,13 +758,13 @@ Parameter                 | 描述
 ### siteSign
 签署该网站的content.json
 
-Parameter                              | 描述
+参数                                   | 描述
                                    --- | ---
-**privatekey** (optional)              | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional)              | Inner path of the content json you want to sign (default: content.json)
-**remove_missing_optional** (optional) | Remove the optional files from content.json that no longer present in the directory (default: False)
+**privatekey** (optional)              | 用于签名的私钥（默认值：当前用户的私钥）
+**inner_path** (optional)              | 要签名的内容json的内部路径（默认值：content.json）
+**remove_missing_optional** (optional) | 从content.json中删除目录中不再存在的可选文件（默认值：False）
 
-**返回**: "ok" on success else the error message
+**返回**: 成功返回"ok"否则出现错误消息
 
 > __Note:__
 > Use "stored" as privatekey if its definied in users.json (eg. cloned sites)
@@ -785,11 +785,11 @@ if @site_info["privatekey"] # Private key stored in users.json
 
 强制检查并从其他节点下载更改的内容（仅当用户处于被动模式并使用旧版Zeronet时才需要）
 
-Parameter     | 描述
+参数          | 描述
           --- | ---
-**address**   | Address of site want to update (only current site allowed without site ADMIN permission)
+**address**   | 想要更新的站点地址（只允许当前站点，不需要站点ADMIN权限）
 
-**Return:** None
+**返回:** None
 
 **示例:**
 ```coffeescript
@@ -808,7 +808,7 @@ updateSite: =>
 
 获取用户保存的设置。
 
-**Return:** The user specific site's settings saved using userSetSettings.
+**返回:** The user specific site's settings saved using userSetSettings.
 
 
 ---
@@ -818,11 +818,11 @@ updateSite: =>
 
 设置用户的站点特定设置。
 
-Parameter     | 描述
+参数          | 描述
           --- | ---
-**settings**  | The user's site specific settings you want to store.
+**settings**  | 要存储的用户的站点特定设置。
 
-**Return:** ok on success
+**返回:** ok on success
 
 
 ---
@@ -835,7 +835,7 @@ Parameter     | 描述
 
 初始化bigfile的新上载端点。
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **inner_path**       | Upload location
 **size**             | File size
@@ -918,7 +918,7 @@ Allow cross-site file access under virtual directory **/cors-siteaddress/** and 
 
 Request Cross origin resource sharing permission with the given site.
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **address**          | The site address you want get cors access
 
@@ -937,9 +937,9 @@ The site will be added to user's client if it's required.
 
 ### userPublickey
 
-Get user's site specific publickey
+获取用户的站点特定的公钥
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **index** (optional) | Sub-publickey within site (default: 0)
 
@@ -950,9 +950,9 @@ Parameter            | 描述
 
 ### eciesEncrypt
 
-Encrypt a text using a publickey
+使用公钥加密文本
 
-Parameter                      | 描述
+参数                           | 描述
                            --- | ---
 **text**                       | Text to encrypt
 **publickey** (optional)       | User's publickey index (int) or base64 encoded publickey (default: 0)
@@ -965,9 +965,9 @@ Parameter                      | 描述
 
 ### eciesDecrypt
 
-Try to decrypt list of texts
+尝试解密文本列表
 
-Parameter                      | 描述
+参数                           | 描述
                            --- | ---
 **params**                     | A text or list of encrypted texts
 **privatekey** (optional)      | User's privatekey index (int) or base64 encoded privatekey (default: 0)
@@ -979,9 +979,9 @@ Parameter                      | 描述
 
 ### aesEncrypt
 
-Encrypt a text using the key and the iv
+使用密钥和iv加密文本
 
-Parameter                      | 描述
+参数                           | 描述
                            --- | ---
 **text**                       | A text encrypt using AES
 **key** (optional)             | Base64 encoded password (default: generate new)
@@ -995,9 +995,9 @@ Parameter                      | 描述
 
 ### aesDecrypt
 
-Decrypt text using the IV and AES key
+使用IV和AES密钥解密文本
 
-Parameter                      | 描述
+参数                           | 描述
                            --- | ---
 **iv**                         | IV in Base64 format
 **encrypted_text**             | Encrypted text in Base64 format
@@ -1021,7 +1021,7 @@ Set followed sql queries.
 
 The SQL query should result in rows with cols:
 
-Field          | 描述
+域             | 描述
            --- | ---
 **type**       | Type: post, article, comment, mention
 **date_added** | Event time
@@ -1029,7 +1029,7 @@ Field          | 描述
 **body**       | Event's second and third line
 **url**        | Link to event's page
 
-Parameter      | 描述
+参数           | 描述
            --- | ---
 **feeds**      | Format: {"query name": [SQL query, [param1, param2, ...], ...}, parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
 
@@ -1071,7 +1071,7 @@ Execute all followed sql query
 
 **返回**: The result of the followed Sql queries
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **limit**            | Limit of results per followed site (default: 10)
 **day_limit**        | Return no older than number of this days (default: 3)
@@ -1085,7 +1085,7 @@ Parameter            | 描述
 
 Start downloading new merger site(s)
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **addresses**        | Site address or list of site addresses
 
@@ -1096,7 +1096,7 @@ Parameter            | 描述
 
 Stop seeding and delete a merged site
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **address**           | Site address
 
@@ -1107,7 +1107,7 @@ Parameter            | 描述
 
 Return merged sites.
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **query_site_info**  | If True, then gives back detailed site info for merged sites
 
@@ -1122,7 +1122,7 @@ Parameter            | 描述
 
 Add new user to mute list. (Requires confirmation for non-ADMIN sites)
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **auth_address**     | Directory name of the user's data.
 **cert_user_id**     | Cert user name of the user
@@ -1141,7 +1141,7 @@ Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit
 
 Remove a user from mute list. (Requires confirmation for non-ADMIN sites)
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **auth_address**     | Directory name of the user's data.
 
@@ -1171,7 +1171,7 @@ List muted users. (Requires ADMIN permission on site)
 
 Return list of optional files
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **address**          | The site address you want to list optional files (default: current site)
 **orderby**          | Order of returned optional files (default: time_downloaded DESC)
@@ -1185,7 +1185,7 @@ Parameter            | 描述
 
 Query optional file info from database
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **inner_path**       | The path of the file
 
@@ -1197,7 +1197,7 @@ Parameter            | 描述
 
 Pin (exclude from automatized optional file cleanup) downloaded optional file
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **inner_path**       | The path of the file
 **address**          | Address for the file (default: current site)
@@ -1208,7 +1208,7 @@ Parameter            | 描述
 
 Remove pinning (include from automatized optional file cleanup) of downloaded optional file
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **inner_path**       | The path of the file
 **address**          | Address for the file (default: current site)
@@ -1217,9 +1217,9 @@ Parameter            | 描述
 
 ### optionalFileDelete
 
-Query a downloaded optional file
+查询下载的可选文件
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **inner_path**       | The path of the file
 **address**          | Address for the file (default: current site)
@@ -1237,9 +1237,9 @@ Return currently used disk space by optional files
 
 ### optionalLimitSet
 
-Set the optional file limit
+设置可选文件限制
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **limit**            | Max space used by the optional files in gb or percent of used space
 
@@ -1249,7 +1249,7 @@ Parameter            | 描述
 
 List the auto-downloaded directories of optional files
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
 **address**          | Address of site you want to list helped directories (default: current site)
 
@@ -1260,56 +1260,56 @@ Parameter            | 描述
 
 ### optionalHelp
 
-Add directory to auto-download list
+将目录添加到自动下载列表
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**directory**        | Directory you want to add to auto-download list
-**title**            | Title for the entry (displayed on ZeroHello)
-**address**          | Address of site you want to add the auto-download directory (default: current site)
+**directory**        | 要添加到自动下载列表的目录
+**title**            | 条目标题（显示在ZeroHello上）
+**address**          | 要添加自动下载目录的站点地址（默认值：当前站点）
 
 ---
 
 ### optionalHelpRemove
 
-Remove an auto-download entry
+删除自动下载条目
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**directory**        | Directory you want to remove from auto-download list
-**address**          | Address of affected site (default: current site)
+**directory**        | 要从自动下载列表中删除的目录
+**address**          | 受影响站点的地址（默认值：当前站点）
 
 ---
 
 ### optionalHelpAll
 
-Help download every new uploaded optional file to the site
+帮助将每个新上传的可选文件下载到站点
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**value**            | Enable or Disable the auto-download
-**address**          | Address of affected site (default: current site)
+**value**            | 启用或禁用自动下载
+**address**          | 受影响站点的地址（默认值：当前站点）
 
 
 ---
 
 
 ## 管理员命令
-_(requires ADMIN permission in data/sites.json)_
+_(需要data/sites.json中的ADMIN权限)_
 
 
 ### as
 
-Execute command in other site's context
+在其他站点的上下文中执行命令
 
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**address**          | The context site's address
-**cmd**              | API command name
-**arguments**        | API command arguments
+**address**          | 上下文网站的地址
+**cmd**              | API命令名称
+**arguments**        | API命令参数
 
-**返回**: Command's return value
+**返回**: 命令的返回值
 
 
 **Example**
@@ -1332,13 +1332,13 @@ Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.lo
 
 ### configSet
 
-Create or update an entry in ZeroNet config file. (zeronet.conf by default)
+在ZeroNet配置文件中创建或更新条目。 （默认情况下为zeronet.conf）
 
 
-Parameter            | 描述
+参数                 | 描述
                  --- | ---
-**key**              | Configuration entry name
-**value**            | Configuration entry new value
+**key**              | 配置条目名称
+**value**            | 配置条目新值
 
 
 **返回**: ok
@@ -1350,11 +1350,11 @@ Parameter            | 描述
 
 ### certSet
 
-Set the used certificate for current site.
+为当前站点设置使用的证书。
 
-Parameter            | 描述
+参数            | 描述
                  --- | ---
-**domain**           | Domain of the certificate issuer
+**domain**           | 证书颁发者的域名
 
 **返回**: None
 
@@ -1364,11 +1364,11 @@ Parameter            | 描述
 
 ### channelJoinAllsite
 
-Request notifications about every site's events.
+请求有关每个站点事件的通知。
 
-Parameter           | 描述
+参数                | 描述
                ---  | ---
-**channel**         | Channel to join (see channelJoin)
+**channel**         | 要加入的频道（请参阅channelJoin）
 
 **返回**: None
 
@@ -1380,7 +1380,7 @@ Parameter           | 描述
 
 ### serverPortcheck
 
-Start checking if port is opened
+开始检查端口是否打开
 
 **返回**: True (port opened) or False (port closed)
 
@@ -1390,7 +1390,7 @@ Start checking if port is opened
 
 ### serverShutdown
 
-Stop running ZeroNet client.
+停止运行ZeroNet客户端。
 
 **返回**: None
 
@@ -1401,7 +1401,7 @@ Stop running ZeroNet client.
 
 ### serverUpdate
 
-Re-download ZeroNet from github.
+从github重新下载ZeroNet。
 
 **返回**: None
 
@@ -1410,16 +1410,16 @@ Re-download ZeroNet from github.
 
 
 ### siteClone
-Copy site files into a new one.
+将站点文件复制到新文件中。
 
 Every file and directory will be skipped if it has a `-default` subfixed version and the subfixed version will be copied instead of it.
 
 
 Eg. If you have a `data` and a `data-default` directory: The `data` directory will not be copied and the `data-default` directory will be renamed to data.
 
-Parameter           | 描述
+参数           | 描述
                ---  | ---
-**address**         | Address of site want to clone
+**address**         | 想要克隆的网站地址
 **root_inner_path** | The source directory of the new site
 
 **返回**: None, automatically redirects to new site on completion
@@ -1430,18 +1430,18 @@ Parameter           | 描述
 
 ### siteList
 
-**返回**: <list> SiteInfo list of all downloaded sites
+**返回**: <list> 所有下载网站的SiteInfo列表
 
 
 ---
 
 
 ### sitePause
-Pause site serving
+暂停网站服务
 
-Parameter           | 描述
+参数           | 描述
                ---  | ---
-**address**         | Address of site want to pause
+**address**         | 想要暂停的网站地址
 
 **返回**: None
 
@@ -1450,10 +1450,10 @@ Parameter           | 描述
 
 
 ### siteResume
-Resume site serving
+恢复网站服务
 
-Parameter           | 描述
+参数           | 描述
                ---  | ---
-**address**         | Address of site want to resume
+**address**         | 想要恢复的网站地址
 
 **返回**: None 
