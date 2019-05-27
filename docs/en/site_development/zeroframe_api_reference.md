@@ -1719,27 +1719,32 @@ params = {"file_name": "data.json"}
 Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.log(res.length) } )
 ```
 
----
 
+### certList
 
-**Return**: ok
+Returns information regarding the currently known identity provider certificates.
 
-### configSet
+**Return**: A list of objects each representing a certificate from an identity provider.
 
-Create or update an entry in ZeroNet config file. (zeronet.conf by default)
+**Example**
 
+```javascript
+Page.cmd("certSelect")
+```
 
-Parameter            | Description
-                 --- | ---
-**key**              | Configuration entry name
-**value**            | Configuration entry new value
-
-
-**Return**: ok
-
-
----
-
+```javascript
+[
+  ...
+  {
+    "auth_type": "web",
+    "domain": "zeroid.bit",
+    "selected": false,
+    "auth_user_name": "username",
+    "auth_address": "1GUDV..."
+  },
+  ...
+]
+```
 
 
 ### certSet
@@ -1767,7 +1772,23 @@ Parameter           | Description
 **Return**: None
 
 
+---
 
+**Return**: ok
+
+
+### configSet
+
+Create or update an entry in ZeroNet config file. (zeronet.conf by default)
+
+
+Parameter            | Description
+                 --- | ---
+**key**              | Configuration entry name
+**value**            | Configuration entry new value
+
+
+**Return**: ok
 
 ---
 
