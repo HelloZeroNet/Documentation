@@ -4,10 +4,8 @@
 # Help to keep ZeroNet development alive
 
 
-## ZeroNet: 2018 first half
-<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="9.5"></a>
-
-* General donation towards ZeroNet development
+## ZeroNet general development
+<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="0"></a>
 
 <div>or using PayPal:
 <a href="https://www.paypal.me/zeronet/0usd"><img alt="" border="0" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png"></a>

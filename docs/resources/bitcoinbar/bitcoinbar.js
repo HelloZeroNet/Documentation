@@ -4,7 +4,13 @@ function applyBitcoinbarData(elem, data) {
 	var percent = balance_btc / parseFloat(elem.data("goal")) * 100
 
 	// Set the text and create html elements
-	elem.html("<div class='bar'></div><div class='text'>"+balance_btc.toFixed(3)+" BTC <span class='goal'>of "+elem.data("goal")+" BTC</span><br><span class='heart'>&#x2665;</span> <u>Donate bitcoin</u><br>Thank you! :)</div>")
+	if (elem.data("goal"))
+		goal_html = "<span class='goal'>of "+elem.data("goal")+"BTC</span>";
+	else {
+		goal_html = "received";
+		percent = 100
+	}
+	elem.html("<div class='bar'></div><div class='text'>"+balance_btc.toFixed(3)+" BTC " + goal_html + "<br><span class='heart'>&#x2665;</span> <u>Donate bitcoin</u><br>Thank you! :)</div>")
 
 	// Set anim later to get anim
 	setTimeout(function() {
@@ -55,7 +61,7 @@ function updateBitcoinbars() {
 	$(".bitcoinbar").each(function() {
 		addresses.push("addresses="+$(this).data("address"))
 	})
-	$.get("https://mainnet.helloblock.io/v1/addresses?"+addresses.join("&"), function(res) { 
+	$.get("https://mainnet.helloblock.io/v1/addresses?"+addresses.join("&"), function(res) {
 		for (var i=0;i<res.data.addresses.length;i++) {
 			var address_data = res.data.addresses[i]
 			elem = $(".bitcoinbar[data-address="+address_data.address+"]")
@@ -69,7 +75,7 @@ function updateBitcoinbars() {
 	$(".bitcoinbar").each(function() {
 		addresses.push($(this).data("address"))
 	})
-	$.get("https://block.io/api/v2/get_address_balance/?api_key=969b-3ffd-0b6a-45ad&addresses="+addresses.join(","), function(res) { 
+	$.get("https://block.io/api/v2/get_address_balance/?api_key=969b-3ffd-0b6a-45ad&addresses="+addresses.join(","), function(res) {
 		for (var i=0;i<res.data.balances.length;i++) {
 			var address_data = res.data.balances[i]
 			elem = $(".bitcoinbar[data-address="+address_data.address+"]")
@@ -78,7 +84,7 @@ function updateBitcoinbars() {
 			applyBitcoinbarData(elem, address_data)
 		}
 	})
-	
+
 }
 
 updateBitcoinbars()

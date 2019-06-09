@@ -1,8 +1,8 @@
 # Contribution financière
 
 
-## ZeroNet: 2018 premier semestre
-<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="9.5"></a>
+## ZeroNet
+<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="0"></a>
 
 * Donation général pour le dévelopment de ZeroNet
 

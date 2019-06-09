@@ -4,8 +4,8 @@
 # 帮助保持ZeroNet的发展
 
 
-## ZeroNet: 2018 first half
-<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="9.5"></a>
+## ZeroNet
+<a href="bitcoin:1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX?Label=ZeroNet+donation" class="bitcoinbar" data-address="1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX" data-goal="0"></a>
 
 * 对ZeroNet开发的一般捐赠
 
