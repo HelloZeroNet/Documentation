@@ -146,8 +146,6 @@ Exemple :
 ```
 Le champ vide (`""`) signifie que c'est le domaine supérieur, les autres champs sont des sous-domaines.
 
-> __Tip:__ Vous pouvez acheter des Namecoins avec des bitcoins sur [shapeshift.io](https://shapeshift.io/).
-
 > __Tip:__ Autres moyens pour enregistrer un nom de domaine en .bit : [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
 
 > __Tip:__ Vous pouvez vérifier votre nom de domaine sur [namecha.in](http://namecha.in/), par exemple: [zeroid.bit](http://namecha.in/name/d/zeroid)
