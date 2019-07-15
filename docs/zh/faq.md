@@ -136,7 +136,8 @@ After the registration is done you have to edit your domain's record by adding a
 ```
 {
 ...
-    "zeronet": {
+    "zeronet": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
+    "map": {
         "": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
         "blog": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8",
         "talk": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
