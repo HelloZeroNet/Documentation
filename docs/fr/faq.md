@@ -144,7 +144,6 @@ Exemple :
 ...
 }
 ```
-Le champ vide (`""`) signifie que c'est le domaine supérieur, les autres champs sont des sous-domaines.
 
 > __Tip:__ Vous pouvez acheter des Namecoins avec des bitcoins sur [shapeshift.io](https://shapeshift.io/).
 

@@ -147,7 +147,6 @@ After the registration is done you have to edit your domain's record by adding a
 ...
 }
 ```
-An empty string (`""`) means the top domain, anything other than that is a sub-domain.
 
 > __Tip:__ You can buy Namecoin for Bitcoin or other cryptocurrencies using [shapeshift.io](https://shapeshift.io/).
 
