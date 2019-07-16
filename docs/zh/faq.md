@@ -136,15 +136,14 @@ After the registration is done you have to edit your domain's record by adding a
 ```
 {
 ...
-    "zeronet": {
-        "": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
-        "blog": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8",
-        "talk": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
+    "zeronet": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
+    "map": {
+        "blog": { "zeronet": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8" },
+        "talk": { "zeronet": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ" }
     },
 ...
 }
 ```
-An empty string (`""`) means the top domain, anything other than that is a sub-domain.
 
 > __Tip:__ Other possibilities to register .bit domains: [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
 

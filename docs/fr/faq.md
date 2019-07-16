@@ -136,15 +136,14 @@ Exemple :
 ```
 {
 ...
-    "zeronet": {
-        "": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
-        "blog": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8",
-        "talk": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ"
+    "zeronet": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr",
+    "map": {
+        "blog": { "zeronet": "1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8" },
+        "talk": { "zeronet": "1TaLk3zM7ZRskJvrh3ZNCDVGXvkJusPKQ" }
     },
 ...
 }
 ```
-Le champ vide (`""`) signifie que c'est le domaine supérieur, les autres champs sont des sous-domaines.
 
 > __Tip:__ Autres moyens pour enregistrer un nom de domaine en .bit : [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
 
