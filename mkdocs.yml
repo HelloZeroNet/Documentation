@@ -14,8 +14,6 @@ site_dir: site
 
 theme:
   language: 'en'
-  feature:
-    tabs: true
   palette:
     primary: "deep purple"
     accent: "deep purple"
