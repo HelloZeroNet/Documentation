@@ -1269,7 +1269,7 @@ Request to login with a private key.
     **Output:**
 
     None, the login prompt will appear in a window inaccessible to the iframe.
-    
+
 
 ### userShowMasterSeed
 
@@ -1686,6 +1686,40 @@ Parameter            | Description
 
 
 ---
+
+
+## Plugin: UiPluginManager
+
+
+### pluginAddRequest
+
+
+Ask user to install a new plugin from a directory of the current site.
+
+Parameter            | Description
+                 --- | ---
+**inner_path**       | Directory of the plugin
+
+**Example:**
+```coffeescript
+Page.cmd("pluginAddRequest", "plugins/Example")
+```
+
+The plugin directory must contain a **plugin_info.json** file that contains the plugin's displayed name, a short description and the version (rev) number.
+
+**Example plugins/Example/plugin_info.json:**
+```json
+{
+    "name": "Example plugin",
+    "description": "Just an example for third-party plugins",
+    "rev": 5
+}
+```
+
+**Return**: "ok" on success
+
+> __Note:__
+> You can see the currently installed plugins version number in [server info](#serverinfo) plugins_rev node.
 
 
 ## Admin commands
