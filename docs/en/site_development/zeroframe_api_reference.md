@@ -162,7 +162,7 @@ Return the history state of the current tab from the browser.
 ---
 
 ### wrapperGetAjaxKey
-**Return**: Retrieve a key that can be used to make ajax requests.
+**Return**: Retrieve a key that can be used to make ajax (XMLHTTPRequest, fetch) requests.
 
 ??? "Example"
 
@@ -238,6 +238,9 @@ Return the history state of the current tab from the browser.
 
         Retrieving files from other ZeroNet sites can be done via the [CORS
         plugin](#plugin-cors).
+
+        You can also use `monkeyPatchAjax` function from `ZeroFrame.js` to
+        patch default XMLHTTPRequest and fetch implementations.
 
 ---
 
