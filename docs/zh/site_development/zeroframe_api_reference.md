@@ -67,7 +67,7 @@ siteDelete: (address) ->
 ---
 
 ### wrapperGetAjaxKey
-**返回**: 初始化ajax请求所需的密钥
+**返回**: 初始化ajax (XMLHTTPRequest, fetch)请求所需的密钥
 
 **示例:**
 ```javascript

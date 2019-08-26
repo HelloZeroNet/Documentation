@@ -326,7 +326,9 @@ Node                   | 描述
     "permission_rules": {
       ".*": {
         "files_allowed": "data.json",
-        "max_size": 10000
+        "files_allowed_optional" : "\\.(png|jpeg|jpg|gif|webm|mp4|ogg|mp3|pdf|epub|zip|tar\\.gz)(\\.piecemap\\.msgpack)",
+        "max_size": 10000,
+        "max_size_optional": 10000000
       },
       "bitid/.*@zeroid.bit": { "max_size": 40000 },
       "bitmsg/.*@zeroid.bit": { "max_size": 15000 }

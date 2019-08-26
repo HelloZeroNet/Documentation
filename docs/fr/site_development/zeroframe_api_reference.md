@@ -68,7 +68,7 @@ Applies the windows.location.hash to page url. Call when you page is fully loade
 ---
 
 ### wrapperGetAjaxKey
-**Return**: The key you need to initilize ajax requests
+**Return**: The key you need to initilize ajax (XMLHTTPRequest, fetch) requests
 
 **Example:**
 ```javascript
