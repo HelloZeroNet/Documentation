@@ -65,7 +65,7 @@ For other OS's, follow the instructions in the "How to make ZeroNet work with To
 
 #### How to make ZeroNet work with Tor under Linux/MacOS?
 
- - Install Tor for your OS following Tor's official guidelines: [Linux](https://www.torproject.org/docs/debian.html.en) [Mac](https://www.torproject.org/docs/tor-doc-osx.html.en).
+ - Install Tor for your OS following Tor's official guidelines: [Linux](https://www.torproject.org/docs/tor-doc-unix.html.en) [Mac](https://www.torproject.org/docs/tor-doc-osx.html.en).
  - `sudo nano /etc/tor/torrc`
  - Remove the `#` character from lines `ControlPort 9051` and `CookieAuthentication 1` (line ~57)
  - Restart tor
