@@ -34,12 +34,14 @@ ZeroNet is made to work with anonymity networks: you can easily hide your IP usi
 In Tor mode it is recommended to use ZeroNet from within the Tor Browser:
 
 - Start the Tor Browser
-- Go to address `about:preferences#advanced`
-- Click `Settings...`
-- Enter `127.0.0.1` to field **No proxy for**
-- Open http://127.0.0.1:43110 in the browser
+- Go to address `about:config` & accept risk warning
+- Search `no_proxies_on`
+- Double click the preference entry
+- Enter `127.0.0.1` & press OK
+- Open [http://127.0.0.1:43110](http://127.0.0.1:43110) in the browser
 
 If you still see a blank page:
+
  - Click on NoScript's button (first on the toolbar)
  - Choose "Temporary allow all this page"
  - Reload the page
@@ -248,7 +250,7 @@ ZeroNet is built for dynamic, real-time updated websites, but you can serve any 
 - Other files (html, css, js...) are then __downloaded__ and verified using their size and SHA512 hash from content.json.
 - Each visited site then becomes __also served by you__.
 - If the site owner (who has the private key for the site address) __modifies__ the site, then he/she signs
-  the new content.json and __publishes it to peers__. After the peers have verified the file's 
+  the new content.json and __publishes it to peers__. After the peers have verified the file's
   integrity (using the signature), they __download the modified files__ and serve the new content to other peers.
 
 More info:
