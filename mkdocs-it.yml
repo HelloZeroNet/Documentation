@@ -1,0 +1,55 @@
+
+site_name: ZeroNet
+site_url: https://zeronet.io
+site_description: Site Web decentralizzati utilizzando crittografia Bitcoin e la rete BitTorrent
+
+repo_url: https://github.com/HelloZeroNet/ZeroNet
+edit_uri: ../Documentation/edit/master/docs/en/
+
+extra_css: [docs.css, stylesheets/menu.css]
+extra_javascript: [ZeroFrame.js, jquery.min.js, docs.js, javascripts/menu.js]
+
+docs_dir: docs/it
+site_dir: site
+
+theme:
+  language: 'it'
+  palette:
+    primary: "deep purple"
+    accent: "deep purple"
+  logo: "logo/zeronet_logo.svg"
+  name: "material"
+  favicon: "logo/favicon.ico"
+  custom_dir: "docs/resources"
+  font: false
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - codehilite
+  - markdown.extensions.admonition
+  - pymdownx.superfences
+  - pymdownx.details
+
+plugins:
+  - search:
+      lang: ['it']
+
+nav:
+- Introduction: "index.md"
+- Frequently asked questions: "faq.md"
+- Start using ZeroNet:
+  - "using_zeronet/installing.md"
+  - "using_zeronet/sample_sites.md"
+  - "using_zeronet/create_new_site.md"
+- Site Development:
+  - "site_development/getting_started.md"
+  - "site_development/zeroframe_api_reference.md"
+  - "site_development/content_json.md"
+  - "site_development/dbschema_json.md"
+  - "site_development/cert_authority.md"
+- Help ZeroNet development:
+  - "help_zeronet/contributing.md"
+  - "help_zeronet/coding_conventions.md"
+  - "help_zeronet/network_protocol.md"
+  - "help_zeronet/donate.md"

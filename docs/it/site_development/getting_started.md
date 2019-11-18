@@ -1,83 +1,83 @@
-# Getting Started
+# Per iniziare
 
-ZeroNet allows you to publish static and dynamic websites on a distributed web platform.
+ZeroNet consente di pubblicare siti web statici e dinamici in una piattaforma web distribuita.
 
-In ZeroNet there is no concept of servers. Thus, server-side languages like PHP or Ruby are not needed. Instead, one can create dynamic content using ZeroNet's API (called ZeroFrame), JavaScript (or CoffeeScript) and the SQL database provided to all websites.
+In ZeroNet non c'è il concetto di server. Pertanto, linguaggi lato server come PHP o Ruby non servono. Invece, si possono creare contenuti dinamici utilizzando le API ZeroNet (chiamate ZeroFrame), JavaScript (o CoffeeScript) e il database SQL database fornito a tutti i siti web.
 
-## Tutorials
+## Tutorial
 
-### ZeroChat tutorial
+### Tutorial ZeroChat
 
-In this tutorial we are going to build a P2P, decentralized, server-less chat site in less then 100 lines of code.
+In questo tutorial si svilupperà un sito di chat P2P, decentralizzato, senza-server in meno di 100 righe di codice.
 
-* [Read on ZeroBlog](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:99:ZeroChat+tutorial)
-* [Read on Medium.com](https://decentralize.today/decentralized-p2p-chat-in-100-lines-of-code-d6e496034cd4)
+* [Leggi su ZeroBlog](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:99:ZeroChat+tutorial)
+* [Leggi su Medium.com](https://decentralize.today/decentralized-p2p-chat-in-100-lines-of-code-d6e496034cd4)
 
-## Useful Information
+## Informazioni utili
 
-### ZeroNet Debug mode
+### Modalità debug ZeroNet
 
-ZeroNet comes with a `--debug` flag that will make site development easier.
+ZeroNet presenta una opzione `--debug` che consente di sviluppare siti facilmente.
 
-To run ZeroNet in debug mode use: `python zeronet.py --debug`
+Per avviare ZeroNet in modalità debug usare: `python zeronet.py --debug`
 
-If you are using compiled/bundled version of ZeroNet:
+Se si sta usando una versione compilata/bundled di ZeroNet:
 
-* On Windows: `lib\ZeroNet.cmd --debug`
-* On Linux: `./ZeroNet.sh --debug`
-* On Mac: `./ZeroNet.app/Contents/MacOS/ZeroNet --debug`
+* Su Windows: `lib\ZeroNet.cmd --debug`
+* Su Linux: `./ZeroNet.sh --debug`
+* Su Mac: `./ZeroNet.app/Contents/MacOS/ZeroNet --debug`
 
-#### Debug mode features:
+#### Funzionalità modalità debug:
 
-- Automatic [CoffeeScript](http://coffeescript.org/) -> JavaScript conversion (if a coffeescript compiler is installed)
-- Debug messages will appear in the console
-- Auto reload of some source files (UiRequest, UiWebsocket, FileRequest) on modification to prevent restarting (Requires [PyFilesystem](http://pyfilesystem.org/) on GNU/Linux)
-- `http://127.0.0.1:43110/Debug` Traceback and interactive Python console at the last error position (using the wonderful Werkzeug debugger - Requires [Werkzeug](http://werkzeug.pocoo.org/))
-- `http://127.0.0.1:43110/Console` Spawns an interactive Python console (Requires [Werkzeug](http://werkzeug.pocoo.org/))
+- Conversione automatica [CoffeeScript](http://coffeescript.org/) -> JavaScript (se è installato un compilatore coffeescript)
+- I messaggi di debug compaiono nella console
+- Auto ricarica di alcuni file sorgenti (UiRequest, UiWebsocket, FileRequest) su modifica per prevenire il riavvio (Richiede [PyFilesystem](http://pyfilesystem.org/) su GNU/Linux)
+- `http://127.0.0.1:43110/Debug` Tracciamento e console Python interattiva all'ultima posizione di errore (utilizzando il meraviglioso debugger Werkzeug - Richiede [Werkzeug](http://werkzeug.pocoo.org/))
+- `http://127.0.0.1:43110/Console` Visualizza una cponsole interattiva Python (Richiede [Werkzeug](http://werkzeug.pocoo.org/))
 
-### Writing in CoffeeScript
+### Scrivere in CoffeeScript
 
-To aid in writing CoffeeScript-based ZeroNet sites and to make use of ZeroNet's
-built-in CoffeeScript -> JavaScript converter, first enable debug mode as
-described in [Debug](#zeronet-debug-mode). Additionally, ensure the site you
-wish to work on is marked as one you own by enabling "This is my site" via
-the site sidebar.
+Per aiutare nella scrittura di siti ZeroNet basati su CoffeeScript-based e per utilizzare il convertitore ZeroNet
+incluso CoffeeScript -> JavaScript, abilitare per prima cosa la modalità debug come descritto
+in [Debug](#modalità-debug-zeronet). Inoltre, assicurarsi che il sito su cui si vuole lavorare
+sia marcato come di proprietà abilitando "Questo è il mio sito" attraverso
+la barra laterale.
 
-<!-- Is this right? -->
-ZeroNet will compile all CoffeeScript files it can find into a file called `all.js`, and deposit it in a `js/` folder at the top level of your site. This file will also include all your JavaScript code as well. Then you can simply import all your dynamic code into your HTML with the following before the `</body>` tag:
+<!-- Questo è corretto? -->
+ZeroNet compilerà tutti i file CoffeeScript che troverà all'interno del file `all.js`, e li depositerà in una cartella `js/` al livello principale del sito. Questo file incliderà anche tutto il codice JavaScript. Quindi è possibile importare tutto il codice dinamico nell'HTML con la seguente riga prima del tag `</body>`:
 
 ```html
 <script type="text/javascript" src="js/all.js?lang={lang}"></script>
 ```
 
-<!-- Why? -->
-!!! info "Note"
+<!-- Perché? -->
+!!! info "Nota"
 
-    `{lang}` is a *placeholder variable*, and will be automatically replaced by the appropriate value by ZeroNet when the site is loaded.
+    `{lang}` è una *variabile segnaposto* e verrà sostituita automaticamente dal valore opportuno da ZeroNet quando il sito viene caricato.
 
 
-### Disable HTTP Browser Caching
+### Disabilitare la chache HTTP del browser
 
-In addition to Debug Mode, disabling HTTP Caching in the browser is an essential part of ZeroNet site development. Modern web browsers attempt to cache web content whenever they can. As all ZeroNet sites run in an iframe, web browsers cannot detect when a ZeroNet site's content changes, and thus site changes are often not reflected if HTTP Caching is enabled.
+In aggiunta alla modalità debug, disabilitare la cache HTTP nel browser è una parte essenziale nello sviluppo di siti ZeroNet. I moderni browser tentano di memorizzare in cache i conentuti web quando possono. Siccome tutti i siti ZeroNet funzionano all'interno di un iframe, i web browser non si accorgono quando il contenuto di un sito ZeroNet cambia e pertanto le modifiche dei siti non vengono visualizzate se è attiva la cache HTTP.
 
-To disable, open your browser's devtools, navigate to the devtools settings and check the option along the lines of 'Disable HTTP Cache (when toolbox is open)'. As the setting suggests, make sure to keep devtools open when testing new changes to your site!
+Per disabilitarla, aprire gli strumenti sviluppatori del browser, spostarsi sulle impostazioni è settare l'opzione vicino alla riga di 'Disabilitare cache HTTP (quando gli strumenti sviluppatore sono aperti)'. Come suggeriscono le impostazioni, assicurarsi di mantenere aperti gli strumenti sviluppatori quando si testano nuove modifiche del sito!
 
-### Extra features (works only for sites that you own)
+### Funzionalità aggiuntive (funzionano folo sui siti di proprietà)
 
- - Merged CSS files: All CSS files inside the site folder will be merged into one file called `all.css`. You can choose to include only this file to your site. If you want to keep the other CSS files to make the development easier, you can add them to the ignore key of your `content.json`. This way, they won't be published with your site. (eg: add to your `content.json` `"ignore": "(js|css)/(?!all.(js|css))"` this will ignore all CSS and JS files except `all.js` and `all.css`)
- - Merged JS files: All JS files inside the site folder will be merged into one file called `all.js`. If a CoffeeScript compiler is present (bundled for Windows) it will convert `.coffee` to `.js`.
- - Order in which files are merged into all.css/all.js: Files inside subdirectories of the css/js folder comes first; Files in the css/js folder will be merged according to file name ordering (01_a.css, 02_a.css, etc)
+ - File CSS uniti: tutti i file CSS all'interno della cartella del sito vengono uniti in uno chiamato `all.css`. Si può scegliere di includere solo questo file nel sito. Se si vogliono mantenere gli altri file CSS per sviluppare con facilità, si possono aggiungere alla chiave ignore del relativo file `content.json`. In questo modo, non verranno pubblicati con il sito. (es.: aggiungere a `content.json` `"ignore": "(js|css)/(?!all.(js|css))"` per ignorare tutti i file CSS e JS eccetto `all.js` e `all.css`)
+ - File JS uniti: tutti i file JS all'interno della cartella del sito vegono uniti in uno chiamato `all.js`. Se è presente un compilatore CoffeeScript (fornito per Windows) convertirà `.coffee` in `.js`.
+ - L'ordine in cui i file vengono uniti in all.css/all.js: i file all'interno delle sotto cartelle delle cartelle css/js sono i primi; i file nella cartella css/js verranno uniti seguendo l'ordinamento per nome (01_a.css, 02_a.css, etc)
 
-## Need Help?
+## Serve aiuto?
 
-ZeroNet has a growing community of developers who hang out in various spaces. If you would like to ask for help, advice or just want to hang out, feel free to connect in to the following services:
+ZeroNet ha una comunità in crescita di sviluppatori con diverse specializzazioni. Se serve aiuto, notizie o semplicemente restare in contatto, connettetevi liberamente ai seguenti servizi:
 
-### Forums
+### Forum
 
-* [ZeroExchange](http://127.0.0.1:43110/zeroexchange.bit/), a p2p StackOverflow clone
-* [ZeroTalk](http://127.0.0.1:43110/Talk.ZeroNetwork.bit/), a p2p Reddit-like forum
+* [ZeroExchange](http://127.0.0.1:43110/zeroexchange.bit/), un clone p2p StackOverflow
+* [ZeroTalk](http://127.0.0.1:43110/Talk.ZeroNetwork.bit/), un forum p2p Reddit-like
 
 ### Chat
 
-* [#zeronet-dev:matrix.org](https://riot.im/app/#/room/#zeronet-dev:matrix.org) on Matrix
-* IRC at #zeronet on Freenode
+* [#zeronet-dev:matrix.org](https://riot.im/app/#/room/#zeronet-dev:matrix.org) su Matrix
+* IRC a #zeronet su Freenode

@@ -1,61 +1,61 @@
-# ZeroFrame API Reference
+# Referenza API ZeroFrame
 
-## The ZeroFrame API
+## La API ZeroFrame
 
-ZeroFrame is an API that allows ZeroNet websites to interact with the ZeroNet daemon. It allows sites to save/retrieve files, publish changes and many other things. A copy of the library is included at `js/ZeroFrame.js` whenever a new site is created.
+ZeroFrame è una API che consente ai siti ZeroNet di interagire con il deamon ZeroNet. Consente si siti di salvare/recuperare file, pubbicare modifiche e molte altre cose. Una copia della libreria è inclusa in `js/ZeroFrame.js` ogni volta che un nuovo sito viene creato.
 
-The library can be imported like any other JavaScript file, or site developers also have the option of [importing through NPM](ZeroFrame API Page, ##Import?). Please see the [ZeroFrame API Reference]() for API details.
+La libreria puà essere importata come ogni altro file JavaScript, o gli sviluppatori hanno l'opzione di [importarla tramite NPM](Pagina API ZeroFrame, ##Import?). Vedere la  [Referenza API ZeroFrame]() per i dettagli della API.
 
 ## Wrapper
 
-Commands that interact with code outside of the iframe.
+Comandi che interagiscono con il codice all'esterno dell'iframe.
 
 ### wrapperConfirm
-Display a notification with a confirmation.
+Visualizza una notifica con una conferma.
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
-    message = 'Are you sure you want to delete this?'
-    buttonTitle = 'Delete'
+    message = 'Sei sicuro di volerlo cancellare?'
+    buttonTitle = 'Cancella'
 
     zeroframe.cmd 'wrapperConfirm', [message, buttonTitle], (confirmed) =>
       if confirmed
-        console.log 'Deleting post...'
+        console.log 'Cancellazione post...'
     ```
 
     ```javascript tab="JavaScript"
     const zeroframe = new ZeroFrame();
 
-    let message = 'Are you sure you want to delete this?';
-    let buttonTitle = 'delete';
+    let message = 'Sei sicuro di volerlo cancellare?';
+    let buttonTitle = 'Cancella';
 
     zeroframe.cmd('wrapperConfirm', [message, buttonTitle], (confirmed) => {
       if (confirmed) {
-        console.log('Deleting post...');
+        console.log('Cancellazione post...');
       }
     };
     ```
 
-    **Output:**
+    **Risultato:**
 
-    User clicks confirm:
+    L'utente sa clic sulla conferma:
 
     ```javascript
-    "Deleting post..."
+    "Cancellazione post..."
     ```
 
-    !!! info "Note"
+    !!! info "Nota"
 
-        The callback function is not run if the user dismisses the notification.
+        La funzione di callback non viene eseguita se l'utente ignora la notifica.
 ---
 
 
 ### wrapperInnerLoaded
-Because `#anchors` in the URL only apply to the outer web page, and not the inner iframe where ZeroNet sites live, this command must be used to do so. When your site is fully loaded, call this method to apply the current anchor to the inner iframe's `src` URL.
+Poiché `#anchors` nell'URL si applica solo alla pagina web esterna e non all'interno dell'iframe dove è attivo il sito ZeroNet, bisogna usare il comando seguente. Quando il sito è completamente caricato, richiamare questo metodo per applicare l'anchor corrente al parametro `src` dell'URL dell'iframe interno.
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
@@ -68,42 +68,42 @@ Because `#anchors` in the URL only apply to the outer web page, and not the inne
     zeroframe.cmd('wrapperInnerLoaded', []);
     ```
 
-    **Output:**
+    **Risultato:**
 
-    If the user is on `http://127.0.0.1:43110/mysite.bit#my-title`:
+    Se l'utente è su `http://127.0.0.1:43110/mysite.bit#my-title`:
 
     ```
-    [Wrapper] Added hash to location http://127.0.0.1:43110/mysite.bit/?wrapper_nonce=some_nonce#my-title
+    Chiave aggiunta dal [Wrapper] alla locazione http://127.0.0.1:43110/mysite.bit/?wrapper_nonce=some_nonce#my-title
     ```
 
 
 ---
 
 ### innerLoaded
-Alias for [wrapperInnerLoaded](#wrapperinnerloaded).
+Alias per [wrapperInnerLoaded](#wrapperinnerloaded).
 
 ---
 
 
 ### wrapperGetLocalStorage
-Retrieve the contents of the ZeroNet site's Local Storage.
+Recupera il contenuto Local Storage del sito ZeroNet.
 
-!!! info "Note"
+!!! info "Nota"
 
-    As ZeroNet sites all run off the same domain, the same Local Storage is
-    technically shared by all sites, which is a security risk. Thus, the
-    UiWrapper compartmentalizes each site to only be able to access their own
-    portion.
+    Poiché tutti i siti ZeroNet funzionano sullo stesso dominio, lo stesso Local Storage è
+    tecnicamente condiviso da tutti i siti, che è un rischio per la sicurezza. Pertanto, il
+    UiWrapper compartimenta ogni sito perché sia in grado di accedere solo alla propria
+    porzione.
 
-**Return**: The Local Storage for this site as JSON.
+**Restituisce**: Il Local Storage per il sito in formato JSON.
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
     zeroframe.cmd "wrapperGetLocalStorage", [], (res) =>
       res ?= {}
-      console.log "Local storage value:", res
+      console.log "Valore Local storage:", res
     ```
 
     ```javascript tab="JavaScript"
@@ -111,19 +111,19 @@ Retrieve the contents of the ZeroNet site's Local Storage.
 
     zeroframe.cmd("wrapperGetLocalStorage", [], (res) => {
       res = res || {};
-      console.log("Local Storage contents:", res);
+      console.log("Contenuto Local Storage:", res);
     });
     ```
 
-    **Output:**
+    **Risultato:**
 
-    If Local Storage is empty:
+    Se il Local Storage è vuoto:
 
     ```javascript
     Local Storage contents: {}
     ```
 
-    If Local Storage has been modified with [wrapperSetLocalStorage](#wrappersetlocalstorage):
+    Se il Local Storage è stato modificato con [wrapperSetLocalStorage](#wrappersetlocalstorage):
 
     ```javascript
     Local Storage contents: {"score": 500}
@@ -132,11 +132,11 @@ Retrieve the contents of the ZeroNet site's Local Storage.
 ---
 
 ### wrapperGetState
-Return the history state of the current tab from the browser.
+Restituisce lo storico della linguetta del browser corrente.
 
-**Return**: Browser's current history state object.
+**Restituisce**: oggetto corrente dello storico del browser.
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
@@ -153,7 +153,7 @@ Return the history state of the current tab from the browser.
     });
     ```
 
-    **Output:**
+    **Risultato:**
 
     ```
     null
@@ -162,9 +162,9 @@ Return the history state of the current tab from the browser.
 ---
 
 ### wrapperGetAjaxKey
-**Return**: Retrieve a key that can be used to make ajax (XMLHTTPRequest, fetch) requests.
+**Restituisce**: recupera una chiave che può essere utilizzata per realizzare una richiesta ajax (XMLHTTPRequest, fetch).
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
@@ -172,7 +172,7 @@ Return the history state of the current tab from the browser.
     zeroframe.cmd 'wrapperGetAjaxKey', {}, (ajax_key) ->
       req = new window.XMLHttpRequest()
       req.open 'GET', "content.json?ajax_key=#{ajax_key}"
-      # Optional: only if you want to request a partial file
+      # Opzionale: solo se si vuole una parte di file
       # req.setRequestHeader 'Range', 'bytes=10-200'
       req.onload = ->
         console.log req.response
@@ -185,7 +185,7 @@ Return the history state of the current tab from the browser.
     zeroframe.cmd('wrapperGetAjaxKey', {}, (ajax_key) => {
       const req = new window.XMLHttpRequest();
       req.open('GET', `content.json?ajax_key=${ajax_key}`);
-      // Optional: only if you want request partial file
+      // Opzionale: solo se si vuole una parte di file
       // req.setRequestHeader('Range', 'bytes=10-200');
       req.onload = () => {
         console.log(req.response);
@@ -194,9 +194,9 @@ Return the history state of the current tab from the browser.
     });
     ```
 
-    **Output:**
+    **Risultato:**
 
-    The file we requested. In this case, the `content.json` of the current site:
+    Il file richiesto. In questo caso, il file `content.json` del sito corrente:
 
     ```javascript
     {
@@ -229,59 +229,57 @@ Return the history state of the current tab from the browser.
     }
     ```
 
-    !!! info "Note"
+    !!! info "Nota"
 
-        The recommended usecase of this is for communicating with non-ZeroNet
-        sources. This is not the recommended way to retrieve the contents of
-        a file for a site. For that, use the [fileGet](#fileget) command
-        instead.
+        Il caso d'uso raccomandato è per la comunicazione con risorse non ZeroNet.
+        Non è raccomandato per recuperare i contenuti di un file per un sito.
+        Per questo, utilizzare il comando [fileGet](#fileget).
 
-        Retrieving files from other ZeroNet sites can be done via the [CORS
-        plugin](#plugin-cors).
+        Il recupero di file da altri siti ZeroNet può essere fatto con il [plugin CORS](#plugin-cors).
 
-        You can also use `monkeyPatchAjax` function from `ZeroFrame.js` to
-        patch default XMLHTTPRequest and fetch implementations.
+        Si può anche utilizzare la sunzione `monkeyPatchAjax` di `ZeroFrame.js` per aggiustare la
+        XMLHTTPRequest predefinita e attuare implementazioni.
 
 ---
 
 ### wrapperNotification
-Display a notification.
+Visualizza una notifica.
 
-Parameter              | Description
-                  ---  | ---
-**type**               | The style of the notification. Possible values: `info`, `error`, `done`
-**message**            | The message you want to display
-**timeout** (optional) | Hide display after this interval (milliseconds)
+Parametro               | Descrizione
+                   ---  | ---
+**type**                | Style della notifica. Possibili valori: `info`, `error`, `done`
+**message**             | Il messaggio che si vuole visualizzare
+**timeout** (opzionale) | Nasconde il messaggio dopo questo intervallo (millisecondi)
 
-**Return**: None.
+**Restituisce**: Niente.
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
-    zeroframe.cmd 'wrapperNotification', ['done', 'Your registration has been sent!', 10000]
+    zeroframe.cmd 'wrapperNotification', ['done', 'La tua registrazione è stata inviata!', 10000]
     ```
 
     ```javascript tab="JavaScript"
     const zeroframe = new ZeroFrame();
 
-    zeroframe.cmd('wrapperNotification', ['done', 'Your registration has been sent!', 10000]);
+    zeroframe.cmd('wrapperNotification', ['done', 'La tua registrazione è stata inviata!', 10000]);
     ```
 
 
 ---
 
 ### wrapperOpenWindow
-Navigates to or opens a new popup window.
+Sposta in una nuova finestra popup o la apre.
 
-Parameter              | Description
+Parametro              | Descrizione
                   ---  | ---
-**url**                | URL of the opened page
-**target** (optional)  | Target window name
-**specs** (optional)   | Special properties of the window (see: [window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open))
+**url**                | URL della pagina aperta
+**target** (opzionale) | Nome della finestra obiettivo
+**specs** (opzionale)  | Proprietà speciali della finestra (vedere: [window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open))
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
@@ -299,20 +297,20 @@ Parameter              | Description
 
 
 ### wrapperPermissionAdd
-Request a new permission for site.
+Richiede un nuovo permesso per il sito.
 
-Parameter        | Description
+Parametro        | Descrizione
              --- | ---
-**permission**   | Name of permission (e.g. Merger:ZeroMe)
+**permission**   | Nome del permesso (es. Merger:ZeroMe)
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
     zeroframe.cmd 'wrapperPermissionAdd', ['Merger:ZeroMe'], (res) ->
       if res == 'ok'
-        console.log 'Permission granted.'
+        console.log 'Permesso concesso.'
     ```
 
     ```javascript tab="JavaScript"
@@ -320,45 +318,44 @@ Parameter        | Description
 
     zeroframe.cmd('wrapperPermissionAdd', ['Merger:ZeroMe'], (res) => {
       if (res === 'ok') {
-        console.log('Permission granted.');
+        console.log('Permesso concesso.');
       }
     });
     ```
 
-    **Output:**
+    **Risultato:**
 
-    If the user accepted the permission request:
+    Se l'utente accetta la richiesta di permesso:
 
     ```
-    Permission granted.
+    Permesso concesso.
     ```
 
-    If the user denied or did not answer the request, the method will not be
-    run.
+    Se l'utente nega o non risponde alla richiesta, il metodo on viene eseguito.
 
 
 ---
 
 ### wrapperPrompt
-Prompt for text input from the user.
+Richiesta di inserimento testo dall'utente.
 
-Parameter           | Description
-               ---  | ---
-**message**         | The message you want to display
-**type** (optional) | The input field type (e.g. `text`, `password`)
+Parametro            | Descrizione
+               ---   | ---
+**message**          | Il messaggio da visualizzare
+**type** (opzionale) | Il tupo di campo (es. `text`, `password`)
 
-**Return**: Entered input text.
+**Restituisce**: il resto inserito.
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
-    # Prompt for a site's private key
-    zeroframe.cmd 'wrapperPrompt', ['Enter your private key:', 'password'], (privatekey) ->
-      # Sign and publish content.json
+    # Richista della chiave privata per un sito
+    zeroframe.cmd 'wrapperPrompt', ['Inserire la chiave privata:', 'password'], (privatekey) ->
+      # Firma e pubblica content.json
       zeroframe.cmd 'sitePublish', [privatekey], (res) ->
-        console.log 'Publish result:', res
+        console.log 'Risultato pubblicazione:', res
     ```
 
     ```javascript tab="JavaScript"
@@ -366,36 +363,36 @@ Parameter           | Description
 
     zeroframe = new ZeroFrame();
 
-    // Prompt for a site's private key
-    zeroframe.cmd('wrapperPrompt', ['Enter your private key:', 'password'], function(privatekey) {
-      // Sign and publish content.json
+    // Richista della chiave privata per un sito
+    zeroframe.cmd('wrapperPrompt', ['Inserire la chiave privata:', 'password'], function(privatekey) {
+      // Firma e pubblica content.json
       zeroframe.cmd('sitePublish', [privatekey], function(res) {
-        console.log('Publish result:', res);
+        console.log('Risultato pubblicazione:', res);
       });
     });
     ```
 
-    **Output:**
+    **Risultato:**
 
     ```
-    Publish result: ok
+    Risultato pubblicazione: ok
     ```
 
 
 ---
 
 ### wrapperPushState
-Change the url while and adding a new entry to the browser's history. See [JavaScript pushState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method). And see [wrapperReplaceState](#wrapperreplacestate) to do so without adding a new history entry.
+Modifica l'url attuale e aggiunge un nuovo valore nello storico del browser. Vedere [JavaScript pushState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method). E vedere [wrapperReplaceState](#wrapperreplacestate) per non aggiungere un valore nello storico.
 
-Parameter           | Description
+Parametro           | Descrizione
                ---  | ---
-**state**           | State JavaScript object
-**title**           | Title of the page
-**url**             | URL path of the page
+**state**           | Oggetto stato JavaScript
+**title**           | Titolo della pagina
+**url**             | Percorso URL della pagina
 
-**Return**: None.
+**Restituisce**: Niente.
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
@@ -412,17 +409,17 @@ Parameter           | Description
 ---
 
 ### wrapperReplaceState
-Change the url without adding a new entry to the browser's history. See [JavaScript replaceState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method).
+Modifica l'url della finestra senza aggiungere il valore allo storico del browser. Vedere [JavaScript replaceState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method).
 
-Parameter           | Description
+Parametro           | Descrizione
                ---  | ---
-**state**           | State JavaScript object
-**title**           | Title of the page
-**url**             | URL path of the page
+**state**           | Oggetto stato JavaScript
+**title**           | Titolo della pagina
+**url**             | Percorso URL della pagina
 
-**Return**: None.
+**Restituisce**: Niente.
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
@@ -446,7 +443,7 @@ Parameter           | Description
 
 Set the current page to fullscreen.
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
@@ -466,19 +463,19 @@ Set the current page to fullscreen.
 ### wrapperSetLocalStorage
 Set browser's local store data stored for the site
 
-Parameter              | Description
+Parametro              | Descrizione
                   ---  | ---
 **data**               | Any data structure you want to store for the site
 
-**Return**: None.
+**Restituisce**: Niente.
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
     setTimeout(->
       zeroframe.cmd 'wrapperSetLocalStorage', {'score': 500}, (res) =>
-        console.log 'Score saved.'
+        console.log 'Punteggio salvato.'
     , 100)
     ```
 
@@ -487,70 +484,70 @@ Parameter              | Description
 
     setTimeout(() => {
       zeroframe.cmd('wrapperSetLocalStorage', {'score': 500}, (res) => {
-        console.log('Score saved.');
+        console.log('Punteggio salvato.');
       });
     }, 100);
 
     const zeroframe = new ZeroFrame();
     ```
 
-    !!! info "Note"
+    !!! info "Nota"
 
-        `wrapperSetLocalStorage` relies on `site_info`, an object containing
-        information about the site that is retrieved from ZeroNet daemon on
-        ZeroFrame's load In order to allow for this to happen, we delay the
-        execution of `wrapperSetLocalStorage` by 100ms.
+        `wrapperSetLocalStorage` si basa su `site_info`, un oggetto che contiene
+        informazioni sul sito recuparato dal deamon ZeroNet sul carico ZeroFrame.
+        Perché questo avvenga, serve ritardare l'esecuzione di `wrapperSetLocalStorage`
+        per 100ms.
 
-    **Output:**
+    **Risultato:**
 
-    If local storage is empty:
+    Se il local storage è vuoto:
 
     ```javascript
-    Score saved.
+    Punteggio salvato.
     ```
 
 
 ---
 
 ### wrapperSetTitle
-Set the title of the site.
+Imposta il titolo del sito.
 
-Parameter              | Description
+Parametro              | Descrizione
                   ---  | ---
-**title**              | New browser tab title
+**title**              | Titolo della nuova linguetta del browser
 
-**Return**: None.
+**Restituisce**: Niente.
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
-    zeroframe.cmd 'wrapperSetTitle', 'My New Title'
+    zeroframe.cmd 'wrapperSetTitle', 'Il mio nuovo titolo'
     ```
 
     ```javascript tab="JavaScript"
     const zeroframe = new ZeroFrame();
 
-    zeroframe.cmd('wrapperSetTitle', 'My New Title');
+    zeroframe.cmd('wrapperSetTitle', 'Il mio nuovo titolo');
     ```
 
-    Site title will now be `My New Title`.
+    Il titolo del sito sarà `Il mio nuovo titolo`.
 
 
 ---
 
 
 ### wrapperSetViewport
-Set sites's viewport meta tag content (required for mobile sites).
+Imposta il contenuto del meta tag per il viewport del sito (richiesto per siti mobile).
 
-Parameter           | Description
+Parametro           | Descrizione
                ---  | ---
-**viewport**        | The viewport meta tag content
+**viewport**        | Contenuto del meta tag viewport
 
-**Return**: None.
+**Restituisce**: Niente.
 
-??? "Example"
+??? "Esempio"
 
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
@@ -570,13 +567,13 @@ Parameter           | Description
 
 ## UiServer
 
-The UiServer does all the 'backend' work (eg: querying the DB, accessing files,
-etc). These are the API calls you will need to make your site dynamic.
+L'UiServer fa tutto il lavoro nel 'backend' (es: interrogare il DB, accedere ai file, ecc.).
+Queste sono le chiamate API necessarie per realizzare un sito dinamico.
 
 ### announcerInfo
-Tracker statistics for current site
+Registratore delle statistiche per il sito
 
-**Return**:
+**Restituisce**:
 ```json
 {
 	"stats": {
@@ -596,18 +593,18 @@ Tracker statistics for current site
 
 
 ### certAdd
-Add a new certificate to the current user.
+Aggiunge un nuovo certificato al l'utente corrente.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**domain**           | Certificate issuer domain
-**auth_type**        | Auth type used on registration
-**auth_user_name**   | User name used on registration
-**cert**             | The cert itself: `auth_address#auth_type/auth_user_name` string signed by the cert site owner
+**domain**           | Certificato del dominio emeittente
+**auth_type**        | Tiopo autorizzazione utilizzata in registrazione
+**auth_user_name**   | Nome utente utilizzato in registrazione
+**cert**             | Il certificato stesso: stringa `auth_address#auth_type/auth_user_name` firmata dal certificato del titolare del sito
 
-**Return**: `"ok"`, `"Not changed"` or `{"error": error_message}`.
+**Restituisce**: `"ok"`, `"Not changed"` or `{"error": error_message}`.
 
-**Example:**
+**Esempio:**
 ```coffeescript
 @cmd "certAdd", ["zeroid.bit", auth_type, user_name, cert_sign], (res) =>
 	$(".ui").removeClass("flipped")
@@ -620,17 +617,17 @@ Parameter            | Description
 
 
 ### certSelect
-Display certificate selector.
+Visualizza il selettore del certificato.
 
-Parameter                       | Description
-                            --- | ---
-**accepted_domains** (optional) | List of domains that accepted by site as authorization provider (default: [])
-**accept_any** (optional)       | Does not limits the accepted certificate providers (default: False)
-**accepted_pattern** (optional) | Regexp pattern for accepted certificate providers address (default: None)
+Parametro                        | Descrizione
+                             --- | ---
+**accepted_domains** (opzionale) | Elenco dei domini accettati dal sito come fornitori di autorizzazioni (predefinito: [])
+**accept_any** (opzionale)       | Non limita i fornitori di certificati accettati (predefinito: False)
+**accepted_pattern** (opzionale) | Regexp pattern for accepted certificate providers address (predefinto.: Niente)
 
-**Return**: None.
+**Restituisce**: Niente.
 
-**Example:**
+**Esempio:**
 ```coffeescript
 @cmd "certSelect", {"accepted_domains": ["zeroid.bit"], "accepted_pattern": "1ZeroiD[0-9]"}
 ```
@@ -641,25 +638,25 @@ Parameter                       | Description
 
 ### channelJoin
 
-Request notifications about sites's events.
+Richiesta notifiche sugli eventi del sito.
 
-Parameter   | Description
+Parametro   | Descrizione
         --- | ---
-**channel** | Channel to join
+**channel** | Canale da connettere
 
-**Return**: None.
+**Restituisce**: Niente.
 
 **Channels**:
 
  - **siteChanged** (joined by default)<br>Events: peers_added, file_started, file_done, file_failed
 
-**Example**:
+**Esempio**:
 ```coffeescript
-# Wrapper websocket connection ready
+# Connessione wrapper websocket pronta
 onOpenWebsocket: (e) =>
 	@cmd "channelJoinAllsite", {"channel": "siteChanged"}
 
-# Route incoming requests and messages
+# Percorso richiesta in arrivo e messaggi
 route: (cmd, data) ->
 	if cmd == "setSiteInfo"
 		@log "Site changed", data
@@ -675,7 +672,7 @@ route: (cmd, data) ->
 	"address":"1RivERqttrjFqwp9YH1FviduBosQPtdBN",
 	"next_size_limit":10,
 	"event":[ "file_done", "index.html" ],
-	[...] # Same as siteInfo return dict
+	[...] # Come il dizionaro di risposta siteInfo
 }
 
 ```
@@ -685,17 +682,17 @@ route: (cmd, data) ->
 
 
 ### dbQuery
-Run a query on the sql cache
+Esegue una query nella chache sql
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**query**            | Sql query command
-**params**           | Parameter substitution to the sql query
+**query**            | Comando sql
+**params**           | Sostituzione parametro nella query
 
-**Return**: Result of the query as an array.
+**Restituisce**: Risultaro della quesry come matrice.
 
 
-**Example:**
+**Esempio:**
 ```javascript
 Page.cmd("dbQuery", [
    "SELECT * FROM json WHERE file_name = :file_name",
@@ -738,50 +735,50 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
 
 
 ### dirList
-List a content of a directory
+Elenca il contenuto di una cartella
 
-Parameter        | Description
+Parametro        | Descrizione
              --- | ---
-**inner_path**   | Directory you want to list
+**inner_path**   | La cartella che si vuole analizzare
 
-**Return**: List of file and directory names
+**Restituisce**: Elenco dei file e delle cartelle
 
 
 ---
 
 
 ### fileDelete
-Delete a file.
+Cancella un file.
 
-Parameter        | Description
+Parametro        | Descrizione
              --- | ---
-**inner_path**   | The file you want to delete
+**inner_path**   | Il file che si vuole cancellare
 
-**Return**: `"ok"` on success, the error message otherwise.
+**Restituisce**: `"ok"` al successo, altrimenti il messaggio di errore.
 
 
 ---
 
 
 ### fileGet
-Get the contents of a file.
+Ottiene il contenuto di un file.
 
-Parameter               | Description
-                    --- | ---
-**inner_path**          | The file you want to get
-**required** (optional) | Try and wait for the file if it's not exists. (default: True)
-**format** (optional)   | Encoding of returned data. (text or base64) (default: text)
-**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
+Parametro                | Descrizione
+                     --- | ---
+**inner_path**           | Il file che si vuole estrarre
+**required** (opzionale) | Prova e aspetta il file se non esiste (predefinito: True)
+**format** (opzionale)   | Codifica dei dati restituiti (text or Base64) (predefinito: text)
+**timeout** (opzionale)  | Tempo massimo di attesa per arrivo dei dati (predefinito: 300)
 
-**Return**: <string> The content of the file.
+**Restituisce**: <string> Il contenuto del file.
 
 
-**Example:**
+**Esempio:**
 ```coffeescript
-# Upvote a topic on ZeroTalk
+# Voto di un argomento su ZeroTalk
 submitTopicVote: (e) =>
 	if not Users.my_name # Not registered
-		Page.cmd "wrapperNotification", ["info", "Please, request access before posting."]
+		Page.cmd "wrapperNotification", ["info", "Effettuare l'accesso prima di votare."]
 		return false
 
 	elem = $(e.currentTarget)
@@ -814,52 +811,52 @@ submitTopicVote: (e) =>
 
 
 ### fileList
-Recursively list of files in a directory
+Elenco ricorsivo dei file di una cartella
 
-Parameter        | Description
+Parametro        | Descrizione
              --- | ---
-**inner_path**   | Directory you want to list
+**inner_path**   | Cartella da analizzare
 
-**Return**: List of files in the directory (recursive).
+**Restituisce**: Elenco dei file nella cartella (ricorsivo).
 
 
 ---
 
 
 ### fileNeed
-Initialize download of a (optional) file.
+Inizializza il download di un file (opzionale).
 
-Parameter               | Description
+Parametro               | Descrizione
                     --- | ---
-**inner_path**          | The file you want to get
-**timeout** (optional)  | Maximum wait time to data arrive (default: 300)
+**inner_path**          | Il file che si vuole ottenere
+**timeout** (opzionale) | Tempo massimo di arrivo dei dati (predefinito: 300)
 
-**Return**: `"ok"` on successful download.
+**Restituisce**: `"ok"` al successo del download.
 
 
 ---
 
 ### fileQuery
-Simple json file query command
+Semplice comando di richiesta di file json
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**dir_inner_path**   | Pattern of queried files
-**query**            | Query command (optional)
+**dir_inner_path**   | Modello del file interrogato
+**query**            | Comando di richiesta (opzionale)
 
-**Return**: Matched content as an array.
+**Restituisce**: Contenuti ottenuti in formato matrice.
 
-**Query examples:**
+**Esempi di query:**
 
- - `["data/users/*/data.json", "topics"]`: Returns all topics node from all user files
- - `["data/users/*/data.json", "comments.1@2"]`: Returns `user_data["comments"]["1@2"]` value from all user files
- - `["data/users/*/data.json", ""]`: Returns all data from users files
- - `["data/users/*/data.json"]`: Returns all data from users files (same as above)
+ - `["data/users/*/data.json", "topics"]`: Restituisce tutti gli argomenti per tutti i file utente
+ - `["data/users/*/data.json", "comments.1@2"]`: Restituisce i valori `user_data["comments"]["1@2"]` da tutti i file utente
+ - `["data/users/*/data.json", ""]`: Restituisce tutti i dati dai file utenti
+ - `["data/users/*/data.json"]`: Restituisce tutti i dati dai file utenti (come il precedente)
 
-**Example:**
+**Esempio:**
 ```coffeescript
 @cmd "fileQuery", ["data/users/*/data.json", "topics"], (topics) =>
-	topics.sort (a, b) -> # Sort by date
+	topics.sort (a, b) -> # Ordinato per data
 		return a.added - b.added
 	for topic in topics
 		@log topic.topic_id, topic.inner_path, topic.title
@@ -870,15 +867,15 @@ Parameter            | Description
 
 
 ### fileRules
-Return the rules for the file.
+Restituisce le regole per il file
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**inner_path**       | File inner path
+**inner_path**       | Percorso interno del file
 
-**Return**: Matched content as an array.
+**Restituisce**: il contenuto corrispondente come matrice
 
-**Example result:**
+**Esempio risultato:**
 
 ```json
 {
@@ -891,7 +888,7 @@ Parameter            | Description
 }
 ```
 
-**Example:**
+**Esempio:**
 ```coffeescript
 @cmd "fileRules", "data/users/1J3rJ8ecnwH2EPYa6MrgZttBNc61ACFiCj/content.json", (rules) =>
 	@log rules
@@ -903,22 +900,22 @@ Parameter            | Description
 
 ### fileWrite
 
-Write file content
+Scrive il contenuto del file
 
 
-Parameter          | Description
+Parametro          | Descrizione
                --- | ---
-**inner_path**     | Inner path of the file you want to write
-**content_base64** | Content you want to write to file (base64 encoded)
+**inner_path**     | Percorso interno del file che si vuole scrivere
+**content_base64** | Contenuto che si vuole scrivere nel file (codificato in Base6)
 
-**Return**: `"ok"` on success, the error message otherwise.
+**Restituisce**: `"ok"` al successo, altrimenti il messaggio di errore.
 
-**Example:**
+**Esempio:**
 ```coffeescript
 writeData: (cb=null) ->
-	# Encode to json, encode utf8
+	# Codifica in json, utf8
 	json_raw = unescape(encodeURIComponent(JSON.stringify({"hello": "ZeroNet"}, undefined, '\t')))
-	# Convert to to base64 and send
+	# Converte in Base64 e spedisce
 	@cmd "fileWrite", ["data.json", btoa(json_raw)], (res) =>
 		if res == "ok"
 			if cb then cb(true)
@@ -927,16 +924,16 @@ writeData: (cb=null) ->
 			if cb then cb(false)
 ```
 
-_Note:_ to write files that not in content.json yet, you must have `"own": true` in `data/sites.json` at the site you want to write
+_Nota:_ per scrivere file che non sono ancora nel content.json, serve avere `"own": true` in `data/sites.json` nel sito che si vuole scrivere
 
 
 ---
 
 
 ### ping
-Test UiServer websocket connection
+Testa la connessione websocket UiServer
 
-**Return:** pong
+**Restituisce:** pong
 
 
 ---
@@ -944,25 +941,25 @@ Test UiServer websocket connection
 
 ### serverInfo
 
-**Return:** All information about the server as a JavaScript object.
+**Restituisce:** Tutte le informazioni sul server come oggetto JavaScript.
 
-**Example:**
+**Esempio:**
 ```coffeescript
 @cmd "serverInfo", {}, (server_info) =>
 	@log "Server info:", server_info
 ```
 
-**Example return value:**
+**Esempio valore restituito:**
 ```json
 {
-	"debug": true, # Running in debug mode
-	"fileserver_ip": "*", # Fileserver binded to
-	"fileserver_port": 15441, # FileServer port
-	"ip_external": true, # Active of passive mode
-	"platform": "win32", # Operating system
-	"ui_ip": "127.0.0.1", # UiServer binded to
-	"ui_port": 43110, # UiServer port (Web)
-	"version": "0.2.5" # Version
+	"debug": true, # Funzionamento in modalità debug
+	"fileserver_ip": "*", # Fileserver collegato a
+	"fileserver_port": 15441, # Porta FileServer
+	"ip_external": true, # Modalità attiva o passiva
+	"platform": "win32", # Sistema operativo
+	"ui_ip": "127.0.0.1", # UiServer collegato a
+	"ui_port": 43110, # Porta UiServer (Web)
+	"version": "0.2.5" # Versione
 }
 ```
 
@@ -974,9 +971,9 @@ Test UiServer websocket connection
 
 ### siteInfo
 
-**Return**: All information about the site as a JavaScript object.
+**Restituisce**: Tutte le informazioni sul sito come oggetto JavaScript.
 
-**Example:**
+**Esempio:**
 ```coffeescript
 @cmd "siteInfo", {}, (site_info) =>
 	@log "Site info:", site_info
@@ -985,26 +982,26 @@ Test UiServer websocket connection
 **Example return value:**
 ```json
 {
-	"tasks": 0, # Number of files currently under download
-	"size_limit": 10, # Current site size limit in MB
-	"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", # Site address
-	"next_size_limit": 10, # Size limit required by sum of site's files
-	"auth_address": "2D6xXUmCVAXGrbVUGRRJdS4j1hif1EMfae", # Current user's bitcoin address
-	"auth_key_sha512": "269a0f4c1e0c697b9d56ccffd9a9748098e51acc5d2807adc15a587779be13cf", # Deprecated, dont use
-	"peers": 14, # Peers of site
-	"auth_key": "pOBdl00EJ29Ad8OmVIc763k4", # Deprecated, dont use
+	"tasks": 0, # Numero di file attualmente in download
+	"size_limit": 10, # Limite dimensione del sito attuale in MB
+	"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", # Indirizzo del sito
+	"next_size_limit": 10, # Limite dimensione richiesta dalla somma dei file del sito
+	"auth_address": "2D6xXUmCVAXGrbVUGRRJdS4j1hif1EMfae", # Indirizzo Bitcoin dell'utente corrente
+	"auth_key_sha512": "269a0f4c1e0c697b9d56ccffd9a9748098e51acc5d2807adc15a587779be13cf", # Deprecato, non utilizzare
+	"peers": 14, # Peer del sito
+	"auth_key": "pOBdl00EJ29Ad8OmVIc763k4", # Deprecato, non usare
 	"settings":  {
-		"peers": 13, # Saved peers num for sorting
-		"serving": true, # Site enabled
-		"modified": 1425344149.365, # Last modification time of all site's files
-		"own": true, # Own site
-		"permissions": ["ADMIN"], # Site's permission
-		"size": 342165 # Site total size in bytes
+		"peers": 13, # Numero salvato di peer per l'ordinamento
+		"serving": true, # Sito abilitato
+		"modified": 1425344149.365, # Ultimo aggiornamento di tutti i file del sito
+		"own": true, # Sito proprio
+		"permissions": ["ADMIN"], # Permessi del sito
+		"size": 342165 # Dimensione totale del sito in byte
 	},
-	"bad_files": 0, # Files that needs to be download
-	"workers": 0, # Current concurent downloads
-	"content": { # Root content.json
-		"files": 12, # Number of file, detailed file info removed to reduce data transfer and parse time
+	"bad_files": 0, # File che devono essere scaricati
+	"workers": 0, # Numero di download concorrenti attuali
+	"content": { # Radice di content.json
+		"files": 12, # Numero di file, rimosse le informazioni dettagliate dei file per ridurre il trasferimento di dati e il tempo di elaborazione
 		"description": "This site",
 		"title": "ZeroHello",
 		"signs_required": 1,
@@ -1015,9 +1012,9 @@ Test UiServer websocket connection
 		"zeronet_version": "0.2.5",
 		"includes": 0
 	},
-	"cert_user_id": "zeronetuser@zeroid.bit", # Currently selected certificate for the site
-	"started_task_num": 1, # Last number of files downloaded
-	"content_updated": 1426008289.71 # Content.json update time
+	"cert_user_id": "zeronetuser@zeroid.bit", # Certificato attualmente slezionato per il sito
+	"started_task_num": 1, # Ultimo numero di file scaricati
+	"content_updated": 1426008289.71 # Data aggiornamento Content.json
 }
 ```
 
@@ -1026,22 +1023,22 @@ Test UiServer websocket connection
 
 
 ### sitePublish
-Publish a content.json of the site
+Pubblica un content.json del sito
 
-Parameter                 | Description
-                      --- | ---
-**privatekey** (optional) | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional) | Inner path of the content json you want to publish (default: content.json)
-**sign** (optional)       | If True then sign the content.json before publish (default: True)
+Parametro                  | Descrizione
+                       --- | ---
+**privatekey** (opzionale) | Chiave privata utilizzata per la firma (predefinita: chiave privata dell'utente corrente)
+**inner_path** (opzionale) | Percorso interno del contenuto json che si vuole pubblicare (predefinito: content.json)
+**sign** (opzionale)       | Se True firma il content.json prima di pubblicarlo (predefinito: True)
 
-**Return**: `"ok"` on success, the error message otherwise.
+**Restituisce**: `"ok"` al successo, altrimenti il messaggio di errore.
 
-**Example:**
+**Esempio:**
 ```coffeescript
-# Prompt the private key
+# Mostra la chiave privata
 @cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
 	$(".publishbar .button").addClass("loading")
-	# Send sign content.json and publish request to server
+	# Invia il content.json firmato e pubblica la richiesta al server
 	@cmd "sitePublish", [privatekey], (res) =>
 		$(".publishbar .button").removeClass("loading")
 		@log "Publish result:", res
@@ -1052,31 +1049,31 @@ Parameter                 | Description
 
 
 ### siteReload
-Reload content.json file content and scans for optional files
+Ricarica il contenuto del file content.json e controlla se ci sono nuovi file
 
-**Return**: "ok" on success
+**Restituisce**: "ok" al successo
 
 
 ---
 
 
 ### siteSign
-Sign a content.json of the site
+Firma un content.json del sito
 
-Parameter                              | Description
-                                   --- | ---
-**privatekey** (optional)              | Private key used for signing (default: current user's privatekey)
-**inner_path** (optional)              | Inner path of the content json you want to sign (default: content.json)
-**remove_missing_optional** (optional) | Remove the optional files from content.json that no longer present in the directory (default: False)
+Parametro                               | Descrizione
+                                    --- | ---
+**privatekey** (opzionale)              | Chiave privata utilizzata per firmare (predefinita: chiave privata utente corrente)
+**inner_path** (opzionale)              | Percorso interno dei contenuto json che si vuole firmare (predefinito: content.json)
+**remove_missing_optional** (opzionale) | Rimuove da content.json i file opzionali non più presenti nella cartella (predefinito: False)
 
-**Return**: `"ok"` on success, the error message otherwise.
+**Restituisce**: `"ok"` al successo, altrimenti il messaggio di errore.
 
-> __Note:__
-> Use "stored" as privatekey if its definied in users.json (eg. cloned sites)
+> __Nota:__
+> Utilizzare "stored" come chiave privata se è definita in users.json (es siti clonati)
 
-**Example:**
+**Esempio:**
 ```coffeescript
-if @site_info["privatekey"] # Private key stored in users.json
+if @site_info["privatekey"] # Chiave privata salvata in users.json
 	@cmd "siteSign", ["stored", "content.json"], (res) =>
 		@log "Sign result", res
 ```
@@ -1088,17 +1085,17 @@ if @site_info["privatekey"] # Private key stored in users.json
 
 ### siteUpdate
 
-Force check and download changed content from other peers (only necessary if user is in passive mode and using old version of Zeronet)
+Forza il controllo e scarica il contenuto modificato dagli altri peer (necessario solo se l'utente è in modalità passiva e utilizzando una vcchia versione di Zeronet)
 
-Parameter     | Description
+Parametro     | Descrizione
           --- | ---
-**address**   | Address of site want to update (only current site allowed without site ADMIN permission)
+**address**   | Indirizzo che il sito vuole aggiornare (consentito solo per il sito corrente senza autorizzazione ADMIN)
 
-**Return:** None.
+**Restituisce:** Niente.
 
-**Example:**
+**Esempio:**
 ```coffeescript
-# Manual site update for passive connections
+# Aggiornamento manuale del sito per connessioni passive
 updateSite: =>
 	$("#passive_error a").addClass("loading").removeClassLater("loading", 1000)
 	@log "Updating site..."
@@ -1111,9 +1108,9 @@ updateSite: =>
 
 ### userGetSettings
 
-Get user's saved settings.
+Ottiene le impostazioni salvate dell'utente
 
-**Return:** The user specific site's settings saved using userSetSettings.
+**Restituisce:** Le impostazioni utente specifiche del sito salvate utilizzando userSetSettings.
 
 
 ---
@@ -1121,13 +1118,13 @@ Get user's saved settings.
 
 ### userSetSettings
 
-Set user's site specific settings.
+Setta le impostazioni utente specifiche del sito.
 
-Parameter     | Description
+Parametro     | Descrizione
           --- | ---
-**settings**  | The user's site specific settings you want to store.
+**settings**  | Le impostazioni utente specifiche del sito che si vogliono salvare.
 
-**Return:** `"ok"` on success.
+**Restituisce:** `"ok"` al successo.
 
 
 ---
@@ -1138,26 +1135,26 @@ Parameter     | Description
 
 ### BigfileUploadInit
 
-Initialize a new upload endpoint for a bigfile.
+Inizializza un nuovo endpoint di trasferimento per un file grande.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**inner_path**       | Upload location
-**size**             | File size
+**inner_path**       | Percorso del trasferimento
+**size**             | Dimensione del file
 
 
-**Return**: A dict with the information about the upload:
+**Restituisce**: Un dizionario con le informazioni sul trasferimento:
 
-Parameter              | Description
+Parametro              | Descrizione
                    --- | ---
-**url**                | Http upload endpoint
-**piece_size**         | Size of each separately hashed part of the file
-**inner_path**         | File path within the site
-**file_relative_path** | File path relative to content.json
+**url**                | Endpoint Http del trasferimento
+**piece_size**         | Dimensione di ogni parte del file firmata separatamente
+**inner_path**         | Percorso del file all'interno del sito
+**file_relative_path** | Percorso del file relativo a content.json
 
-> __Note:__ Not supported non-ascii characters will be automatically removed from `inner_path` and `file_relative_path` values
+> __Nota:__ I caratteri non ascii non supportati verranno automaticamente rimossi dai valori di `inner_path` e `file_relative_path`
 
-**Example**
+**Esempio**
 
 ```javascript
 var input = document.createElement('input')
@@ -1193,18 +1190,19 @@ input.click()
 
 ### chartDbQuery
 
-Run database query on chart database.
+Esegue la query sul database grafico
 
-Arguments and return value: Same as [dbQuery](#dbquery-query-param)
+Argomenti e valore restituito: uguale a [dbQuery](#dbquery-query-param)
+[_todo_] sistemare il link
 
 
 ### chartGetPeerLocations
 
-Get a list of unique peers from the client.
+Ottiene un elenco di peer univoco dal client.
 
-**Return**: A list of unique peers.
+**Restituisce**: Un elenco di peer univoci.
 
-**Example**:
+**Esempio**:
 ```javascript
 Page.cmd("chartGetPeerLocations")
 > [
@@ -1217,46 +1215,46 @@ Page.cmd("chartGetPeerLocations")
 
 ## Plugin: Cors
 
-Allow cross-site file access under virtual directory **/cors-siteaddress/** and grant cross-site database query using the [as](#as-address-cmd-arguments) API command.
+Consente l'accesso ai file tra siti attraverso la cartella virtuale **/cors-siteaddress/** e valida le query tra database tra siti utilizzando il comando API [as](#as-address-cmd-arguments).
 
 ### corsPermission
 
-Request Cross origin resource sharing permission with the given site.
+Richiede la risorsa tra origini diverse condividendo i permessi con il sito indicato.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**address**          | The site address you want get cors access
+**address**          | L'indirizzo del sito per il quale si viole ottenere l'accesso cors
 
-**Return**: `"ok"` on success.
+**Restituisce**: `"ok"` al successo.
 
-After the permission is granted the other site's files will be available under **/cors-siteaddress/** virtual directory via http request or by the fileGet API command.
+Dopo che il permesso è concesso i file dell'altro sito saranno disponibili nella cartella virtuale **/cors-siteaddress/** attraverso una richiesta http o dal comando API fileGet.
 
-The site will be added to user's client if it's required.
+Il sito verrà aggiunto al client dell'utente se richiesto.
 
 
 ---
 
 ## Plugin: Multiuser
 
-!!! info "Note"
-    The below commands can only be executed by a site with the "ADMIN" [permission](#wrapperpermissionadd).
+!!! info "Nota"
+    Il seguente comando può essere eseguito solamente da un sito con il [permesso](#wrapperpermissionadd) "ADMIN".
 
 
 ### userLoginForm
 
-Request to login with a private key.
+Richiesta di accesso con chiave privata.
 
 !!! info "Info"
-    The Multiuser plugin will take this private key, convert it to a master seed,
-    and by setting a cookie in your browser (e.g. `master_address=1bc83cc...`) you
-    can specify which user to act as on all subsequent requests.
+    Il plugin Multiuser utilizzerà questa chiave privata, la convertirà in un seed master
+    e imposterà un cookie nel browser (es. `master_address=1bc83cc...`); si può specificare
+    quale utente utilizzare come per tutte le richieste seguenti.
 
-    This cookie is sent by the UiWrapper as part of its WebSocket connection
-    handshake. This method was chosen as it doesn't require modifying existing
-    requests, and it also works with communicating to ZeroNet clients that are
-    hosted on a separate machine (such as ZeroNet proxies).
+    Questo cookie è spedito dal UiWrapper come parte della sua richiesta di connessione 
+    WebSocket. Questo metodo è stato scelto perchè non richiede la modifica della richiesta
+    esistente e inoltre lavora comunicando ai client ZeroNet che sono ospitati in una macchina
+    separata (come i proxy ZeroNet).
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
@@ -1269,16 +1267,16 @@ Request to login with a private key.
     zeroframe.cmd('userShowMasterSeed', []);
     ```
 
-    **Output:**
+    **Risultato:**
 
-    None, the login prompt will appear in a window inaccessible to the iframe.
+    Nessuno, il messaggio di login apparirà in una finestra non accessibile all'iframe.
 
 
 ### userShowMasterSeed
 
-Request to show the user's private key.
+Richiesta di mostrare la chiave privata dell'utente.
 
-??? "Example"
+??? "Esempio"
     ```coffeescript tab="CoffeeScript"
     zeroframe = new ZeroFrame()
 
@@ -1291,9 +1289,9 @@ Request to show the user's private key.
     zeroframe.cmd('userShowMasterSeed', []);
     ```
 
-    **Output:**
+    **Risultato:**
 
-    None, the private key will appear in a window inaccessible to the iframe.
+    Nessuno, la chiave privata apparirà in una finestra non accessibile all'iframe.
 
 
 ---
@@ -1304,76 +1302,76 @@ Request to show the user's private key.
 
 ### userPublickey
 
-Get user's site specific public key.
+Ottiene la chiave pubblica specifica del sito dell'utente.
 
-Parameter            | Description
-                 --- | ---
-**index** (optional) | Sub-public key within site (default: 0)
+Parametro             | Descrizione
+                  --- | ---
+**index** (opzionale) | La chiave sub-pubblica all'interno del sito (predefinito: 0)
 
 
-**Return**: Base64-encoded public key.
+**Restituisce**: La chiave pubblica codificata in Base64.
 
 ---
 
 ### eciesEncrypt
 
-Encrypt a text using a public key.
+Cripta un testo utilizzando una chiave pubblica.
 
-Parameter                      | Description
+Parametro                      | Descrizione
                            --- | ---
-**text**                       | Text to encrypt
-**publickey** (optional)       | User's public key index (int) or base64 encoded public key (default: 0)
-**return_aes_key** (optional)  | Get the AES key used in encryption (default: False)
+**text**                       | Il testo da criptare
+**publickey** (opzionale)      | Indice (intero) della chiave pubblica dell'utente o chiave pubblica codificata in Base64 (predefinito: 0)
+**return_aes_key** (opzionale) | Ottiene la chiave AES utilizzata per criptare (predefinito: False)
 
 
-**Return**: Encrypted text in base64 format or [Encrypted text in base64 format, AES key in base64 format].
+**Restituisce**: Testo criptato nel formato Base64 o [Testo criptato nel formato Base64, chiave AES in formato Base6].
 
 ---
 
 ### eciesDecrypt
 
-Try to decrypt list of texts
+Tenta di decodificare un elenco di testi
 
-Parameter                      | Description
+Parametro                      | Descrizione
                            --- | ---
-**params**                     | A text or list of encrypted texts
-**privatekey** (optional)      | User's privatekey index (int) or base64 encoded privatekey (default: 0)
+**params**                     | Un testo o elenco di testi criptati
+**privatekey** (opzionale)     | Indice (intero) della chiave privata dell'utente o chiave privata codificata in Base64 (predefinito: 0)
 
 
-**Return**: Decrypted text or array of decrypted texts (null for failed decodings).
+**Restituisce**: Testo decodificato o matrice di testi decodificati (null per decodifiche fallite).
 
 ---
 
 ### aesEncrypt
 
-Encrypt a text using the key and the iv
+Cripta un testo utilizzando la chiave e l'iv
 
-Parameter                      | Description
+Parametro                      | Descrizione
                            --- | ---
-**text**                       | A text encrypt using AES
-**key** (optional)             | Base64 encoded password (default: generate new)
-**iv** (optional)              | Base64 encoded iv (default: generate new)
+**text**                       | Un testo criptato utilizzando AES
+**key** (opzionale)            | Password codificata in Base64 (predefinita: genera una nuova)
+**iv** (opzionale)             | IV codificato in Base64 (predefinito: genera uno nuovo)
 
 
-**Return**: [base64 encoded key, base64 encoded iv, base64 encoded encrypted text].
+**Restituisce**: [chiave codificata in Base64, IV codificato in Base64, testo criptato codificato in Base64].
 
 
 ---
 
 ### aesDecrypt
 
-Decrypt text using the IV and AES key
+Decodifica il testo utilizzando IV e la chiave AES
 
-Parameter                      | Description
+Parametro                      | Descrizione
                            --- | ---
-**iv**                         | IV in Base64 format
-**encrypted_text**             | Encrypted text in Base64 format
-**encrypted_texts**            | Array of [base64 encoded iv, base64 encoded encrypted text] pairs
-**key**                        | Base64 encoded password for the text
-**keys**                       | Keys for decoding (tries every one for every pairs)
+**iv**                         | IV in formato Base64
+**encrypted_text**             | Testo criptato in formato Base64
+**encrypted_texts**            | Matrice di coppie [IV codificato in Base64, testo criptato codificato in Base64]
+**key**                        | Password per il testo codificata in Base64
+**keys**                       | Chiavi per la decofica (tenta ogniuna per ogni coppia)
 
 
-**Return**: Decoded text or array of decoded texts.
+**Restituisce**: Testo decodificato o matrice di testi decodificati.
 
 
 ---
@@ -1384,27 +1382,27 @@ Parameter                      | Description
 
 ### feedFollow
 
-Set followed sql queries.
+Imposta le query sql di sottoscrizione.
 
-The SQL query should result in rows with cols:
+La query sql deve risultare come una serie di righe con colonne:
 
-Field          | Description
+Campo          | Descrizione
            --- | ---
-**type**       | Type: post, article, comment, mention
-**date_added** | Event time
-**title**      | Event's first line to be displayed
-**body**       | Event's second and third line
-**url**        | Link to event's page
+**type**       | Tipo: post, article, comment, mention
+**date_added** | Data evento
+**title**      | Prima riga visualizzata dell'evento
+**body**       | Seconda e terza riga dell'evento
+**url**        | Link alla pagina dell'evento
 
-Parameter      | Description
+Parametro      | Descrizione
            --- | ---
-**feeds**      | Format: {"query name": [SQL query, [param1, param2, ...], ...}, parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
+**feeds**      | Formato: {"nome della query": [query SQL, [parametro1, parametro2, ...], ...}, i parametri verranno esclusi, uniti da `,` inseriti al posto di `:params` nella query sql.
 
-**Return**: `"ok"`.
+**Restituisce**: `"ok"`.
 
-**Example:**
+**Esempio:**
 ```coffeescript
-# Follow ZeroBlog posts
+# Sottoscrive i post ZeroBlog
 query = "
 	SELECT
 	 post_id AS event_uri,
@@ -1423,23 +1421,23 @@ Page.cmd feedFollow [{"Posts": [query, params]}]
 
 ### feedListFollow
 
-Return of current followed feeds
+Restituisce le tracce attualmente sottoscritte
 
-**Return**: The currently followed feeds in the same format as in the feedFollow commands.
+**Restituisce**: Le tracce attualmente sottoscritte nello stesso formato del comendo feedFollow.
 
 
 ---
 
 ### feedQuery
 
-Execute all queries for followed sites/pages in the user's notifications feed.
+Esegue tutte le query per i siti/pagine sottoscritti nella traccia di notifiche dell'utente.
 
-**Return**: The result of the followed SQL queries.
+**Restituisce**: Il risultato delle query sql sottoscritte.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**limit**            | Limit of results per followed site (default: 10)
-**day_limit**        | Events no older than number of this days (default: 3)
+**limit**            | Limite dei risultati per sito sottoscritto (predefinito: 10)
+**day_limit**        | Eventi non più vecchi di questi giorni (predefinito: 3)
 
 
 ---
@@ -1449,33 +1447,33 @@ Parameter            | Description
 
 ### mergerSiteAdd
 
-Start downloading new merger site(s).
+Inizia a scaricare nuovo/i sito/i distribuito.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**addresses**        | Site address or list of site addresses
+**addresses**        | Indirizzo del sito o elenco di indirizzi di siti
 
 
 ---
 
 ### mergerSiteDelete
 
-Stop seeding and delete a merged site.
+Ferma la distribuzione e cancella un sito distribuito.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**address**          | Site address
+**address**          | Indirizzo del sito
 
 
 ---
 
 ### mergerSiteList
 
-Return merged sites.
+Restituisce i siti distribuiti.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**query_site_info**  | If true, then gives back detailed site infomation for merged sites
+**query_site_info**  | Se true, restituisce informazioni dettagliate per i siti distribuiti
 
 
 ---
@@ -1486,17 +1484,17 @@ Parameter            | Description
 
 ### muteAdd
 
-Add new user to mute list. (Requires confirmation for non-ADMIN sites)
+Aggiunge un utente alla lista degli esclusi. (Richiede la conferma per siti **non-admin**)
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**auth_address**     | Directory name of the user's data
-**cert_user_id**     | Cert user name of the user
-**reason**           | Reason of the muting
+**auth_address**     | Nome della cartella dei dati utente
+**cert_user_id**     | Nome certificato dell'utente
+**reason**           | Motivo dell'esclusione
 
-**Return**: `"ok"` if confirmed.
+**Restituisce**: `"ok"` se confermato.
 
-**Example:**
+**Esempio:**
 ```coffeescript
 Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit','Spammer'])
 ```
@@ -1505,15 +1503,15 @@ Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit
 
 ### muteRemove
 
-Remove a user from mute list. (Requires confirmation for **non-admin** sites).
+Rimuove un utente dalla lista degli esclusi. (Richiede la conferma per siti **non-admin**).
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**auth_address**     | Directory name of the user's data
+**auth_address**     | Nome della cartella dei dati utente
 
-**Return**: `"ok"` if confirmed.
+**Restituisce**: `"ok"` se confermato.
 
-**Example:**
+**Esempio:**
 ```coffeescript
 Page.cmd("muteRemove", '1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz')
 ```
@@ -1522,9 +1520,9 @@ Page.cmd("muteRemove", '1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz')
 
 ### muteList
 
-List muted users. (Requires **admin** permission on site).
+Elenco utenti esclusi. (Richiede il permesso **admin** sul sito).
 
-**Return**: Array of muted users.
+**Restituisce**: Matrice di utenti esclusi.
 
 
 ---
@@ -1535,79 +1533,79 @@ List muted users. (Requires **admin** permission on site).
 
 ### optionalFileList
 
-Return an array of optional file information.
+Restituisce una matrice di informazioni sui file opzionali.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**address**          | The site address you want to list optional files (default: current site)
-**orderby**          | Order of returned optional files (default: time_downloaded DESC)
-**limit**            | Max number of returned optional files (default: 10)
+**address**          | L'indirizzo del sito di cui estrarre la lista dei file opzionali (predefinito: sito corrente)
+**orderby**          | Ordine dei file opzionali restituiti (predefinito: time_downloaded decrescente)
+**limit**            | Numero massimo di file opzionali restituiti (predefinito: 10)
 
-**Return**: Database rows with the following columns for each optional file returned:
+**Restituisce**: Le righe del database con le seguenti colonne per ogni file opzionale restituito:
 
-Column name         | Description
+Column name         | Descrizione
                 --- | ---
-**file_id**         | The ID of the file
-**site_id**         | The ID of the site the file is from
-**inner_path**      | The path of the file starting from the site root
-**hash_id**         | The hash of the file
-**size**            | The size of the file (in bytes)
-**peer**            | How many peers this file has
-**uploaded**        | How many bytes of this file have been uploaded to other peers
-**is_downloaded**   | Whether this file has been completely downloaded
-**is_pinned**       | Whether this file has been pinned
-**time_added**      | When this file was added
-**time_downloaded** | When this file finished downloading
-**time_accessed**   | When this file was last accessed
+**file_id**         | L'ID del file
+**site_id**         | L'ID del sito di origine del file
+**inner_path**      | Il percorso del file partendo dalla radice del sito
+**hash_id**         | La chiave del file
+**size**            | La dimensione del file (in byte)
+**peer**            | Quanti peer ha questo file
+**uploaded**        | Quanti byte di questo file sono stati caricati su altri peer
+**is_downloaded**   | Se questo file è stata scaricato completamente
+**is_pinned**       | Se questo file è stato marcato
+**time_added**      | Quando è stato aggiunto questo file
+**time_downloaded** | Quando si è completato lo scaricamento di questo file
+**time_accessed**   | Quando è stato eseguito l'ultimo accesso a questo file
 
 ---
 
 ### optionalFileInfo
 
-Query information about a single optional file given its path.
+Richiesta di informazioni di un file opziona dato il suo persorso.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**inner_path**       | The path of the file starting from the site root
+**inner_path**       | Il percorso del file partendo dalla radice del sito
 
-**Return**: Database row with the following columns:
+**Restituisce**: Riga del database con le seguenti colonne:
 
-Column name         | Description
+Nome colonna        | Descrizione
                 --- | ---
-**file_id**         | The ID of the file
-**site_id**         | The ID of the site the file is from
-**inner_path**      | The path of the file starting from the site root
-**hash_id**         | The hash of the file
-**size**            | The size of the file (in bytes)
-**peer**            | How many peers this file has
-**uploaded**        | How many bytes of this file have been uploaded to other peers
-**is_downloaded**   | Whether this file has been completely downloaded
-**is_pinned**       | Whether this file has been pinned
-**time_added**      | When this file was added
-**time_downloaded** | When this file finished downloading
-**time_accessed**   | When this file was last accessed
+**file_id**         | L'ID del file
+**site_id**         | L'ID del sito cui appartiene il file
+**inner_path**      | Il percorso del file partendo dalla radice del sito
+**hash_id**         | La chiave del file
+**size**            | La dimensione del file (in byte)
+**peer**            | Quanti peer ha il file
+**uploaded**        | Quanti byte del file sono stati caricati sui peer
+**is_downloaded**   | Se il file è stato scaricato completamente
+**is_pinned**       | Se questo file è stato marcato
+**time_added**      | Quando è stato aggiunto il file
+**time_downloaded** | Quando è terminato lo scaricamento del file
+**time_accessed**   | L'ultimo accesso al file
 
 ---
 
 ### optionalFilePin
 
-Pin a downloaded optional file. The file is now excluded from automated optional file cleanup.
+Marca un file opzionale scaricato. Ora il fiel è escluso dalla pulizia automatica dei file opzionali.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+**inner_path**       | Il percorso del file
+**address**          | Indirizzo del sito (predefinito: sito corrente)
 
 ---
 
 ### optionalFileUnpin
 
-Remove pinning of a downloaded optional file. The file is now included in automated optional file cleanup.
+Rimuove la marcatura di un file opzionale scaricato. Ora il file è incluso nella pulizia automatica dei file opzionali.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+**inner_path**       | Il percorso del file
+**address**          | Indirizzo del sito (predefinito: sito corrente)
 
 ---
 
@@ -1615,77 +1613,75 @@ Parameter            | Description
 
 Delete a downloaded optional file.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+**inner_path**       | Il percorso del file
+**address**          | Indirizzo del sito (predefinito: sito corrente)
 
 ---
 
 ### optionalLimitStats
 
-Return currently used disk space by optional files.
+Restituisce lo spazio attualmente occupato dai file opzionali.
 
-**Return**: limit, used and free space statistics.
+**Restituisce**: Statistiche di spazio limite, utilizzato e libero.
 
 ---
 
 
 ### optionalLimitSet
 
-Set the optional file limit.
+Imposta il limite dei file opzionali.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**limit**            | Max space used by the optional files in GB or percentage of used space
+**limit**            | Massima dimensione in GB utilizzata dai file opzionali o percentuale di spazio utilizzato
 
 ---
 
 ### optionalHelpList
 
-List the auto-downloaded directories of optional files.
+Elenca le cartelle di scaricamento automatico dei file opzionali.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**address**          | Address of site you want to list helped directories (default: current site)
+**address**          | Indirizzo del sito di cui elencare le cartelle (predefinito: sito corrente)
 
-**Return**: Auto-downloaded directories and descriptions as a JavaScript object.
+**Restituisce**: Cartelle di scaricamento automatico e descrizioni come oggetto JavaScript.
 
 ---
 
 
 ### optionalHelp
 
-Add directory to auto-download list.
+Aggiunge una cartella alla lista degli scaricamenti automatici.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**directory**        | Directory you want to add to auto-download list
-**title**            | Title for the entry (displayed on ZeroHello)
-**address**          | Address of site you want to add the auto-download directory (default: current site)
-
+**directory**        | Cartella da aggiungere all'elenco di scaricamento automatico
+**title**            | Titolo dei dati (visualizzata in ZeroHello)
+**address**          | Indirizzo del sito che si vuole aggiungere alla cartella di scaricamento automatico (predefinto: sito corrente)
 ---
 
 ### optionalHelpRemove
 
-Prevent auto-download of optional files within a directory. Only effective if
-[optionalHelp](#optionalhelp) is enabled on the site.
+Previene lo scaricamento automatico dei file opzionali in una cartella. Effettivo solo se [optionalHelp](#optionalhelp) è attivo sul sito.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**directory**        | Directory you want to remove from auto-download list
-**address**          | Address of site (default: current site)
+**directory**        | Cartella da eliminare dall'elenco di auto scaricamento
+**address**          | Indirizzo del sito (predefinito: sito corrente)
 
 ---
 
 ### optionalHelpAll
 
-Help download every new uploaded optional file to the site
+Aiuta a scaricare ogni nuovo file opzionale caricato sul sito
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**value**            | Enable or Disable the auto-download
-**address**          | Address of affected site (default: current site)
+**value**            | Abilita o disabilita lo scaricamento automatico
+**address**          | Indirizzo del sito interessato (predefinito: sito corrente)
 
 
 ---
@@ -1697,53 +1693,53 @@ Parameter            | Description
 ### pluginAddRequest
 
 
-Ask user to install a new plugin from a directory of the current site.
+Chiede all'utente di installare un nuovo plugin da una cartella del sito corrente.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**inner_path**       | Directory of the plugin
+**inner_path**       | Cartella del plugin
 
-**Example:**
+**Esempio:**
 ```coffeescript
 Page.cmd("pluginAddRequest", "plugins/Example")
 ```
 
-The plugin directory must contain a **plugin_info.json** file that contains the plugin's displayed name, a short description and the version (rev) number.
+La cartella del plugin deve contenere un file **plugin_info.json** che contiene il nome del plugin, una descrizione breve e il numero di versione (rev).
 
-**Example plugins/Example/plugin_info.json:**
+**Esempio plugins/Esempio/plugin_info.json:**
 ```json
 {
-    "name": "Example plugin",
-    "description": "Just an example for third-party plugins",
+    "name": "Plugin esempio",
+    "description": "Solo un esempio di un plugin di terze parti",
     "rev": 5
 }
 ```
 
-**Return**: "ok" on success
+**Restituisce**: "ok" al successo
 
-> __Note:__
-> You can see the currently installed plugins version number in [server info](#serverinfo) plugins_rev node.
+> __Nota__
+> Si possono visualizzare le versioni dei plugin attualmente installati nel nodo [informazioni del server](#serverinfo) plugins_rev.
 
 
-## Admin commands
-_(requires ADMIN permission in data/sites.json)_
+## Comandi amministratore
+_(richiede l'autorizzazione ADMIN in data/sites.json)_
 
 
 ### as
 
-Execute command in other site's context
+Esegue il comando nel contesto di un altro sito
 
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**address**          | The context site's address
-**cmd**              | API command name
-**arguments**        | API command arguments
+**address**          | L'indirizzo del contesto del sito
+**cmd**              | Nome del comando API
+**arguments**        | Argomenti del comando API
 
-**Return**: Command's return value
+**Restituisce**: Valore restituito dal comando
 
 
-**Example**
+**Esempio**
 
 ```javascript
 Page.cmd("as", ["138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP", "siteSetLimit", 20], console.log )
@@ -1759,11 +1755,11 @@ Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.lo
 
 ### certList
 
-Returns information regarding the currently known identity provider certificates.
+Restituisce le informazioni relative ai certificati dei fornitori di identità conosciuti.
 
-**Return**: A list of objects each representing a certificate from an identity provider.
+**Restituisce**: Un elenco di oggetti ognuno rappresentante un certificato da un fornitore di identità.
 
-**Example**
+**Esempio**
 
 ```javascript
 Page.cmd("certSelect")
@@ -1786,13 +1782,13 @@ Page.cmd("certSelect")
 
 ### certSet
 
-Set the used certificate for current site.
+Imposta il certificato utilizzato per il sito corrente.
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**domain**           | Domain of the certificate issuer
+**domain**           | Dominio dell'emmittente del certificato
 
-**Return**: None
+**Restituisce**: Niente
 
 
 ---
@@ -1800,41 +1796,41 @@ Parameter            | Description
 
 ### channelJoinAllsite
 
-Request notifications about every site's events.
+Richiede la notifica di ogni evento del sito.
 
-Parameter           | Description
+Parametro           | Descrizione
                ---  | ---
-**channel**         | Channel to join (see channelJoin)
+**channel**         | Canale da seguire (vedere channelJoin)
 
-**Return**: None
+**Restituisce**: Niente
 
 
 ---
 
-**Return**: ok
+**Restituisce**: ok
 
 
 ### configSet
 
-Create or update an entry in ZeroNet config file. (zeronet.conf by default)
+Crea o modifica una informazione nel file di configurazione di ZeroNet. (predefinito zeronet.conf)
 
 
-Parameter            | Description
+Parametro            | Descrizione
                  --- | ---
-**key**              | Configuration entry name
-**value**            | Configuration entry new value
+**key**              | Nome dell'informazione della configurazione
+**value**            | Nuovo valore dell'informazione della configurazione
 
 
-**Return**: ok
+**Restituisce**: ok
 
 ---
 
 
 ### serverPortcheck
 
-Start checking if port is opened
+Inizia il controllo se la porta è aperta
 
-**Return**: True (port opened) or False (port closed)
+**Restituisce**: True (porta aperta) or False (porta chiusa)
 
 
 ---
@@ -1842,9 +1838,9 @@ Start checking if port is opened
 
 ### serverShutdown
 
-Stop running ZeroNet client.
+Ferma l'esecuzione del client ZeroNet.
 
-**Return**: None
+**Restituisce**: Niente
 
 
 
@@ -1853,28 +1849,28 @@ Stop running ZeroNet client.
 
 ### serverUpdate
 
-Re-download ZeroNet from github.
+Riscarica ZeroNet da Github.
 
-**Return**: None
+**Restituisce**: Niente
 
 
 ---
 
 
 ### siteClone
-Copy site files into a new one.
+Copia i file di un sito in uno nuovo.
 
-Every file and directory will be skipped if it has a `-default` subfixed version and the subfixed version will be copied instead of it.
+Ogni file e cartella vengono saltate se esiste la versione consuffisso `-default` e la versione con suffisso verrà utilizzata al suo posto.
 
 
-Eg. If you have a `data` and a `data-default` directory: The `data` directory will not be copied and the `data-default` directory will be renamed to data.
+Es. Se c'è una cartella `data` e una `data-default`: la cartella `data` non verrà copiata e la cartella `data-default` verrà rinominata in `data`.
 
-Parameter           | Description
+Parametro           | Descrizione
                ---  | ---
-**address**         | Address of site want to clone
-**root_inner_path** | The source directory of the new site
+**address**         | Indirizzo del sito da copiare
+**root_inner_path** | La cartella sorgente del nuovo sito
 
-**Return**: None, automatically redirects to new site on completion
+**Restituisce**: Niente, reindirizza automaticamente al nuovo sito al completamento
 
 
 ---
@@ -1882,30 +1878,30 @@ Parameter           | Description
 
 ### siteList
 
-**Return**: <list> SiteInfo list of all downloaded sites
+**Restituisce**: <list> Elenco siteInfo di tutti i siti scaricati
 
 
 ---
 
 
 ### sitePause
-Pause site serving
+Mette in pausa la distribuzione del sito
 
-Parameter           | Description
+Parametro           | Descrizione
                ---  | ---
-**address**         | Address of site want to pause
+**address**         | Indirizzo del sito da mettere in pausa
 
-**Return**: None
+**Restituisce**: Niente
 
 
 ---
 
 
 ### siteResume
-Resume site serving
+Riprendere a distribuire il sito
 
-Parameter           | Description
+Parametro           | Descrizione
                ---  | ---
-**address**         | Address of site want to resume
+**address**         | Indirizzo del sito da riprendere a distribuire
 
-**Return**: None
+**Restituisce**: Niente

@@ -1,47 +1,47 @@
-# Structure of dbschema.json
+# Struttuda di dbschema.json
 
-[Example dbschema.json file](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
+[Esempio file dbschema.json](https://github.com/HelloZeroNet/ZeroTalk/blob/master/dbschema.json)
 
-The code below will do the following:
+Il codice sottostante fa quanto segue:
 
- - If an updated data/users/*/data.json file is received (eg.: a user posted something):
-   - Every row in `data["topics"]` is loaded to the `topic` table
-   - Every key in `data["comment_votes"]` is loaded to the `comment_vote` table as `comment_hash` col and the values stored in same line as `vote`
- - If an updated data/users/content.json file is received (eg.: new user created):
-   - The `"user_id", "user_name", "max_size", "added"` key in value of `content["include"]` is loaded into the `user` table and the key is stored as `path`
+ - Se viene ricevuto un file data/users/*/data.json aggiornato (es.: un utente ha inviato qualcosa):
+   - Ogni riga in `data["topics"]` viene caricata nella tabella `topic`
+   - Ogni chiave in `data["comment_votes"]` viene caricata nella tabella `comment_vote` come colonna `comment_hash` e il valore salvato nella stessa riga come `vote`
+ - Se viene ricevuto un file data/users/content.json aggiornato (es.: è stato creato un nuovo utente):
+   - Le chiavi `"user_id", "user_name", "max_size", "added"` per valore di `content["include"]` vengono salvate nella tabella `user` e la chiave è salvata come `path`
 
-> Note: [Some restriction](content_json/#regular-expressions-limitations) apply to regular expressions to avoid possible ReDoS vulnerability.
+> Nota: [Alcune restrizioni](content_json/#limitazioni-espressioni-regolari) si applicano alle espressioni regolari per evitare la vulnerabilità ReDoS.
 
 ```json
 
 {
-  "db_name": "ZeroTalk", # Database name (only used for debugging)
-  "db_file": "data/users/zerotalk.db", # Database file relative to site's directory
-  "version": 2, # 1 = Json table has path column that includes directory and filename
-                # 2 = Json table has separate directory and file_name column
-                # 3 = Same as version 2, but also has site column (for merger sites)
-  "maps": { # Json to database mappings
-    ".*/data.json": { # Regex pattern of file relative to db_file
-      "to_table": [ # Load values to table
+  "db_name": "ZeroTalk", # nome del database (utilizzato solo per ricerca errori)
+  "db_file": "data/users/zerotalk.db", # file database relativo alla cartella del sito
+  "version": 2, # 1 = la tabella json ha una colonna path che include cartella e nome del file
+                # 2 = la tabella json ha colonne separate per la cartella e il nome del file
+                # 3 = Come la versione 2 ma ha anche una colonna per il sito (per unione di siti)
+  "maps": { # mappa da json a database
+    ".*/data.json": { # modello regex dei file relativi al file del database
+      "to_table": [ # carica i valori nella tabella
         {
-          "node": "topics", # Reading data.json[topics] key value
-          "table": "topic" # Feeding data to topic table
+          "node": "topics", # lettura del valore della chiave data.json[argomenti]
+          "table": "topic" # alimentazione dati alla tabella degli argomenti
         },
         {
-          "node": "comment_votes", # Reading data.json[comment_votes] key value
-          "table": "comment_vote", # Feeding data to comment_vote table
+          "node": "comment_votes", # lettura del valore della chiave data.json[comment_votes]
+          "table": "comment_vote", # alimentazione dei dati nella tabella comment_vote
           "key_col": "comment_hash",
-            # data.json[comment_votes] is a simple dict, the keys of the
-            # dict are loaded to comment_vote table comment_hash column
+            # data.json[comment_votes] è un semplice dizionario, le chiavi del dizionario
+            # sono caricate nella tabella comment_vote, colonna comment_hash
 
           "val_col": "vote"
-            # The data.json[comment_votes] dict values loaded to comment_vote table vote column
+            # dizionario dei valori data.json[comment_votes] caricato nella colonna vote della tabella comment_vote
 
         }
       ],
       "to_keyvalue": ["next_message_id", "next_topic_id"]
-        # Load data.json[next_topic_id] to keyvalue table
-        # (key: next_message_id, value: data.json[next_message_id] value)
+        # Carica data.json[next_topic_id] nella tabella keyvalue
+        # (key: next_message_id, value: data.json[next_message_id])
 
     },
     "content.json": {
@@ -51,20 +51,20 @@ The code below will do the following:
           "table": "user",
           "key_col": "path",
           "import_cols": ["user_id", "user_name", "max_size", "added"],
-            # Only import these columns to user table
+            # importa solo queste colonne nella tabella user
           "replaces": {
             "path": {"content.json": "data.json"}
-              # Replace content.json to data.json in the
-              # value of path column (required for joining)
+              # sostituisce content.json con data.json nel valore
+              # della colonna del path (richiesta per le unioni)
           }
         }
       ],
-      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  # Save cert_auth_type and cert_user_id directly to json table (easier and faster data queries)
+      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  # Salva cert_auth_type e cert_user_id direttamente nella tabella json (quey semplici e veloci)
     }
   },
-  "tables": { # Table definitions
-    "topic": { # Define topic table
-      "cols": [ # Cols of the table
+  "tables": { # definizione tabella
+    "topic": { # definisce la tabella topic
+      "cols": [ # colonne della tabella
         ["topic_id", "INTEGER"],
         ["title", "TEXT"],
         ["body", "TEXT"],
@@ -74,11 +74,11 @@ The code below will do the following:
         ["json_id", "INTEGER REFERENCES json (json_id)"]
       ],
       "indexes": ["CREATE UNIQUE INDEX topic_key ON topic(topic_id, json_id)"],
-        # Indexes automatically created
+        # indice creato automaticamente
 
       "schema_changed": 1426195822
-        # Last time of the schema changed, if the client's version is different then
-        # automatically destroy the old, create the new table then reload the data into it
+        # ultima modifica dello schema, se la versione del client è diversa allora la
+        # vecchia viene distrutta atomaticamente, crea la nuova tabella e ricarica in essa i dati
 
     },
     "comment_vote": {
@@ -102,7 +102,7 @@ The code below will do the following:
       "indexes": ["CREATE UNIQUE INDEX user_id ON user(user_id)", "CREATE UNIQUE INDEX user_path ON user(path)"],
       "schema_changed": 1426195825
     },
-    "json": {  # Json table format only required if you have specified to_json_table pattern anywhere
+    "json": {  # formato tabella json richiesto solo se è stato specificato il modello to_json_table
         "cols": [
             ["json_id", "INTEGER PRIMARY KEY AUTOINCREMENT"],
             ["directory", "TEXT"],
@@ -117,7 +117,7 @@ The code below will do the following:
 }
 ```
 
-## Example for data.json file
+## Esempio di data.json file
 ```json
 {
   "next_topic_id": 2,
@@ -175,7 +175,7 @@ The code below will do the following:
 }
 ```
 
-## Example for content.json file
+## Esempio di content.json file
 
 ```json
 {

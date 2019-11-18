@@ -1,20 +1,20 @@
-# Coding standards if you want to collaborate to ZeroNet
- - Follow [PEP8](https://www.python.org/dev/peps/pep-0008/)
- - Simple is better than complex
- - Premature optimization is the root of all evil
+# Standard di programmazione per collaborare a ZeroNet
+ - Seguire [PEP8](https://www.python.org/dev/peps/pep-0008/)
+ - Semplice è meglio che complesso
+ - L'ottimizzazione prematura è la strada verso la perdizione
 
-### Naming
- - ClassNames: Capitalized, CamelCased
- - functionNames: starts with lowercase, camelCased
- - variable_names: lowercased, under_scored
+### Nomenclatura
+ - NomiDelleClassi: iniziali delle parole maiuscole (CamelCased)
+ - nomiDelleFunzioni: iniziale minuscola, le altre parole con inziale maiuscola (camelCased)
+ - nomi_delle_variabili: minuscolo con parole separate da underscore (under_scored o snaked_name)
 
-### Variables
- - file_path: File path realtive to working dir (data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)
- - inner_path: File relative to site dir (css/all.css)
- - file_name: all.css
- - file: Python file object
- - privatekey: Private key for the site (without _)
+### Variabili
+ - percorso_file: percorso dei file relativo alla cartella di lavoro (data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)
+ - percorsi_interni: percorsi relativi alle cartelle del sito (css/all.css)
+ - nomi_file: all.css
+ - file: oggetti Python
+ - privatekey: chiave privata per il sito (senza _)
 
-### Source files directories and naming
- - One class per file is preferred
- - Source file name and directory comes from ClassName: WorkerManager class = Worker/WorkerManager.py
+### Cartelle file sorgenti e nomenclatura
+ - É preferibile un file per classe
+ - I nomi dei file sorgenti e delle cartelle derivano dal NomeClasse: WorkerManager class = Worker/WorkerManager.py

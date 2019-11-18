@@ -1,3 +1,3 @@
-# Translation HowTo
+# Come tradurre
 
-Instructions goes here.
+Inserire qui le istruzioni per la traduzione.

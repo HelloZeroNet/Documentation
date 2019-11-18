@@ -1,62 +1,62 @@
-# Create new ZeroNet site
+# Creare un nuovo sito ZeroNet
 
-## Easy way: Using the web interface
+## Modo semplice: utilizzare l'interfaccia web
 
- * Click on **⋮** > **"Create new, empty site"** menu item on the site [ZeroHello](http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D).
- * You will be **redirected** to a completely new site that is only modifiable by you!
- * You can find and modify your site's content in **data/[yoursiteaddress]** directory
- * After the modifications open your site, drag the topright "0" button to left, then press **sign** and **publish** buttons on the bottom
+ * Fare clic su **⋮** > voce di menu **"Creare un nuovo sito vuoto"** sul sito [ZeroHello](http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D).
+ * Si verrà **rediretti** in un sito completamente nuovo modificabile solo da voi!
+ * Si può accedere e modificare il contenuto del proprio sito nella cartella **data/[indirizzodeltuosito]**
+ * Dopo le modifiche aprire il sito, trascinare a sinistra l'icona "0" in alto a destra, quindi fare clic sui bottoni **firma** e **pubblica** nella parte bassa
 
-## Manual way: Using the command line
+## Modo manuale: utilizzando la riga di comando
 
-### 1. Create site structure
+### 1. Creare la struttura del sito
 
-* Shut down ZeroNet if it is running
-* Browse to the folder where ZeroNet is installed and run:
+* Spegnere ZeroNet se attivo
+* Navicare nella cartella dove è installato ZeroNet ed eseguire:
 
 ```bash
 $ zeronet.py siteCreate
 ...
-- Site private key: 23DKQpzxhbVBrAtvLEc2uvk7DZweh4qL3fn3jpM3LgHDczMK2TtYUq
-- Site address: 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
+- Chiave privata del sito: 23DKQpzxhbVBrAtvLEc2uvk7DZweh4qL3fn3jpM3LgHDczMK2TtYUq
+- Indirizzo del sito: 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
 ...
-- Site created!
+- Sito creato!
 $ zeronet.py
 ...
 ```
 
-- This will create the initial files for your site inside ```data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```.
+- Questo creerà i file iniziali dentro ```data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```.
 
-> __Note:__
-> Windows users using the bundle version must browse into the ZeroBundle/ZeroNet folder and run `"../Python/python.exe" zeronet.py siteCreate`
+> __Nota:__
+> Gli utenti Windows che utilizzano la versione pachettizata devono navigare nella cartella ZeroBundle/ZeroNet ed eseguire `"../Python/python.exe" zeronet.py siteCreate`
 
-### 2. Build/Modify site
+### 2. Costruire/modificare un sito
 
-* Update the site files located in ```data/[your site address key]``` (eg: 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2).
-* When your site is ready run:
+* Aggiornare i file del sito posizionati in ```data/[chiave dell'indirizzo del sito]``` (es.: 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2).
+* Quando il sito è pronto eseguire:
 
 ```bash
 $ zeronet.py siteSign 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
-- Signing site: 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2...
-Private key (input hidden):
+- Sito in firma: 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2...
+Chiave privata (inserimento nascosto):
 ```
 
-* Enter the private key you got when you created the site. This will sign all files so peers can verify that the site owner is who made the changes.
+* Inserire la chiave privata ottenuta quando si è creato il sito. Questo applicherà la firma a tutti i file così i peer potranno verificare che chi effettua le modifiche è il proprietario del sito.
 
-### 3. Publish site changes
+### 3. Pubblicare le modifiche del sito
 
-* In order to inform peers about the changes you made you need to run:
+* Per informare i peer delle modifiche effettuate bisogna eseguire:
 
 ```bash
 $ zeronet.py sitePublish 13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2
 ...
-Site:13DNDk..bhC2 Publishing to 3/10 peers...
-Site:13DNDk..bhC2 Successfuly published to 3 peers
-- Serving files....
+SiSitote:13DNDk..bhC2 Publishing to 3/10 peers...
+Sito:13DNDk..bhC2 Pubblicato con successo da 3 peer
+- File distribuiti....
 ```
 
-* That's it! You've successfully signed and published your modifications.
-* Your site will be accessible from: ```http://localhost:43110/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```
+* Questo è tutto! Le modifiche sono state firmate e pubblicate con successo.
+* Il sito sarà accessibile da: ```http://localhost:43110/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```
 
 
-**Next steps:** [ZeroNet Developer Documentation](../../site_development/getting_started/)
+**Passi successivi:** [Documentazione sviluppatori ZeroNet](../../site_development/getting_started/)

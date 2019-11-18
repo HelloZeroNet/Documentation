@@ -1,129 +1,129 @@
-# Sample ZeroNet sites
+# Siti ZeroNet di esempio
 
 ## ZeroHello
 
-The homepage of ZeroNet
+La pagina principale di ZeroNet
 
- - Lists all added sites: Title, Peer number, Modification date, etc.
- - Site actions: Update, Pause, Resume, Delete, Check Files and Save as .zip
- - Clone sites to have your own blog / forum
- - ZeroNet Statistics
- - If an update is available, ZeroNet can be updated with one click
+ - Elenca tutti i siti seguiti: titolo, numero peer, data modifica, etc.
+ - Azioni sui siti: aggiorna, pausa, riavvia, cancella, controlla file e salva come .zip
+ - Duplicare siti per avere il proprio blog / forum
+ - Statistiche ZeroNet
+ - Se è disponibile un aggiornamento, ZeroNet può essere aggiornato con un clic
 
 ![ZeroHello](../img/zerohello.png)
 
-Address: [1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D](http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D)
+Indirizzo: [1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D](http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D)
 
-[Source code](https://github.com/HelloZeroNet/ZeroHello)
+[Codice sorgente](https://github.com/HelloZeroNet/ZeroHello)
 
 ---
 
 ## ZeroBlog
 
-Self publishing blog demo
+Demo di un blog con pubblicazione automatica
 
- - Inline content editor
- - Markdown syntax
- - Code syntax highlighting
- - Site signing & publishing through the web interface
+ - Modifica dei contenuti in linea
+ - Sintassi Markdown
+ - Evidenza sintassi del codice
+ - Firma e pubblicazione del sito attraverso l'interfaccia web
 
-How does it work?
+Come funziona?
 
- - `data.json` contained within site files contain blog posts and comments. Each user has their own.
- - Upon pressing `Sign & Publish new content`, the blogger is asked for the site private key (displayed when [creating a new site using zeronet.py siteCreate command](create_new_site/))
- - Your ZeroNet client signs the new/modified files and publishes directly to other peers
- - The site will then be accessible until to other peers to view
+ - `data.json` all'interno dei file del sito contiene i messaggi e i commenti del blog. Ogni utente ha i propri.
+ - Con l'elaborazione `Firma & Pubblica nuovi contenuti`, viene richiesta al bloggher la chiave privata del sito (visualizzata [creando un nuovo sito utilizzando il comando zeronet.py siteCreate](create_new_site/))
+ - Il vostro client ZeroNet firma i file nuovo/modificati e li pubblica direttamente agli altri peer
+ - Il sito sarà quindi accessibile finché altri peer lo pubblicano
 
 ![ZeroBlog](../img/zeroblog.png)
 
-Address: [1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8](http://127.0.0.1:43110/1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8) or [blog.zeronetwork.bit](http://127.0.0.1:43110/blog.zeronetwork.bit)
+Indirizzo: [1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8](http://127.0.0.1:43110/1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8) o [blog.zeronetwork.bit](http://127.0.0.1:43110/blog.zeronetwork.bit)
 
-[Source code](https://github.com/HelloZeroNet/ZeroBlog)
+[Codice sorgente](https://github.com/HelloZeroNet/ZeroBlog)
 
 
 ---
 
 ## ZeroTalk
 
-Decentralized, P2P forum demo
+Demo di forum P2P decentralizzato
 
- - Post and comment creation, modification, deletion and upvoting
- - Commenting and content modifications pushed directly to other peers
- - Only you can sign and modify your own files
- - Real time display of new comments
+ - Creazione di messaggi e commenti, modifica, cancellazione e votazioni
+ - Commenti e contenuti pubblicati direttamente agli altri peer
+ - Solo l'autore può firmare e modificare i prorpi file
+ - Visualizzazione in tempo reale di nuovi commenti
 
-How does it work?
+Come funziona?
 
- - To post and comment you have to request a certificate of registration (a cryptographic sign) from a ZeroID provider
- - After you have the certificate you can publish your content (messages, posts, upvotes) directly to other peers
+ - Per inserire e commentare messaggi serve richiedere un certificato di registrazione (una firma criprografica) da un provider ZeroID
+ - Ottenuto il certificato si può pubblicare il contenuto (messaggi, argomenti, voti) direttamente ad altri peer
 
 ![ZeroTalk](../img/zerotalk.png)
 
-Address: [1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT](http://127.0.0.1:43110/1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT) or [talk.zeronetwork.bit](http://127.0.0.1:43110/talk.zeronetwork.bit)
+Indirizzo: [1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT](http://127.0.0.1:43110/1TaLkFrMwvbNsooF4ioKAY9EuxTBTjipT) o [talk.zeronetwork.bit](http://127.0.0.1:43110/talk.zeronetwork.bit)
 
-[Source code](https://github.com/HelloZeroNet/ZeroTalk)
+[Codice sorgente](https://github.com/HelloZeroNet/ZeroTalk)
 
 ---
 
 ## ZeroMail
 
-End-to-end encrypted, distributed, P2P messaging site. To improve privacy it uses a BitMessage-like solution and will not expose the message recipient.
+Sito di messaggistica end-to-end criptato, distribuito, P2P. Per aumentare la riservatezza uilizza una soluzione simile a BitMessage e non espone il contenitore del messaggio.
 
- - Using ECIES for secret exchange, AES256 for message encoding
- - When you first visit the site, it adds your public key to your data file. At that point anyone is able to send a message to you
- - Everyone tries to decrypt every message, this improves privacy by making it impossible to find the message recipient
- - To reduce per message overhead and increase decryption speed, we re-use the AES key, but a new IV is generated every time
+ - Utilizza ECIES per scambi segreti, AES256 per la codifica dei messaggi
+ - Quando si visita il sito per la prima volta, viene aggiunta la chiave pubblica dell'utente ai suoi file dati. Da questo momento chiunque può inviare messaggi all'utente
+ - Ognuno tenta di decifrare ogni messaggio, questo migliora la riservatezza rendendo impossibile trovare il contenitore del messaggio
+ - Per ridurre il sovraccarico del messaggio e aumentare la velocità di decodifica, si riutilizza la chiave AES, ma viene generato un nuovo IV ogni volta
 
 ![ZeroTalk](../img/zeromail.png)
 
-Address: [1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27](http://127.0.0.1:43110/1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27) or [mail.zeronetwork.bit](http://127.0.0.1:43110/mail.zeronetwork.bit)
+Indirizzo: [1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27](http://127.0.0.1:43110/1MaiL5gfBM1cyb4a8e3iiL8L5gXmoAJu27) o [mail.zeronetwork.bit](http://127.0.0.1:43110/mail.zeronetwork.bit)
 
-[Source code](https://github.com/HelloZeroNet/ZeroMail)
+[Codice sorgente](https://github.com/HelloZeroNet/ZeroMail)
 
 ---
 
 ## ZeroMe
 
-Decentralized, Twitter-like P2P social network.
+Social network decentralizzata, simil-Twitter, P2P.
 
- - Stores user information in ZeroMe user registry
- - Stores posts and comments in MergerSites called Hubs
- - Upload images as optional files
- - Real time display of feed activity
+ - Archivia le informazioni utente nel registro utente ZeroMe
+ - Archivia messaggi e commenti in SitiUnione chiamati Hub
+ - Carica le immagini come file opzionali
+ - Visualizza in tempo reale le attività dei collegamenti
  
 ![ZeroMe](../img/zerome.png)
 
-Address: [1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH](http://127.0.0.1:43110/1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH)
+Indirizzo: [1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH](http://127.0.0.1:43110/1MeFqFfFFGQfa1J3gJyYYUvb5Lksczq7nH)
 
-[Source code](https://github.com/HelloZeroNet/ZeroMe)
+[SoCodice sorgente](https://github.com/HelloZeroNet/ZeroMe)
 
 ---
 
 ## ReactionGIFs
 
-Demo for optional files, files which only download from other peers if your browser requests them.
+Demo per i file opzionali, file che vengono scaricati dagli altri peer solo se il browser li richiede.
 
 ![ReactionGIFs](../img/reactiongifs.jpg)
 
-Address: [1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h](http://127.0.0.1:43110/1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h)
+Indirizzo: [1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h](http://127.0.0.1:43110/1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h)
 
-[Source code](https://github.com/HelloZeroNet/ReactionGIFs)
+[SouCodice sorgente](https://github.com/HelloZeroNet/ReactionGIFs)
 
 ---
 
 ## ZeroChat
 
-The finished site for the tutorial of creating a server-less, SQL backed, real-time updated P2P chat application using ZeroNet in less than 100 lines of code.
+Il sito tutorial completo per la creazione di una applicazione di chat P2P, server-less, abilitata da SQL, aggiornata in tempo reale utilizzando ZeroNet in meno di 100 righe di codice.
 
- - Uses ZeroID certificate for authentication
- - Stores messages in a SQLite database
- - Posts messages and distribute directly to other users in real-time
- - Real-time update the messages as they arrive
+ - Utilizza i certificati ZeroID per l'autenticazione
+ - Salva i messaggi in un database SQLite
+ - Invia messaggi e li distribuisce direttamente agli altri utenti in tempo reale
+ - Aggiorna i messaggi in tempo reale al loro arrivo
 
 ![ZeroChat](../img/zerochat.png)
 
-Address of finished site: [1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg](http://127.0.0.1:43110/1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg)
+Indirizzo del sito completato: [1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg](http://127.0.0.1:43110/1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg)
 
-Tutorial on ZeroBlog:
- [Part1](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:43:ZeroNet+site+development+tutorial+1),
- [Part2](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:46:ZeroNet+site+development+tutorial+2)
+Tutorial su ZeroBlog:
+ [Parte 1](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:43:ZeroNet+site+development+tutorial+1),
+ [Parte 2](http://127.0.0.1:43110/Blog.ZeroNetwork.bit/?Post:46:ZeroNet+site+development+tutorial+2)
