@@ -9,6 +9,9 @@
 
 ## Manual way: Using the command line
 
+> __Note:__
+> If you are using pre-boundled ZeroNet distribution, then in place of `zeronet.py` you need to use `./ZeroNet.sh` (Linux), `lib/ZeroNet.cmd` (Windows), `ZeroNet.app/Contents/MacOS/ZeroNet` (macOS)
+
 ### 1. Create site structure
 
 * Shut down ZeroNet if it is running
@@ -26,9 +29,6 @@ $ zeronet.py
 ```
 
 - This will create the initial files for your site inside ```data/13DNDkMUExRf9Xa9ogwPKqp7zyHFEqbhC2```.
-
-> __Note:__
-> Windows users using the bundle version must browse into the ZeroBundle/ZeroNet folder and run `"../Python/python.exe" zeronet.py siteCreate`
 
 ### 2. Build/Modify site
 
