@@ -15,7 +15,7 @@ Every connection begins with a handshake by sending a request to the target netw
 
 Parameter            | Description
                  --- | ---
-**crypt**            | Null/None, only used in respones
+**crypt**            | Null/None, only used in response
 **crypt_supported**  | An array of connection encryption methods supported by the client
 **fileserver_port**  | The client's fileserver port
 **onion**            | (Only used on tor) The client's onion address
