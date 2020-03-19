@@ -59,20 +59,21 @@ Pour désactiver le caching, ouvrez votre navigateur "devtool", dans le menu de 
 
 ### Extra fonctionalités (fonctionne seulement si le site vous appartient)
 
- - Fichiers CSS mergés: Tous les fichiers CSS à l'intérieur du répertoire du site seront mergés en un seul fichier nommé `all.css`. Vous pouvez choisir d'inclure seulement ce fichier dans votre site. Si vous souhaitez garder les fichiers CSS sans les publiier, il est possible de les ajouter dans la section `ignore` dans votre `content.json`. Cela facilite le développement et 
- - Merged JS files: All JS files inside the site folder will be merged into one file called `all.js`. If a CoffeeScript compiler is present (bundled for Windows) it will convert `.coffee` to `.js`.
- - Order in which files are merged into all.css/all.js: Files inside subdirectories of the css/js folder comes first; Files in the css/js folder will be merged according to file name ordering (01_a.css, 02_a.css, etc)
+ - Fichiers CSS mergés: Tous les fichiers CSS à l'intérieur du répertoire du site seront mergés en un seul fichier nommé `all.css`. Vous pouvez choisir d'inclure seulement ce fichier dans votre site. Si vous souhaitez garder les fichiers CSS sans les publiier, il est possible de les ajouter dans la section `ignore` dans votre `content.json`. Cela facilite le développement. (example : `"ignore": "(js|css)/(?!all.(js|css))"` cela va ignorer tous les fichiers CSS et JS sauf `all.js` et `all.css`)
+ - Fichiers JS mergés : Tous les fichiers JS contenu dans un répertoire pour un site sera mergé en un seul fichier appelé `all.js`. Si un compilateur CoffeeScript est présent (c'est le cas avec windows) il convertira les fichier `.coffee` to `.js`.
+ - Ordre dans lequel les fichiers sont mergés dans all.css/all.js: Fichiers à l'intérieur des sous-répertoires du répertoire css/js sont mergés en premier; puis osnt ajoutés les fichiers du répertoire css/js par ordre alphanumérique (01_a.css, 02_a.css, etc)
 
-## Need Help?
 
-ZeroNet has a growing community of developers who hang out in various spaces. If you would like to ask for help, advice or just want to hang out, feel free to connect in to the following services:
+## Besoin d'aide
+
+ZeroNet a une communauté grandissante de dévelopeurs qui sont présents dans différents espaces. Si vous avez besoin d'aide, de conseils ou souhaiter juste discuter, venez nous rejoindre sur l'un de ces services :
 
 ### Forums
 
-* [ZeroExchange](http://127.0.0.1:43110/zeroexchange.bit/), a p2p StackOverflow clone
-* [ZeroTalk](http://127.0.0.1:43110/Talk.ZeroNetwork.bit/), a p2p Reddit-like forum
+* [ZeroExchange](http://127.0.0.1:43110/zeroexchange.bit/), un clone p2p de StackOverflow
+* [ZeroTalk](http://127.0.0.1:43110/Talk.ZeroNetwork.bit/), un p2p forum similaire à Reddit
 
 ### Chat
 
-* [#zeronet-dev:matrix.org](https://riot.im/app/#/room/#zeronet-dev:matrix.org) on Matrix
-* IRC at #zeronet on Freenode
+* [#zeronet-dev:matrix.org](https://riot.im/app/#/room/#zeronet-dev:matrix.org) sur Matrix
+* via IRC #zeronet sur freenode
