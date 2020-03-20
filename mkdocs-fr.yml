@@ -14,8 +14,6 @@ site_dir: site/fr
 
 theme:
   language: 'fr'
-  feature:
-    tabs: true
   palette:
     primary: "deep purple"
     accent: "deep purple"
@@ -29,7 +27,10 @@ markdown_extensions:
   - toc:
       permalink: true
   - codehilite
-
+  - markdown.extensions.admonition
+  - pymdownx.superfences
+  - pymdownx.details
+  
 plugins:
   - search:
       lang: ['fr']
