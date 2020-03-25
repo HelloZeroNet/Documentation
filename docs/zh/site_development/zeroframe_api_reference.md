@@ -1,181 +1,410 @@
 # ZeroFrame API参考
 
-## ZeroFrame API
+## ZeroFrame的API
 
-ZeroFrame是一个允许ZeroNet网站与ZeroNet守护进程交互的API。 它允许站点保存/检索文件，发布更改和许多其他内容。 每当创建新站点时，库的副本都包含在`js/ZeroFrame.js`中。
+ZeroFrame是一个允许零网网站与零网守护进程交互的API。 它允许站点保存/检索文件，发布更新和许多其他内容。 每当创建新站点时，库的拷贝放在了`js/ZeroFrame.js`中。
 
-可以像任何其他JavaScript文件一样导入库，或者站点开发人员也可以选择[通过NPM导入](ZeroFrame API Page, ##Import?)。 有关API详细信息，请参阅[ZeroFrame API参考]()。
+和JavaScript文件一样，这个库也可以从外部导入。或者站点开发者也可以选择[通过NPM导入](ZeroFrame API Page, ##Import?)。 有关API详细信息，请参阅[ZeroFrame API参考]()。
 
-## 包装器
+## 封装器
 
-_这些命令由包装器帧处理，因此不使用websocket发送到UiServer._
+与iframe外部代码交互的命令。
 
 
 ### wrapperConfirm
-使用确认按钮显示通知
+显示带有确认的通知。
 
-参数                   | 描述
-                  ---  | ---
-**message**            | 你想展示的消息
-**button_caption** (可选) | 确认按钮的标题 (默认值: OK)
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
 
-**返回**: 如果点击按钮返回True
+    message = '你确定要删除这个吗？'
+    buttonTitle = '删除'
 
-**示例:**
-```coffeescript
-# Delete site
-siteDelete: (address) ->
-	site = @sites[address]
-	title = site.content.title
-	if title.length > 40
-		title = title.substring(0, 15)+"..."+title.substring(title.length-10)
-	@cmd "wrapperConfirm", ["Are you sure you sure? <b>#{title}</b>", "Delete"], (confirmed) =>
-		@log "Deleting #{site.address}...", confirmed
-		if confirmed
-			$(".site-#{site.address}").addClass("deleted")
-			@cmd "siteDelete", {"address": address}
-```
+    zeroframe.cmd 'wrapperConfirm', [message, buttonTitle], (confirmed) =>
+      if confirmed
+        console.log '正在删除帖子...'
+    ```
 
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
 
+    let message = '你确定要删除这个吗？';
+    let buttonTitle = '删除';
+
+    zeroframe.cmd('wrapperConfirm', [message, buttonTitle], (confirmed) => {
+      if (confirmed) {
+        console.log('正在删除帖子...');
+      }
+    };
+    ```
+
+    **输出:**
+
+    用户点击确认:
+
+    ```javascript
+    "正在删除帖子..."
+    ```
+
+    !!! info "注释"
+
+        如果用户拒绝通知，则不运行回调函数。
 ---
 
 
 ### wrapperInnerLoaded
+由于URL中的`#anchors` 只适用于外部网页，而不适用于ZeroNet站点所在的内部iframe，因此必须使用此命令。当站点完全加载时，调用此方法将当前锚应用于内部iframe的`src`URL中。
 
-将windows.location.hash应用于页面url。 页面完全加载后调用以跳转到所需的锚点。
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperInnerLoaded', []
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperInnerLoaded', []);
+    ```
+
+    **输出:**
+
+    如果用户点击 `http://127.0.0.1:43110/mysite.bit#my-title`:
+
+    ```
+    [Wrapper] 添加哈希到目标处 http://127.0.0.1:43110/mysite.bit/?wrapper_nonce=some_nonce#my-title
+    ```
+
+	
+---
+
+### innerLoaded
+[wrapperInnerLoaded](#wrapperinnerloaded)的别名。
 
 ---
 
 
 ### wrapperGetLocalStorage
-**返回**: 浏览器对此站点的本地存储
+检索ZeroNet站点本地存储的内容。
 
-**示例:**
-```coffeescript
-@cmd "wrapperGetLocalStorage", [], (res) =>
-	res ?= {}
-	@log "Local storage value:", res
-```
+!!! info "注释"
 
+    由于ZeroNet站点都在同一个域上运行，因此本地存储技术上是由所有站点共享的，这具有安全风险。 因此UiWrapper将每个站点划分为只能访问它们自己站点的那部分。
 
+**返回**: JSON格式的此站点本地存储。
+
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd "wrapperGetLocalStorage", [], (res) =>
+      res ?= {}
+      console.log "本地存储值:", res
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd("wrapperGetLocalStorage", [], (res) => {
+      res = res || {};
+      console.log("本地存储值:", res);
+    });
+    ```
+
+    **输出:**
+
+    如果本地存储是空:
+
+    ```javascript
+    本地存储内容: {}
+    ```
+
+    如本地存储已通过[wrapperSetLocalStorage](#wrappersetlocalstorage)修改:
+
+    ```javascript
+    本地存储内容: {"score": 500}
+    ```
 
 ---
 
 ### wrapperGetState
-**返回**: 浏览器当前历史状态对象
+从浏览器返回当前选项卡的历史状态。
 
+**返回**: 浏览器的当前历史状态对象。
+
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperGetState', {}, (state) ->
+      console.log state
+    ```
+
+    ```javascript tab="JavaScript"
+    zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperGetState', {}, (state) => {
+      console.log(state);
+    });
+    ```
+
+    **输出:**
+
+    ```
+    null
+    ```
+	
 ---
 
 ### wrapperGetAjaxKey
-**返回**: 初始化ajax (XMLHTTPRequest, fetch)请求所需的密钥
+**返回**: 检索可用于发出ajax（XMLHTTPRequest，fetch）请求的密钥。
 
-**示例:**
-```javascript
-ajax_key = await page.cmdp("wrapperGetAjaxKey")
-req = new window.XMLHttpRequest()
-req.open("GET", "content.json?ajax_key=" + ajax_key)
-req.setRequestHeader("Range", "bytes=10-200")  // Optional: only if you want request partial file
-req.send()
-console.log(req.response)
-```
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperGetAjaxKey', {}, (ajax_key) ->
+      req = new window.XMLHttpRequest()
+      req.open 'GET', "content.json?ajax_key=#{ajax_key}"
+      # Optional: only if you want to request a partial file
+      # req.setRequestHeader 'Range', 'bytes=10-200'
+      req.onload = ->
+        console.log req.response
+      req.send()
+    ```
+
+    ```javascript tab="JavaScript"
+    zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperGetAjaxKey', {}, (ajax_key) => {
+      const req = new window.XMLHttpRequest();
+      req.open('GET', `content.json?ajax_key=${ajax_key}`);
+      // Optional: only if you want request partial file
+      // req.setRequestHeader('Range', 'bytes=10-200');
+      req.onload = () => {
+        console.log(req.response);
+      };
+      req.send();
+    });
+    ```
+
+    **输出:**
+
+    我们需要的文件。 在本例中，是当前站点的`content.json`:
+
+    ```javascript
+    {
+      "address": "1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D",
+      "address_index": 66669697,
+      "background-color": "#FFF",
+      "description": "",
+      "files": {
+        "index.html": {
+        "sha512": "542f7724432a22ceb8821b4241af4d36cfd81e101b72d425c6c59e148856537e",
+        "size": 1114
+        },
+        "js/ZeroFrame.js": {
+        "sha512": "42125c7aa72496455e044e3fd940e0f05db86824c781381edb7a70f71a5f0882",
+        "size": 3370
+        }
+      },
+      "ignore": "",
+      "inner_path": "content.json",
+      "modified": 1541199581,
+      "postmessage_nonce_security": true,
+      "signers_sign": "G6Aq7MXMzCjvEdqCToGTDZ7mrsCfaQzZdoBqHg4Cle2NHGno1Pgx2dvgeTFpsWkFP/oAA4CHKt2Zu+KueJM+7Mg=",
+      "signs": {
+        "1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D": "COr0M7+egjY29ZhW7mQp4MPHYuwrgOKVk6kl1CnRPef2QPbUQARYigo0cId8nIs7Y6Fnaj+uHR2HPvh09XVGb1Q="
+      },
+      "signs_required": 1,
+      "title": "my site",
+      "translate": ["js/all.js"],
+      "zeronet_version": "0.6.4"
+    }
+    ```
+
+    !!! info "注释"
+        
+		建议使用这种情况与非零网源通信。 这不是为站点检索文件内容的推荐方法。 对这种情况，使用[fileGet](#fileget)命令代替。
+
+		从其他ZeroNet站点检索文件可以通过[CORS plugin](#plugin-cors)完成。
+
+        你也可以使用来自`ZeroFrame.js`的`monkeyPatchAjax`函数来补充默认的XMLHTTPRequest和fetch实现。
 
 ---
 
 ### wrapperNotification
-展示一个通知
+展示一个通知。
 
 参数                   | 描述
                   ---  | ---
 **type**               | 可以的值: info, error, done
 **message**            | 你想显示的消息
-**timeout** (可选) | 超过此间隔后隐藏展示 (毫秒)
+**timeout** (可选)     | 超过此间隔后隐藏展示 (毫秒)
 
 **返回**: None
 
-**示例:**
-```coffeescript
-@cmd "wrapperNotification", ["done", "Your registration has been sent!", 10000]
-```
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperNotification', ['done', '您的注册信息已发送!', 10000]
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperNotification', ['done', '您的注册信息已发送!', 10000]);
+    ```
 
 
 ---
 
 ### wrapperOpenWindow
-
-导航或打开一个新的弹出窗口.
+导航或打开一个新的弹出窗口。
 
 参数                   | 描述
                   ---  | ---
 **url**                | 打开页面的地址
 **target** (可选)      | 目标窗口的名字
-**specs** (可选)       | 窗口的特殊属性 (见: [window.open specs](http://www.w3schools.com/jsref/met_win_open.asp))
+**specs** (可选)       | 窗口的特殊属性 (见: [window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open))
 
-**示例:**
-```coffeescript
-@cmd "wrapperOpenWindow", ["https://zeronet.io", "_blank", "width=550,height=600,location=no,menubar=no"]
-```
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperOpenWindow', ['https://zeronet.io', '_blank', 'width=550,height=600,location=no,menubar=no']
+    ```
+
+    ```javascript tab="JavaScript"
+    zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperOpenWindow', ['https://zeronet.io', '_blank', 'width=550,height=600,location=no,menubar=no']);
+    ```
 
 ---
 
 
 ### wrapperPermissionAdd
-
-为站点请求新的允许
-
+为站点请求新的允许权限。
 
 参数             | 描述
              --- | ---
-**permission**   | 允许的名字 (例如. Merger:ZeroMe)
+**permission**   | 允许的名字 (例如 Merger:ZeroMe)
 
+??? "示例"
 
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperPermissionAdd', ['Merger:ZeroMe'], (res) ->
+      if res == 'ok'
+        console.log '权限已授予。'
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperPermissionAdd', ['Merger:ZeroMe'], (res) => {
+      if (res === 'ok') {
+        console.log('权限已授予。');
+      }
+    });
+    ```
+
+    **输出:**
+
+    如果用户接受了请求的权限:
+
+    ```
+    权限已授予。
+    ```
+
+    如果用户拒绝了或没有回答请求，该方法将不会运行。
+
+	
 ---
 
 ### wrapperPrompt
-
-提示来自用户的文本输入
+提示用户输入文本。
 
 参数                | 描述
                ---  | ---
 **message**         | 你想显示的消息
-**type** (可选) | 输入的类型 (默认: text)
+**type** (可选)     | 输入的类型 (例如 `text`, `password`)
 
-**返回**: 输入的文本
+**返回**: 输入的文本。
 
-**示例:**
-```coffeescript
-# Prompt the private key
-@cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
-    $(".publishbar .button").addClass("loading")
-    # Send sign content.json and publish request to server
-    @cmd "sitePublish", [privatekey], (res) =>
-        $(".publishbar .button").removeClass("loading")
-        @log "Publish result:", res
-```
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    # 提示输入站点的私钥
+    zeroframe.cmd 'wrapperPrompt', ['Enter your private key:', 'password'], (privatekey) ->
+      # 签名并发布 content.json
+      zeroframe.cmd 'sitePublish', [privatekey], (res) ->
+        console.log '发布结果:', res
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe = new ZeroFrame();
+
+    // 提示输入站点的私钥
+    zeroframe.cmd('wrapperPrompt', ['Enter your private key:', 'password'], function(privatekey) {
+      // 签名并发布 content.json
+      zeroframe.cmd('sitePublish', [privatekey], function(res) {
+        console.log('发布结果:', res);
+      });
+    });
+    ```
+
+    **输出:**
+
+    ```
+    发布结果: ok
+    ```
 
 
 ---
 
 ### wrapperPushState
-改变地址同时为浏览器历史添加新的值. 见: [pushState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
+改变地址同时为浏览器历史添加新的条目。 见[JavaScript pushState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method). 还可以参见 [wrapperReplaceState](#wrapperreplacestate)。
 
 参数                | 描述
                ---  | ---
-**state**           | State javascript object
+**state**           | 状态javascript对象
 **title**           | 此页面的标题
 **url**             | 此页面的地址
 
 **返回**: None
 
-**示例:**
-```coffeescript
-@cmd "wrapperPushState", [{"scrollY": 100}, "Profile page", "Profile"]
-```
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperPushState', [{'scrollY': 100}, 'Profile page', 'Profile']
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperPushState', [{'scrollY': 100}, 'Profile page', 'Profile']);
+    ```
 
 
 ---
 
 ### wrapperReplaceState
-更改网址且不向浏览器的历史记录添加新条目。 见: [replaceState JS method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)
+更改网址且不向浏览器的历史记录添加新条目。 参见[JavaScript replaceState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_replaceState()_method)。
 
 参数                | 描述
                ---  | ---
@@ -185,27 +414,50 @@ console.log(req.response)
 
 **返回**: None
 
-```coffeescript
-@cmd "wrapperReplaceState", [{"scrollY": 100}, "Profile page", "Profile"]
-```
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
 
+    zeroframe.cmd 'wrapperReplaceState', [{'scrollY': 100}, 'Profile page', 'Profile']
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperReplaceState', [{'scrollY': 100}, 'Profile page', 'Profile']);
+    ```
+
+	
 ---
 
 ### wrapperRequestFullscreen
 设置当前页面为全屏. (在第一次通话时请求网站的许可)
 
-> **注意:** 从ZeroNet Rev3136 开始，你可以不需要请求全屏直接使用javascript的全屏API
+!!! warning "弃用"
 
-**示例:**
-```javascript
-page.cmd("wrapperRequestFullscreen")
-```
+    从ZeronetRev3136开始，您可以直接使用全屏JavaScript的API，而无需首先询问封装器.
+
+将当前页面设置为全屏。
+
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd('wrapperRequestFullscreen')
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperRequestFullscreen')
+    ```
 
 
 ---
 
 ### wrapperSetLocalStorage
-为此站点设置浏览器的本地存储数据
+设置为站点存储的浏览器本地存储数据
 
 参数                   | 描述
                   ---  | ---
@@ -213,17 +465,45 @@ page.cmd("wrapperRequestFullscreen")
 
 **返回**: None
 
-**示例:**
-```coffeescript
-Page.local_storage["topic.#{@topic_id}_#{@topic_user_id}.visited"] = Time.timestamp()
-Page.cmd "wrapperSetLocalStorage", Page.local_storage
-```
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    setTimeout(->
+      zeroframe.cmd 'wrapperSetLocalStorage', {'score': 500}, (res) =>
+        console.log '分数已保存。'
+    , 100)
+    ```
+
+    ```javascript tab="JavaScript"
+    import 'js/ZeroFrame.js'
+
+    setTimeout(() => {
+      zeroframe.cmd('wrapperSetLocalStorage', {'score': 500}, (res) => {
+        console.log('分数已保存。');
+      });
+    }, 100);
+
+    const zeroframe = new ZeroFrame();
+    ```
+
+    !!! info "注释"
+
+        `wrapperSetLocalStorage`依赖于`site_info`, 这是一个包含站点信息的对象，该站点在ZeroFrame加载时从ZeroNet后台程序检索。 为了允许这种情况发生，我们将“wrapperSetLocalStorage”的执行延迟了100毫秒。
+
+    **输出:**
+
+    如果本地存储为空:
+
+    ```javascript
+    分数已保存。
+    ```
 
 
 ---
 
 ### wrapperSetTitle
-设置浏览器的标题
+设置该站点的标题。
 
 参数                   | 描述
                   ---  | ---
@@ -231,17 +511,28 @@ Page.cmd "wrapperSetLocalStorage", Page.local_storage
 
 **返回**: None
 
-**示例:**
-```coffeescript
-Page.cmd "wrapperSetTitle", "newtitle"
-```
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperSetTitle', '我的新标题'
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperSetTitle', '我的新标题');
+    ```
+
+    站点标题现在将会是`我的新标题`。
+
 
 ---
 
 
 ### wrapperSetViewport
-
-设置网站的视区元标记内容（移动网站所需）
+设置网站的视区元标签内容（移动手机网站所需）。
 
 
 参数                | 描述
@@ -250,26 +541,30 @@ Page.cmd "wrapperSetTitle", "newtitle"
 
 **返回**: None
 
-**示例:**
-```coffeescript
-# Prompt the private key
-@cmd "wrapperSetViewport", "width=device-width, initial-scale=1.0"
-```
+??? "示例"
+
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'wrapperSetViewport', 'width=device-width, initial-scale=1.0'
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('wrapperSetViewport', 'width=device-width, initial-scale=1.0');
+    ```
 
 
 ---
 
 
-
 ## UiServer
 
-UiServer适用于ZeroNet，好比LAMP设置适用于普通网站。
-
-UiServer将完成所有“后端”工作（例如：查询数据库，访问文件等）。 这是您使网站动态化所需的API调用。
-
+UiServer将完成所有'后端'工作（例如：查询数据库，访问文件等）。 这些是让网站动态化所需的API调用。
 
 ### announcerInfo
-当前站点的跟踪器统计信息
+当前站点的跟踪程序统计信息
 
 **返回**:
 ```json
@@ -291,16 +586,16 @@ UiServer将完成所有“后端”工作（例如：查询数据库，访问文
 
 
 ### certAdd
-向当前用户添加新证书。
+向当前用户添加新的证书。
 
 参数                 | 描述
                  --- | ---
-**domain**           | 证书颁发者域
+**domain**           | 证书颁发者域名
 **auth_type**        | 注册时使用的Auth类型
 **auth_user_name**   | 注册时使用的用户名
 **cert**             | 证书本身: 由证书站点所有者签名的字符串 `auth_address#auth_type/auth_user_name` 
 
-**返回**: "ok", "Not changed" 或者 {"error": error_message}
+**返回**: `"ok"`, `"Not changed"` 或者 `{"error": error_message}`。
 
 **示例:**
 ```coffeescript
@@ -317,11 +612,11 @@ UiServer将完成所有“后端”工作（例如：查询数据库，访问文
 ### certSelect
 显示证书选择器。
 
-参数                 | 描述
-                 --- | ---
-**accepted_domains** | 站点接受为授权提供者的域列表
-**accept_any**       | 不限制接受的证书提供者
-**accepted_pattern** | 接受的证书提供者地址的正则表达式模式
+参数                         | 描述
+				         --- | ---
+**accepted_domains** （可选）| 站点接受为授权提供者的域列表
+**accept_any** （可选）      | 不限制接受的证书提供者
+**accepted_pattern**（可选） | 接受的证书提供者地址的正则表达式模式
 
 **返回**: None
 
@@ -340,29 +635,29 @@ UiServer将完成所有“后端”工作（例如：查询数据库，访问文
 
 参数        | 描述
         --- | ---
-**channel** | Channel to join
+**channel** | 将加入的频道
 
 **返回**: None
 
 **Channels**:
 
- - **siteChanged** (joined by default)<br>Events: peers_added, file_started, file_done, file_failed
+ - **siteChanged** (默认加入的)<br>事件: peers_added, file_started, file_done, file_failed
 
-**Example**:
+**示例**:
 ```coffeescript
-# Wrapper websocket connection ready
+# 封装器websocket连接就绪
 onOpenWebsocket: (e) =>
 	@cmd "channelJoinAllsite", {"channel": "siteChanged"}
 
-# Route incoming requests and messages
+# 路由传入的请求和消息
 route: (cmd, data) ->
 	if cmd == "setSiteInfo"
-		@log "Site changed", data
+		@log "站点已改变", data
 	else
-		@log "Unknown command", cmd, data
+		@log "未知命令", cmd, data
 ```
 
-**Example event data**
+**示例事件数据**
 ```json
 {
 	"tasks":0,
@@ -380,14 +675,14 @@ route: (cmd, data) ->
 
 
 ### dbQuery
-在sql缓存上运行查询
+在sql缓存上执行查询
 
 参数                 | 描述
                  --- | ---
 **query**            | Sql查询命令
 **params**           | 此sql查询的子参数
 
-**返回**: <list> 查询的结果
+**返回**: 数组格式的查询结果。
 
 
 **示例:**
@@ -439,43 +734,43 @@ Page.cmd "dbQuery", ["SELECT user.*, json.json_id AS data_json_id FROM user LEFT
              --- | ---
 **inner_path**   | 要列出的目录
 
-**返回**: 文件及目录名列表
+**返回**: 文件及目录名的列表
 
 
 ---
 
 
 ### fileDelete
-删除文件
+删除一个文件。
 
 参数             | 描述
              --- | ---
-**inner_path**   | 要删除的文件
+**inner_path**   | 要想删除的文件
 
-**返回**: 成功时返回"ok"否则出现错误消息
+**返回**: 成功时返回"ok"，否则返回错误消息。
 
 
 ---
 
 
 ### fileGet
-获取文件内容
+获取一个文件的内容。
 
 参数                    | 描述
                     --- | ---
-**inner_path**          | 你想要的文件
-**required** (optional) | 如果文件不存在，请尝试等待该文件。 (default: True)
-**format** (optional)   | 对返回数据进行编码。 (text or base64) (default: text)
-**timeout** (optional)  | 数据到达的最长等待时间 (default: 300)
+**inner_path**          | 想要得到的文件
+**required** (可选) | 如果文件不存在，尝试并等待该文件。 (默认值: True)
+**format** (可选)   | 返回数据的编码格式。 (text or base64) (默认值: text)
+**timeout** (可选)  | 数据到达的最长等待时间 (默认值: 300)
 
-**返回**: <string> 文件的内容
+**返回**: <string> 文件的内容。
 
 
 **示例:**
 ```coffeescript
-# Upvote a topic on ZeroTalk
+# 对ZeroTalk主题进行投票
 submitTopicVote: (e) =>
-	if not Users.my_name # Not registered
+	if not Users.my_name # 未注册
 		Page.cmd "wrapperNotification", ["info", "Please, request access before posting."]
 		return false
 
@@ -485,20 +780,20 @@ submitTopicVote: (e) =>
 
 	Page.cmd "fileGet", [inner_path], (data) =>
 		data = JSON.parse(data)
-		data.topic_votes ?= {} # Create if not exits
+		data.topic_votes ?= {} # 如果不存在则创建
 		topic_address = elem.parents(".topic").data("topic_address")
 
-		if elem.hasClass("active") # Add upvote to topic
+		if elem.hasClass("active") # 向主题添加投票
 			data.topic_votes[topic_address] = 1
-		else # Remove upvote from topic
+		else # 从主题中删除投票
 			delete data.topic_votes[topic_address]
 
-		# Write file and publish to other peers
+		# 写入文件并发布到其他节点
 		Page.writePublish inner_path, Page.jsonEncode(data), (res) =>
 			elem.removeClass("loading")
 			if res == true
 				@log "File written"
-			else # Failed
+			else # 失败
 				elem.toggleClass("active") # Change back
 
 	return false
@@ -509,27 +804,27 @@ submitTopicVote: (e) =>
 
 
 ### fileList
-递归列出目录中的文件
+文件夹中的文件列表
 
 参数             | 描述
              --- | ---
-**inner_path**   | 要列出的目录
+**inner_path**   | 需要显示的文件夹
 
-**返回**: 目录中的文件列表（递归）
+**返回**: 文件夹中的文件列表（递归）
 
 
 ---
 
 
 ### fileNeed
-初始化（可选）文件的下载。
+（可选）文件下载的初始化。
 
 参数                    | 描述
                     --- | ---
-**inner_path**          | 你想要的文件
-**timeout** (optional)  | 数据到达的最长等待时间 (default: 300)
+**inner_path**          | 你想要得到的文件
+**timeout** (可选)      | 数据到达的最长等待时间 (默认值: 300)
 
-**返回**: 成功下载后返回 "ok"
+**返回**: 成功下载后返回 `"ok"`
 
 
 ---
@@ -537,19 +832,19 @@ submitTopicVote: (e) =>
 ### fileQuery
 简单的json文件查询命令
 
-参数            | 描述
+参数                 | 描述
                  --- | ---
 **dir_inner_path**   | 查询文件的模式
 **query**            | 查询命令（可选）
 
-**返回**: <list> 匹配的内容
+**返回**: 以数组形式匹配内容。
 
-**Query examples:**
+**查询示例:**
 
- - `["data/users/*/data.json", "topics"]`: Returns all topics node from all user files
- - `["data/users/*/data.json", "comments.1@2"]`: Returns `user_data["comments"]["1@2"]` value from all user files
- - `["data/users/*/data.json", ""]`: Returns all data from users files
- - `["data/users/*/data.json"]`: Returns all data from users files (same as above)
+ - `["data/users/*/data.json", "topics"]`: 从全部用户文件中返回话题项
+ - `["data/users/*/data.json", "comments.1@2"]`: 从全部用户文件中返回`user_data["comments"]["1@2"]`值
+ - `["data/users/*/data.json", ""]`: 从全部用户文件中返回全部数据
+ - `["data/users/*/data.json"]`: 从全部用户文件中返回全部数据 (和上面一样)
 
 **示例:**
 ```coffeescript
@@ -571,9 +866,9 @@ submitTopicVote: (e) =>
                  --- | ---
 **inner_path**       | 文件内部路径
 
-**返回**: <list> 匹配的内容
+**返回**: 数组格式的匹配内容。
 
-**Example result:**
+**示例结果:**
 
 ```json
 {
@@ -598,22 +893,22 @@ submitTopicVote: (e) =>
 
 ### fileWrite
 
-写文件内容
+在文件中写内容
 
 
 参数               | 描述
                --- | ---
-**inner_path**     | 要写入的文件的内部路径
-**content_base64** | 要写入文件的内容（base64编码）
+**inner_path**     | 要写入文件的内部路径
+**content_base64** | 要写入文件的内容（base64格式编码）
 
-**返回**: 成功返回"ok"否则出现错误消息
+**返回**: 成功返回`"ok"`，否则返回错误消息。
 
 **示例:**
 ```coffeescript
 writeData: (cb=null) ->
-	# Encode to json, encode utf8
+	# 编码为json，编码为utf8
 	json_raw = unescape(encodeURIComponent(JSON.stringify({"hello": "ZeroNet"}, undefined, '\t')))
-	# Convert to to base64 and send
+	# 转换为base64格式并发送
 	@cmd "fileWrite", ["data.json", btoa(json_raw)], (res) =>
 		if res == "ok"
 			if cb then cb(true)
@@ -622,14 +917,14 @@ writeData: (cb=null) ->
 			if cb then cb(false)
 ```
 
-_Note:_ to write files that not in content.json yet, you must have `"own": true` in `data/sites.json` at the site you want to write
+_注释:_ 要写content.json中没列出的文件，你必须在你想写的站点的data/sites.json`文件中具有`"own": true`项
 
 
 ---
 
 
 ### ping
-测试UiServer websocket连接
+测试UiServer的websocket连接
 
 **返回:** pong
 
@@ -639,7 +934,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 ### serverInfo
 
-**返回:** <dict> 有关服务器的所有信息
+**返回:** JavaScript对象格式的服务器全部信息。
 
 **示例:**
 ```coffeescript
@@ -647,17 +942,17 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 	@log "Server info:", server_info
 ```
 
-**Example return value:**
+**返回值的示例:**
 ```json
 {
-	"debug": true, # Running in debug mode
-	"fileserver_ip": "*", # Fileserver binded to
-	"fileserver_port": 15441, # FileServer port
-	"ip_external": true, # Active of passive mode
-	"platform": "win32", # Operating system
-	"ui_ip": "127.0.0.1", # UiServer binded to
-	"ui_port": 43110, # UiServer port (Web)
-	"version": "0.2.5" # Version
+	"debug": true, # 运行在调试模式
+	"fileserver_ip": "*", # 绑定的文件服务器
+	"fileserver_port": 15441, # 文件服务器端口
+	"ip_external": true, # 主动或被动模式
+	"platform": "win32", # 操作系统
+	"ui_ip": "127.0.0.1", # 绑定的网页服务器
+	"ui_port": 43110, # 网页服务器端口
+	"version": "0.2.5" # 版本
 }
 ```
 
@@ -669,7 +964,7 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 ### siteInfo
 
-**返回**: <dict> 有关该网站的所有信息
+**返回**: JavaScript对象格式的站点全部信息
 
 **示例:**
 ```coffeescript
@@ -677,29 +972,29 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 	@log "Site info:", site_info
 ```
 
-**Example return value:**
+**返回值示例:**
 ```json
 {
-	"tasks": 0, # Number of files currently under download
-	"size_limit": 10, # Current site size limit in MB
-	"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", # Site address
-	"next_size_limit": 10, # Size limit required by sum of site's files
-	"auth_address": "2D6xXUmCVAXGrbVUGRRJdS4j1hif1EMfae", # Current user's bitcoin address
-	"auth_key_sha512": "269a0f4c1e0c697b9d56ccffd9a9748098e51acc5d2807adc15a587779be13cf", # Deprecated, dont use
-	"peers": 14, # Peers of site
-	"auth_key": "pOBdl00EJ29Ad8OmVIc763k4", # Deprecated, dont use
+	"tasks": 0, # 目前需下载的文件数
+	"size_limit": 10, # 当前站点大小限制(MB)
+	"address": "1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr", # 站点地址
+	"next_size_limit": 10, # 全部站点文件容量限制
+	"auth_address": "2D6xXUmCVAXGrbVUGRRJdS4j1hif1EMfae", # 当前用户的比特币地址
+	"auth_key_sha512": "269a0f4c1e0c697b9d56ccffd9a9748098e51acc5d2807adc15a587779be13cf", # 弃用，不再使用
+	"peers": 14, # 站点的节点
+	"auth_key": "pOBdl00EJ29Ad8OmVIc763k4", # 弃用，不再使用
 	"settings":  {
-		"peers": 13, # Saved peers num for sorting
-		"serving": true, # Site enabled
-		"modified": 1425344149.365, # Last modification time of all site's files
-		"own": true, # Own site
-		"permissions": ["ADMIN"], # Site's permission
-		"size": 342165 # Site total size in bytes
+		"peers": 13, # 排序需要的节点数
+		"serving": true, # 托管站点
+		"modified": 1425344149.365, # 全部站点文件的最新修改时间
+		"own": true, # 自己的站点
+		"permissions": ["ADMIN"], # 站点权限
+		"size": 342165 # 站点总大小（字节）
 	},
-	"bad_files": 0, # Files that needs to be download
-	"workers": 0, # Current concurent downloads
-	"content": { # Root content.json
-		"files": 12, # Number of file, detailed file info removed to reduce data transfer and parse time
+	"bad_files": 0, # 需要下载的文件
+	"workers": 0, # 当前正在的下载
+	"content": { # 根content.json
+		"files": 12, # 文件数，详细的文件信息被移除以减小数据传输和解析的时间
 		"description": "This site",
 		"title": "ZeroHello",
 		"signs_required": 1,
@@ -710,9 +1005,9 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 		"zeronet_version": "0.2.5",
 		"includes": 0
 	},
-	"cert_user_id": "zeronetuser@zeroid.bit", # Currently selected certificate for the site
-	"started_task_num": 1, # Last number of files downloaded
-	"content_updated": 1426008289.71 # Content.json update time
+	"cert_user_id": "zeronetuser@zeroid.bit", # 为该站点当前选择的账号
+	"started_task_num": 1, # 最新的已下载文件数
+	"content_updated": 1426008289.71 # Content.json更新时间
 }
 ```
 
@@ -725,18 +1020,18 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 参数                      | 描述
                       --- | ---
-**privatekey** (optional) | 用于签名的私钥（默认值：当前用户的私钥）
-**inner_path** (optional) | 要发布的内容json的内部路径（默认值：content.json）
-**sign** (optional)       | 如果为True则在发布之前签名content.json（默认值：True）
+**privatekey** (可选) | 用于签名的私钥（默认值：当前用户的私钥）
+**inner_path** (可选) | 要发布的内容json的内部路径（默认值：content.json）
+**sign** (可选)       | 如果为True则在发布之前签名content.json（默认值：True）
 
-**返回**: 成功返回"ok"否则出现错误消息
+**返回**: 成功返回`"ok"`，否则返回错误消息。
 
 **示例:**
 ```coffeescript
-# Prompt the private key
-@cmd "wrapperPrompt", ["Enter your private key:", "password"], (privatekey) =>
+# 提示私钥
+@cmd "wrapperPrompt", ["输入你的私钥:", "密码"], (privatekey) =>
 	$(".publishbar .button").addClass("loading")
-	# Send sign content.json and publish request to server
+	# 发送签名的content.json并发布请求到服务器
 	@cmd "sitePublish", [privatekey], (res) =>
 		$(".publishbar .button").removeClass("loading")
 		@log "Publish result:", res
@@ -756,24 +1051,24 @@ _Note:_ to write files that not in content.json yet, you must have `"own": true`
 
 
 ### siteSign
-签署该网站的content.json
+给站点的content.json签名
 
-参数                                   | 描述
-                                   --- | ---
-**privatekey** (optional)              | 用于签名的私钥（默认值：当前用户的私钥）
-**inner_path** (optional)              | 要签名的内容json的内部路径（默认值：content.json）
-**remove_missing_optional** (optional) | 从content.json中删除目录中不再存在的可选文件（默认值：False）
+参数                               | 描述
+                               --- | ---
+**privatekey** (可选)              | 用于签名的私钥（默认值：当前用户的私钥）
+**inner_path** (可选)              | 要签名的内容json的内部路径（默认值：content.json）
+**remove_missing_optional** (可选) | 从content.json中删除文件夹下不存在的可选文件（默认值：False）
 
-**返回**: 成功返回"ok"否则出现错误消息
+**返回**: 成功返回`"ok"`，否则返回错误消息。
 
-> __Note:__
-> Use "stored" as privatekey if its definied in users.json (eg. cloned sites)
+> __注释:__
+> 使用定义在users.json中的"stored"项作为私钥 (例如 克隆的站点)
 
 **示例:**
 ```coffeescript
-if @site_info["privatekey"] # Private key stored in users.json
+if @site_info["privatekey"] # 存储在users.json中的私钥
 	@cmd "siteSign", ["stored", "content.json"], (res) =>
-		@log "Sign result", res
+		@log "签名结果", res
 ```
 
 
@@ -783,7 +1078,7 @@ if @site_info["privatekey"] # Private key stored in users.json
 
 ### siteUpdate
 
-强制检查并从其他节点下载更改的内容（仅当用户处于被动模式并使用旧版Zeronet时才需要）
+强制检查并从其他节点下载更新的内容（仅当用户处于被动模式并使用老旧零网时，才需要）
 
 参数          | 描述
           --- | ---
@@ -793,7 +1088,7 @@ if @site_info["privatekey"] # Private key stored in users.json
 
 **示例:**
 ```coffeescript
-# Manual site update for passive connections
+# 对被动连接的手动站点更新
 updateSite: =>
 	$("#passive_error a").addClass("loading").removeClassLater("loading", 1000)
 	@log "Updating site..."
@@ -808,7 +1103,7 @@ updateSite: =>
 
 获取用户保存的设置。
 
-**返回:** The user specific site's settings saved using userSetSettings.
+**返回:** 用户使用userSetSettings保存的具体站点设置。
 
 
 ---
@@ -816,13 +1111,13 @@ updateSite: =>
 
 ### userSetSettings
 
-设置用户的站点特定设置。
+设置用户的具体站点的设置。
 
 参数          | 描述
           --- | ---
-**settings**  | 要存储的用户的站点特定设置。
+**settings**  | 针对具体站点，想要存储的用户设置
 
-**返回:** ok on success
+**返回:** 成功时返回`"ok"`。
 
 
 ---
@@ -833,26 +1128,26 @@ updateSite: =>
 
 ### BigfileUploadInit
 
-初始化bigfile的新上载端点。
+初始化大文件上传。
 
 参数                 | 描述
                  --- | ---
-**inner_path**       | Upload location
-**size**             | File size
+**inner_path**       | 上传的位置
+**size**             | 文件大小
 
 
-**返回**: A dict with the information about the upload:
+**返回**: 词典格式的此次上传信息:
 
 参数                   | 描述
                    --- | ---
-**url**                | Http upload endpoint
-**piece_size**         | Size of each separately hashed part of the file
-**inner_path**         | File path within the site
-**file_relative_path** | File path relative to content.json
+**url**                | 上传端的Http地址
+**piece_size**         | 文件每个单独哈希部分的大小
+**inner_path**         | 文件的站点内部路径
+**file_relative_path** | 相对content.json的文件路径
 
-> __Note:__ Not supported non-ascii characters will be automatically removed from `inner_path` and `file_relative_path` values
+> __注释:__ 不支持的非ascii字符将自动从`inner_path`和`file_relative_path`项值中被移除
 
-**Example**
+**示例**
 
 ```javascript
 var input = document.createElement('input')
@@ -869,7 +1164,7 @@ input.onchange = () => {
         var req = new XMLHttpRequest()
         req.upload.addEventListener("progress", console.log)
         req.upload.addEventListener("loadend", () =>
-            page.cmd("wrapperConfirm", ["Upload finished!", "Open file"],
+            page.cmd("wrapperConfirm", ["上传完成!", "打开文件"],
                 () => { window.top.location = init_res.inner_path }
             )
         )
@@ -888,18 +1183,18 @@ input.click()
 
 ### chartDbQuery
 
-在图表数据库上运行数据库查询。
+在图表数据库上执行数据库查询。
 
-Arguments and return value: Same as [dbQuery](#dbquery-query-param)
+实参和返回值: 和[dbQuery](#dbquery-query-param)一样
 
 
 ### chartGetPeerLocations
 
-Get list of unique peers in client
+在客户端中获取节点列表
 
-**返回**: List of unique peers
+**返回**: 节点列表
 
-**Example**:
+**示例**:
 ```javascript
 Page.cmd("chartGetPeerLocations")
 > [
@@ -912,21 +1207,78 @@ Page.cmd("chartGetPeerLocations")
 
 ## 插件: Cors
 
-Allow cross-site file access under virtual directory **/cors-siteaddress/** and grant cross-site database query using the [as](#as-address-cmd-arguments) API command.
+在虚拟目录**/cors-siteaddress/**下允许跨站点文件访问，并使用[as](#as-address-cmd-arguments)API命令授予跨站点数据库查询。
 
 ### corsPermission
 
-Request Cross origin resource sharing permission with the given site.
+请求与给定站点的跨源资源共享权限。
 
 参数                 | 描述
                  --- | ---
-**address**          | The site address you want get cors access
+**address**          | 你想获取cors权限的站点地址
 
-**返回**: ok on success
+**返回**: 成功时返回`"ok"`。
 
-After the permission is granted the other site's files will be available under **/cors-siteaddress/** virtual directory via http request or by the fileGet API command.
+授予权限后，其他站点的文件将通过http请求或fileGet API命令在**/cors-siteaddress/**虚拟目录下变得可用。
 
-The site will be added to user's client if it's required.
+如果需要，站点将添加到用户的客户端中。
+
+
+---
+
+## 插件: Multiuser
+
+!!! info "注释"
+    以下命令只能由具有"ADMIN"[权限](#wrapperpermissionadd)的站点执行。
+
+
+### userLoginForm
+
+请求使用私钥登录。
+
+!!! info "信息"
+    多用户插件将获取此私钥，将其转换为主种子。通过在浏览器中设置缓存(例如 `master_address=1bc83cc...`)，您可以指定在所有后续请求中充当哪个用户。
+
+    这个缓存是由UiWrapper作为其WebSocket连接握手的一部分发送的。 选择此方法是因为它不需要修改现有的请求，而且它还可以与托管在单独计算机上的ZeroNet客户端通信(比如 ZeroNet 代理)。
+
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'userLoginForm', []
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('userShowMasterSeed', []);
+    ```
+
+    **输出:**
+
+    None，登录提示将出现在iframe无法访问的窗口中。
+
+
+### userShowMasterSeed
+
+请求显示用户的私钥。
+
+??? "示例"
+    ```coffeescript tab="CoffeeScript"
+    zeroframe = new ZeroFrame()
+
+    zeroframe.cmd 'userShowMasterSeed', []
+    ```
+
+    ```javascript tab="JavaScript"
+    const zeroframe = new ZeroFrame();
+
+    zeroframe.cmd('userShowMasterSeed', []);
+    ```
+
+    **输出:**
+
+    None，私钥将出现在iframe无法访问的窗口中。
 
 
 ---
@@ -937,29 +1289,29 @@ The site will be added to user's client if it's required.
 
 ### userPublickey
 
-获取用户的站点特定的公钥
+获取用户站点的特定公钥。
 
 参数                 | 描述
                  --- | ---
-**index** (optional) | Sub-publickey within site (default: 0)
+**index** (可选)     | 站点内的子公钥。(默认值: 0)
 
 
-**返回**: base64 encoded publickey
+**返回**: base64编码的公钥
 
 ---
 
 ### eciesEncrypt
 
-使用公钥加密文本
+使用公钥加密文本。
 
 参数                           | 描述
                            --- | ---
-**text**                       | Text to encrypt
-**publickey** (optional)       | User's publickey index (int) or base64 encoded publickey (default: 0)
-**return_aes_key** (optional)  | Get the AES key used in encryption (default: False)
+**text**                       | 需要加密的文本
+**publickey** (可选)           | 用户的公钥索引(int) 或者 base64编码的公钥(默认值: 0)
+**return_aes_key** (可选)      | 获取用到加密的AES关键字 (默认值: False)
 
 
-**返回**: Encrypted text in base64 format or [Encrypted text in base64 format, AES key in base64 format]
+**返回**: base64格式的加密文本 或者 [base64格式的加密文本，base64格式的AES关键字]
 
 ---
 
@@ -969,11 +1321,11 @@ The site will be added to user's client if it's required.
 
 参数                           | 描述
                            --- | ---
-**params**                     | A text or list of encrypted texts
-**privatekey** (optional)      | User's privatekey index (int) or base64 encoded privatekey (default: 0)
+**params**                     | 加密文本的列表或文本
+**privatekey** (可选)          | 用户的私钥索引(int) 或者base64编码的私钥(默认值: 0)
 
 
-**返回**: Decrypted text or list of decrypted texts (null for failed decodings)
+**返回**: 加密文本解密后的文本或列表 (失败的解码返回空值)
 
 ---
 
@@ -983,12 +1335,12 @@ The site will be added to user's client if it's required.
 
 参数                           | 描述
                            --- | ---
-**text**                       | A text encrypt using AES
-**key** (optional)             | Base64 encoded password (default: generate new)
-**iv** (optional)              | Base64 encoded iv (default: generate new)
+**text**                       | 需使用AES加密的文本
+**key** (optional)             | Base64编码的密码 (默认值: generate new)
+**iv** (optional)              | Base64编码的iv (默认值: generate new)
 
 
-**返回**: [base64 encoded key, base64 encoded iv, base64 encoded encrypted text]
+**返回**: [base64编码的关键字, base64编码的iv, base64编码的加密文本]
 
 
 ---
@@ -999,14 +1351,14 @@ The site will be added to user's client if it's required.
 
 参数                           | 描述
                            --- | ---
-**iv**                         | IV in Base64 format
-**encrypted_text**             | Encrypted text in Base64 format
-**encrypted_texts**            | List of [base64 encoded iv, base64 encoded encrypted text] pairs
-**key**                        | Base64 encoded password for the text
-**keys**                       | Keys for decoding (tries every one for every pairs)
+**iv**                         | Base64格式的IV
+**encrypted_text**             | Base64格式的加密文本
+**encrypted_texts**            | [base64格式的iv, base64格式的加密文本]对列表
+**key**                        | 这段文本的Base64格式密码
+**keys**                       | 解码关键词(对每一对都尝试)
 
 
-**返回**: Decoded text or list of decoded texts
+**返回**:解码的文本或解码后的文本列表
 
 
 ---
@@ -1017,27 +1369,27 @@ The site will be added to user's client if it's required.
 
 ### feedFollow
 
-Set followed sql queries.
+设置关注的sql查询。
 
-The SQL query should result in rows with cols:
+SQL查询应生成具有列的行:
 
 域             | 描述
            --- | ---
-**type**       | Type: post, article, comment, mention
-**date_added** | Event time
-**title**      | Event's first line to be displayed
-**body**       | Event's second and third line
-**url**        | Link to event's page
+**type**       | 类型: post, article, comment, mention
+**date_added** | 事件时间
+**title**      | 事件要显示的第一行
+**body**       | 事件的第二和第三行
+**url**        | 链接到事件页
 
 参数           | 描述
            --- | ---
-**feeds**      | Format: {"query name": [SQL query, [param1, param2, ...], ...}, parameters will be escaped, joined by `,` inserted in place of `:params` in the Sql query.
+**feeds**      | 格式: {"查询名": [SQL查询, [参数1, 参数2, ...], ...}, 参数将被转义, 由插入Sql查询的`:params`间的`,`连接。
 
-**返回**: ok
+**返回**: `"ok"`。
 
 **示例:**
 ```coffeescript
-# Follow ZeroBlog posts
+# 关注ZeroBlog帖子
 query = "
 	SELECT
 	 post_id AS event_uri,
@@ -1056,25 +1408,24 @@ Page.cmd feedFollow [{"Posts": [query, params]}]
 
 ### feedListFollow
 
-Return of current followed feeds
+当前关注的投喂返回
 
-
-**返回**: The currently followed feeds in the same format as in the feedFollow commands
+**返回**: 与feedFollow命令相同格式的当前关注投喂
 
 
 ---
 
 ### feedQuery
 
-Execute all followed sql query
+在用户的通知源中执行对关注站点/页面的全部查询。
 
-
-**返回**: The result of the followed Sql queries
+**返回**: 关注的Sql查询结果
 
 参数                 | 描述
                  --- | ---
-**limit**            | Limit of results per followed site (default: 10)
-**day_limit**        | Return no older than number of this days (default: 3)
+**limit**            | 每个关注站点的结果数限制 (默认值: 10)
+**day_limit**        | 返回时间不早于此天数 (默认值: 3)
+
 
 ---
 
@@ -1083,33 +1434,33 @@ Execute all followed sql query
 
 ### mergerSiteAdd
 
-Start downloading new merger site(s)
+开始下载新的合并站点。
 
 参数                 | 描述
                  --- | ---
-**addresses**        | Site address or list of site addresses
+**addresses**        | 站点地址或站点地址列表
 
 
 ---
 
 ### mergerSiteDelete
 
-Stop seeding and delete a merged site
+停止托管并删除一个合并站点。
 
 参数                 | 描述
                  --- | ---
-**address**           | Site address
+**address**          | 站点地址
 
 
 ---
 
 ### mergerSiteList
 
-Return merged sites.
+返回合并的站点。
 
 参数                 | 描述
                  --- | ---
-**query_site_info**  | If True, then gives back detailed site info for merged sites
+**query_site_info**  | 如果为True，则返回合并站点的详细站点信息
 
 
 ---
@@ -1120,32 +1471,32 @@ Return merged sites.
 
 ### muteAdd
 
-Add new user to mute list. (Requires confirmation for non-ADMIN sites)
+添加新用户到屏蔽列表。 (对非ADMIN权限站点需要确认)
 
 参数                 | 描述
                  --- | ---
-**auth_address**     | Directory name of the user's data.
-**cert_user_id**     | Cert user name of the user
-**reason**           | Reason of the muting
+**auth_address**     | 用户数据的文件夹名
+**cert_user_id**     | 用户的证书用户名
+**reason**           | 屏蔽理由
 
-**返回**: ok if confirmed
+**返回**: 如果确认返回`"ok"`
 
 **示例:**
 ```coffeescript
-Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit','Spammer'])
+Page.cmd("muteAdd", ['1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz','helloworld@kaffie.bit','垃圾邮件发送者'])
 ```
 
 ---
 
 ### muteRemove
 
-Remove a user from mute list. (Requires confirmation for non-ADMIN sites)
+从屏蔽列表中移除用户。 (对非ADMIN站点要求确认)
 
 参数                 | 描述
                  --- | ---
-**auth_address**     | Directory name of the user's data.
+**auth_address**     | 用户数据的文件夹名
 
-**返回**: ok if confirmed
+**返回**: 如果确认返回`"ok"`
 
 **示例:**
 ```coffeescript
@@ -1156,9 +1507,9 @@ Page.cmd("muteRemove", '1GJUaZMjTfeETdYUhchSkDijv6LVhjekHz')
 
 ### muteList
 
-List muted users. (Requires ADMIN permission on site)
+屏蔽用户列表。 (所在站点要求ADMIN权限)
 
-**返回**: List of muted users
+**返回**: 数组格式的屏蔽用户
 
 
 ---
@@ -1169,66 +1520,96 @@ List muted users. (Requires ADMIN permission on site)
 
 ### optionalFileList
 
-Return list of optional files
+返回可选文件列表
 
 参数                 | 描述
                  --- | ---
-**address**          | The site address you want to list optional files (default: current site)
-**orderby**          | Order of returned optional files (default: time_downloaded DESC)
-**limit**            | Max number of returned optional files (default: 10)
+**address**          | 要列出可选文件的站点地址 (默认值: current site)
+**orderby**          | 返回的可选文件的顺序 (默认值: time_downloaded DESC)
+**limit**            | 返回的可选文件的最大数目 (默认值: 10)
 
-**返回**: Database row of optional files: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
+**返回**: 返回的每个可选文件是包含下面列的数据库行:
+
+列名                | 描述
+                --- | ---
+**file_id**         | 文件的ID
+**site_id**         | 文件来自的站点ID
+**inner_path**      | 从站点根目录开始的文件路径
+**hash_id**         | 文件的哈希
+**size**            | 文件的大小（字节）
+**peer**            | 此文件有多少节点
+**uploaded**        | 此文件中有多少字节已上传到其他节点
+**is_downloaded**   | 此文件是否已完全下载
+**is_pinned**       | 是否已锁定此文件
+**time_added**      | 添加此文件的时间
+**time_downloaded** | 此文件下载完成的时间
+**time_accessed**   | 上次访问此文件的时间
 
 ---
 
 ### optionalFileInfo
 
-Query optional file info from database
+查询有关给定路径的单个可选文件的信息。
 
 参数                 | 描述
                  --- | ---
-**inner_path**       | The path of the file
+**inner_path**       | 从站点根目录开始的文件路径
 
-**返回**: Database row of optional file: file_id, site_id, inner_path, hash_id, size, peer, uploaded, is_downloaded, is_pinned, time_added, time_downlaoded, time_accessed
+**返回**: 具有下面列数据的数据行:
+
+列名                | 描述
+                --- | ---
+**file_id**         | 文件的ID
+**site_id**         | 文件来自的站点ID
+**inner_path**      | 从站点根目录开始的文件路径
+**hash_id**         | 文件的哈希
+**size**            | 文件的大小（字节）
+**peer**            | 此文件有多少节点
+**uploaded**        | 此文件中有多少字节已上传到其他节点
+**is_downloaded**   | 此文件是否已完全下载
+**is_pinned**       | 是否已锁定此文件
+**time_added**      | 添加此文件的时间
+**time_downloaded** | 此文件下载完成的时间
+**time_accessed**   | 上次访问此文件的时间
 
 ---
 
 ### optionalFilePin
 
-Pin (exclude from automatized optional file cleanup) downloaded optional file
+锁定下载的可选文件。该文件现在从自动可选文件清理中排除。
 
 参数                 | 描述
                  --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+**inner_path**       | 此文件的路径
+**address**          | 此文件的地址 (默认值: current site)
 
 ---
 
 ### optionalFileUnpin
 
-Remove pinning (include from automatized optional file cleanup) of downloaded optional file
+移除下载的可选文件固定。该文件现在包含在自动可选文件清理中。
 
 参数                 | 描述
                  --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+**inner_path**       | 此文件的路径
+**address**          | 此文件的地址 (默认值: current site)
 
 ---
 
 ### optionalFileDelete
 
-查询下载的可选文件
+删除下载的可选文件
 
 参数                 | 描述
                  --- | ---
-**inner_path**       | The path of the file
-**address**          | Address for the file (default: current site)
+**inner_path**       | 此文件的路径
+**address**          | 此文件的地址 (默认值: current site)
 
 ---
 
 ### optionalLimitStats
 
-Return currently used disk space by optional files
+返回当前被可选文件占用的磁盘空间
 
 **返回**: limit, used and free space statistics
 
@@ -1241,43 +1622,43 @@ Return currently used disk space by optional files
 
 参数                 | 描述
                  --- | ---
-**limit**            | Max space used by the optional files in gb or percent of used space
+**limit**            | 以gb或已用空间的百分比表示的可选文件可用最大空间
 
 ---
 
 ### optionalHelpList
 
-List the auto-downloaded directories of optional files
+列出可选文件的自动下载目录
 
 参数                 | 描述
                  --- | ---
-**address**          | Address of site you want to list helped directories (default: current site)
+**address**          | 要列出帮助目录的站点地址 (默认值: current site)
 
-**返回**: Dict of auto-downloaded directories and descriptions
+**返回**: JavaScript对象格式的自动下载目录和描述。
 
 ---
 
 
 ### optionalHelp
 
-将目录添加到自动下载列表
+将目录添加到自动下载列表。
 
 参数                 | 描述
                  --- | ---
-**directory**        | 要添加到自动下载列表的目录
+**directory**        | 想要添加到自动下载列表的目录
 **title**            | 条目标题（显示在ZeroHello上）
-**address**          | 要添加自动下载目录的站点地址（默认值：当前站点）
+**address**          | 要添加自动下载目录的站点地址（默认值：current site）
 
 ---
 
 ### optionalHelpRemove
 
-删除自动下载条目
+禁止在目录中自动下载可选文件。 仅当网站上启用了[optionalHelp](#optionalhelp)时有效。
 
 参数                 | 描述
                  --- | ---
 **directory**        | 要从自动下载列表中删除的目录
-**address**          | 受影响站点的地址（默认值：当前站点）
+**address**          | 站点的地址（默认值：current site）
 
 ---
 
@@ -1288,14 +1669,14 @@ List the auto-downloaded directories of optional files
 参数                 | 描述
                  --- | ---
 **value**            | 启用或禁用自动下载
-**address**          | 受影响站点的地址（默认值：当前站点）
+**address**          | 受影响站点的地址（默认值：current site）
 
 
 ---
 
 
 ## 管理员命令
-_(需要data/sites.json中的ADMIN权限)_
+_(在data/sites.json中需要ADMIN权限)_
 
 
 ### as
@@ -1312,7 +1693,7 @@ _(需要data/sites.json中的ADMIN权限)_
 **返回**: 命令的返回值
 
 
-**Example**
+**示例**
 
 ```javascript
 Page.cmd("as", ["138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP", "siteSetLimit", 20], console.log )
@@ -1325,34 +1706,39 @@ params = {"file_name": "data.json"}
 Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.log(res.length) } )
 ```
 
----
 
+### certList
 
-**返回**: ok
+返回有关当前已知身份提供程序证书的信息。
 
-### configSet
+**返回**: 一个对象列表，每个对象表示来自身份提供程序的证书。
 
-在ZeroNet配置文件中创建或更新条目。 （默认情况下为zeronet.conf）
+**示例**
 
+```javascript
+Page.cmd("certSelect")
+```
 
-参数                 | 描述
-                 --- | ---
-**key**              | 配置条目名称
-**value**            | 配置条目新值
-
-
-**返回**: ok
-
-
----
-
+```javascript
+[
+  ...
+  {
+    "auth_type": "web",
+    "domain": "zeroid.bit",
+    "selected": false,
+    "auth_user_name": "username",
+    "auth_address": "1GUDV..."
+  },
+  ...
+]
+```
 
 
 ### certSet
 
 为当前站点设置使用的证书。
 
-参数            | 描述
+参数                 | 描述
                  --- | ---
 **domain**           | 证书颁发者的域名
 
@@ -1373,16 +1759,30 @@ Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.lo
 **返回**: None
 
 
-
-
 ---
 
+**返回**: ok
+
+### configSet
+
+创建或更新ZeroNet的配置文件中的一个条目。(默认是zeronet.conf)
+
+
+参数                 | 描述
+                 --- | ---
+**key**              | 配置条目名称
+**value**            | 配置条目新值
+
+
+**返回**: ok
+
+---
 
 ### serverPortcheck
 
 开始检查端口是否打开
 
-**返回**: True (port opened) or False (port closed)
+**返回**: True (端口已打开) 或者 False (端口已关闭)
 
 
 ---
@@ -1410,19 +1810,19 @@ Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.lo
 
 
 ### siteClone
-将站点文件复制到新文件中。
+将站点文件复制到新站点中。
 
-Every file and directory will be skipped if it has a `-default` subfixed version and the subfixed version will be copied instead of it.
+如果文件或文件夹有`-default`后缀的文件或文件夹版本，他们将会被自动跳过，同时带后缀的版本将会被复制而不是原来的文件或文件夹。
 
 
-Eg. If you have a `data` and a `data-default` directory: The `data` directory will not be copied and the `data-default` directory will be renamed to data.
+例如 如果你有一个`data`和`data-default`文件夹: 这个`data`文件夹将不会被拷贝同时这个`data-default`文件夹会被重新命名为data。
 
-参数           | 描述
+参数                | 描述
                ---  | ---
-**address**         | 想要克隆的网站地址
-**root_inner_path** | The source directory of the new site
+**address**         | 想克隆的网站地址
+**root_inner_path** | 新站点的源文件夹
 
-**返回**: None, automatically redirects to new site on completion
+**返回**: None, 当完成时自动重新导向到新站点
 
 
 ---
@@ -1430,16 +1830,16 @@ Eg. If you have a `data` and a `data-default` directory: The `data` directory wi
 
 ### siteList
 
-**返回**: <list> 所有下载网站的SiteInfo列表
+**返回**: <list> 所有下载网站的站点信息列表
 
 
 ---
 
 
 ### sitePause
-暂停网站服务
+暂停网站托管
 
-参数           | 描述
+参数                | 描述
                ---  | ---
 **address**         | 想要暂停的网站地址
 
@@ -1450,9 +1850,9 @@ Eg. If you have a `data` and a `data-default` directory: The `data` directory wi
 
 
 ### siteResume
-恢复网站服务
+恢复网站托管
 
-参数           | 描述
+参数                | 描述
                ---  | ---
 **address**         | 想要恢复的网站地址
 
