@@ -54,11 +54,11 @@
 
 在Windows平台上, Tor已经打包在零网中。 零网将在第一次运行时会尝试下载并解压Tor。 If this fails for any reason, you can install it manually following the instruction in `core\tools\tor\manual_install.txt`.
 
-For other OS's, follow the instructions in the "How to make 零网 work with Tor under Linux/MacOS" section.
+对其他操作系统, 遵循这"如何在Linux/MacOS中使零网工作在Tor网络上？"这部分建议。
 
-> __Tip:__ You can verify your IP address using 零网's [Stats](http://127.0.0.1:43110/Stats) page.
+> __小提示:__ 你可以使用零网[统计](http://127.0.0.1:43110/Stats)页面验证你的IP地址。
 
-> __Tip:__ If you get connection errors, make sure you have the latest version of Tor installed. (0.2.7.5+ required)
+> __小提示:__ 如果你连接错误，确保你使用的是最新版本的Tor。 (0.2.7.5+ required)
 
 
 ---
