@@ -1,19 +1,19 @@
 # ZeroNet网络协议
 
- - Every message is encoded using [MessagePack](http://msgpack.org/)
- - Every request has 3 parameter:
-    * `cmd`: The request command
-    * `req_id`: The request's unique id (simple, incremented nonce per-connection), the client has to include this when reply to the command.
-    * `params`: Parameters for the request
- - Example request: `{"cmd": "getFile", "req_id": 1, "params:" {"site": "1EU...", "inner_path": "content.json", "location": 0}}`
- - Example response: `{"cmd": "response", "to": 1, "body": "content.json content", "location": 1132, "size": 1132}`
- - Example error response: `{"cmd": "response", "to": 1, "error": "Unknown site"}`
+ - 每条消息均使用[MessagePack](http://msgpack.org/)编码
+ - 每个请求具有3个参数:
+    * `cmd`: 请求命令
+    * `req_id`: 请求的唯一id (simple, incremented nonce per-connection), the client has to include this when reply to the command.
+    * `params`: 请求的参数
+ - 请求示例: `{"cmd": "getFile", "req_id": 1, "params:" {"site": "1EU...", "inner_path": "content.json", "location": 0}}`
+ - 响应示例: `{"cmd": "response", "to": 1, "body": "content.json content", "location": 1132, "size": 1132}`
+ - 错误响应示例: `{"cmd": "response", "to": 1, "error": "Unknown site"}`
 
 
 # 握手
 通过向目标网络地址发送请求，每个连接都以握手开始：
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **crypt**            | Null/None, only used in respones
 **crypt_supported**  | An array of connection encryption methods supported by the client
@@ -28,7 +28,7 @@ Parameter            | Description
 
 The target initialize the encryption on the socket based on `crypt_supported`, then return:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **crypt**            | The encryption to use
 **crypt_supported**  | An array of connection encryption methods supported by the server
@@ -44,9 +44,9 @@ Return key           | Description
 > **Note:** No encryption used on .onion connections, as the Tor network provides the transport security by default.
 > **Note:** You can also implicitly initialize SSL before the handshake if you can assume it supported by remote client.
 
-**Example**:
+**示例**:
 
-Sent handshake:
+发送握手:
 
 ```json
 {
@@ -67,7 +67,7 @@ Sent handshake:
 }
 ```
 
-Return:
+返回:
 
 ```
 {
@@ -91,16 +91,16 @@ Return:
 #### getFile _site_, _inner_path_, _location_, _[file_size]_
 Request a file from the client
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **inner_path**       | File path relative to site directory
 **location**         | Request file from this byte (max 512 bytes got sent in a request, so you need multiple requests for larger files)
 **file_size**        | Total size of the requested file (optional)
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **body**             | The requested file content
 **location**         | The location of the last byte sent
@@ -114,9 +114,9 @@ Stream a file from the client
 
 **返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
-**stream_bytes**    | The length of file data after the MessagePack payload
+**stream_bytes**     | The length of file data after the MessagePack payload
 
 To avoid having python-msgpack serialize large binary strings, the file body is appended directly after the MessagePack payload. For example,
 
@@ -134,9 +134,9 @@ To avoid having python-msgpack serialize large binary strings, the file body is 
 #### ping
 检查客户端是否还活着
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **body**             | Pong
 
@@ -148,25 +148,25 @@ Return key           | Description
 Exchange peers with the client.
 Peers packed to 6 bytes (4byte IP using inet_ntoa + 2byte for port)
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **peers**            | List of peers that the requester has (packed)
 **peers_onion**      | List of Tor Onion peers that the requester has (packed)
 **need**             | Number of peers the requester want
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
-**peers**           | List of IPv4 peers he has for the site (packed)
-**peers_onion**     | List of Tor Onion peers for this site (packed)
+**peers**            | List of IPv4 peers he has for the site (packed)
+**peers_onion**      | List of Tor Onion peers for this site (packed)
 
 Each element in the `peers` list is a packed IPv4 address.
 
-IP address | Port
+IP地址     | 端口
 ---------- | ----
-`4 bytes` | `2 bytes`
+`4 bytes`  | `2 bytes`
 
 Each element in the `peers_onion` list is a packed Tor Onion Service address.
 
@@ -179,19 +179,19 @@ To restore the onion address, pass the first part through `base64.b32encode` and
 ---
 
 #### update _site_, _inner_path_, _body_, _[diffs]_
-Update a site file.
+更新一个站点文件.
 
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **inner_path**       | File path relative to site directory
 **body**             | Full content of the updated content.json
 **diffs** (optional) | [Diff opcodes](#possible-diff-opcodes) for the modified files in the content.json
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **ok**               | Thanks message on successful update :)
 
@@ -204,7 +204,7 @@ A dict that contains the modifications
 
 ##### Possible diff opcodes:
 
-Opcode                                   | Description
+Opcode                                   | 描述
                                      --- | ---
 **['=', number of same characters]**     | Have not changed part of the file (eg.: `['=', 5]`)
 **['+', new text]**                      | Added characters (eg.: `['+', '\nhello new line']`)
@@ -218,17 +218,17 @@ If it failes to match the sha hash provided by the content.json (had different v
 ---
 
 #### listModified _site_, _since_
-Lists the content.json files modified since the given parameter. It used to fetch the site's user submitted content.
+Lists the content.json files modified since the given 参数. It used to fetch the site's user submitted content.
 
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **since**            | List content.json files since this timestamp.
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **modified_files**   | Key: content.json inner_path<br>Value: last modification date
 
@@ -271,13 +271,13 @@ Return key           | Description
 #### getHashfield _site_
 Get the client's downloaded [optional file ids](#optional-file-id).
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **hashfield_raw**    | Optional file ids encoded using `array.array("H", [1000, 1001..]).tostring()`
 
@@ -297,14 +297,14 @@ Return key           | Description
 #### setHashfield _site_, _hashfield_raw_
 Set the list of [optional file ids](#optional-file-id) that the requester client has.
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **hashfield_raw**    | Optional file ids encoded using `array.array("H", [1000, 1001..]).tostring()`
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **ok**               | Updated
 
@@ -315,14 +315,14 @@ Return key           | Description
 #### findHashIds _site_, _hash_ids_
 Queries if the client know any peer that has the requested hash_ids
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 **hash_ids**         | List of optional file ids the client currently looking for
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **peers**            | Key: Optional file id<br>Value: List of ipv4 peers encoded using `socket.inet_aton(ip) + struct.pack("H", port)`
 **peers_onion**      | Key: Optional file id<br>Value: List of onion peers encoded using `base64.b32decode(onion.replace(".onion", "").upper()) + struct.pack("H", port)`
@@ -368,13 +368,13 @@ Integer representation of the first 4 character of the hash:
 Check requested port of the other peer.
 
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **port**             | Port which will be checked.
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **status**           | Status of the port ("open" or "closed")
 **ip_external**      | External IP of the requestor
@@ -387,14 +387,14 @@ Return key           | Description
 
 Returns all big file [piecefield](#bigfile-piecefield) that client has for that site in a dict.
 
-Parameter            | Description
+参数                 | 描述
                  --- | ---
 **site**             | Requested site
 
 
-**Return**:
+**返回**:
 
-Return key             | Description
+返回键                 | 描述
                    --- | ---
 **piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
 
@@ -404,15 +404,15 @@ Return key             | Description
 
 Set the client's [piecefields](#picefield) for that site.
 
-Parameter              | Description
+参数                   | 描述
                    --- | ---
 **site**               | Requested site
 **piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
 
 
-**Return**:
+**返回**:
 
-Return key           | Description
+返回键               | 描述
                  --- | ---
 **ok**               | Updated
 
