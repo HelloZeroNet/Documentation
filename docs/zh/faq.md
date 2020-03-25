@@ -3,56 +3,60 @@
 
 #### 我需要打开一个端口吗？
 
-这是 __可选的__, 您可以在没有开放端口的情况下浏览和使用ZeroNet站点。
-如果要创建新站点，强烈建议使用开放端口。
+这是 __可选的__, 您可以在没有开放端口的情况下浏览和使用零网站点。
+如果你想要创建自己的新站点，强烈建议你把端口打开。
 
-在启动时，ZeroNet尝试使用[UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play)在您的路由器上为您打开一个端口
-，如果失败，您必须手动执行：
+在启动时，零网尝试使用[UPnP](https://wikipedia.org/wiki/Universal_Plug_and_Play)在您的路由器上为您打开一个端口
+，如果失败了，您必须手动操作：
 
- - 尝试使用[http://192.168.1.1](http://192.168.1.1) 或 [http://192.168.0.1](http://192.168.0.1) 访问路由器的Web界面
- - 查找“启用UPnP支持”或类似选项，然后重新启动ZeroNet。
+ - 尝试使用[http://192.168.1.1](http://192.168.1.1) 或 [http://192.168.0.1](http://192.168.0.1) 访问路由器的网站界面
+ - 查找“启用UPnP支持”或类似选项，然后重新启动零网。
 
-如果它仍然不起作用，那么尝试找到路由器页面的“端口转发”部分。 这对每个路由器都不同。 [这是YouTube上的教程。](https://www.youtube.com/watch?v=aQXJ7sLSz14) 要转发的端口是15441。
+如果它仍然不起作用，那么尝试找到路由器网页页面的“端口转发”部分。 不同的路由器有不同的显示。 [这是YouTube上的教程。](https://www.youtube.com/watch?v=aQXJ7sLSz14) 要转发端口默认是15441。
 
 
 ---
 
 
-#### ZeroNet是匿名的吗？
+#### 零网是匿名的吗？
 
-它不比BitTorrent更匿名，但随着网络和网站获得更多节点，隐私（找出谁是评论/网站的所有者的可能性）将会增加。
+它具有和BitTorrent相同的匿名性，随着网络和站点获得更多的节点，隐私性（找出谁是评论/站点所有者的可能性）将会增加。
 
-ZeroNet可与匿名网络配合使用：您可以使用Tor网络轻松隐藏IP。
+零网可与匿名网络配合使用：您可以使用Tor网络轻松隐藏你的IP地址。
 
 ---
 
 
-#### 如何在Tor浏览器中使用ZeroNet？
+#### 如何在Tor浏览器中使用零网？
 
-在Tor模式下，建议在Tor浏览器中使用ZeroNet：
+在Tor模式下，建议在Tor浏览器中使用零网：
 
 - 启动Tor浏览器
-- 去地址 `about:preferences#advanced`
+- 进入地址 `about:config` 并接受风险警告
 - 点击 `Settings...`
-- Enter `127.0.0.1` to field **No proxy for**
-- Open http://127.0.0.1:43110 in the browser
+- 搜索 `no_proxies_on`
+- 双击首选项条目
+- 进入地址 `127.0.0.1` 并按 OK
+- 在浏览器中打开[http://127.0.0.1:43110](http://127.0.0.1:43110)
 
 如果您仍然看到空白页：
- - 单击NoScript的按钮（工具栏上的第一个）
- - 选择“临时允许所有此页面”
+
+ - 单击NoScript按钮（工具栏上第一个）
+ - 选择 “临时允许所有页面”
  - 重新加载页面
+ 
 ---
 
 
-#### 如何在Tor上使用ZeroNet？
+#### 如何在Tor上使用零网？
 
-If you want to hide your IP address, install the latest version of ZeroNet then click Tor > Enable Tor for every connection on ZeroHello.
+如果你想隐藏你的IP, 安装最新版的零网然后点击 Tor > 对ZeroHello上的每个连接开启Tor。
 
-On Windows, Tor is bundled with ZeroNet. ZeroNet will attempt to download and unpack Tor on its first run. If this fails for any reason, you can install it manually following the instruction in `core\tools\tor\manual_install.txt`.
+在Windows平台上, Tor已经打包在零网中。 零网将在第一次运行时会尝试下载并解压Tor。 If this fails for any reason, you can install it manually following the instruction in `core\tools\tor\manual_install.txt`.
 
-For other OS's, follow the instructions in the "How to make ZeroNet work with Tor under Linux/MacOS" section.
+For other OS's, follow the instructions in the "How to make 零网 work with Tor under Linux/MacOS" section.
 
-> __Tip:__ You can verify your IP address using ZeroNet's [Stats](http://127.0.0.1:43110/Stats) page.
+> __Tip:__ You can verify your IP address using 零网's [Stats](http://127.0.0.1:43110/Stats) page.
 
 > __Tip:__ If you get connection errors, make sure you have the latest version of Tor installed. (0.2.7.5+ required)
 
@@ -60,25 +64,28 @@ For other OS's, follow the instructions in the "How to make ZeroNet work with To
 ---
 
 
-#### 如何在Linux/MacOS下使ZeroNet与Tor一起使用？
+#### 如何在Linux/MacOS中使零网工作在Tor网络上？
 
- - Install Tor for your OS following Tor's official guidelines: [Linux](https://www.torproject.org/download/download-unix.html.en) [Mac](https://www.torproject.org/docs/tor-doc-osx.html.en).
+ - 遵循Tor官方指南安装对应系统下的Tor: [Linux](https://www.torproject.org/docs/tor-doc-unix.html.en) [Mac](https://www.torproject.org/docs/tor-doc-osx.html.en)。
  - `sudo nano /etc/tor/torrc`
  - Remove the `#` character from lines `ControlPort 9051` and `CookieAuthentication 1` (line ~57)
- - Restart tor
+ - 重启 tor
  - Add permission for yourself to read the auth cookie. With Debian Linux, the command is `sudo usermod -a -G debian-tor [yourlinuxuser]`<br>(if you are not on Debian check the file's user group by `ls -al /var/run/tor/control.authcookie`)
  - Logout/Login with your user to apply group changes
 
-> __Tip:__ You can verify if your Tor setup is running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
+> __小提示:__ Use the `ls -ld /var/run/tor` command to make sure it has the correct `drwxr-sr-x` permission bits. (fix it with `chmod g+sx /var/run/tor/` if necessary)
 
-> __Tip:__ It's also possible to use Tor without modifying torrc (or to use older versions of Tor clients), by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
+> __小提示:__ You can verify if your Tor setup is running correctly using `echo 'PROTOCOLINFO' | nc 127.0.0.1 9051`
+
+> __小提示:__ It's also possible to use Tor without modifying torrc (or to use older versions of Tor clients), by running `zeronet.py --tor disable --proxy 127.0.0.1:9050 --disable_udp`, but then you will lose ability to talk with other .onion addresses.
+
 
 
 ---
 
 #### 是否可以使用配置文件？
 
-任何命令行配置标志也可以用作配置选项。 将这些选项逐行放入顶级zeronet目录（zeronet.py）中名为`zeronet.conf`的文件中。 例：
+任何命令行配置标志也可以用作配置选项。 将这些选项逐行放入零网的顶级目录（具有zeronet.py的那一层目录）中`zeronet.conf`的文件中。 例如：
 
 ```
 [global]
@@ -108,19 +115,19 @@ tor_proxy = 127.0.0.1:9150
 ---
 
 
-#### 我可以在多台机器上使用相同的用户名吗？
+#### 我可以在多台机器上使用相同的账号吗？
 
-是的，只需将`data / users.json`文件复制到新机器即可。
+是的，你可以。只需将`data/users.json`文件复制到新机器上即可。
 
 
 ---
 
 
-#### 如何创建“花哨的”（非.bit）网站地址？
+#### 如何创建“很酷的”（非.bit）网站地址？
 
-Use [vanitygen](https://bitcointalk.org/index.php?topic=25804.0) to generate one. Once you get your keys, create `data/1YourPublicKey...tCkBzAXTKvJk4uj8` directory. Put some files there.
+用[vanitygen](https://bitcointalk.org/index.php?topic=25804.0) 生成一个. 一旦得到你的公钥, 创建 `data/1YourPublicKey...tCkBzAXTKvJk4uj8` 目录. 放些文件在那儿.
 
-Then navigate to [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/). Drag the `0` button to the left and use the sidebar to sign your site.
+然后访问 [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/). 拖`0` 按钮到左边并在侧边栏中签名你的站点。
 
 
 ---
@@ -128,10 +135,10 @@ Then navigate to [http://127.0.0.1:43110/1YourPublicKey...tCkBzAXTKvJk4uj8/](htt
 
 #### 如何注册.bit域名？
 
-You can register .bit domains using [Namecoin](https://namecoin.info/).
-Manage your domains using the client's GUI or by the [command line interface](https://github.com/namecoin/wiki/blob/master/How-to-register-and-configure-.bit-domains.md).
+你可以使用[Namecoin](https://namecoin.info/)注册.bit域名。
+使用客户端的界面或[命令行界面](https://github.com/namecoin/wiki/blob/master/How-to-register-and-configure-.bit-domains.md)管理你的域名。
 
-After the registration is done you have to edit your domain's record by adding a zeronet section to it, e.g.:
+当注册完成后，你必须通过添加一个zeronet项编辑你的域名记录， 例如：
 
 ```
 {
@@ -145,13 +152,13 @@ After the registration is done you have to edit your domain's record by adding a
 }
 ```
 
-> __Tip:__ Other possibilities to register .bit domains: [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
+> __小提示:__ 其他注册.bit域名的方法: [domaincoin.net](https://domaincoin.net/), [peername.com](https://peername.com/), [dotbit.me](https://dotbit.me/)
 
-> __Tip:__ You can verify your domain on [namecha.in](http://namecha.in/), for example: [zeroid.bit](http://namecha.in/name/d/zeroid)
+> __小提示:__ 你可以在[namecha.in](http://namecha.in/)验证你的域名, 例如: [zeroid.bit](http://namecha.in/name/d/zeroid)
 
-> __Tip:__ You should use only [lower-cased letters, numbers and - in your domains](http://wiki.namecoin.info/?title=Domain_Name_Specification_2.0#Valid_Domains).
+> __小提示:__ 你应该只使用 [小写字母, 数字 在你的域名中](http://wiki.namecoin.info/?title=Domain_Name_Specification_2.0#Valid_Domains)。
 
-> __Tip:__ To make ZeroHello display your domain name instead of your site's Bitcoin address, add a domain key to your content.json. ([Example](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
+> __小提示:__ 要让ZeroHello显示你的域名而不是你的站点比特币地址，添加一个域名项到你的content.json中。 ([示例](https://github.com/HelloZeroNet/ZeroBlog/blob/master/content.json#L6))
 
 
 ---
@@ -161,7 +168,7 @@ After the registration is done you have to edit your domain's record by adding a
 
 是的，这是一个标准的比特币地址。 私钥是WIF格式的，因此您可以在大多数客户端中导入它。
 
-> __Tip:__ 我们不建议您在网站的地址上保留大量资金，因为每次修改网站时都必须输入私钥。
+> __小提示:__ 我们不建议您在网站的地址上保留大量资金，因为每次修改网站时都必须输入私钥。
 
 
 ---
@@ -169,82 +176,79 @@ After the registration is done you have to edit your domain's record by adding a
 
 #### 有人托管恶意内容会发生什么？
 
-ZeroNet站点是沙盒，它们具有与您通过Internet访问的任何其他网站相同的权限。
-您可以完全控制您所托管的内容。 如果您发现可疑内容，您可以随时停止托管该网站。
+零网站点是在沙盒中的，它们具有与您通过网络访问的任何常见网站相同的权限。
+您可以完全控制您所托管的内容。 如果您发现可疑内容，您可以随时停止托管该站点。
 
 ---
 
 
-#### 是否可以将ZeroNet安装到远程机器上？
+#### 是否可以将零网安装到远端机器上？
 
-是的，你必须通过将 __plugins/disabled -UiPassword__ 目录重命名为 __plugins/UiPassword__ 来启用UiPassword插件，
-然后使用<br>`zeronet.py --ui_ip "*" --ui_password anypassword`在远程计算机上启动ZeroNet。
-这会将ZeroNet UI Web服务器绑定到所有接口，但为了保证其安全，您只能通过输入给定的密码来访问它。
+是的，但你必须启用UiPassword插件。只需将__plugins/disabled-UiPassword__目录重命名为 __plugins/UiPassword__就可以了。然后使用<br>`zeronet.py --ui_ip "*" --ui_password anypassword`在远端机器上启动零网。
+这会将零网网页服务器绑定到所有接口，但为保证安全，您只能通过输入给定的密码来访问它。
 
-> __Tip:__ 您还可以使用`--ui_restrict ip1 ip2`来限制基于IP地址的接口。
+> __小提示:__ 您还可以使用`--ui_restrict ip1 ip2`来限制基于IP地址的接口。
 
-> __Tip:__ 您可以通过创建一个`zeronet.conf`文件并在其中添加`[global]`和`ui_password = anypassword`行来在配置文件中指定密码。
-
-
----
-
-
-#### 有没有办法跟踪ZeroNet正在使用的带宽？
-
-The sent/received bytes are displayed at ZeroNet's sidebar.<br>(open it by dragging the topright `0` button to left)
-
-> __Tip:__ Per connection statistics page: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
+> __小提示:__ 您可以通过创建一个`zeronet.conf`文件并在其中添加`[global]`和`ui_password = anypassword`行来在配置文件中指定密码。
 
 
 ---
 
 
-#### 如果两个人使用相同的密钥修改网站会发生什么？
+#### 有没有办法跟踪零网正在使用的带宽？
 
-每个content.json文件都带有时间戳，客户端始终接受具有有效签名的最新文件。
+可以，零网侧边栏中的 已发送/已接受 字节。<br>(通过拖动右上方的`0`按钮到左侧可以打开侧边栏)
 
-
----
-
-
-#### ZeroNet是否使用比特币的区块链？
-
-不，ZeroNet仅使用比特币加密技术进行站点地址和内容签名/验证。
-用户识别基于比特币的[BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)格式。
-
-Namecoin的区块链用于域名注册，但客户不会下载区块链。 相反，区块链元数据通过ZeroNet网络传递。
+> __小提示:__ 每个连接的流量统计: [http://127.0.0.1:43110/Stats](http://127.0.0.1:43110/Stats)
 
 
 ---
 
 
-#### ZeroNet是否仅支持HTML，CSS网站？
+#### 如果两个人使用相同的私钥修改网站会发生什么？
 
-ZeroNet是为动态，实时更新的网站而构建的，但您可以使用它来提供任何类型的文件，例如（VCS存储库，您自己的瘦客户端，数据库等）。
+每个content.json文件都带有时间戳，客户端始终接受具有有效签名的最新那个文件。
 
 
 ---
 
 
-#### 如何创建新的ZeroNet站点？
+#### 零网是否用到比特币中的区块链技术？
 
-[请遵循这些说明.](../using_zeronet/create_new_site/)
+不，零网仅使用到比特币加密技术来对站点地址和内容进行签名/验证。
+用户识别也用到比特币的[BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)格式。
+
+域名币的区块链用在域名注册中，但客户不会下载区块链。 但区块链元数据可通过零网网络传播。
+
 
 ---
 
 
-#### 访问网站时会发生什么？
+#### 零网是否仅支持HTML，CSS网站？
+
+零网是为动态，实时更新的网站而构建的，但您可以使用它来托管任何类型的文件，例如（VCS库，您自己的瘦客户端，数据库等）。
+
+
+---
+
+
+#### 如何创建新的零网站点？
+
+[请遵循这些说明。](../using_zeronet/create_new_site/)
+
+---
+
+
+#### 当我访问站点时会发生什么？
 
 - 当您想要打开一个新站点时，它会向BitTorrent跟踪器询问访问者的IP地址。
-- 最初，下载了一个名为 __content.json__ 的文件，该文件包含所有其他文件名，
-  __hashes__ 和网站所有者的加密签名。
-- 使用站点的 __address__ 和文件中站点所有者的 __signature__， __验证__ 下载的content.json文件。
-- Other files (html, css, js...) are then __downloaded__ and verified using their size and SHA512 hash from content.json.
-- Each visited site then becomes __also served by you__.
-- If the site owner (who has the private key for the site address) __modifies__ the site, then he/she signs
-  the new content.json and __publishes it to peers__. After the peers have verified the file's 
-  integrity (using the signature), they __download the modified files__ and serve the new content to other peers.
+- 最初，一个名为 __content.json__ 的文件被下载下来，该文件包含所有其他文件的文件名，
+  __哈希值__ 和站长的加密签名。
+- 下载的content.json文件将通过使用站点的 __地址__ 和该文件中站长的 __签名__ 被进一步 __验证__ 。
+- 然后其他文件(html, css, js...)被 __下载下来__ 并被通过它们的大小和来自content.json中的SHA512哈希值验证.
+- 每个访问过的站点然后又 __被你托管着__ .
+- 如果站长（拥有站点地址的私钥的人）修改了站点， 然后他签名了新的content.json文件并__将它发布给其他节点__。在节点验证了文件的完整性后（通过签名）， 节点们将__下载修改后的文件__ 并将新content文件发给其他节点。
 
 更多信息:
- [ZeroNet sample sites](../using_zeronet/sample_sites/),
- [Slideshow about how ZeroNet works](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
+ [零网 示例站点](../using_zeronet/sample_sites/),
+ [零网如何工作的演示文档](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub)
