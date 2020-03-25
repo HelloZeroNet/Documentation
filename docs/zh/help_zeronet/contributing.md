@@ -43,23 +43,23 @@
 
 ## 编码约定
 
- - 关注[PEP8](https://www.python.org/dev/peps/pep-0008/)
- - 简单比复杂更好
+ - 遵循 [PEP8](https://www.python.org/dev/peps/pep-0008/)
+ - 简单比复杂好
  - 过早优化是万恶之源
- 
-### 命名
- -  ClassNames：大写，CamelCased
- -  functionNames：小写，camelCased开头
- -  variable_names：小写，under_scored
+
+### 命名规则
+ - 类名(ClassNames): 大写, 骆驼命名法
+ - 函数名(functionNames): 以小写字母开头, 骆驼命名法
+ - 变量名(variable_names): 小写, 下划线
 
 ### 变量
- -  file_path：相对于工作目录的文件路径(data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)
- -  inner_path：相对于站点dir的文件 (css/all.css)
- -  file_name：all.css
- -  file：Python文件对象
- -  privatekey：网站的私钥（没有`_`）
+ - 文件路径(file_path): 相对于工作文件夹的文件路径(data/17ib6teRqdVgjB698T4cD1zDXKgPqpkrMg/css/all.css)
+ - 内部路径(inner_path): 相对于站点文件夹的文件路径(css/all.css)
+ - 文件名(file_name): all.css
+ - 文件(file): Python文件对象
+ - 私钥(privatekey): 站点私钥(没有下划线)
 
-### 源文件目录和命名
- - 每个文件一个类是首选
- - 源文件名和目录来自ClassName：WorkerManager类 = Worker/WorkerManager.py
+### 源文件文件夹和命名
+ - 最好一个文件代表一个类
+ - 源文件名和目录来自类名(ClassName): WorkerManager类 = Worker/WorkerManager.py
 

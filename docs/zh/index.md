@@ -1,12 +1,12 @@
-## 什么是ZeroNet？
+## 什么是零网？
 
-ZeroNet是使用比特币加密技术和BitTorrent构建的**抗审查分布式网络**.
+零网基于Bitcoin加密和BitTorrent技术构建的**分布式网络**。
 
-用户可以在ZeroNet发布静态或动态的网站，访客也可以选择去成为网站的服务器。只要有一个节点在，网站就会保持在线。
+用户可以在零网发布静态或动态的网站，访客可以选择成为网站服务器。只需有一个网站节点在线，网站就可保持能访问状态。
 
-站长更新网站后，所有服务于这个网站（作为服务器）的节点（以前的访客）只会接收网站更新后增加的内容。
+当站长更新他的网站时，所有该网站的服务器节点（以前的访客）将会且只会接收网站内容更新的部分。
 
-ZeroNet内置SQL数据库，便于开发规模大的网站。数据库会以增量更新的方式同步到有这个网站的节点。
+零网具有内置SQL数据库。这使得大型网站开发变得容易。数据库会以增量更新的方式同步到有这个网站的节点。
 
 
 ## 为什么要开发零网（ZeroNet）？
@@ -52,14 +52,14 @@ ZeroNet内置SQL数据库，便于开发规模大的网站。数据库会以增�
 
 ## 零网是如何工作的？
 
-* 安装并启动零网后，访问类似于如下所示的地址打开网站。
+* 安装并启动零网后，访问类似于如下所示的地址打开网站:
   `http://127.0.0.1:43110/{零网站点地址}`
-  (例如  `http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D`).
-* 零网用BitTorrent网络寻找为这个网站做种的节点并向节点索要网站数据(HTML, CSS, JS...)。
-* 客户端会为每个访问过的网站服务，站点也可以手动添加黑名单或移除。
-* 每个网站都有一个网站文件列表，包含站长用私钥生成的SHA512哈希和一个签名。
-* 站长修改网站后，签名新文件列表，并发布到其他节点。
-  节点验证完列表完整性后（用签名），下载已修改的文件再传送给其他节点。
+  (例如  `http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D`)。
+* 零网用BitTorrent网络寻找为这个站点做种的节点并从节点下载站点数据(HTML, CSS, JS...)。
+* 你的客户端将会为每个访问过的站点服务。站点也可以手动移除或被添加到黑名单中。
+* 每个站点有一个包含站点全部文件的清单列表，其中每一项包含了一个SHA512哈希和一个用站长私钥生成的签名。
+* 如果站长修改了站点，那么他将签名新的清单列表，并发布它给其他节点。
+  当节点验证完清单列表完整性后（用签名），他们将下载修改后的文件，并再将它发布给其他节点。
 
 ##### [关于零网加密技术、内容更新和多用户站点的幻灯片 &raquo;](https://docs.google.com/presentation/d/1_2qK1IuOKJ51pgBvllZ9Yu7Au2l551t3XBgyTSvilew/pub?start=false&loop=false&delayms=3000)
 
@@ -86,5 +86,5 @@ Bitcoin: 1QDhxQ6PraUZa21ET5fYUCPgdrwBomnFgX
 
 ### 谢谢!
 
-* 更多信息、帮助、零网站点： [http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
-* 交谈： [#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) 或在 [gitter](https://gitter.im/HelloZeroNet/ZeroNet)
+* 更多信息、帮助、日志、零网站点： [http://www.reddit.com/r/zeronet/](http://www.reddit.com/r/zeronet/)
+* 来和我们聊聊： [#zeronet @ FreeNode](https://kiwiirc.com/client/irc.freenode.net/zeronet) 或在 [gitter](https://gitter.im/HelloZeroNet/ZeroNet)

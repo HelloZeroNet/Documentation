@@ -8,7 +8,7 @@
 
 ## 证书格式
 
-### Body
+### 正文
 
 证书正文包含比特币地址，门户类型和可记忆的用户名。
 
@@ -16,7 +16,7 @@
 [BitcoinAddress]#[PortalType]/[UserName]
 ```
 
-**Example:**
+**示例:**
 
 ```
 1H28iygiKXe3GUMcD77HiifVqtf3858Aft#web/hellozeronet
@@ -26,7 +26,7 @@
 - Portal type: `web`
 - User name: `hellozeronet`
 
-**General rules:**
+**一般规则:**
 
 The Bitcoin address, the portal type and the user name **must not** contain the character `#`, `@` or `/`
 
@@ -52,7 +52,7 @@ sign = os.popen("python zeronet.py --debug cryptSign %s#bitmsg/%s %s 2>&1" % (au
 data["users"][user_name] = "bitmsg,%s,%s" % (auth_address, sign)
 ```
 
-**Example:**
+**示例:**
 
 ```
 "hellozeronet": "web,1H28iygiKXe3GUMcD77HiifVqtf3858Aft,HA2A+iKekECD3hasrsN8IrR86BnXQ63kPH+9A85JLO9hLUpRJTBn62UfnuuF92B9CIc6+EewAIqzIn9UoVq2LPA="
@@ -65,7 +65,7 @@ A certificate can be stored in various formats. However, all formats must includ
 - The user name: `hellozeronet`
 - The signature from authority: `HA2A+iKekECD3hasrsN8IrR86BnXQ63kPH+9A85JLO9hLUpRJTBn62UfnuuF92B9CIc6+EewAIqzIn9UoVq2LPA=`
 
-## Usage in `content.json`
+## `content.json`使用规则
 
 网站所有者可以选择要信任的证书颁发机构。
 
