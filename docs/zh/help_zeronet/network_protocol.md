@@ -11,38 +11,38 @@
 
 
 # 握手
-通过向目标网络地址发送请求，每个连接都以握手开始：
+通过向目标网络地址发送请求,每个连接都以握手开始:
 
 参数                 | 描述
                  --- | ---
-**crypt**            | Null/None, only used in respones
-**crypt_supported**  | An array of connection encryption methods supported by the client
-**fileserver_port**  | The client's fileserver port
-**onion**            | (Only used on tor) The client's onion address
-**protocol**         | The protocol version the client uses (v1 or v2)
-**port_opened**      | The client's client port open status
-**peer_id**          | (Not used on tor) The client's peer_id
-**rev**              | The client's revision number
-**version**          | The client's version
-**target_ip**        | The server's network address
+**crypt**            | Null/None, 仅用于响应
+**crypt_supported**  | 客户端支持的一系列连接加密方法
+**fileserver_port**  | 客户端的文件服务器端口
+**onion**            | (仅用于tor)客户的洋葱地址
+**protocol**         | 客户端使用的协议版本(v1或v2)
+**port_opened**      | 客户端的客户端端口打开状态
+**peer_id**          | (未在tor上使用)客户端的peer_id
+**rev**              | 客户的修订号
+**version**          | 客户端版本
+**target_ip**        | 服务器的网络地址
 
-The target initialize the encryption on the socket based on `crypt_supported`, then return:
+目标基于“crypt_supported”在套接字上初始化加密,然后return:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**crypt**            | The encryption to use
-**crypt_supported**  | An array of connection encryption methods supported by the server
-**fileserver_port**  | The server's fileserver port
-**onion**            | (Only used on tor) The server's onion address
-**protocol**         | The protocol version the server uses (v1 or v2)
-**port_opened**      | The server's client port open status
-**peer_id**          | (Not used on tor) The server's peer_id
-**rev**              | The server's revision number
-**version**          | The server's version
-**target_ip**        | The client's network address
+**crypt**            | 要使用的加密
+**crypt_supported**  | 服务器支持的连接加密方法数组
+**fileserver_port**  | 服务器的文件服务器端口
+**onion**            | (仅用于tor)服务器的洋葱地址
+**protocol**         | 服务器使用的协议版本(v1或v2)
+**port_opened**      | 服务器的客户端端口打开状态
+**peer_id**          | (未在tor上使用)服务器的peer_id
+**rev**              | 服务器的修订号
+**version**          | 服务器的版本
+**target_ip**        | 客户端的网络地址
 
-> **Note:** No encryption used on .onion connections, as the Tor network provides the transport security by default.
-> **Note:** You can also implicitly initialize SSL before the handshake if you can assume it supported by remote client.
+> **注意:** .onion连接上不使用加密,因为Tor网络默认提供传输安全性.
+> **注意:** 如果可以假设远程客户端支持SSL,则还可以在握手之前隐式初始化SSL.
 
 **示例**:
 
@@ -89,36 +89,36 @@ The target initialize the encryption on the socket based on `crypt_supported`, t
 # 节点请求
 
 #### getFile _site_, _inner_path_, _location_, _[file_size]_
-Request a file from the client
+向客户端请求文件
 
 参数                 | 描述
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**inner_path**       | File path relative to site directory
-**location**         | Request file from this byte (max 512 bytes got sent in a request, so you need multiple requests for larger files)
-**file_size**        | Total size of the requested file (optional)
+**site**             | 站点地址(例如:1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**inner_path**       | 相对于站点目录的文件路径
+**location**         | 此字节中的请求文件(一个请求中最多发送了512个字节,因此您需要多个请求以获取更大的文件)
+**file_size**        | 所需文件的总大小(可选)
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**body**             | The requested file content
-**location**         | The location of the last byte sent
-**size**             | Total size of the file
+**body**             | 请求的文件内容
+**location**         | 发送的最后一个字节的位置
+**size**             | 文件总大小
 
 
 ---
 
 #### streamFile _site_, _inner_path_, _location_, _[file_size]_
-Stream a file from the client
+从客户端流式传输文件
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**stream_bytes**     | The length of file data after the MessagePack payload
+**stream_bytes**     | 消息包有效负载之后的文件数据长度
 
-To avoid having python-msgpack serialize large binary strings, the file body is appended directly after the MessagePack payload. For example,
+为了避免python-msgpack序列化大型二进制字符串,文件正文直接附加在MessagePack有效负载之后. 例如,
 
 ```
 > {"cmd": "streamFile", "id": 1, "inner_path": "content.json", "size": 1234}
@@ -126,7 +126,7 @@ To avoid having python-msgpack serialize large binary strings, the file body is 
 < content of the file
 ```
 
-> ZeroNet implementation detail: For file segments larger than 256 kb, streaming is enabled by default.
+> ZeroNet实施细节:对于大于256 kb的文件段,默认情况下启用流.
 
 ---
 
@@ -136,7 +136,7 @@ To avoid having python-msgpack serialize large binary strings, the file body is 
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
 **body**             | Pong
 
@@ -145,36 +145,36 @@ To avoid having python-msgpack serialize large binary strings, the file body is 
 
 
 #### pex _site_, _peers_, _need_
-Exchange peers with the client.
-Peers packed to 6 bytes (4byte IP using inet_ntoa + 2byte for port)
+与客户端交换对等体.
+同行打包到 6 bytes (4byte IP使用 inet_ntoa + 2byte 用于端口)
 
 参数                 | 描述
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**peers**            | List of peers that the requester has (packed)
-**peers_onion**      | List of Tor Onion peers that the requester has (packed)
-**need**             | Number of peers the requester want
+**site**             | 站点地址(例如:1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**peers**            | 请求者已打包的对等方列表
+**peers_onion**      | 请求者已打包的Tor Onion对等方列表
+**need**             | 请求者想要的对等体数
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**peers**            | List of IPv4 peers he has for the site (packed)
-**peers_onion**      | List of Tor Onion peers for this site (packed)
+**peers**            | 他为该站点拥有的IPv4对等方列表(打包)
+**peers_onion**      | 此网站的Tor Torion同行列表(打包)
 
-Each element in the `peers` list is a packed IPv4 address.
+“peer”列表中的每个元素都是一个打包的IPv4地址.
 
 IP地址     | 端口
 ---------- | ----
 `4 bytes`  | `2 bytes`
 
-Each element in the `peers_onion` list is a packed Tor Onion Service address.
+`peers_onion` 列表中的每个元素都是一个打包的Tor Onion服务地址.
 
-B32-decoded onion address | Port
+B32解码的Tor地址           | 端口
 ------------------------- | ----
 `binary_str[0:-2]`        | `binary_str[-2:]`
 
-To restore the onion address, pass the first part through `base64.b32encode` and append `.onion` to the return value.
+要恢复洋葱地址,请将第一部分通过`base64.b32encode`传递,并将`.onion`附加到返回值.
 
 ---
 
@@ -184,55 +184,55 @@ To restore the onion address, pass the first part through `base64.b32encode` and
 
 参数                 | 描述
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**inner_path**       | File path relative to site directory
-**body**             | Full content of the updated content.json
-**diffs** (optional) | [Diff opcodes](#possible-diff-opcodes) for the modified files in the content.json
+**site**             | 站点地址(例如:1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**inner_path**       | 相对于站点目录的文件路径
+**body**             | 更新后的content.json的完整内容
+**diffs** (optional) | [Diff opcodes](#possible-diff-opcodes) 用于content.json中的修改文件
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**ok**               | Thanks message on successful update :)
+**ok**               | 更新成功提示消息:)
 
-##### Diffs format
+##### 格式差异
 
-A dict that contains the modifications
+包含修改的字典
 
- - Key: changed file's relative path to content.json (eg.: `data.json`)
- - Value: The list of diff opcodes for the file (eg.: `[['=', 5], ['+', '\nhello new line'], ['-', 6]]`)
+ - Key: 更改了文件到content.json的相对路径(例如:`data.json`)
+ - Value: 文件的不同操作码的列表(例如:'[['=',5],['+','\ nello new line'],['-',6]]`)
 
-##### Possible diff opcodes:
+##### 可能的不同操作码:
 
-Opcode                                   | 描述
+操作码                                   | 描述
                                      --- | ---
-**['=', number of same characters]**     | Have not changed part of the file (eg.: `['=', 5]`)
-**['+', new text]**                      | Added characters (eg.: `['+', '\nhello new line']`)
-**['-', number of removed characters]**  | Full content of the updated file (eg.: `['-', 6]`)
+**['=', 相同的字符]**     | 尚未更改文件的一部分(例如:`['=',5]`)
+**['+', 新字符]**                      | 添加的字符(例如:“ ['+”,` \ nhello新行”]`)
+**['-', 删除字符数]**  | 更新文件的完整内容(例如:`['-', 6]`)
 
-After the update received, the client tries to patch the files using the diffs.
-If it failes to match the sha hash provided by the content.json (had different version of the file) it automatically re-downloads the whole file from the sender of the update.
+收到更新后,客户端将尝试使用差异修补文件.
+如果它与content.json(具有不同版本的文件)提供的sha哈希不匹配,它将自动从更新的发件人重新下载整个文件.
 
-> __Note:__ The patches are limited to 30KB per file and only used for .json files
+> __提示:__ 补丁程序每个文件限制为30KB,仅用于.json文件
 
 ---
 
 #### listModified _site_, _since_
-Lists the content.json files modified since the given 参数. It used to fetch the site's user submitted content.
+列出自给定参数以来修改的content.json文件. 它曾经用于获取站点的用户提交的内容.
 
 
 参数                 | 描述
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**since**            | List content.json files since this timestamp.
+**site**             | 站点地址(例如:1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**since**            | 自此时间戳以来,列出content.json文件.
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**modified_files**   | Key: content.json inner_path<br>Value: last modification date
+**modified_files**   | Key: content.json inner_path <br>值:上次修改日期
 
-**Example**:
+**示例**:
 
 ```json
 > zeronet.py --silent peerCmd 127.0.0.1 15441 listModified "{'site': '1BLogC9LN4oPDcruNz3qo1ysa133E9AGg8', 'since': 1497507030}"
@@ -269,19 +269,19 @@ Lists the content.json files modified since the given 参数. It used to fetch t
 
 
 #### getHashfield _site_
-Get the client's downloaded [optional file ids](#optional-file-id).
+获取客户端下载的 [可选文件ID] (#optional-file-id).
 
 参数                 | 描述
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**site**             | 站点地址(例如:1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**hashfield_raw**    | Optional file ids encoded using `array.array("H", [1000, 1001..]).tostring()`
+**hashfield_raw**    | 使用`array.array(“ H”,[1000,1001 ..]).tostring()`编码的可选文件ID.
 
-**Example**:
+**示例**:
 ```json
 > zeronet.py --silent peerCmd 192.168.1.13 15441 getHashfield "{'site': '1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h'}
 {
@@ -295,39 +295,38 @@ Get the client's downloaded [optional file ids](#optional-file-id).
 
 
 #### setHashfield _site_, _hashfield_raw_
-Set the list of [optional file ids](#optional-file-id) that the requester client has.
+设置请求者客户端具有的 [可选文件ID] (#optional-file-id)列表.
 
 参数                 | 描述
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**hashfield_raw**    | Optional file ids encoded using `array.array("H", [1000, 1001..]).tostring()`
-
+**site**             | 站点地址(例如:1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**hashfield_raw**    | 使用`array.array(“ H”,[1000,1001 ..]).tostring()`编码的可选文件ID.
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**ok**               | Updated
+**ok**               | 更新
 
 
 ---
 
 
 #### findHashIds _site_, _hash_ids_
-Queries if the client know any peer that has the requested hash_ids
+查询客户端是否知道具有请求的hash_ids的任何对等方
 
 参数                 | 描述
                  --- | ---
-**site**             | Site address (example: 1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
-**hash_ids**         | List of optional file ids the client currently looking for
+**site**             | 站点地址(例如:1EU1tbG9oC1A8jz2ouVwGZyQ5asrNsE4Vr)
+**hash_ids**         | 客户端当前正在寻找的可选文件ID的列表
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**peers**            | Key: Optional file id<br>Value: List of ipv4 peers encoded using `socket.inet_aton(ip) + struct.pack("H", port)`
-**peers_onion**      | Key: Optional file id<br>Value: List of onion peers encoded using `base64.b32decode(onion.replace(".onion", "").upper()) + struct.pack("H", port)`
+**peers**            | Key: 可选文件ID <br>值:使用`socket.inet_aton(ip)+ struct.pack(“ H”,port)编码的ipv4对等点列表
+**peers_onion**      | 可选文件id <br>值:使用`base64.b32decode(onion.replace(“.onion”,“”).upper())+ struct.pack(“ H”,port)编码的Tor同级列表.
 
-**Example**:
+**示例**:
 ```json
 > zeronet.py --silent peerCmd 192.168.1.13 15441 findHashIds "{'site': '1Gif7PqWTzVWDQ42Mo7np3zXmGAo3DXc7h', 'hash_ids': [59948, 29811]}"
 {
@@ -355,8 +354,8 @@ Queries if the client know any peer that has the requested hash_ids
 }
 ```
 
-##### Optional file id
-Integer representation of the first 4 character of the hash:
+##### 可选文件ID
+哈希的前4个字符的整数表示:
 ```
 >>> int("ea2c2acb30bd5e1249021976536574dd3f0fd83340e023bb4e78d0d818adf30a"[0:4], 16)
 59948
@@ -365,84 +364,84 @@ Integer representation of the first 4 character of the hash:
 ---
 
 #### checkport _port_
-Check requested port of the other peer.
+检查其他对等体的请求端口.
 
 
 参数                 | 描述
                  --- | ---
-**port**             | Port which will be checked.
+**port**             | 将检查的端口.
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**status**           | Status of the port ("open" or "closed")
-**ip_external**      | External IP of the requestor
+**status**           | 端口状态(“打开”或“关闭”)
+**ip_external**      | 请求者的外部IP
 
 ---
 
-# Bigfile Plugin
+# 大文件插件
 
 #### getPieceFields _site_
 
-Returns all big file [piecefield](#bigfile-piecefield) that client has for that site in a dict.
+返回字典中客户端对该站点具有的所有大文件[piecefield](#bigfile-piecefield).
 
 参数                 | 描述
                  --- | ---
-**site**             | Requested site
+**site**             | 要求的地点
 
 
 **返回**:
 
-返回键                 | 描述
+返回值                 | 描述
                    --- | ---
-**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
+**piecefields_packed** | Key: Bigfile的sha512/256 [merkle根哈希](#bigfile-merkle-root)<br>值:打包[piecefield](#bigfile-piecefield)
 
 ---
 
 #### setPieceFields _site_, _piecefields_packed_
 
-Set the client's [piecefields](#picefield) for that site.
+为该站点设置客户的[piecefields](#picefield).
 
 参数                   | 描述
                    --- | ---
-**site**               | Requested site
-**piecefields_packed** | Key: Bigfile's sha512/256 [merkle root hash](#bigfile-merkle-root)<br>Value: Packed [piecefield](#bigfile-piecefield)
+**site**               | 请求的页面地址
+**piecefields_packed** | Key: Bigfile的sha512/256 [merkle根哈希](#bigfile-merkle-root)<br>值:打包[piecefield](#bigfile-piecefield)
 
 
 **返回**:
 
-返回键               | 描述
+返回值               | 描述
                  --- | ---
-**ok**               | Updated
+**ok**               | 更新
 
 
 ##### Bigfile piecefield
 
-Holds the the big files downloaded pieces information in a simple string with 1/0 values. (1 = Downloaded, 0 = Not downloaded)
+将大文件下载件信息保存在一个具有1/0值的简单字符串中. (1 =已下载,0 =未下载)
 
-> __Example__: `1110000001` means the file is sized 9-10MB and the client downloaded the first 3MB and the last 1MB at 1MB piecesize.
+> __示例__: `1110000001` 表示文件大小为9-10MB,客户端以1MB的大小下载了前3MB和后1MB.
 
 **Packed format**:
 
-Turns the string to an list of int by counting the repeating characters starting with `1`.
+通过计算以“ 1”开头的重复字符,将字符串转换为int列表.
 
-> __Example__: `1110000001` to `[3, 6, 1]`, `0000000001` to `[0, 9, 1]`, `1111111111` to `[10]`
+> __示例__: `1110000001` to `[3, 6, 1]`, `0000000001` to `[0, 9, 1]`, `1111111111` to `[10]`
 
-After the conversion it turns it to more efficient [typed array](https://docs.python.org/2/library/array.html) using `array.array('H', piecefield)`
+转换后,使用array.array('H',piecefield)将其转换为更有效的[typed array](https://docs.python.org/2/library/array.html).
 
-##### Bigfile merkle root
+##### 大文件Merkle根
 
-During the big file hashing procedure, in addition to storing the per-piece sha512/256 hash digests in the [piecemap](#bigfile-piecemap) file, the algorithm also calculates the SHA-512/256 merkle root of the file using the [merkle-tools](https://github.com/tierion/merkle-tools) implementation.
-The merkle root is only used as an ID to identify the big file, not (yet) for verifying the pieces.
+在大文件哈希过程中,除了将逐段的sha512/256哈希摘要存储在[piecemap](#bigfile-piecemap)文件中之外,该算法还使用 [merkle-tools](https://github.com/tierion/merkle-tools)实现.
+merkle根仅用作标识大文件的ID,尚未用作验证文件的ID.
 
-> __Note__: The merkle root is chosen to identify the file, instead of the file's actual SHA-512/256 hash. Obviously, using the latter results in hashing the same file twice. (once for piecemap once for the whole file)
+> __提示__: 选择merkle根来标识文件,而不是文件的实际SHA-512 / 256哈希. 显然,使用后者会导致对同一文件进行两次哈希处理. (对于整个文件一次一次计件图)
 
-> __Note__: The merkle root is not used to verify the integrity of the pieces or the big file, because doing so would take more bandwidth and space to transfer and store the merkle-proofs for partial verification, than the per-piece hash map file itself.
+> __提示__: merkle根不用于验证碎片或大文件的完整性,因为与逐个哈希映射文件本身相比,这样做会占用更多的带宽和空间来传输和存储merkle证明以进行部分验证.
 
-##### Bigfile piecemap
+##### 大文件片段图
 
-It holds the per-piece SHA-512/256 hashes. The piece size and the picemap filename is defined in `content.json`, eg.:
+它包含每个SHA-512/256 哈希. 片段大小和picemap文件名在`content.json`中定义, 例如:
 
 ```
 ...
@@ -456,7 +455,7 @@ It holds the per-piece SHA-512/256 hashes. The piece size and the picemap filena
 ...
 ```
 
-Having the following data structure, the piecemap file is packed into the [msgpack](https://msgpack.org/) format:
+具有以下数据结构,片断图文件打包为[msgpack](https://msgpack.org/)格式:
 
 ```
 {
