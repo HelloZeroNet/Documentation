@@ -573,6 +573,40 @@ Parameter           | Description
 The UiServer does all the 'backend' work (eg: querying the DB, accessing files,
 etc). These are the API calls you will need to make your site dynamic.
 
+
+### as
+
+Execute command in other site's context.
+
+This command requires ADMIN permission or [MergerSite](#plugin-mergersite)/[CORS](#plugin-cors) permission to the specific site execute.
+
+
+Parameter            | Description
+                 --- | ---
+**address**          | The context site's address
+**cmd**              | API command name
+**arguments**        | API command arguments
+
+**Return**: Command's return value
+
+
+**Example**
+
+```javascript
+Page.cmd("as", ["138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP", "siteSetLimit", 20], console.log )
+```
+
+```javascript
+address = "138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP"
+query = "SELECT * FROM json WHERE file_name = :file_name"
+params = {"file_name": "data.json"}
+Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.log(res.length) } )
+```
+
+
+---
+
+
 ### announcerInfo
 Tracker statistics for current site
 
@@ -593,6 +627,9 @@ Tracker statistics for current site
 	}
 }
 ```
+
+
+---
 
 
 ### certAdd
@@ -1727,34 +1764,6 @@ The plugin directory must contain a **plugin_info.json** file that contains the 
 
 ## Admin commands
 _(requires ADMIN permission in data/sites.json)_
-
-
-### as
-
-Execute command in other site's context
-
-
-Parameter            | Description
-                 --- | ---
-**address**          | The context site's address
-**cmd**              | API command name
-**arguments**        | API command arguments
-
-**Return**: Command's return value
-
-
-**Example**
-
-```javascript
-Page.cmd("as", ["138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP", "siteSetLimit", 20], console.log )
-```
-
-```javascript
-address = "138R53t3ZW7KDfSfxVpWUsMXgwUnsDNXLP"
-query = "SELECT * FROM json WHERE file_name = :file_name"
-params = {"file_name": "data.json"}
-Page.cmd("as", [address, "dbQuery", [query, params]], function(res) { console.log(res.length) } )
-```
 
 
 ### certList
