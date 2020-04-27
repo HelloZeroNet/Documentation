@@ -578,7 +578,7 @@ etc). These are the API calls you will need to make your site dynamic.
 
 Execute command in other site's context.
 
-This command requires ADMIN permission or [MergerSite](#plugin-mergersite)/[CORS](#plugin-cors) permission to the specific site execute.
+This command requires ADMIN permission or [MergerSite](#plugin-mergersite)/[CORS](#plugin-cors) permission to the specific site you want to interact with.
 
 
 Parameter            | Description
