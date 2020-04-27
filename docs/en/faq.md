@@ -83,6 +83,46 @@ For other OS's, follow the instructions in the "How to make ZeroNet work with To
 
 ---
 
+
+#### How to configure Nginx reverse proxy for ZeroNet?
+
+ - Example configuration for `/etc/nginx/sites-enabled/zeronet`:
+
+```
+server {
+
+    server_name yourhost.name;
+
+    location / {
+        proxy_pass http://127.0.0.1:43110;
+        proxy_set_header Host $host;
+        proxy_http_version 1.1;
+        proxy_read_timeout 1h;  # for long live websocket connetion
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
+    listen 80;
+}
+
+```
+
+ - Create `zeronet.conf` file next to where your ZeroNet.sh / zeronet.py file is:
+
+```
+[global]
+ui_host = yourhost.name
+```
+
+ - Replace `yourhost.name` in the configuration files with a domain name that points to your server
+ - Start ZeroNet
+
+> __Tip:__ For public proxies enable the Multiuser plugin by renaming `plugins/disabled-Multiuser` to `plugins/Multiuser`
+
+
+----
+
+
 #### Is it possible to use a configuration file?
 
 Any command line configuration flag can also be used as a configuration option. Place these options line-by-line into a file called `zeronet.conf` in your top-level zeronet directory (the one with zeronet.py). Example:
