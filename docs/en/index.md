@@ -57,7 +57,7 @@ ZeroNet comes with a built-in SQL database. This makes content-heavy site develo
   `http://127.0.0.1:43110/{zeronet_site_address}`
   (e.g.  `http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D`).
 * ZeroNet will then use the BitTorrent network to find peers that are seeding the site and will download the site content (HTML, CSS, JS...) from these peers.
-* Each site visited is then served by your client. Sites can removed or blacklisted if necessary.
+* Each site visited is then served by your client. Sites can be removed or blacklisted if necessary.
 * Every site contains a list of all of its files, each entry containing a SHA512 hash and a signature generated using the site owner's private key.
 * If the site owner modifies the site, then he/she signs a new list and publishes it to the peers.
   After the peers have verified the files list integrity (using the
