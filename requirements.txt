@@ -1,1 +1,1 @@
-mkdocs-meterial
+mkdocs-material
