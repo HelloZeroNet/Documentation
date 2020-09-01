@@ -4,3 +4,9 @@ version: 2
 # Build documentation with MkDocs
 mkdocs:
   configuration: mkdocs-readthedocs.yml
+
+python:
+  version: 3.7
+  install:
+    - requirements: requirements.txt
+    
