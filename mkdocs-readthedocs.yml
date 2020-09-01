@@ -3,6 +3,9 @@ site_name: ZeroNet
 site_url: https://zeronet.io
 site_description: Decentralized websites using Bitcoin crypto and the BitTorrent network
 
+extra_css: [docs.css, stylesheets/menu.css]
+extra_javascript: [ZeroFrame.js, jquery.min.js, docs.js, javascripts/menu.js]
+
 repo_url: https://github.com/HelloZeroNet/ZeroNet
 
 markdown_extensions:
