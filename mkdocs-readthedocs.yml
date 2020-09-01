@@ -35,8 +35,10 @@ nav:
 
 
 theme:
-  favicon: logo/favicon.ico
-  feature: {tabs: true}
-  logo: logo/zeronet_logo.svg
-  name: readthedocs
-  palette: {accent: deep purple, primary: deep purple}
+  palette:
+    primary: "deep purple"
+    accent: "deep purple"
+  logo: "logo/zeronet_logo.svg"
+  name: "material"
+  favicon: "logo/favicon.ico"
+  custom_dir: "docs/resources"
