@@ -44,4 +44,3 @@ theme:
   logo: "logo/zeronet_logo.svg"
   name: "material"
   favicon: "logo/favicon.ico"
-  custom_dir: "docs/resources"
