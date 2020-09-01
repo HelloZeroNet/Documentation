@@ -8,6 +8,9 @@ repo_url: https://github.com/HelloZeroNet/ZeroNet
 markdown_extensions:
 - toc: {permalink: true}
 - codehilite
+- markdown.extensions.admonition
+- pymdownx.superfences
+- pymdownx.details
 
 docs_dir: docs/en
 
