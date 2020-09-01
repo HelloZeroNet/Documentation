@@ -18,7 +18,7 @@ function showRedirectNotice() {
         </p>
     </div>
     `
-    document.querySelector(".wy-nav-content").insertAdjacentHTML("afterbegin", notice);
+    document.querySelector(".wy-nav-content, .md-content").insertAdjacentHTML("afterbegin", notice);
 }
 
 // modify the redirect link to more specific one if it's still exists in new docs
