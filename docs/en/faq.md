@@ -268,7 +268,7 @@ Namecoin's blockchain is being used for domain registrations, however clients do
 
 #### Does ZeroNet only support HTML, CSS websites?
 
-ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it, such as (VCS repositories, your own thin-client, database, etc.
+ZeroNet is built for dynamic, real-time updated websites, but you can serve any kind of files using it, such as VCS repositories, your own thin-client, database, etc.
 
 
 ---
